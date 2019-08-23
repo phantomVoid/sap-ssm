@@ -1,0 +1,4 @@
+H:\app\VOID\product\12.2.0\dbhome_2\jdbc\lib
+install:install-file -Dfile=ojdbc8.jar -DgroupId=com.oracle  -DartifactId=ojdbc8 -Dversion=12.2.0.1 -Dpackaging=jar
+
+install:install-file -Dfile=sapjco3.jar -DgroupId=com.sap.conn.jco  -DartifactId=sapjco3 -Dversion=3.0.14  -Dpackaging=jar

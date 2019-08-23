@@ -1,0 +1,44 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jaxws="http://cxf.apache.org/jaxws"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+        http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+
+    <import resource="classpath*:META-INF/cxf/cxf.xml" />
+    <import resource="classpath*:META-INF/cxf/cxf-extension-soap.xml" />
+    <import resource="classpath*:META-INF/cxf/cxf-servlet.xml" />
+     <!-- 自动扫描webService -->
+    <context:component-scan base-package="com.phantom.wss.impl" />
+
+    <!--物料主数据-->
+    <jaxws:endpoint implementor="com.phantom.sap.intf.impl.ItemIntfImpl" address="/ItemIntfImpl"/>
+
+    <!--物料层级-->
+    <jaxws:endpoint implementor="com.phantom.sap.intf.impl.ItemLevelIntfImpl" address="/ItemLevelIntfImpl"/>
+
+    <!--工单下达-->
+    <jaxws:endpoint implementor="com.phantom.wss.impl.WorkOrderSynAddServerImpl" address="/WorkOrderSynAddServer"/>
+
+    <!--工单修改-->
+    <jaxws:endpoint implementor="com.phantom.wss.impl.WorkOrderSynEditServiceImp" address="/WorkOrderSynEditService"/>
+
+    <!--生产投料-->
+    <jaxws:endpoint implementor="com.phantom.sap.intf.impl.ProjectFeedIntfImpl" address="/ProjectFeedIntfImpl"/>
+
+    <!--制造单-工单缴库-->
+    <jaxws:endpoint implementor="com.phantom.sap.intf.impl.ProjectPostPackIntfImpl" address="/ProjectPostPackIntfImpl"/>
+    <jaxws:endpoint implementor="com.phantom.sap.intf.impl.ProjectPackFeedIntfImpl" address="/ProjectPackFeedIntfImpl"/>
+
+    <!--工时报工-->
+    <jaxws:endpoint implementor="com.phantom.sap.intf.impl.ProjectReportIntfImpl" address="/ProjectReportIntfImpl"/>
+</beans>

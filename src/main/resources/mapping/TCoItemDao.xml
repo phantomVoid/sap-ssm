@@ -1,0 +1,1016 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.phantom.dao.TCoItemDao">
+  <resultMap id="BaseResultMap" type="com.phantom.model.TCoItem">
+    <result column="ID" jdbcType="VARCHAR" property="ID" />
+    <result column="CI_ITEM_CODE" jdbcType="VARCHAR" property="CI_ITEM_CODE" />
+    <result column="CI_ITEM_NAME" jdbcType="VARCHAR" property="CI_ITEM_NAME" />
+    <result column="CI_ITEM_SPEC" jdbcType="VARCHAR" property="CI_ITEM_SPEC" />
+    <result column="CI_ITEM_SOURCE" jdbcType="VARCHAR" property="CI_ITEM_SOURCE" />
+    <result column="CI_GROUP_ID" jdbcType="VARCHAR" property="CI_GROUP_ID" />
+    <result column="CI_ITEM_GENRE" jdbcType="VARCHAR" property="CI_ITEM_GENRE" />
+    <result column="CI_ITEM_TYPE" jdbcType="VARCHAR" property="CI_ITEM_TYPE" />
+    <result column="CI_SUPPLIER_CODE" jdbcType="VARCHAR" property="CI_SUPPLIER_CODE" />
+    <result column="CI_CUST_CODE" jdbcType="VARCHAR" property="CI_CUST_CODE" />
+    <result column="CI_MIN_PACK" jdbcType="DECIMAL" property="CI_MIN_PACK" />
+    <result column="CI_UNIT" jdbcType="VARCHAR" property="CI_UNIT" />
+    <result column="CI_LINK_NUM" jdbcType="DECIMAL" property="CI_LINK_NUM" />
+    <result column="CI_JIGSAW_NUM" jdbcType="DECIMAL" property="CI_JIGSAW_NUM" />
+    <result column="CI_FEEDER_SIZE" jdbcType="VARCHAR" property="CI_FEEDER_SIZE" />
+    <result column="CI_PACK_TYPE" jdbcType="VARCHAR" property="CI_PACK_TYPE" />
+    <result column="CI_PRINT_TIME" jdbcType="DECIMAL" property="CI_PRINT_TIME" />
+    <result column="CI_FEED_ANGLE" jdbcType="DECIMAL" property="CI_FEED_ANGLE" />
+    <result column="CI_STOCK_CYCLE" jdbcType="DECIMAL" property="CI_STOCK_CYCLE" />
+    <result column="CI_CYCLE_REMIND" jdbcType="DECIMAL" property="CI_CYCLE_REMIND" />
+    <result column="CI_FQC_QTY" jdbcType="DECIMAL" property="CI_FQC_QTY" />
+    <result column="CI_AUTO_FQC" jdbcType="VARCHAR" property="CI_AUTO_FQC" />
+    <result column="CI_IQC_FREE" jdbcType="VARCHAR" property="CI_IQC_FREE" />
+    <result column="CI_SCRAP_FLAG" jdbcType="VARCHAR" property="CI_SCRAP_FLAG" />
+    <result column="CI_MIN_STOCK" jdbcType="DECIMAL" property="CI_MIN_STOCK" />
+    <result column="CI_MAX_STOCK" jdbcType="DECIMAL" property="CI_MAX_STOCK" />
+    <result column="CI_STANDARD_WEIGHTS" jdbcType="DECIMAL" property="CI_STANDARD_WEIGHTS" />
+    <result column="CI_FULL_WEIGHTS" jdbcType="DECIMAL" property="CI_FULL_WEIGHTS" />
+    <result column="CI_TEST_FALG" jdbcType="VARCHAR" property="CI_TEST_FALG" />
+    <result column="CI_TEST_UNIT" jdbcType="VARCHAR" property="CI_TEST_UNIT" />
+    <result column="CI_TEST_MAX" jdbcType="DECIMAL" property="CI_TEST_MAX" />
+    <result column="CI_TEST_MIN" jdbcType="DECIMAL" property="CI_TEST_MIN" />
+    <result column="CI_MSD_FLAG" jdbcType="VARCHAR" property="CI_MSD_FLAG" />
+    <result column="CI_MSD_ID" jdbcType="VARCHAR" property="CI_MSD_ID" />
+    <result column="CI_ROHS_FLAG" jdbcType="VARCHAR" property="CI_ROHS_FLAG" />
+    <result column="CI_CUST_ITEM" jdbcType="VARCHAR" property="CI_CUST_ITEM" />
+    <result column="CI_PCB_FLAG" jdbcType="VARCHAR" property="CI_PCB_FLAG" />
+    <result column="CI_MEMO" jdbcType="VARCHAR" property="CI_MEMO" />
+    <result column="DEPT_ID" jdbcType="VARCHAR" property="DEPT_ID" />
+    <result column="CREATE_USER" jdbcType="VARCHAR" property="CREATE_USER" />
+    <result column="CREATE_TIME" jdbcType="DATE" property="CREATE_TIME" />
+    <result column="EDIT_USER" jdbcType="VARCHAR" property="EDIT_USER" />
+    <result column="EDIT_TIME" jdbcType="DATE" property="EDIT_TIME" />
+    <result column="CI_SN_RULE_B" jdbcType="VARCHAR" property="CI_SN_RULE_B" />
+    <result column="CI_SN_RULE_S" jdbcType="VARCHAR" property="CI_SN_RULE_S" />
+    <result column="CI_SIZE" jdbcType="DECIMAL" property="CI_SIZE" />
+    <result column="CI_REPAIR_MAX" jdbcType="DECIMAL" property="CI_REPAIR_MAX" />
+    <result column="CI_CONTRAL_TYPE" jdbcType="VARCHAR" property="CI_CONTRAL_TYPE" />
+    <result column="DATA_AUTH" jdbcType="VARCHAR" property="DATA_AUTH" />
+    <result column="CI_RECHECK_DAYS" jdbcType="DECIMAL" property="CI_RECHECK_DAYS" />
+    <result column="CI_REMIND_DAYS" jdbcType="DECIMAL" property="CI_REMIND_DAYS" />
+    <result column="CI_EXCESS_RECEIVE" jdbcType="VARCHAR" property="CI_EXCESS_RECEIVE" />
+    <result column="CI_EXCESS_PICK" jdbcType="VARCHAR" property="CI_EXCESS_PICK" />
+    <result column="CI_AGING_TIME" jdbcType="DECIMAL" property="CI_AGING_TIME" />
+    <result column="CI_SLUGGISH_CYCLE" jdbcType="DECIMAL" property="CI_SLUGGISH_CYCLE" />
+    <result column="CI_ITEM_SIZE" jdbcType="VARCHAR" property="CI_ITEM_SIZE" />
+    <result column="CI_STOCK_PERIOD" jdbcType="DECIMAL" property="CI_STOCK_PERIOD" />
+    <result column="CI_STOCK_PERIOD_KEEP" jdbcType="DECIMAL" property="CI_STOCK_PERIOD_KEEP" />
+    <result column="CI_OVERRATE" jdbcType="DECIMAL" property="CI_OVERRATE" />
+    <result column="CI_MANUFACTURER" jdbcType="VARCHAR" property="CI_MANUFACTURER" />
+    <result column="CI_MANUFACTURER_MODEL" jdbcType="VARCHAR" property="CI_MANUFACTURER_MODEL" />
+    <result column="CI_3C_FLAG" jdbcType="VARCHAR" property="CI_3C_FLAG" />
+    <result column="SAMPLE_CODE" jdbcType="VARCHAR" property="SAMPLE_CODE" />
+    <result column="ABC_TYPE" jdbcType="VARCHAR" property="ABC_TYPE" />
+    <result column="CI_IS_ESCROW" jdbcType="VARCHAR" property="CI_IS_ESCROW" />
+    <result column="CI_SN_RULE" jdbcType="VARCHAR" property="CI_SN_RULE" />
+    <result column="RAW_LOTNUMBER" jdbcType="VARCHAR" property="RAW_LOTNUMBER" />
+    <result column="STOCK_CODE" jdbcType="VARCHAR" property="STOCK_CODE" />
+    <result column="SAP_WEIGHT_UNIT" jdbcType="VARCHAR" property="SAP_WEIGHT_UNIT" />
+    <result column="SAP_IS_DEL" jdbcType="VARCHAR" property="SAP_IS_DEL" />
+    <result column="SAP_BASE_UNIT" jdbcType="VARCHAR" property="SAP_BASE_UNIT" />
+    <result column="SAP_COLOR_CODE" jdbcType="VARCHAR" property="SAP_COLOR_CODE" />
+    <result column="SAP_LEVEL_GROUP" jdbcType="VARCHAR" property="SAP_LEVEL_GROUP" />
+    <result column="SAP_GROSS_WEIGHT" jdbcType="VARCHAR" property="SAP_GROSS_WEIGHT" />
+    <result column="SAP_NET_WEIGHT" jdbcType="VARCHAR" property="SAP_NET_WEIGHT" />
+    <result column="SAP_IS_CONFIG" jdbcType="VARCHAR" property="SAP_IS_CONFIG" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, CI_ITEM_CODE, CI_ITEM_NAME, CI_ITEM_SPEC, CI_ITEM_SOURCE, CI_GROUP_ID, CI_ITEM_GENRE, 
+    CI_ITEM_TYPE, CI_SUPPLIER_CODE, CI_CUST_CODE, CI_MIN_PACK, CI_UNIT, CI_LINK_NUM, 
+    CI_JIGSAW_NUM, CI_FEEDER_SIZE, CI_PACK_TYPE, CI_PRINT_TIME, CI_FEED_ANGLE, CI_STOCK_CYCLE, 
+    CI_CYCLE_REMIND, CI_FQC_QTY, CI_AUTO_FQC, CI_IQC_FREE, CI_SCRAP_FLAG, CI_MIN_STOCK, 
+    CI_MAX_STOCK, CI_STANDARD_WEIGHTS, CI_FULL_WEIGHTS, CI_TEST_FALG, CI_TEST_UNIT, CI_TEST_MAX, 
+    CI_TEST_MIN, CI_MSD_FLAG, CI_MSD_ID, CI_ROHS_FLAG, CI_CUST_ITEM, CI_PCB_FLAG, CI_MEMO, 
+    DEPT_ID, CREATE_USER, CREATE_TIME, EDIT_USER, EDIT_TIME, CI_SN_RULE_B, CI_SN_RULE_S, 
+    CI_SIZE, CI_REPAIR_MAX, CI_CONTRAL_TYPE, DATA_AUTH, CI_RECHECK_DAYS, CI_REMIND_DAYS, 
+    CI_EXCESS_RECEIVE, CI_EXCESS_PICK, CI_AGING_TIME, CI_SLUGGISH_CYCLE, CI_ITEM_SIZE, 
+    CI_STOCK_PERIOD, CI_STOCK_PERIOD_KEEP, CI_OVERRATE, CI_MANUFACTURER, CI_MANUFACTURER_MODEL, 
+    CI_3C_FLAG, SAMPLE_CODE, ABC_TYPE, CI_IS_ESCROW, CI_SN_RULE, RAW_LOTNUMBER, STOCK_CODE, 
+    SAP_WEIGHT_UNIT, SAP_IS_DEL, SAP_BASE_UNIT, SAP_COLOR_CODE, SAP_LEVEL_GROUP, SAP_GROSS_WEIGHT, 
+    SAP_NET_WEIGHT, SAP_IS_CONFIG
+  </sql>
+  <select id="selectByExample" parameterType="com.phantom.model.TCoItemExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from N2ADMIN.T_CO_ITEM
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.phantom.model.TCoItemExample">
+    delete from N2ADMIN.T_CO_ITEM
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.phantom.model.TCoItem">
+    insert into N2ADMIN.T_CO_ITEM (ID, CI_ITEM_CODE, CI_ITEM_NAME, 
+      CI_ITEM_SPEC, CI_ITEM_SOURCE, CI_GROUP_ID, 
+      CI_ITEM_GENRE, CI_ITEM_TYPE, CI_SUPPLIER_CODE, 
+      CI_CUST_CODE, CI_MIN_PACK, CI_UNIT, 
+      CI_LINK_NUM, CI_JIGSAW_NUM, CI_FEEDER_SIZE, 
+      CI_PACK_TYPE, CI_PRINT_TIME, CI_FEED_ANGLE, 
+      CI_STOCK_CYCLE, CI_CYCLE_REMIND, CI_FQC_QTY, 
+      CI_AUTO_FQC, CI_IQC_FREE, CI_SCRAP_FLAG, 
+      CI_MIN_STOCK, CI_MAX_STOCK, CI_STANDARD_WEIGHTS, 
+      CI_FULL_WEIGHTS, CI_TEST_FALG, CI_TEST_UNIT, 
+      CI_TEST_MAX, CI_TEST_MIN, CI_MSD_FLAG, 
+      CI_MSD_ID, CI_ROHS_FLAG, CI_CUST_ITEM, 
+      CI_PCB_FLAG, CI_MEMO, DEPT_ID, 
+      CREATE_USER, CREATE_TIME, EDIT_USER, 
+      EDIT_TIME, CI_SN_RULE_B, CI_SN_RULE_S, 
+      CI_SIZE, CI_REPAIR_MAX, CI_CONTRAL_TYPE, 
+      DATA_AUTH, CI_RECHECK_DAYS, CI_REMIND_DAYS, 
+      CI_EXCESS_RECEIVE, CI_EXCESS_PICK, CI_AGING_TIME, 
+      CI_SLUGGISH_CYCLE, CI_ITEM_SIZE, CI_STOCK_PERIOD, 
+      CI_STOCK_PERIOD_KEEP, CI_OVERRATE, CI_MANUFACTURER, 
+      CI_MANUFACTURER_MODEL, CI_3C_FLAG, SAMPLE_CODE, 
+      ABC_TYPE, CI_IS_ESCROW, CI_SN_RULE, 
+      RAW_LOTNUMBER, STOCK_CODE, SAP_WEIGHT_UNIT, 
+      SAP_IS_DEL, SAP_BASE_UNIT, SAP_COLOR_CODE, 
+      SAP_LEVEL_GROUP, SAP_GROSS_WEIGHT, SAP_NET_WEIGHT, 
+      SAP_IS_CONFIG)
+    values (#{ID,jdbcType=VARCHAR}, #{CI_ITEM_CODE,jdbcType=VARCHAR}, #{CI_ITEM_NAME,jdbcType=VARCHAR}, 
+      #{CI_ITEM_SPEC,jdbcType=VARCHAR}, #{CI_ITEM_SOURCE,jdbcType=VARCHAR}, #{CI_GROUP_ID,jdbcType=VARCHAR}, 
+      #{CI_ITEM_GENRE,jdbcType=VARCHAR}, #{CI_ITEM_TYPE,jdbcType=VARCHAR}, #{CI_SUPPLIER_CODE,jdbcType=VARCHAR}, 
+      #{CI_CUST_CODE,jdbcType=VARCHAR}, #{CI_MIN_PACK,jdbcType=DECIMAL}, #{CI_UNIT,jdbcType=VARCHAR}, 
+      #{CI_LINK_NUM,jdbcType=DECIMAL}, #{CI_JIGSAW_NUM,jdbcType=DECIMAL}, #{CI_FEEDER_SIZE,jdbcType=VARCHAR}, 
+      #{CI_PACK_TYPE,jdbcType=VARCHAR}, #{CI_PRINT_TIME,jdbcType=DECIMAL}, #{CI_FEED_ANGLE,jdbcType=DECIMAL}, 
+      #{CI_STOCK_CYCLE,jdbcType=DECIMAL}, #{CI_CYCLE_REMIND,jdbcType=DECIMAL}, #{CI_FQC_QTY,jdbcType=DECIMAL}, 
+      #{CI_AUTO_FQC,jdbcType=VARCHAR}, #{CI_IQC_FREE,jdbcType=VARCHAR}, #{CI_SCRAP_FLAG,jdbcType=VARCHAR}, 
+      #{CI_MIN_STOCK,jdbcType=DECIMAL}, #{CI_MAX_STOCK,jdbcType=DECIMAL}, #{CI_STANDARD_WEIGHTS,jdbcType=DECIMAL}, 
+      #{CI_FULL_WEIGHTS,jdbcType=DECIMAL}, #{CI_TEST_FALG,jdbcType=VARCHAR}, #{CI_TEST_UNIT,jdbcType=VARCHAR}, 
+      #{CI_TEST_MAX,jdbcType=DECIMAL}, #{CI_TEST_MIN,jdbcType=DECIMAL}, #{CI_MSD_FLAG,jdbcType=VARCHAR}, 
+      #{CI_MSD_ID,jdbcType=VARCHAR}, #{CI_ROHS_FLAG,jdbcType=VARCHAR}, #{CI_CUST_ITEM,jdbcType=VARCHAR}, 
+      #{CI_PCB_FLAG,jdbcType=VARCHAR}, #{CI_MEMO,jdbcType=VARCHAR}, #{DEPT_ID,jdbcType=VARCHAR}, 
+      #{CREATE_USER,jdbcType=VARCHAR}, #{CREATE_TIME,jdbcType=DATE}, #{EDIT_USER,jdbcType=VARCHAR}, 
+      #{EDIT_TIME,jdbcType=DATE}, #{CI_SN_RULE_B,jdbcType=VARCHAR}, #{CI_SN_RULE_S,jdbcType=VARCHAR}, 
+      #{CI_SIZE,jdbcType=DECIMAL}, #{CI_REPAIR_MAX,jdbcType=DECIMAL}, #{CI_CONTRAL_TYPE,jdbcType=VARCHAR}, 
+      #{DATA_AUTH,jdbcType=VARCHAR}, #{CI_RECHECK_DAYS,jdbcType=DECIMAL}, #{CI_REMIND_DAYS,jdbcType=DECIMAL}, 
+      #{CI_EXCESS_RECEIVE,jdbcType=VARCHAR}, #{CI_EXCESS_PICK,jdbcType=VARCHAR}, #{CI_AGING_TIME,jdbcType=DECIMAL}, 
+      #{CI_SLUGGISH_CYCLE,jdbcType=DECIMAL}, #{CI_ITEM_SIZE,jdbcType=VARCHAR}, #{CI_STOCK_PERIOD,jdbcType=DECIMAL}, 
+      #{CI_STOCK_PERIOD_KEEP,jdbcType=DECIMAL}, #{CI_OVERRATE,jdbcType=DECIMAL}, #{CI_MANUFACTURER,jdbcType=VARCHAR}, 
+      #{CI_MANUFACTURER_MODEL,jdbcType=VARCHAR}, #{CI_3C_FLAG,jdbcType=VARCHAR}, #{SAMPLE_CODE,jdbcType=VARCHAR}, 
+      #{ABC_TYPE,jdbcType=VARCHAR}, #{CI_IS_ESCROW,jdbcType=VARCHAR}, #{CI_SN_RULE,jdbcType=VARCHAR}, 
+      #{RAW_LOTNUMBER,jdbcType=VARCHAR}, #{STOCK_CODE,jdbcType=VARCHAR}, #{SAP_WEIGHT_UNIT,jdbcType=VARCHAR}, 
+      #{SAP_IS_DEL,jdbcType=VARCHAR}, #{SAP_BASE_UNIT,jdbcType=VARCHAR}, #{SAP_COLOR_CODE,jdbcType=VARCHAR}, 
+      #{SAP_LEVEL_GROUP,jdbcType=VARCHAR}, #{SAP_GROSS_WEIGHT,jdbcType=VARCHAR}, #{SAP_NET_WEIGHT,jdbcType=VARCHAR}, 
+      #{SAP_IS_CONFIG,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.phantom.model.TCoItem">
+    insert into N2ADMIN.T_CO_ITEM
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ID != null">
+        ID,
+      </if>
+      <if test="CI_ITEM_CODE != null">
+        CI_ITEM_CODE,
+      </if>
+      <if test="CI_ITEM_NAME != null">
+        CI_ITEM_NAME,
+      </if>
+      <if test="CI_ITEM_SPEC != null">
+        CI_ITEM_SPEC,
+      </if>
+      <if test="CI_ITEM_SOURCE != null">
+        CI_ITEM_SOURCE,
+      </if>
+      <if test="CI_GROUP_ID != null">
+        CI_GROUP_ID,
+      </if>
+      <if test="CI_ITEM_GENRE != null">
+        CI_ITEM_GENRE,
+      </if>
+      <if test="CI_ITEM_TYPE != null">
+        CI_ITEM_TYPE,
+      </if>
+      <if test="CI_SUPPLIER_CODE != null">
+        CI_SUPPLIER_CODE,
+      </if>
+      <if test="CI_CUST_CODE != null">
+        CI_CUST_CODE,
+      </if>
+      <if test="CI_MIN_PACK != null">
+        CI_MIN_PACK,
+      </if>
+      <if test="CI_UNIT != null">
+        CI_UNIT,
+      </if>
+      <if test="CI_LINK_NUM != null">
+        CI_LINK_NUM,
+      </if>
+      <if test="CI_JIGSAW_NUM != null">
+        CI_JIGSAW_NUM,
+      </if>
+      <if test="CI_FEEDER_SIZE != null">
+        CI_FEEDER_SIZE,
+      </if>
+      <if test="CI_PACK_TYPE != null">
+        CI_PACK_TYPE,
+      </if>
+      <if test="CI_PRINT_TIME != null">
+        CI_PRINT_TIME,
+      </if>
+      <if test="CI_FEED_ANGLE != null">
+        CI_FEED_ANGLE,
+      </if>
+      <if test="CI_STOCK_CYCLE != null">
+        CI_STOCK_CYCLE,
+      </if>
+      <if test="CI_CYCLE_REMIND != null">
+        CI_CYCLE_REMIND,
+      </if>
+      <if test="CI_FQC_QTY != null">
+        CI_FQC_QTY,
+      </if>
+      <if test="CI_AUTO_FQC != null">
+        CI_AUTO_FQC,
+      </if>
+      <if test="CI_IQC_FREE != null">
+        CI_IQC_FREE,
+      </if>
+      <if test="CI_SCRAP_FLAG != null">
+        CI_SCRAP_FLAG,
+      </if>
+      <if test="CI_MIN_STOCK != null">
+        CI_MIN_STOCK,
+      </if>
+      <if test="CI_MAX_STOCK != null">
+        CI_MAX_STOCK,
+      </if>
+      <if test="CI_STANDARD_WEIGHTS != null">
+        CI_STANDARD_WEIGHTS,
+      </if>
+      <if test="CI_FULL_WEIGHTS != null">
+        CI_FULL_WEIGHTS,
+      </if>
+      <if test="CI_TEST_FALG != null">
+        CI_TEST_FALG,
+      </if>
+      <if test="CI_TEST_UNIT != null">
+        CI_TEST_UNIT,
+      </if>
+      <if test="CI_TEST_MAX != null">
+        CI_TEST_MAX,
+      </if>
+      <if test="CI_TEST_MIN != null">
+        CI_TEST_MIN,
+      </if>
+      <if test="CI_MSD_FLAG != null">
+        CI_MSD_FLAG,
+      </if>
+      <if test="CI_MSD_ID != null">
+        CI_MSD_ID,
+      </if>
+      <if test="CI_ROHS_FLAG != null">
+        CI_ROHS_FLAG,
+      </if>
+      <if test="CI_CUST_ITEM != null">
+        CI_CUST_ITEM,
+      </if>
+      <if test="CI_PCB_FLAG != null">
+        CI_PCB_FLAG,
+      </if>
+      <if test="CI_MEMO != null">
+        CI_MEMO,
+      </if>
+      <if test="DEPT_ID != null">
+        DEPT_ID,
+      </if>
+      <if test="CREATE_USER != null">
+        CREATE_USER,
+      </if>
+      <if test="CREATE_TIME != null">
+        CREATE_TIME,
+      </if>
+      <if test="EDIT_USER != null">
+        EDIT_USER,
+      </if>
+      <if test="EDIT_TIME != null">
+        EDIT_TIME,
+      </if>
+      <if test="CI_SN_RULE_B != null">
+        CI_SN_RULE_B,
+      </if>
+      <if test="CI_SN_RULE_S != null">
+        CI_SN_RULE_S,
+      </if>
+      <if test="CI_SIZE != null">
+        CI_SIZE,
+      </if>
+      <if test="CI_REPAIR_MAX != null">
+        CI_REPAIR_MAX,
+      </if>
+      <if test="CI_CONTRAL_TYPE != null">
+        CI_CONTRAL_TYPE,
+      </if>
+      <if test="DATA_AUTH != null">
+        DATA_AUTH,
+      </if>
+      <if test="CI_RECHECK_DAYS != null">
+        CI_RECHECK_DAYS,
+      </if>
+      <if test="CI_REMIND_DAYS != null">
+        CI_REMIND_DAYS,
+      </if>
+      <if test="CI_EXCESS_RECEIVE != null">
+        CI_EXCESS_RECEIVE,
+      </if>
+      <if test="CI_EXCESS_PICK != null">
+        CI_EXCESS_PICK,
+      </if>
+      <if test="CI_AGING_TIME != null">
+        CI_AGING_TIME,
+      </if>
+      <if test="CI_SLUGGISH_CYCLE != null">
+        CI_SLUGGISH_CYCLE,
+      </if>
+      <if test="CI_ITEM_SIZE != null">
+        CI_ITEM_SIZE,
+      </if>
+      <if test="CI_STOCK_PERIOD != null">
+        CI_STOCK_PERIOD,
+      </if>
+      <if test="CI_STOCK_PERIOD_KEEP != null">
+        CI_STOCK_PERIOD_KEEP,
+      </if>
+      <if test="CI_OVERRATE != null">
+        CI_OVERRATE,
+      </if>
+      <if test="CI_MANUFACTURER != null">
+        CI_MANUFACTURER,
+      </if>
+      <if test="CI_MANUFACTURER_MODEL != null">
+        CI_MANUFACTURER_MODEL,
+      </if>
+      <if test="CI_3C_FLAG != null">
+        CI_3C_FLAG,
+      </if>
+      <if test="SAMPLE_CODE != null">
+        SAMPLE_CODE,
+      </if>
+      <if test="ABC_TYPE != null">
+        ABC_TYPE,
+      </if>
+      <if test="CI_IS_ESCROW != null">
+        CI_IS_ESCROW,
+      </if>
+      <if test="CI_SN_RULE != null">
+        CI_SN_RULE,
+      </if>
+      <if test="RAW_LOTNUMBER != null">
+        RAW_LOTNUMBER,
+      </if>
+      <if test="STOCK_CODE != null">
+        STOCK_CODE,
+      </if>
+      <if test="SAP_WEIGHT_UNIT != null">
+        SAP_WEIGHT_UNIT,
+      </if>
+      <if test="SAP_IS_DEL != null">
+        SAP_IS_DEL,
+      </if>
+      <if test="SAP_BASE_UNIT != null">
+        SAP_BASE_UNIT,
+      </if>
+      <if test="SAP_COLOR_CODE != null">
+        SAP_COLOR_CODE,
+      </if>
+      <if test="SAP_LEVEL_GROUP != null">
+        SAP_LEVEL_GROUP,
+      </if>
+      <if test="SAP_GROSS_WEIGHT != null">
+        SAP_GROSS_WEIGHT,
+      </if>
+      <if test="SAP_NET_WEIGHT != null">
+        SAP_NET_WEIGHT,
+      </if>
+      <if test="SAP_IS_CONFIG != null">
+        SAP_IS_CONFIG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ID != null">
+        #{ID,jdbcType=VARCHAR},
+      </if>
+      <if test="CI_ITEM_CODE != null">
+        #{CI_ITEM_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="CI_ITEM_NAME != null">
+        #{CI_ITEM_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="CI_ITEM_SPEC != null">
+        #{CI_ITEM_SPEC,jdbcType=VARCHAR},
+      </if>
+      <if test="CI_ITEM_SOURCE != null">
+        #{CI_ITEM_SOURCE,jdbcType=VARCHAR},
+      </if>
+      <if test="CI_GROUP_ID != null">
+        #{CI_GROUP_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="CI_ITEM_GENRE != null">
+        #{CI_ITEM_GENRE,jdbcType=VARCHAR},
+      </if>
+      <if test="CI_ITEM_TYPE != null">
+        #{CI_ITEM_TYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="CI_SUPPLIER_CODE != null">
+        #{CI_SUPPLIER_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="CI_CUST_CODE != null">
+        #{CI_CUST_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="CI_MIN_PACK != null">
+        #{CI_MIN_PACK,jdbcType=DECIMAL},
+      </if>
+      <if test="CI_UNIT != null">
+        #{CI_UNIT,jdbcType=VARCHAR},
+      </if>
+      <if test="CI_LINK_NUM != null">
+        #{CI_LINK_NUM,jdbcType=DECIMAL},
+      </if>
+      <if test="CI_JIGSAW_NUM != null">
+        #{CI_JIGSAW_NUM,jdbcType=DECIMAL},
+      </if>
+      <if test="CI_FEEDER_SIZE != null">
+        #{CI_FEEDER_SIZE,jdbcType=VARCHAR},
+      </if>
+      <if test="CI_PACK_TYPE != null">
+        #{CI_PACK_TYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="CI_PRINT_TIME != null">
+        #{CI_PRINT_TIME,jdbcType=DECIMAL},
+      </if>
+      <if test="CI_FEED_ANGLE != null">
+        #{CI_FEED_ANGLE,jdbcType=DECIMAL},
+      </if>
+      <if test="CI_STOCK_CYCLE != null">
+        #{CI_STOCK_CYCLE,jdbcType=DECIMAL},
+      </if>
+      <if test="CI_CYCLE_REMIND != null">
+        #{CI_CYCLE_REMIND,jdbcType=DECIMAL},
+      </if>
+      <if test="CI_FQC_QTY != null">
+        #{CI_FQC_QTY,jdbcType=DECIMAL},
+      </if>
+      <if test="CI_AUTO_FQC != null">
+        #{CI_AUTO_FQC,jdbcType=VARCHAR},
+      </if>
+      <if test="CI_IQC_FREE != null">
+        #{CI_IQC_FREE,jdbcType=VARCHAR},
+      </if>
+      <if test="CI_SCRAP_FLAG != null">
+        #{CI_SCRAP_FLAG,jdbcType=VARCHAR},
+      </if>
+      <if test="CI_MIN_STOCK != null">
+        #{CI_MIN_STOCK,jdbcType=DECIMAL},
+      </if>
+      <if test="CI_MAX_STOCK != null">
+        #{CI_MAX_STOCK,jdbcType=DECIMAL},
+      </if>
+      <if test="CI_STANDARD_WEIGHTS != null">
+        #{CI_STANDARD_WEIGHTS,jdbcType=DECIMAL},
+      </if>
+      <if test="CI_FULL_WEIGHTS != null">
+        #{CI_FULL_WEIGHTS,jdbcType=DECIMAL},
+      </if>
+      <if test="CI_TEST_FALG != null">
+        #{CI_TEST_FALG,jdbcType=VARCHAR},
+      </if>
+      <if test="CI_TEST_UNIT != null">
+        #{CI_TEST_UNIT,jdbcType=VARCHAR},
+      </if>
+      <if test="CI_TEST_MAX != null">
+        #{CI_TEST_MAX,jdbcType=DECIMAL},
+      </if>
+      <if test="CI_TEST_MIN != null">
+        #{CI_TEST_MIN,jdbcType=DECIMAL},
+      </if>
+      <if test="CI_MSD_FLAG != null">
+        #{CI_MSD_FLAG,jdbcType=VARCHAR},
+      </if>
+      <if test="CI_MSD_ID != null">
+        #{CI_MSD_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="CI_ROHS_FLAG != null">
+        #{CI_ROHS_FLAG,jdbcType=VARCHAR},
+      </if>
+      <if test="CI_CUST_ITEM != null">
+        #{CI_CUST_ITEM,jdbcType=VARCHAR},
+      </if>
+      <if test="CI_PCB_FLAG != null">
+        #{CI_PCB_FLAG,jdbcType=VARCHAR},
+      </if>
+      <if test="CI_MEMO != null">
+        #{CI_MEMO,jdbcType=VARCHAR},
+      </if>
+      <if test="DEPT_ID != null">
+        #{DEPT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="CREATE_USER != null">
+        #{CREATE_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="CREATE_TIME != null">
+        #{CREATE_TIME,jdbcType=DATE},
+      </if>
+      <if test="EDIT_USER != null">
+        #{EDIT_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="EDIT_TIME != null">
+        #{EDIT_TIME,jdbcType=DATE},
+      </if>
+      <if test="CI_SN_RULE_B != null">
+        #{CI_SN_RULE_B,jdbcType=VARCHAR},
+      </if>
+      <if test="CI_SN_RULE_S != null">
+        #{CI_SN_RULE_S,jdbcType=VARCHAR},
+      </if>
+      <if test="CI_SIZE != null">
+        #{CI_SIZE,jdbcType=DECIMAL},
+      </if>
+      <if test="CI_REPAIR_MAX != null">
+        #{CI_REPAIR_MAX,jdbcType=DECIMAL},
+      </if>
+      <if test="CI_CONTRAL_TYPE != null">
+        #{CI_CONTRAL_TYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="DATA_AUTH != null">
+        #{DATA_AUTH,jdbcType=VARCHAR},
+      </if>
+      <if test="CI_RECHECK_DAYS != null">
+        #{CI_RECHECK_DAYS,jdbcType=DECIMAL},
+      </if>
+      <if test="CI_REMIND_DAYS != null">
+        #{CI_REMIND_DAYS,jdbcType=DECIMAL},
+      </if>
+      <if test="CI_EXCESS_RECEIVE != null">
+        #{CI_EXCESS_RECEIVE,jdbcType=VARCHAR},
+      </if>
+      <if test="CI_EXCESS_PICK != null">
+        #{CI_EXCESS_PICK,jdbcType=VARCHAR},
+      </if>
+      <if test="CI_AGING_TIME != null">
+        #{CI_AGING_TIME,jdbcType=DECIMAL},
+      </if>
+      <if test="CI_SLUGGISH_CYCLE != null">
+        #{CI_SLUGGISH_CYCLE,jdbcType=DECIMAL},
+      </if>
+      <if test="CI_ITEM_SIZE != null">
+        #{CI_ITEM_SIZE,jdbcType=VARCHAR},
+      </if>
+      <if test="CI_STOCK_PERIOD != null">
+        #{CI_STOCK_PERIOD,jdbcType=DECIMAL},
+      </if>
+      <if test="CI_STOCK_PERIOD_KEEP != null">
+        #{CI_STOCK_PERIOD_KEEP,jdbcType=DECIMAL},
+      </if>
+      <if test="CI_OVERRATE != null">
+        #{CI_OVERRATE,jdbcType=DECIMAL},
+      </if>
+      <if test="CI_MANUFACTURER != null">
+        #{CI_MANUFACTURER,jdbcType=VARCHAR},
+      </if>
+      <if test="CI_MANUFACTURER_MODEL != null">
+        #{CI_MANUFACTURER_MODEL,jdbcType=VARCHAR},
+      </if>
+      <if test="CI_3C_FLAG != null">
+        #{CI_3C_FLAG,jdbcType=VARCHAR},
+      </if>
+      <if test="SAMPLE_CODE != null">
+        #{SAMPLE_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="ABC_TYPE != null">
+        #{ABC_TYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="CI_IS_ESCROW != null">
+        #{CI_IS_ESCROW,jdbcType=VARCHAR},
+      </if>
+      <if test="CI_SN_RULE != null">
+        #{CI_SN_RULE,jdbcType=VARCHAR},
+      </if>
+      <if test="RAW_LOTNUMBER != null">
+        #{RAW_LOTNUMBER,jdbcType=VARCHAR},
+      </if>
+      <if test="STOCK_CODE != null">
+        #{STOCK_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="SAP_WEIGHT_UNIT != null">
+        #{SAP_WEIGHT_UNIT,jdbcType=VARCHAR},
+      </if>
+      <if test="SAP_IS_DEL != null">
+        #{SAP_IS_DEL,jdbcType=VARCHAR},
+      </if>
+      <if test="SAP_BASE_UNIT != null">
+        #{SAP_BASE_UNIT,jdbcType=VARCHAR},
+      </if>
+      <if test="SAP_COLOR_CODE != null">
+        #{SAP_COLOR_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="SAP_LEVEL_GROUP != null">
+        #{SAP_LEVEL_GROUP,jdbcType=VARCHAR},
+      </if>
+      <if test="SAP_GROSS_WEIGHT != null">
+        #{SAP_GROSS_WEIGHT,jdbcType=VARCHAR},
+      </if>
+      <if test="SAP_NET_WEIGHT != null">
+        #{SAP_NET_WEIGHT,jdbcType=VARCHAR},
+      </if>
+      <if test="SAP_IS_CONFIG != null">
+        #{SAP_IS_CONFIG,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.phantom.model.TCoItemExample" resultType="java.lang.Long">
+    select count(*) from N2ADMIN.T_CO_ITEM
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update N2ADMIN.T_CO_ITEM
+    <set>
+      <if test="record.ID != null">
+        ID = #{record.ID,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CI_ITEM_CODE != null">
+        CI_ITEM_CODE = #{record.CI_ITEM_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CI_ITEM_NAME != null">
+        CI_ITEM_NAME = #{record.CI_ITEM_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CI_ITEM_SPEC != null">
+        CI_ITEM_SPEC = #{record.CI_ITEM_SPEC,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CI_ITEM_SOURCE != null">
+        CI_ITEM_SOURCE = #{record.CI_ITEM_SOURCE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CI_GROUP_ID != null">
+        CI_GROUP_ID = #{record.CI_GROUP_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CI_ITEM_GENRE != null">
+        CI_ITEM_GENRE = #{record.CI_ITEM_GENRE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CI_ITEM_TYPE != null">
+        CI_ITEM_TYPE = #{record.CI_ITEM_TYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CI_SUPPLIER_CODE != null">
+        CI_SUPPLIER_CODE = #{record.CI_SUPPLIER_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CI_CUST_CODE != null">
+        CI_CUST_CODE = #{record.CI_CUST_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CI_MIN_PACK != null">
+        CI_MIN_PACK = #{record.CI_MIN_PACK,jdbcType=DECIMAL},
+      </if>
+      <if test="record.CI_UNIT != null">
+        CI_UNIT = #{record.CI_UNIT,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CI_LINK_NUM != null">
+        CI_LINK_NUM = #{record.CI_LINK_NUM,jdbcType=DECIMAL},
+      </if>
+      <if test="record.CI_JIGSAW_NUM != null">
+        CI_JIGSAW_NUM = #{record.CI_JIGSAW_NUM,jdbcType=DECIMAL},
+      </if>
+      <if test="record.CI_FEEDER_SIZE != null">
+        CI_FEEDER_SIZE = #{record.CI_FEEDER_SIZE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CI_PACK_TYPE != null">
+        CI_PACK_TYPE = #{record.CI_PACK_TYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CI_PRINT_TIME != null">
+        CI_PRINT_TIME = #{record.CI_PRINT_TIME,jdbcType=DECIMAL},
+      </if>
+      <if test="record.CI_FEED_ANGLE != null">
+        CI_FEED_ANGLE = #{record.CI_FEED_ANGLE,jdbcType=DECIMAL},
+      </if>
+      <if test="record.CI_STOCK_CYCLE != null">
+        CI_STOCK_CYCLE = #{record.CI_STOCK_CYCLE,jdbcType=DECIMAL},
+      </if>
+      <if test="record.CI_CYCLE_REMIND != null">
+        CI_CYCLE_REMIND = #{record.CI_CYCLE_REMIND,jdbcType=DECIMAL},
+      </if>
+      <if test="record.CI_FQC_QTY != null">
+        CI_FQC_QTY = #{record.CI_FQC_QTY,jdbcType=DECIMAL},
+      </if>
+      <if test="record.CI_AUTO_FQC != null">
+        CI_AUTO_FQC = #{record.CI_AUTO_FQC,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CI_IQC_FREE != null">
+        CI_IQC_FREE = #{record.CI_IQC_FREE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CI_SCRAP_FLAG != null">
+        CI_SCRAP_FLAG = #{record.CI_SCRAP_FLAG,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CI_MIN_STOCK != null">
+        CI_MIN_STOCK = #{record.CI_MIN_STOCK,jdbcType=DECIMAL},
+      </if>
+      <if test="record.CI_MAX_STOCK != null">
+        CI_MAX_STOCK = #{record.CI_MAX_STOCK,jdbcType=DECIMAL},
+      </if>
+      <if test="record.CI_STANDARD_WEIGHTS != null">
+        CI_STANDARD_WEIGHTS = #{record.CI_STANDARD_WEIGHTS,jdbcType=DECIMAL},
+      </if>
+      <if test="record.CI_FULL_WEIGHTS != null">
+        CI_FULL_WEIGHTS = #{record.CI_FULL_WEIGHTS,jdbcType=DECIMAL},
+      </if>
+      <if test="record.CI_TEST_FALG != null">
+        CI_TEST_FALG = #{record.CI_TEST_FALG,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CI_TEST_UNIT != null">
+        CI_TEST_UNIT = #{record.CI_TEST_UNIT,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CI_TEST_MAX != null">
+        CI_TEST_MAX = #{record.CI_TEST_MAX,jdbcType=DECIMAL},
+      </if>
+      <if test="record.CI_TEST_MIN != null">
+        CI_TEST_MIN = #{record.CI_TEST_MIN,jdbcType=DECIMAL},
+      </if>
+      <if test="record.CI_MSD_FLAG != null">
+        CI_MSD_FLAG = #{record.CI_MSD_FLAG,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CI_MSD_ID != null">
+        CI_MSD_ID = #{record.CI_MSD_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CI_ROHS_FLAG != null">
+        CI_ROHS_FLAG = #{record.CI_ROHS_FLAG,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CI_CUST_ITEM != null">
+        CI_CUST_ITEM = #{record.CI_CUST_ITEM,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CI_PCB_FLAG != null">
+        CI_PCB_FLAG = #{record.CI_PCB_FLAG,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CI_MEMO != null">
+        CI_MEMO = #{record.CI_MEMO,jdbcType=VARCHAR},
+      </if>
+      <if test="record.DEPT_ID != null">
+        DEPT_ID = #{record.DEPT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CREATE_USER != null">
+        CREATE_USER = #{record.CREATE_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CREATE_TIME != null">
+        CREATE_TIME = #{record.CREATE_TIME,jdbcType=DATE},
+      </if>
+      <if test="record.EDIT_USER != null">
+        EDIT_USER = #{record.EDIT_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="record.EDIT_TIME != null">
+        EDIT_TIME = #{record.EDIT_TIME,jdbcType=DATE},
+      </if>
+      <if test="record.CI_SN_RULE_B != null">
+        CI_SN_RULE_B = #{record.CI_SN_RULE_B,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CI_SN_RULE_S != null">
+        CI_SN_RULE_S = #{record.CI_SN_RULE_S,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CI_SIZE != null">
+        CI_SIZE = #{record.CI_SIZE,jdbcType=DECIMAL},
+      </if>
+      <if test="record.CI_REPAIR_MAX != null">
+        CI_REPAIR_MAX = #{record.CI_REPAIR_MAX,jdbcType=DECIMAL},
+      </if>
+      <if test="record.CI_CONTRAL_TYPE != null">
+        CI_CONTRAL_TYPE = #{record.CI_CONTRAL_TYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.DATA_AUTH != null">
+        DATA_AUTH = #{record.DATA_AUTH,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CI_RECHECK_DAYS != null">
+        CI_RECHECK_DAYS = #{record.CI_RECHECK_DAYS,jdbcType=DECIMAL},
+      </if>
+      <if test="record.CI_REMIND_DAYS != null">
+        CI_REMIND_DAYS = #{record.CI_REMIND_DAYS,jdbcType=DECIMAL},
+      </if>
+      <if test="record.CI_EXCESS_RECEIVE != null">
+        CI_EXCESS_RECEIVE = #{record.CI_EXCESS_RECEIVE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CI_EXCESS_PICK != null">
+        CI_EXCESS_PICK = #{record.CI_EXCESS_PICK,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CI_AGING_TIME != null">
+        CI_AGING_TIME = #{record.CI_AGING_TIME,jdbcType=DECIMAL},
+      </if>
+      <if test="record.CI_SLUGGISH_CYCLE != null">
+        CI_SLUGGISH_CYCLE = #{record.CI_SLUGGISH_CYCLE,jdbcType=DECIMAL},
+      </if>
+      <if test="record.CI_ITEM_SIZE != null">
+        CI_ITEM_SIZE = #{record.CI_ITEM_SIZE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CI_STOCK_PERIOD != null">
+        CI_STOCK_PERIOD = #{record.CI_STOCK_PERIOD,jdbcType=DECIMAL},
+      </if>
+      <if test="record.CI_STOCK_PERIOD_KEEP != null">
+        CI_STOCK_PERIOD_KEEP = #{record.CI_STOCK_PERIOD_KEEP,jdbcType=DECIMAL},
+      </if>
+      <if test="record.CI_OVERRATE != null">
+        CI_OVERRATE = #{record.CI_OVERRATE,jdbcType=DECIMAL},
+      </if>
+      <if test="record.CI_MANUFACTURER != null">
+        CI_MANUFACTURER = #{record.CI_MANUFACTURER,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CI_MANUFACTURER_MODEL != null">
+        CI_MANUFACTURER_MODEL = #{record.CI_MANUFACTURER_MODEL,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CI_3C_FLAG != null">
+        CI_3C_FLAG = #{record.CI_3C_FLAG,jdbcType=VARCHAR},
+      </if>
+      <if test="record.SAMPLE_CODE != null">
+        SAMPLE_CODE = #{record.SAMPLE_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ABC_TYPE != null">
+        ABC_TYPE = #{record.ABC_TYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CI_IS_ESCROW != null">
+        CI_IS_ESCROW = #{record.CI_IS_ESCROW,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CI_SN_RULE != null">
+        CI_SN_RULE = #{record.CI_SN_RULE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.RAW_LOTNUMBER != null">
+        RAW_LOTNUMBER = #{record.RAW_LOTNUMBER,jdbcType=VARCHAR},
+      </if>
+      <if test="record.STOCK_CODE != null">
+        STOCK_CODE = #{record.STOCK_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.SAP_WEIGHT_UNIT != null">
+        SAP_WEIGHT_UNIT = #{record.SAP_WEIGHT_UNIT,jdbcType=VARCHAR},
+      </if>
+      <if test="record.SAP_IS_DEL != null">
+        SAP_IS_DEL = #{record.SAP_IS_DEL,jdbcType=VARCHAR},
+      </if>
+      <if test="record.SAP_BASE_UNIT != null">
+        SAP_BASE_UNIT = #{record.SAP_BASE_UNIT,jdbcType=VARCHAR},
+      </if>
+      <if test="record.SAP_COLOR_CODE != null">
+        SAP_COLOR_CODE = #{record.SAP_COLOR_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.SAP_LEVEL_GROUP != null">
+        SAP_LEVEL_GROUP = #{record.SAP_LEVEL_GROUP,jdbcType=VARCHAR},
+      </if>
+      <if test="record.SAP_GROSS_WEIGHT != null">
+        SAP_GROSS_WEIGHT = #{record.SAP_GROSS_WEIGHT,jdbcType=VARCHAR},
+      </if>
+      <if test="record.SAP_NET_WEIGHT != null">
+        SAP_NET_WEIGHT = #{record.SAP_NET_WEIGHT,jdbcType=VARCHAR},
+      </if>
+      <if test="record.SAP_IS_CONFIG != null">
+        SAP_IS_CONFIG = #{record.SAP_IS_CONFIG,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update N2ADMIN.T_CO_ITEM
+    set ID = #{record.ID,jdbcType=VARCHAR},
+      CI_ITEM_CODE = #{record.CI_ITEM_CODE,jdbcType=VARCHAR},
+      CI_ITEM_NAME = #{record.CI_ITEM_NAME,jdbcType=VARCHAR},
+      CI_ITEM_SPEC = #{record.CI_ITEM_SPEC,jdbcType=VARCHAR},
+      CI_ITEM_SOURCE = #{record.CI_ITEM_SOURCE,jdbcType=VARCHAR},
+      CI_GROUP_ID = #{record.CI_GROUP_ID,jdbcType=VARCHAR},
+      CI_ITEM_GENRE = #{record.CI_ITEM_GENRE,jdbcType=VARCHAR},
+      CI_ITEM_TYPE = #{record.CI_ITEM_TYPE,jdbcType=VARCHAR},
+      CI_SUPPLIER_CODE = #{record.CI_SUPPLIER_CODE,jdbcType=VARCHAR},
+      CI_CUST_CODE = #{record.CI_CUST_CODE,jdbcType=VARCHAR},
+      CI_MIN_PACK = #{record.CI_MIN_PACK,jdbcType=DECIMAL},
+      CI_UNIT = #{record.CI_UNIT,jdbcType=VARCHAR},
+      CI_LINK_NUM = #{record.CI_LINK_NUM,jdbcType=DECIMAL},
+      CI_JIGSAW_NUM = #{record.CI_JIGSAW_NUM,jdbcType=DECIMAL},
+      CI_FEEDER_SIZE = #{record.CI_FEEDER_SIZE,jdbcType=VARCHAR},
+      CI_PACK_TYPE = #{record.CI_PACK_TYPE,jdbcType=VARCHAR},
+      CI_PRINT_TIME = #{record.CI_PRINT_TIME,jdbcType=DECIMAL},
+      CI_FEED_ANGLE = #{record.CI_FEED_ANGLE,jdbcType=DECIMAL},
+      CI_STOCK_CYCLE = #{record.CI_STOCK_CYCLE,jdbcType=DECIMAL},
+      CI_CYCLE_REMIND = #{record.CI_CYCLE_REMIND,jdbcType=DECIMAL},
+      CI_FQC_QTY = #{record.CI_FQC_QTY,jdbcType=DECIMAL},
+      CI_AUTO_FQC = #{record.CI_AUTO_FQC,jdbcType=VARCHAR},
+      CI_IQC_FREE = #{record.CI_IQC_FREE,jdbcType=VARCHAR},
+      CI_SCRAP_FLAG = #{record.CI_SCRAP_FLAG,jdbcType=VARCHAR},
+      CI_MIN_STOCK = #{record.CI_MIN_STOCK,jdbcType=DECIMAL},
+      CI_MAX_STOCK = #{record.CI_MAX_STOCK,jdbcType=DECIMAL},
+      CI_STANDARD_WEIGHTS = #{record.CI_STANDARD_WEIGHTS,jdbcType=DECIMAL},
+      CI_FULL_WEIGHTS = #{record.CI_FULL_WEIGHTS,jdbcType=DECIMAL},
+      CI_TEST_FALG = #{record.CI_TEST_FALG,jdbcType=VARCHAR},
+      CI_TEST_UNIT = #{record.CI_TEST_UNIT,jdbcType=VARCHAR},
+      CI_TEST_MAX = #{record.CI_TEST_MAX,jdbcType=DECIMAL},
+      CI_TEST_MIN = #{record.CI_TEST_MIN,jdbcType=DECIMAL},
+      CI_MSD_FLAG = #{record.CI_MSD_FLAG,jdbcType=VARCHAR},
+      CI_MSD_ID = #{record.CI_MSD_ID,jdbcType=VARCHAR},
+      CI_ROHS_FLAG = #{record.CI_ROHS_FLAG,jdbcType=VARCHAR},
+      CI_CUST_ITEM = #{record.CI_CUST_ITEM,jdbcType=VARCHAR},
+      CI_PCB_FLAG = #{record.CI_PCB_FLAG,jdbcType=VARCHAR},
+      CI_MEMO = #{record.CI_MEMO,jdbcType=VARCHAR},
+      DEPT_ID = #{record.DEPT_ID,jdbcType=VARCHAR},
+      CREATE_USER = #{record.CREATE_USER,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.CREATE_TIME,jdbcType=DATE},
+      EDIT_USER = #{record.EDIT_USER,jdbcType=VARCHAR},
+      EDIT_TIME = #{record.EDIT_TIME,jdbcType=DATE},
+      CI_SN_RULE_B = #{record.CI_SN_RULE_B,jdbcType=VARCHAR},
+      CI_SN_RULE_S = #{record.CI_SN_RULE_S,jdbcType=VARCHAR},
+      CI_SIZE = #{record.CI_SIZE,jdbcType=DECIMAL},
+      CI_REPAIR_MAX = #{record.CI_REPAIR_MAX,jdbcType=DECIMAL},
+      CI_CONTRAL_TYPE = #{record.CI_CONTRAL_TYPE,jdbcType=VARCHAR},
+      DATA_AUTH = #{record.DATA_AUTH,jdbcType=VARCHAR},
+      CI_RECHECK_DAYS = #{record.CI_RECHECK_DAYS,jdbcType=DECIMAL},
+      CI_REMIND_DAYS = #{record.CI_REMIND_DAYS,jdbcType=DECIMAL},
+      CI_EXCESS_RECEIVE = #{record.CI_EXCESS_RECEIVE,jdbcType=VARCHAR},
+      CI_EXCESS_PICK = #{record.CI_EXCESS_PICK,jdbcType=VARCHAR},
+      CI_AGING_TIME = #{record.CI_AGING_TIME,jdbcType=DECIMAL},
+      CI_SLUGGISH_CYCLE = #{record.CI_SLUGGISH_CYCLE,jdbcType=DECIMAL},
+      CI_ITEM_SIZE = #{record.CI_ITEM_SIZE,jdbcType=VARCHAR},
+      CI_STOCK_PERIOD = #{record.CI_STOCK_PERIOD,jdbcType=DECIMAL},
+      CI_STOCK_PERIOD_KEEP = #{record.CI_STOCK_PERIOD_KEEP,jdbcType=DECIMAL},
+      CI_OVERRATE = #{record.CI_OVERRATE,jdbcType=DECIMAL},
+      CI_MANUFACTURER = #{record.CI_MANUFACTURER,jdbcType=VARCHAR},
+      CI_MANUFACTURER_MODEL = #{record.CI_MANUFACTURER_MODEL,jdbcType=VARCHAR},
+      CI_3C_FLAG = #{record.CI_3C_FLAG,jdbcType=VARCHAR},
+      SAMPLE_CODE = #{record.SAMPLE_CODE,jdbcType=VARCHAR},
+      ABC_TYPE = #{record.ABC_TYPE,jdbcType=VARCHAR},
+      CI_IS_ESCROW = #{record.CI_IS_ESCROW,jdbcType=VARCHAR},
+      CI_SN_RULE = #{record.CI_SN_RULE,jdbcType=VARCHAR},
+      RAW_LOTNUMBER = #{record.RAW_LOTNUMBER,jdbcType=VARCHAR},
+      STOCK_CODE = #{record.STOCK_CODE,jdbcType=VARCHAR},
+      SAP_WEIGHT_UNIT = #{record.SAP_WEIGHT_UNIT,jdbcType=VARCHAR},
+      SAP_IS_DEL = #{record.SAP_IS_DEL,jdbcType=VARCHAR},
+      SAP_BASE_UNIT = #{record.SAP_BASE_UNIT,jdbcType=VARCHAR},
+      SAP_COLOR_CODE = #{record.SAP_COLOR_CODE,jdbcType=VARCHAR},
+      SAP_LEVEL_GROUP = #{record.SAP_LEVEL_GROUP,jdbcType=VARCHAR},
+      SAP_GROSS_WEIGHT = #{record.SAP_GROSS_WEIGHT,jdbcType=VARCHAR},
+      SAP_NET_WEIGHT = #{record.SAP_NET_WEIGHT,jdbcType=VARCHAR},
+      SAP_IS_CONFIG = #{record.SAP_IS_CONFIG,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

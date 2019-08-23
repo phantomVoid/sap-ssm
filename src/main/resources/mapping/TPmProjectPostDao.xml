@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.phantom.dao.TPmProjectPostDao">
+  <resultMap id="BaseResultMap" type="com.phantom.model.TPmProjectPost">
+    <id column="ID" jdbcType="VARCHAR" property="ID" />
+    <result column="DEPT_ID" jdbcType="VARCHAR" property="DEPT_ID" />
+    <result column="CREATE_USER" jdbcType="VARCHAR" property="CREATE_USER" />
+    <result column="CREATE_TIME" jdbcType="DATE" property="CREATE_TIME" />
+    <result column="EDIT_USER" jdbcType="VARCHAR" property="EDIT_USER" />
+    <result column="EDIT_TIME" jdbcType="DATE" property="EDIT_TIME" />
+    <result column="DATA_AUTH" jdbcType="VARCHAR" property="DATA_AUTH" />
+    <result column="ITEM_SN" jdbcType="VARCHAR" property="ITEM_SN" />
+    <result column="PROJECT_ID" jdbcType="VARCHAR" property="PROJECT_ID" />
+    <result column="WORK_SPACE" jdbcType="VARCHAR" property="WORK_SPACE" />
+    <result column="ITEM_CODE" jdbcType="VARCHAR" property="ITEM_CODE" />
+    <result column="ITEM_NUM" jdbcType="DECIMAL" property="ITEM_NUM" />
+    <result column="BASE_UNIT" jdbcType="VARCHAR" property="BASE_UNIT" />
+    <result column="LOT" jdbcType="VARCHAR" property="LOT" />
+    <result column="WARE_HOUSE" jdbcType="VARCHAR" property="WARE_HOUSE" />
+    <result column="REVERSE" jdbcType="VARCHAR" property="REVERSE" />
+    <result column="SFLAG" jdbcType="VARCHAR" property="SFLAG" />
+    <result column="MESSAGE" jdbcType="VARCHAR" property="MESSAGE" />
+    <result column="PROJECT_SORT" jdbcType="VARCHAR" property="PROJECT_SORT" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, DEPT_ID, CREATE_USER, CREATE_TIME, EDIT_USER, EDIT_TIME, DATA_AUTH, ITEM_SN, 
+    PROJECT_ID, WORK_SPACE, ITEM_CODE, ITEM_NUM, BASE_UNIT, LOT, WARE_HOUSE, REVERSE, 
+    SFLAG, MESSAGE, PROJECT_SORT
+  </sql>
+  <select id="selectByExample" parameterType="com.phantom.model.TPmProjectPostExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from N2ADMIN.T_PM_PROJECT_POST
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from N2ADMIN.T_PM_PROJECT_POST
+    where ID = #{ID,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from N2ADMIN.T_PM_PROJECT_POST
+    where ID = #{ID,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.phantom.model.TPmProjectPostExample">
+    delete from N2ADMIN.T_PM_PROJECT_POST
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.phantom.model.TPmProjectPost">
+    <selectKey keyProperty="ID" order="BEFORE" resultType="java.lang.String">
+      SELECT F_C_GETNEWID_VOID AS ID FROM DUAL
+    </selectKey>
+    insert into N2ADMIN.T_PM_PROJECT_POST (DEPT_ID, CREATE_USER, CREATE_TIME,
+      EDIT_USER, EDIT_TIME, DATA_AUTH, 
+      ITEM_SN, PROJECT_ID, WORK_SPACE, 
+      ITEM_CODE, ITEM_NUM, BASE_UNIT, 
+      LOT, WARE_HOUSE, REVERSE, 
+      SFLAG, MESSAGE, PROJECT_SORT
+      )
+    values (#{DEPT_ID,jdbcType=VARCHAR}, #{CREATE_USER,jdbcType=VARCHAR}, #{CREATE_TIME,jdbcType=DATE},
+      #{EDIT_USER,jdbcType=VARCHAR}, #{EDIT_TIME,jdbcType=DATE}, #{DATA_AUTH,jdbcType=VARCHAR}, 
+      #{ITEM_SN,jdbcType=VARCHAR}, #{PROJECT_ID,jdbcType=VARCHAR}, #{WORK_SPACE,jdbcType=VARCHAR}, 
+      #{ITEM_CODE,jdbcType=VARCHAR}, #{ITEM_NUM,jdbcType=DECIMAL}, #{BASE_UNIT,jdbcType=VARCHAR}, 
+      #{LOT,jdbcType=VARCHAR}, #{WARE_HOUSE,jdbcType=VARCHAR}, #{REVERSE,jdbcType=VARCHAR}, 
+      #{SFLAG,jdbcType=VARCHAR}, #{MESSAGE,jdbcType=VARCHAR}, #{PROJECT_SORT,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.phantom.model.TPmProjectPost">
+    <selectKey keyProperty="ID" order="BEFORE" resultType="java.lang.String">
+      SELECT F_C_GETNEWID_VOID AS ID FROM DUAL
+    </selectKey>
+    insert into N2ADMIN.T_PM_PROJECT_POST
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="DEPT_ID != null">
+        DEPT_ID,
+      </if>
+      <if test="CREATE_USER != null">
+        CREATE_USER,
+      </if>
+      <if test="CREATE_TIME != null">
+        CREATE_TIME,
+      </if>
+      <if test="EDIT_USER != null">
+        EDIT_USER,
+      </if>
+      <if test="EDIT_TIME != null">
+        EDIT_TIME,
+      </if>
+      <if test="DATA_AUTH != null">
+        DATA_AUTH,
+      </if>
+      <if test="ITEM_SN != null">
+        ITEM_SN,
+      </if>
+      <if test="PROJECT_ID != null">
+        PROJECT_ID,
+      </if>
+      <if test="WORK_SPACE != null">
+        WORK_SPACE,
+      </if>
+      <if test="ITEM_CODE != null">
+        ITEM_CODE,
+      </if>
+      <if test="ITEM_NUM != null">
+        ITEM_NUM,
+      </if>
+      <if test="BASE_UNIT != null">
+        BASE_UNIT,
+      </if>
+      <if test="LOT != null">
+        LOT,
+      </if>
+      <if test="WARE_HOUSE != null">
+        WARE_HOUSE,
+      </if>
+      <if test="REVERSE != null">
+        REVERSE,
+      </if>
+      <if test="SFLAG != null">
+        SFLAG,
+      </if>
+      <if test="MESSAGE != null">
+        MESSAGE,
+      </if>
+      <if test="PROJECT_SORT != null">
+        PROJECT_SORT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="DEPT_ID != null">
+        #{DEPT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="CREATE_USER != null">
+        #{CREATE_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="CREATE_TIME != null">
+        #{CREATE_TIME,jdbcType=DATE},
+      </if>
+      <if test="EDIT_USER != null">
+        #{EDIT_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="EDIT_TIME != null">
+        #{EDIT_TIME,jdbcType=DATE},
+      </if>
+      <if test="DATA_AUTH != null">
+        #{DATA_AUTH,jdbcType=VARCHAR},
+      </if>
+      <if test="ITEM_SN != null">
+        #{ITEM_SN,jdbcType=VARCHAR},
+      </if>
+      <if test="PROJECT_ID != null">
+        #{PROJECT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="WORK_SPACE != null">
+        #{WORK_SPACE,jdbcType=VARCHAR},
+      </if>
+      <if test="ITEM_CODE != null">
+        #{ITEM_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="ITEM_NUM != null">
+        #{ITEM_NUM,jdbcType=DECIMAL},
+      </if>
+      <if test="BASE_UNIT != null">
+        #{BASE_UNIT,jdbcType=VARCHAR},
+      </if>
+      <if test="LOT != null">
+        #{LOT,jdbcType=VARCHAR},
+      </if>
+      <if test="WARE_HOUSE != null">
+        #{WARE_HOUSE,jdbcType=VARCHAR},
+      </if>
+      <if test="REVERSE != null">
+        #{REVERSE,jdbcType=VARCHAR},
+      </if>
+      <if test="SFLAG != null">
+        #{SFLAG,jdbcType=VARCHAR},
+      </if>
+      <if test="MESSAGE != null">
+        #{MESSAGE,jdbcType=VARCHAR},
+      </if>
+      <if test="PROJECT_SORT != null">
+        #{PROJECT_SORT,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.phantom.model.TPmProjectPostExample" resultType="java.lang.Long">
+    select count(*) from N2ADMIN.T_PM_PROJECT_POST
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update N2ADMIN.T_PM_PROJECT_POST
+    <set>
+      <if test="record.ID != null">
+        ID = #{record.ID,jdbcType=VARCHAR},
+      </if>
+      <if test="record.DEPT_ID != null">
+        DEPT_ID = #{record.DEPT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CREATE_USER != null">
+        CREATE_USER = #{record.CREATE_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CREATE_TIME != null">
+        CREATE_TIME = #{record.CREATE_TIME,jdbcType=DATE},
+      </if>
+      <if test="record.EDIT_USER != null">
+        EDIT_USER = #{record.EDIT_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="record.EDIT_TIME != null">
+        EDIT_TIME = #{record.EDIT_TIME,jdbcType=DATE},
+      </if>
+      <if test="record.DATA_AUTH != null">
+        DATA_AUTH = #{record.DATA_AUTH,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ITEM_SN != null">
+        ITEM_SN = #{record.ITEM_SN,jdbcType=VARCHAR},
+      </if>
+      <if test="record.PROJECT_ID != null">
+        PROJECT_ID = #{record.PROJECT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="record.WORK_SPACE != null">
+        WORK_SPACE = #{record.WORK_SPACE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ITEM_CODE != null">
+        ITEM_CODE = #{record.ITEM_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ITEM_NUM != null">
+        ITEM_NUM = #{record.ITEM_NUM,jdbcType=DECIMAL},
+      </if>
+      <if test="record.BASE_UNIT != null">
+        BASE_UNIT = #{record.BASE_UNIT,jdbcType=VARCHAR},
+      </if>
+      <if test="record.LOT != null">
+        LOT = #{record.LOT,jdbcType=VARCHAR},
+      </if>
+      <if test="record.WARE_HOUSE != null">
+        WARE_HOUSE = #{record.WARE_HOUSE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.REVERSE != null">
+        REVERSE = #{record.REVERSE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.SFLAG != null">
+        SFLAG = #{record.SFLAG,jdbcType=VARCHAR},
+      </if>
+      <if test="record.MESSAGE != null">
+        MESSAGE = #{record.MESSAGE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.PROJECT_SORT != null">
+        PROJECT_SORT = #{record.PROJECT_SORT,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update N2ADMIN.T_PM_PROJECT_POST
+    set ID = #{record.ID,jdbcType=VARCHAR},
+      DEPT_ID = #{record.DEPT_ID,jdbcType=VARCHAR},
+      CREATE_USER = #{record.CREATE_USER,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.CREATE_TIME,jdbcType=DATE},
+      EDIT_USER = #{record.EDIT_USER,jdbcType=VARCHAR},
+      EDIT_TIME = #{record.EDIT_TIME,jdbcType=DATE},
+      DATA_AUTH = #{record.DATA_AUTH,jdbcType=VARCHAR},
+      ITEM_SN = #{record.ITEM_SN,jdbcType=VARCHAR},
+      PROJECT_ID = #{record.PROJECT_ID,jdbcType=VARCHAR},
+      WORK_SPACE = #{record.WORK_SPACE,jdbcType=VARCHAR},
+      ITEM_CODE = #{record.ITEM_CODE,jdbcType=VARCHAR},
+      ITEM_NUM = #{record.ITEM_NUM,jdbcType=DECIMAL},
+      BASE_UNIT = #{record.BASE_UNIT,jdbcType=VARCHAR},
+      LOT = #{record.LOT,jdbcType=VARCHAR},
+      WARE_HOUSE = #{record.WARE_HOUSE,jdbcType=VARCHAR},
+      REVERSE = #{record.REVERSE,jdbcType=VARCHAR},
+      SFLAG = #{record.SFLAG,jdbcType=VARCHAR},
+      MESSAGE = #{record.MESSAGE,jdbcType=VARCHAR},
+      PROJECT_SORT = #{record.PROJECT_SORT,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.phantom.model.TPmProjectPost">
+    update N2ADMIN.T_PM_PROJECT_POST
+    <set>
+      <if test="DEPT_ID != null">
+        DEPT_ID = #{DEPT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="CREATE_USER != null">
+        CREATE_USER = #{CREATE_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="CREATE_TIME != null">
+        CREATE_TIME = #{CREATE_TIME,jdbcType=DATE},
+      </if>
+      <if test="EDIT_USER != null">
+        EDIT_USER = #{EDIT_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="EDIT_TIME != null">
+        EDIT_TIME = #{EDIT_TIME,jdbcType=DATE},
+      </if>
+      <if test="DATA_AUTH != null">
+        DATA_AUTH = #{DATA_AUTH,jdbcType=VARCHAR},
+      </if>
+      <if test="ITEM_SN != null">
+        ITEM_SN = #{ITEM_SN,jdbcType=VARCHAR},
+      </if>
+      <if test="PROJECT_ID != null">
+        PROJECT_ID = #{PROJECT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="WORK_SPACE != null">
+        WORK_SPACE = #{WORK_SPACE,jdbcType=VARCHAR},
+      </if>
+      <if test="ITEM_CODE != null">
+        ITEM_CODE = #{ITEM_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="ITEM_NUM != null">
+        ITEM_NUM = #{ITEM_NUM,jdbcType=DECIMAL},
+      </if>
+      <if test="BASE_UNIT != null">
+        BASE_UNIT = #{BASE_UNIT,jdbcType=VARCHAR},
+      </if>
+      <if test="LOT != null">
+        LOT = #{LOT,jdbcType=VARCHAR},
+      </if>
+      <if test="WARE_HOUSE != null">
+        WARE_HOUSE = #{WARE_HOUSE,jdbcType=VARCHAR},
+      </if>
+      <if test="REVERSE != null">
+        REVERSE = #{REVERSE,jdbcType=VARCHAR},
+      </if>
+      <if test="SFLAG != null">
+        SFLAG = #{SFLAG,jdbcType=VARCHAR},
+      </if>
+      <if test="MESSAGE != null">
+        MESSAGE = #{MESSAGE,jdbcType=VARCHAR},
+      </if>
+      <if test="PROJECT_SORT != null">
+        PROJECT_SORT = #{PROJECT_SORT,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.phantom.model.TPmProjectPost">
+    update N2ADMIN.T_PM_PROJECT_POST
+    set DEPT_ID = #{DEPT_ID,jdbcType=VARCHAR},
+      CREATE_USER = #{CREATE_USER,jdbcType=VARCHAR},
+      CREATE_TIME = #{CREATE_TIME,jdbcType=DATE},
+      EDIT_USER = #{EDIT_USER,jdbcType=VARCHAR},
+      EDIT_TIME = #{EDIT_TIME,jdbcType=DATE},
+      DATA_AUTH = #{DATA_AUTH,jdbcType=VARCHAR},
+      ITEM_SN = #{ITEM_SN,jdbcType=VARCHAR},
+      PROJECT_ID = #{PROJECT_ID,jdbcType=VARCHAR},
+      WORK_SPACE = #{WORK_SPACE,jdbcType=VARCHAR},
+      ITEM_CODE = #{ITEM_CODE,jdbcType=VARCHAR},
+      ITEM_NUM = #{ITEM_NUM,jdbcType=DECIMAL},
+      BASE_UNIT = #{BASE_UNIT,jdbcType=VARCHAR},
+      LOT = #{LOT,jdbcType=VARCHAR},
+      WARE_HOUSE = #{WARE_HOUSE,jdbcType=VARCHAR},
+      REVERSE = #{REVERSE,jdbcType=VARCHAR},
+      SFLAG = #{SFLAG,jdbcType=VARCHAR},
+      MESSAGE = #{MESSAGE,jdbcType=VARCHAR},
+      PROJECT_SORT = #{PROJECT_SORT,jdbcType=VARCHAR}
+    where ID = #{ID,jdbcType=VARCHAR}
+  </update>
+</mapper>

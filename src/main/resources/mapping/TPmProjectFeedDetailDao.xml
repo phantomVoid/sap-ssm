@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.phantom.dao.TPmProjectFeedDetailDao">
+  <resultMap id="BaseResultMap" type="com.phantom.model.TPmProjectFeedDetail">
+    <id column="ID" jdbcType="VARCHAR" property="ID" />
+    <result column="DEPT_ID" jdbcType="VARCHAR" property="DEPT_ID" />
+    <result column="CREATE_USER" jdbcType="VARCHAR" property="CREATE_USER" />
+    <result column="CREATE_TIME" jdbcType="DATE" property="CREATE_TIME" />
+    <result column="EDIT_USER" jdbcType="VARCHAR" property="EDIT_USER" />
+    <result column="EDIT_TIME" jdbcType="DATE" property="EDIT_TIME" />
+    <result column="DATA_AUTH" jdbcType="VARCHAR" property="DATA_AUTH" />
+    <result column="PROJECT_ID" jdbcType="VARCHAR" property="PROJECT_ID" />
+    <result column="ITEM_CODE" jdbcType="VARCHAR" property="ITEM_CODE" />
+    <result column="MODEL_CODE" jdbcType="VARCHAR" property="MODEL_CODE" />
+    <result column="ITEM_NUM" jdbcType="DECIMAL" property="ITEM_NUM" />
+    <result column="FEED_NUM" jdbcType="DECIMAL" property="FEED_NUM" />
+    <result column="PROCESS_ORDER" jdbcType="VARCHAR" property="PROCESS_ORDER" />
+    <result column="RAW_LOTNUMBER" jdbcType="VARCHAR" property="RAW_LOTNUMBER" />
+    <result column="STOCK_CODE" jdbcType="VARCHAR" property="STOCK_CODE" />
+    <result column="WORK_SPACE" jdbcType="VARCHAR" property="WORK_SPACE" />
+    <result column="WAREHOUSE" jdbcType="VARCHAR" property="WAREHOUSE" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, DEPT_ID, CREATE_USER, CREATE_TIME, EDIT_USER, EDIT_TIME, DATA_AUTH, PROJECT_ID, 
+    ITEM_CODE, MODEL_CODE, ITEM_NUM, FEED_NUM, PROCESS_ORDER, RAW_LOTNUMBER, STOCK_CODE, 
+    WORK_SPACE, WAREHOUSE
+  </sql>
+  <select id="selectByExample" parameterType="com.phantom.model.TPmProjectFeedDetailExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from N2ADMIN.T_PM_PROJECT_FEED_DETAIL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from N2ADMIN.T_PM_PROJECT_FEED_DETAIL
+    where ID = #{ID,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from N2ADMIN.T_PM_PROJECT_FEED_DETAIL
+    where ID = #{ID,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.phantom.model.TPmProjectFeedDetailExample">
+    delete from N2ADMIN.T_PM_PROJECT_FEED_DETAIL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.phantom.model.TPmProjectFeedDetail">
+    <selectKey keyProperty="ID" order="BEFORE" resultType="java.lang.String">
+      SELECT F_C_GETNEWID_VOID AS ID FROM DUAL
+    </selectKey>
+    insert into N2ADMIN.T_PM_PROJECT_FEED_DETAIL (DEPT_ID, CREATE_USER, CREATE_TIME, 
+      EDIT_USER, EDIT_TIME, DATA_AUTH, 
+      PROJECT_ID, ITEM_CODE, MODEL_CODE, 
+      ITEM_NUM, FEED_NUM, PROCESS_ORDER, 
+      RAW_LOTNUMBER, STOCK_CODE, WORK_SPACE, 
+      WAREHOUSE)
+    values (#{DEPT_ID,jdbcType=VARCHAR}, #{CREATE_USER,jdbcType=VARCHAR}, #{CREATE_TIME,jdbcType=DATE}, 
+      #{EDIT_USER,jdbcType=VARCHAR}, #{EDIT_TIME,jdbcType=DATE}, #{DATA_AUTH,jdbcType=VARCHAR}, 
+      #{PROJECT_ID,jdbcType=VARCHAR}, #{ITEM_CODE,jdbcType=VARCHAR}, #{MODEL_CODE,jdbcType=VARCHAR}, 
+      #{ITEM_NUM,jdbcType=DECIMAL}, #{FEED_NUM,jdbcType=DECIMAL}, #{PROCESS_ORDER,jdbcType=VARCHAR}, 
+      #{RAW_LOTNUMBER,jdbcType=VARCHAR}, #{STOCK_CODE,jdbcType=VARCHAR}, #{WORK_SPACE,jdbcType=VARCHAR}, 
+      #{WAREHOUSE,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.phantom.model.TPmProjectFeedDetail">
+    <selectKey keyProperty="ID" order="BEFORE" resultType="java.lang.String">
+      SELECT F_C_GETNEWID_VOID AS ID FROM DUAL
+    </selectKey>
+    insert into N2ADMIN.T_PM_PROJECT_FEED_DETAIL
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="DEPT_ID != null">
+        DEPT_ID,
+      </if>
+      <if test="CREATE_USER != null">
+        CREATE_USER,
+      </if>
+      <if test="CREATE_TIME != null">
+        CREATE_TIME,
+      </if>
+      <if test="EDIT_USER != null">
+        EDIT_USER,
+      </if>
+      <if test="EDIT_TIME != null">
+        EDIT_TIME,
+      </if>
+      <if test="DATA_AUTH != null">
+        DATA_AUTH,
+      </if>
+      <if test="PROJECT_ID != null">
+        PROJECT_ID,
+      </if>
+      <if test="ITEM_CODE != null">
+        ITEM_CODE,
+      </if>
+      <if test="MODEL_CODE != null">
+        MODEL_CODE,
+      </if>
+      <if test="ITEM_NUM != null">
+        ITEM_NUM,
+      </if>
+      <if test="FEED_NUM != null">
+        FEED_NUM,
+      </if>
+      <if test="PROCESS_ORDER != null">
+        PROCESS_ORDER,
+      </if>
+      <if test="RAW_LOTNUMBER != null">
+        RAW_LOTNUMBER,
+      </if>
+      <if test="STOCK_CODE != null">
+        STOCK_CODE,
+      </if>
+      <if test="WORK_SPACE != null">
+        WORK_SPACE,
+      </if>
+      <if test="WAREHOUSE != null">
+        WAREHOUSE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="DEPT_ID != null">
+        #{DEPT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="CREATE_USER != null">
+        #{CREATE_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="CREATE_TIME != null">
+        #{CREATE_TIME,jdbcType=DATE},
+      </if>
+      <if test="EDIT_USER != null">
+        #{EDIT_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="EDIT_TIME != null">
+        #{EDIT_TIME,jdbcType=DATE},
+      </if>
+      <if test="DATA_AUTH != null">
+        #{DATA_AUTH,jdbcType=VARCHAR},
+      </if>
+      <if test="PROJECT_ID != null">
+        #{PROJECT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="ITEM_CODE != null">
+        #{ITEM_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="MODEL_CODE != null">
+        #{MODEL_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="ITEM_NUM != null">
+        #{ITEM_NUM,jdbcType=DECIMAL},
+      </if>
+      <if test="FEED_NUM != null">
+        #{FEED_NUM,jdbcType=DECIMAL},
+      </if>
+      <if test="PROCESS_ORDER != null">
+        #{PROCESS_ORDER,jdbcType=VARCHAR},
+      </if>
+      <if test="RAW_LOTNUMBER != null">
+        #{RAW_LOTNUMBER,jdbcType=VARCHAR},
+      </if>
+      <if test="STOCK_CODE != null">
+        #{STOCK_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="WORK_SPACE != null">
+        #{WORK_SPACE,jdbcType=VARCHAR},
+      </if>
+      <if test="WAREHOUSE != null">
+        #{WAREHOUSE,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.phantom.model.TPmProjectFeedDetailExample" resultType="java.lang.Long">
+    select count(*) from N2ADMIN.T_PM_PROJECT_FEED_DETAIL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update N2ADMIN.T_PM_PROJECT_FEED_DETAIL
+    <set>
+      <if test="record.ID != null">
+        ID = #{record.ID,jdbcType=VARCHAR},
+      </if>
+      <if test="record.DEPT_ID != null">
+        DEPT_ID = #{record.DEPT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CREATE_USER != null">
+        CREATE_USER = #{record.CREATE_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CREATE_TIME != null">
+        CREATE_TIME = #{record.CREATE_TIME,jdbcType=DATE},
+      </if>
+      <if test="record.EDIT_USER != null">
+        EDIT_USER = #{record.EDIT_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="record.EDIT_TIME != null">
+        EDIT_TIME = #{record.EDIT_TIME,jdbcType=DATE},
+      </if>
+      <if test="record.DATA_AUTH != null">
+        DATA_AUTH = #{record.DATA_AUTH,jdbcType=VARCHAR},
+      </if>
+      <if test="record.PROJECT_ID != null">
+        PROJECT_ID = #{record.PROJECT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ITEM_CODE != null">
+        ITEM_CODE = #{record.ITEM_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.MODEL_CODE != null">
+        MODEL_CODE = #{record.MODEL_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ITEM_NUM != null">
+        ITEM_NUM = #{record.ITEM_NUM,jdbcType=DECIMAL},
+      </if>
+      <if test="record.FEED_NUM != null">
+        FEED_NUM = #{record.FEED_NUM,jdbcType=DECIMAL},
+      </if>
+      <if test="record.PROCESS_ORDER != null">
+        PROCESS_ORDER = #{record.PROCESS_ORDER,jdbcType=VARCHAR},
+      </if>
+      <if test="record.RAW_LOTNUMBER != null">
+        RAW_LOTNUMBER = #{record.RAW_LOTNUMBER,jdbcType=VARCHAR},
+      </if>
+      <if test="record.STOCK_CODE != null">
+        STOCK_CODE = #{record.STOCK_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.WORK_SPACE != null">
+        WORK_SPACE = #{record.WORK_SPACE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.WAREHOUSE != null">
+        WAREHOUSE = #{record.WAREHOUSE,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update N2ADMIN.T_PM_PROJECT_FEED_DETAIL
+    set ID = #{record.ID,jdbcType=VARCHAR},
+      DEPT_ID = #{record.DEPT_ID,jdbcType=VARCHAR},
+      CREATE_USER = #{record.CREATE_USER,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.CREATE_TIME,jdbcType=DATE},
+      EDIT_USER = #{record.EDIT_USER,jdbcType=VARCHAR},
+      EDIT_TIME = #{record.EDIT_TIME,jdbcType=DATE},
+      DATA_AUTH = #{record.DATA_AUTH,jdbcType=VARCHAR},
+      PROJECT_ID = #{record.PROJECT_ID,jdbcType=VARCHAR},
+      ITEM_CODE = #{record.ITEM_CODE,jdbcType=VARCHAR},
+      MODEL_CODE = #{record.MODEL_CODE,jdbcType=VARCHAR},
+      ITEM_NUM = #{record.ITEM_NUM,jdbcType=DECIMAL},
+      FEED_NUM = #{record.FEED_NUM,jdbcType=DECIMAL},
+      PROCESS_ORDER = #{record.PROCESS_ORDER,jdbcType=VARCHAR},
+      RAW_LOTNUMBER = #{record.RAW_LOTNUMBER,jdbcType=VARCHAR},
+      STOCK_CODE = #{record.STOCK_CODE,jdbcType=VARCHAR},
+      WORK_SPACE = #{record.WORK_SPACE,jdbcType=VARCHAR},
+      WAREHOUSE = #{record.WAREHOUSE,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.phantom.model.TPmProjectFeedDetail">
+    update N2ADMIN.T_PM_PROJECT_FEED_DETAIL
+    <set>
+      <if test="DEPT_ID != null">
+        DEPT_ID = #{DEPT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="CREATE_USER != null">
+        CREATE_USER = #{CREATE_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="CREATE_TIME != null">
+        CREATE_TIME = #{CREATE_TIME,jdbcType=DATE},
+      </if>
+      <if test="EDIT_USER != null">
+        EDIT_USER = #{EDIT_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="EDIT_TIME != null">
+        EDIT_TIME = #{EDIT_TIME,jdbcType=DATE},
+      </if>
+      <if test="DATA_AUTH != null">
+        DATA_AUTH = #{DATA_AUTH,jdbcType=VARCHAR},
+      </if>
+      <if test="PROJECT_ID != null">
+        PROJECT_ID = #{PROJECT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="ITEM_CODE != null">
+        ITEM_CODE = #{ITEM_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="MODEL_CODE != null">
+        MODEL_CODE = #{MODEL_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="ITEM_NUM != null">
+        ITEM_NUM = #{ITEM_NUM,jdbcType=DECIMAL},
+      </if>
+      <if test="FEED_NUM != null">
+        FEED_NUM = #{FEED_NUM,jdbcType=DECIMAL},
+      </if>
+      <if test="PROCESS_ORDER != null">
+        PROCESS_ORDER = #{PROCESS_ORDER,jdbcType=VARCHAR},
+      </if>
+      <if test="RAW_LOTNUMBER != null">
+        RAW_LOTNUMBER = #{RAW_LOTNUMBER,jdbcType=VARCHAR},
+      </if>
+      <if test="STOCK_CODE != null">
+        STOCK_CODE = #{STOCK_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="WORK_SPACE != null">
+        WORK_SPACE = #{WORK_SPACE,jdbcType=VARCHAR},
+      </if>
+      <if test="WAREHOUSE != null">
+        WAREHOUSE = #{WAREHOUSE,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.phantom.model.TPmProjectFeedDetail">
+    update N2ADMIN.T_PM_PROJECT_FEED_DETAIL
+    set DEPT_ID = #{DEPT_ID,jdbcType=VARCHAR},
+      CREATE_USER = #{CREATE_USER,jdbcType=VARCHAR},
+      CREATE_TIME = #{CREATE_TIME,jdbcType=DATE},
+      EDIT_USER = #{EDIT_USER,jdbcType=VARCHAR},
+      EDIT_TIME = #{EDIT_TIME,jdbcType=DATE},
+      DATA_AUTH = #{DATA_AUTH,jdbcType=VARCHAR},
+      PROJECT_ID = #{PROJECT_ID,jdbcType=VARCHAR},
+      ITEM_CODE = #{ITEM_CODE,jdbcType=VARCHAR},
+      MODEL_CODE = #{MODEL_CODE,jdbcType=VARCHAR},
+      ITEM_NUM = #{ITEM_NUM,jdbcType=DECIMAL},
+      FEED_NUM = #{FEED_NUM,jdbcType=DECIMAL},
+      PROCESS_ORDER = #{PROCESS_ORDER,jdbcType=VARCHAR},
+      RAW_LOTNUMBER = #{RAW_LOTNUMBER,jdbcType=VARCHAR},
+      STOCK_CODE = #{STOCK_CODE,jdbcType=VARCHAR},
+      WORK_SPACE = #{WORK_SPACE,jdbcType=VARCHAR},
+      WAREHOUSE = #{WAREHOUSE,jdbcType=VARCHAR}
+    where ID = #{ID,jdbcType=VARCHAR}
+  </update>
+</mapper>

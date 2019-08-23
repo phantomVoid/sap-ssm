@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.phantom.dao.TProjectPackFeedDao">
+  <resultMap id="BaseResultMap" type="com.phantom.model.TProjectPackFeed">
+    <id column="ID" jdbcType="VARCHAR" property="ID" />
+    <result column="DEPT_ID" jdbcType="VARCHAR" property="DEPT_ID" />
+    <result column="CREATE_USER" jdbcType="VARCHAR" property="CREATE_USER" />
+    <result column="CREATE_TIME" jdbcType="DATE" property="CREATE_TIME" />
+    <result column="EDIT_USER" jdbcType="VARCHAR" property="EDIT_USER" />
+    <result column="EDIT_TIME" jdbcType="DATE" property="EDIT_TIME" />
+    <result column="DATA_AUTH" jdbcType="VARCHAR" property="DATA_AUTH" />
+    <result column="PROJECT_ID" jdbcType="VARCHAR" property="PROJECT_ID" />
+    <result column="ITEM_CODE" jdbcType="VARCHAR" property="ITEM_CODE" />
+    <result column="RECEIVE_COUNT" jdbcType="DECIMAL" property="RECEIVE_COUNT" />
+    <result column="PACK_NUM" jdbcType="DECIMAL" property="PACK_NUM" />
+    <result column="ITEM_MANE" jdbcType="VARCHAR" property="ITEM_MANE" />
+    <result column="ITEM_SPEC" jdbcType="VARCHAR" property="ITEM_SPEC" />
+    <result column="ITEM_NUM" jdbcType="DECIMAL" property="ITEM_NUM" />
+    <result column="MESSAGE" jdbcType="VARCHAR" property="MESSAGE" />
+    <result column="SFLAG" jdbcType="VARCHAR" property="SFLAG" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, DEPT_ID, CREATE_USER, CREATE_TIME, EDIT_USER, EDIT_TIME, DATA_AUTH, PROJECT_ID, 
+    ITEM_CODE, RECEIVE_COUNT, PACK_NUM, ITEM_MANE, ITEM_SPEC, ITEM_NUM, MESSAGE, SFLAG
+  </sql>
+  <select id="selectByExample" parameterType="com.phantom.model.TProjectPackFeedExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from N2ADMIN.T_PROJECT_PACK_FEED
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from N2ADMIN.T_PROJECT_PACK_FEED
+    where ID = #{ID,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from N2ADMIN.T_PROJECT_PACK_FEED
+    where ID = #{ID,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.phantom.model.TProjectPackFeedExample">
+    delete from N2ADMIN.T_PROJECT_PACK_FEED
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.phantom.model.TProjectPackFeed">
+    insert into N2ADMIN.T_PROJECT_PACK_FEED (ID, DEPT_ID, CREATE_USER, 
+      CREATE_TIME, EDIT_USER, EDIT_TIME, 
+      DATA_AUTH, PROJECT_ID, ITEM_CODE, 
+      RECEIVE_COUNT, PACK_NUM, ITEM_MANE, 
+      ITEM_SPEC, ITEM_NUM, MESSAGE, 
+      SFLAG)
+    values (#{ID,jdbcType=VARCHAR}, #{DEPT_ID,jdbcType=VARCHAR}, #{CREATE_USER,jdbcType=VARCHAR}, 
+      #{CREATE_TIME,jdbcType=DATE}, #{EDIT_USER,jdbcType=VARCHAR}, #{EDIT_TIME,jdbcType=DATE}, 
+      #{DATA_AUTH,jdbcType=VARCHAR}, #{PROJECT_ID,jdbcType=VARCHAR}, #{ITEM_CODE,jdbcType=VARCHAR}, 
+      #{RECEIVE_COUNT,jdbcType=DECIMAL}, #{PACK_NUM,jdbcType=DECIMAL}, #{ITEM_MANE,jdbcType=VARCHAR}, 
+      #{ITEM_SPEC,jdbcType=VARCHAR}, #{ITEM_NUM,jdbcType=DECIMAL}, #{MESSAGE,jdbcType=VARCHAR}, 
+      #{SFLAG,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.phantom.model.TProjectPackFeed">
+    insert into N2ADMIN.T_PROJECT_PACK_FEED
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ID != null">
+        ID,
+      </if>
+      <if test="DEPT_ID != null">
+        DEPT_ID,
+      </if>
+      <if test="CREATE_USER != null">
+        CREATE_USER,
+      </if>
+      <if test="CREATE_TIME != null">
+        CREATE_TIME,
+      </if>
+      <if test="EDIT_USER != null">
+        EDIT_USER,
+      </if>
+      <if test="EDIT_TIME != null">
+        EDIT_TIME,
+      </if>
+      <if test="DATA_AUTH != null">
+        DATA_AUTH,
+      </if>
+      <if test="PROJECT_ID != null">
+        PROJECT_ID,
+      </if>
+      <if test="ITEM_CODE != null">
+        ITEM_CODE,
+      </if>
+      <if test="RECEIVE_COUNT != null">
+        RECEIVE_COUNT,
+      </if>
+      <if test="PACK_NUM != null">
+        PACK_NUM,
+      </if>
+      <if test="ITEM_MANE != null">
+        ITEM_MANE,
+      </if>
+      <if test="ITEM_SPEC != null">
+        ITEM_SPEC,
+      </if>
+      <if test="ITEM_NUM != null">
+        ITEM_NUM,
+      </if>
+      <if test="MESSAGE != null">
+        MESSAGE,
+      </if>
+      <if test="SFLAG != null">
+        SFLAG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ID != null">
+        #{ID,jdbcType=VARCHAR},
+      </if>
+      <if test="DEPT_ID != null">
+        #{DEPT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="CREATE_USER != null">
+        #{CREATE_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="CREATE_TIME != null">
+        #{CREATE_TIME,jdbcType=DATE},
+      </if>
+      <if test="EDIT_USER != null">
+        #{EDIT_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="EDIT_TIME != null">
+        #{EDIT_TIME,jdbcType=DATE},
+      </if>
+      <if test="DATA_AUTH != null">
+        #{DATA_AUTH,jdbcType=VARCHAR},
+      </if>
+      <if test="PROJECT_ID != null">
+        #{PROJECT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="ITEM_CODE != null">
+        #{ITEM_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="RECEIVE_COUNT != null">
+        #{RECEIVE_COUNT,jdbcType=DECIMAL},
+      </if>
+      <if test="PACK_NUM != null">
+        #{PACK_NUM,jdbcType=DECIMAL},
+      </if>
+      <if test="ITEM_MANE != null">
+        #{ITEM_MANE,jdbcType=VARCHAR},
+      </if>
+      <if test="ITEM_SPEC != null">
+        #{ITEM_SPEC,jdbcType=VARCHAR},
+      </if>
+      <if test="ITEM_NUM != null">
+        #{ITEM_NUM,jdbcType=DECIMAL},
+      </if>
+      <if test="MESSAGE != null">
+        #{MESSAGE,jdbcType=VARCHAR},
+      </if>
+      <if test="SFLAG != null">
+        #{SFLAG,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.phantom.model.TProjectPackFeedExample" resultType="java.lang.Long">
+    select count(*) from N2ADMIN.T_PROJECT_PACK_FEED
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update N2ADMIN.T_PROJECT_PACK_FEED
+    <set>
+      <if test="record.ID != null">
+        ID = #{record.ID,jdbcType=VARCHAR},
+      </if>
+      <if test="record.DEPT_ID != null">
+        DEPT_ID = #{record.DEPT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CREATE_USER != null">
+        CREATE_USER = #{record.CREATE_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CREATE_TIME != null">
+        CREATE_TIME = #{record.CREATE_TIME,jdbcType=DATE},
+      </if>
+      <if test="record.EDIT_USER != null">
+        EDIT_USER = #{record.EDIT_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="record.EDIT_TIME != null">
+        EDIT_TIME = #{record.EDIT_TIME,jdbcType=DATE},
+      </if>
+      <if test="record.DATA_AUTH != null">
+        DATA_AUTH = #{record.DATA_AUTH,jdbcType=VARCHAR},
+      </if>
+      <if test="record.PROJECT_ID != null">
+        PROJECT_ID = #{record.PROJECT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ITEM_CODE != null">
+        ITEM_CODE = #{record.ITEM_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.RECEIVE_COUNT != null">
+        RECEIVE_COUNT = #{record.RECEIVE_COUNT,jdbcType=DECIMAL},
+      </if>
+      <if test="record.PACK_NUM != null">
+        PACK_NUM = #{record.PACK_NUM,jdbcType=DECIMAL},
+      </if>
+      <if test="record.ITEM_MANE != null">
+        ITEM_MANE = #{record.ITEM_MANE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ITEM_SPEC != null">
+        ITEM_SPEC = #{record.ITEM_SPEC,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ITEM_NUM != null">
+        ITEM_NUM = #{record.ITEM_NUM,jdbcType=DECIMAL},
+      </if>
+      <if test="record.MESSAGE != null">
+        MESSAGE = #{record.MESSAGE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.SFLAG != null">
+        SFLAG = #{record.SFLAG,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update N2ADMIN.T_PROJECT_PACK_FEED
+    set ID = #{record.ID,jdbcType=VARCHAR},
+      DEPT_ID = #{record.DEPT_ID,jdbcType=VARCHAR},
+      CREATE_USER = #{record.CREATE_USER,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.CREATE_TIME,jdbcType=DATE},
+      EDIT_USER = #{record.EDIT_USER,jdbcType=VARCHAR},
+      EDIT_TIME = #{record.EDIT_TIME,jdbcType=DATE},
+      DATA_AUTH = #{record.DATA_AUTH,jdbcType=VARCHAR},
+      PROJECT_ID = #{record.PROJECT_ID,jdbcType=VARCHAR},
+      ITEM_CODE = #{record.ITEM_CODE,jdbcType=VARCHAR},
+      RECEIVE_COUNT = #{record.RECEIVE_COUNT,jdbcType=DECIMAL},
+      PACK_NUM = #{record.PACK_NUM,jdbcType=DECIMAL},
+      ITEM_MANE = #{record.ITEM_MANE,jdbcType=VARCHAR},
+      ITEM_SPEC = #{record.ITEM_SPEC,jdbcType=VARCHAR},
+      ITEM_NUM = #{record.ITEM_NUM,jdbcType=DECIMAL},
+      MESSAGE = #{record.MESSAGE,jdbcType=VARCHAR},
+      SFLAG = #{record.SFLAG,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.phantom.model.TProjectPackFeed">
+    update N2ADMIN.T_PROJECT_PACK_FEED
+    <set>
+      <if test="DEPT_ID != null">
+        DEPT_ID = #{DEPT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="CREATE_USER != null">
+        CREATE_USER = #{CREATE_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="CREATE_TIME != null">
+        CREATE_TIME = #{CREATE_TIME,jdbcType=DATE},
+      </if>
+      <if test="EDIT_USER != null">
+        EDIT_USER = #{EDIT_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="EDIT_TIME != null">
+        EDIT_TIME = #{EDIT_TIME,jdbcType=DATE},
+      </if>
+      <if test="DATA_AUTH != null">
+        DATA_AUTH = #{DATA_AUTH,jdbcType=VARCHAR},
+      </if>
+      <if test="PROJECT_ID != null">
+        PROJECT_ID = #{PROJECT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="ITEM_CODE != null">
+        ITEM_CODE = #{ITEM_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="RECEIVE_COUNT != null">
+        RECEIVE_COUNT = #{RECEIVE_COUNT,jdbcType=DECIMAL},
+      </if>
+      <if test="PACK_NUM != null">
+        PACK_NUM = #{PACK_NUM,jdbcType=DECIMAL},
+      </if>
+      <if test="ITEM_MANE != null">
+        ITEM_MANE = #{ITEM_MANE,jdbcType=VARCHAR},
+      </if>
+      <if test="ITEM_SPEC != null">
+        ITEM_SPEC = #{ITEM_SPEC,jdbcType=VARCHAR},
+      </if>
+      <if test="ITEM_NUM != null">
+        ITEM_NUM = #{ITEM_NUM,jdbcType=DECIMAL},
+      </if>
+      <if test="MESSAGE != null">
+        MESSAGE = #{MESSAGE,jdbcType=VARCHAR},
+      </if>
+      <if test="SFLAG != null">
+        SFLAG = #{SFLAG,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.phantom.model.TProjectPackFeed">
+    update N2ADMIN.T_PROJECT_PACK_FEED
+    set DEPT_ID = #{DEPT_ID,jdbcType=VARCHAR},
+      CREATE_USER = #{CREATE_USER,jdbcType=VARCHAR},
+      CREATE_TIME = #{CREATE_TIME,jdbcType=DATE},
+      EDIT_USER = #{EDIT_USER,jdbcType=VARCHAR},
+      EDIT_TIME = #{EDIT_TIME,jdbcType=DATE},
+      DATA_AUTH = #{DATA_AUTH,jdbcType=VARCHAR},
+      PROJECT_ID = #{PROJECT_ID,jdbcType=VARCHAR},
+      ITEM_CODE = #{ITEM_CODE,jdbcType=VARCHAR},
+      RECEIVE_COUNT = #{RECEIVE_COUNT,jdbcType=DECIMAL},
+      PACK_NUM = #{PACK_NUM,jdbcType=DECIMAL},
+      ITEM_MANE = #{ITEM_MANE,jdbcType=VARCHAR},
+      ITEM_SPEC = #{ITEM_SPEC,jdbcType=VARCHAR},
+      ITEM_NUM = #{ITEM_NUM,jdbcType=DECIMAL},
+      MESSAGE = #{MESSAGE,jdbcType=VARCHAR},
+      SFLAG = #{SFLAG,jdbcType=VARCHAR}
+    where ID = #{ID,jdbcType=VARCHAR}
+  </update>
+</mapper>

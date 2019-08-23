@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.phantom.dao.TPmProjectDetailDao">
+  <resultMap id="BaseResultMap" type="com.phantom.model.TPmProjectDetail">
+    <result column="ID" jdbcType="VARCHAR" property="ID" />
+    <result column="PROJECT_ID" jdbcType="VARCHAR" property="PROJECT_ID" />
+    <result column="CBD_ITEM_CODE" jdbcType="VARCHAR" property="CBD_ITEM_CODE" />
+    <result column="CBD_ITEM_NUM" jdbcType="DECIMAL" property="CBD_ITEM_NUM" />
+    <result column="CBD_SEQUENCE" jdbcType="DECIMAL" property="CBD_SEQUENCE" />
+    <result column="CBD_POINT" jdbcType="VARCHAR" property="CBD_POINT" />
+    <result column="CBD_UNITS" jdbcType="VARCHAR" property="CBD_UNITS" />
+    <result column="CBD_ITEM_TYPE" jdbcType="VARCHAR" property="CBD_ITEM_TYPE" />
+    <result column="DEPT_ID" jdbcType="VARCHAR" property="DEPT_ID" />
+    <result column="CREATE_USER" jdbcType="VARCHAR" property="CREATE_USER" />
+    <result column="CREATE_TIME" jdbcType="DATE" property="CREATE_TIME" />
+    <result column="EDIT_USER" jdbcType="VARCHAR" property="EDIT_USER" />
+    <result column="EDIT_TIME" jdbcType="DATE" property="EDIT_TIME" />
+    <result column="DATA_AUTH" jdbcType="VARCHAR" property="DATA_AUTH" />
+    <result column="PROJECT_BIN" jdbcType="VARCHAR" property="PROJECT_BIN" />
+    <result column="WORKCENTER_SEQ" jdbcType="VARCHAR" property="WORKCENTER_SEQ" />
+    <result column="WORKCENTER_NO" jdbcType="VARCHAR" property="WORKCENTER_NO" />
+    <result column="WORKCENTER" jdbcType="VARCHAR" property="WORKCENTER" />
+    <result column="OUTPUT_RATE" jdbcType="DECIMAL" property="OUTPUT_RATE" />
+    <result column="MEMO" jdbcType="VARCHAR" property="MEMO" />
+    <result column="WORK_SPACE" jdbcType="VARCHAR" property="WORK_SPACE" />
+    <result column="WARE_HOUSE" jdbcType="VARCHAR" property="WARE_HOUSE" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, PROJECT_ID, CBD_ITEM_CODE, CBD_ITEM_NUM, CBD_SEQUENCE, CBD_POINT, CBD_UNITS, 
+    CBD_ITEM_TYPE, DEPT_ID, CREATE_USER, CREATE_TIME, EDIT_USER, EDIT_TIME, DATA_AUTH, 
+    PROJECT_BIN, WORKCENTER_SEQ, WORKCENTER_NO, WORKCENTER, OUTPUT_RATE, MEMO, WORK_SPACE, 
+    WARE_HOUSE
+  </sql>
+  <select id="selectByExample" parameterType="com.phantom.model.TPmProjectDetailExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from N2ADMIN.T_PM_PROJECT_DETAIL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.phantom.model.TPmProjectDetailExample">
+    delete from N2ADMIN.T_PM_PROJECT_DETAIL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.phantom.model.TPmProjectDetail">
+    insert into N2ADMIN.T_PM_PROJECT_DETAIL (ID, PROJECT_ID, CBD_ITEM_CODE, 
+      CBD_ITEM_NUM, CBD_SEQUENCE, CBD_POINT, 
+      CBD_UNITS, CBD_ITEM_TYPE, DEPT_ID, 
+      CREATE_USER, CREATE_TIME, EDIT_USER, 
+      EDIT_TIME, DATA_AUTH, PROJECT_BIN, 
+      WORKCENTER_SEQ, WORKCENTER_NO, WORKCENTER, 
+      OUTPUT_RATE, MEMO, WORK_SPACE, 
+      WARE_HOUSE)
+    values (#{ID,jdbcType=VARCHAR}, #{PROJECT_ID,jdbcType=VARCHAR}, #{CBD_ITEM_CODE,jdbcType=VARCHAR}, 
+      #{CBD_ITEM_NUM,jdbcType=DECIMAL}, #{CBD_SEQUENCE,jdbcType=DECIMAL}, #{CBD_POINT,jdbcType=VARCHAR}, 
+      #{CBD_UNITS,jdbcType=VARCHAR}, #{CBD_ITEM_TYPE,jdbcType=VARCHAR}, #{DEPT_ID,jdbcType=VARCHAR}, 
+      #{CREATE_USER,jdbcType=VARCHAR}, #{CREATE_TIME,jdbcType=DATE}, #{EDIT_USER,jdbcType=VARCHAR}, 
+      #{EDIT_TIME,jdbcType=DATE}, #{DATA_AUTH,jdbcType=VARCHAR}, #{PROJECT_BIN,jdbcType=VARCHAR}, 
+      #{WORKCENTER_SEQ,jdbcType=VARCHAR}, #{WORKCENTER_NO,jdbcType=VARCHAR}, #{WORKCENTER,jdbcType=VARCHAR}, 
+      #{OUTPUT_RATE,jdbcType=DECIMAL}, #{MEMO,jdbcType=VARCHAR}, #{WORK_SPACE,jdbcType=VARCHAR}, 
+      #{WARE_HOUSE,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.phantom.model.TPmProjectDetail">
+    insert into N2ADMIN.T_PM_PROJECT_DETAIL
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ID != null">
+        ID,
+      </if>
+      <if test="PROJECT_ID != null">
+        PROJECT_ID,
+      </if>
+      <if test="CBD_ITEM_CODE != null">
+        CBD_ITEM_CODE,
+      </if>
+      <if test="CBD_ITEM_NUM != null">
+        CBD_ITEM_NUM,
+      </if>
+      <if test="CBD_SEQUENCE != null">
+        CBD_SEQUENCE,
+      </if>
+      <if test="CBD_POINT != null">
+        CBD_POINT,
+      </if>
+      <if test="CBD_UNITS != null">
+        CBD_UNITS,
+      </if>
+      <if test="CBD_ITEM_TYPE != null">
+        CBD_ITEM_TYPE,
+      </if>
+      <if test="DEPT_ID != null">
+        DEPT_ID,
+      </if>
+      <if test="CREATE_USER != null">
+        CREATE_USER,
+      </if>
+      <if test="CREATE_TIME != null">
+        CREATE_TIME,
+      </if>
+      <if test="EDIT_USER != null">
+        EDIT_USER,
+      </if>
+      <if test="EDIT_TIME != null">
+        EDIT_TIME,
+      </if>
+      <if test="DATA_AUTH != null">
+        DATA_AUTH,
+      </if>
+      <if test="PROJECT_BIN != null">
+        PROJECT_BIN,
+      </if>
+      <if test="WORKCENTER_SEQ != null">
+        WORKCENTER_SEQ,
+      </if>
+      <if test="WORKCENTER_NO != null">
+        WORKCENTER_NO,
+      </if>
+      <if test="WORKCENTER != null">
+        WORKCENTER,
+      </if>
+      <if test="OUTPUT_RATE != null">
+        OUTPUT_RATE,
+      </if>
+      <if test="MEMO != null">
+        MEMO,
+      </if>
+      <if test="WORK_SPACE != null">
+        WORK_SPACE,
+      </if>
+      <if test="WARE_HOUSE != null">
+        WARE_HOUSE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ID != null">
+        #{ID,jdbcType=VARCHAR},
+      </if>
+      <if test="PROJECT_ID != null">
+        #{PROJECT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="CBD_ITEM_CODE != null">
+        #{CBD_ITEM_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="CBD_ITEM_NUM != null">
+        #{CBD_ITEM_NUM,jdbcType=DECIMAL},
+      </if>
+      <if test="CBD_SEQUENCE != null">
+        #{CBD_SEQUENCE,jdbcType=DECIMAL},
+      </if>
+      <if test="CBD_POINT != null">
+        #{CBD_POINT,jdbcType=VARCHAR},
+      </if>
+      <if test="CBD_UNITS != null">
+        #{CBD_UNITS,jdbcType=VARCHAR},
+      </if>
+      <if test="CBD_ITEM_TYPE != null">
+        #{CBD_ITEM_TYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="DEPT_ID != null">
+        #{DEPT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="CREATE_USER != null">
+        #{CREATE_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="CREATE_TIME != null">
+        #{CREATE_TIME,jdbcType=DATE},
+      </if>
+      <if test="EDIT_USER != null">
+        #{EDIT_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="EDIT_TIME != null">
+        #{EDIT_TIME,jdbcType=DATE},
+      </if>
+      <if test="DATA_AUTH != null">
+        #{DATA_AUTH,jdbcType=VARCHAR},
+      </if>
+      <if test="PROJECT_BIN != null">
+        #{PROJECT_BIN,jdbcType=VARCHAR},
+      </if>
+      <if test="WORKCENTER_SEQ != null">
+        #{WORKCENTER_SEQ,jdbcType=VARCHAR},
+      </if>
+      <if test="WORKCENTER_NO != null">
+        #{WORKCENTER_NO,jdbcType=VARCHAR},
+      </if>
+      <if test="WORKCENTER != null">
+        #{WORKCENTER,jdbcType=VARCHAR},
+      </if>
+      <if test="OUTPUT_RATE != null">
+        #{OUTPUT_RATE,jdbcType=DECIMAL},
+      </if>
+      <if test="MEMO != null">
+        #{MEMO,jdbcType=VARCHAR},
+      </if>
+      <if test="WORK_SPACE != null">
+        #{WORK_SPACE,jdbcType=VARCHAR},
+      </if>
+      <if test="WARE_HOUSE != null">
+        #{WARE_HOUSE,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.phantom.model.TPmProjectDetailExample" resultType="java.lang.Long">
+    select count(*) from N2ADMIN.T_PM_PROJECT_DETAIL
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update N2ADMIN.T_PM_PROJECT_DETAIL
+    <set>
+      <if test="record.ID != null">
+        ID = #{record.ID,jdbcType=VARCHAR},
+      </if>
+      <if test="record.PROJECT_ID != null">
+        PROJECT_ID = #{record.PROJECT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CBD_ITEM_CODE != null">
+        CBD_ITEM_CODE = #{record.CBD_ITEM_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CBD_ITEM_NUM != null">
+        CBD_ITEM_NUM = #{record.CBD_ITEM_NUM,jdbcType=DECIMAL},
+      </if>
+      <if test="record.CBD_SEQUENCE != null">
+        CBD_SEQUENCE = #{record.CBD_SEQUENCE,jdbcType=DECIMAL},
+      </if>
+      <if test="record.CBD_POINT != null">
+        CBD_POINT = #{record.CBD_POINT,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CBD_UNITS != null">
+        CBD_UNITS = #{record.CBD_UNITS,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CBD_ITEM_TYPE != null">
+        CBD_ITEM_TYPE = #{record.CBD_ITEM_TYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.DEPT_ID != null">
+        DEPT_ID = #{record.DEPT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CREATE_USER != null">
+        CREATE_USER = #{record.CREATE_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CREATE_TIME != null">
+        CREATE_TIME = #{record.CREATE_TIME,jdbcType=DATE},
+      </if>
+      <if test="record.EDIT_USER != null">
+        EDIT_USER = #{record.EDIT_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="record.EDIT_TIME != null">
+        EDIT_TIME = #{record.EDIT_TIME,jdbcType=DATE},
+      </if>
+      <if test="record.DATA_AUTH != null">
+        DATA_AUTH = #{record.DATA_AUTH,jdbcType=VARCHAR},
+      </if>
+      <if test="record.PROJECT_BIN != null">
+        PROJECT_BIN = #{record.PROJECT_BIN,jdbcType=VARCHAR},
+      </if>
+      <if test="record.WORKCENTER_SEQ != null">
+        WORKCENTER_SEQ = #{record.WORKCENTER_SEQ,jdbcType=VARCHAR},
+      </if>
+      <if test="record.WORKCENTER_NO != null">
+        WORKCENTER_NO = #{record.WORKCENTER_NO,jdbcType=VARCHAR},
+      </if>
+      <if test="record.WORKCENTER != null">
+        WORKCENTER = #{record.WORKCENTER,jdbcType=VARCHAR},
+      </if>
+      <if test="record.OUTPUT_RATE != null">
+        OUTPUT_RATE = #{record.OUTPUT_RATE,jdbcType=DECIMAL},
+      </if>
+      <if test="record.MEMO != null">
+        MEMO = #{record.MEMO,jdbcType=VARCHAR},
+      </if>
+      <if test="record.WORK_SPACE != null">
+        WORK_SPACE = #{record.WORK_SPACE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.WARE_HOUSE != null">
+        WARE_HOUSE = #{record.WARE_HOUSE,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update N2ADMIN.T_PM_PROJECT_DETAIL
+    set ID = #{record.ID,jdbcType=VARCHAR},
+      PROJECT_ID = #{record.PROJECT_ID,jdbcType=VARCHAR},
+      CBD_ITEM_CODE = #{record.CBD_ITEM_CODE,jdbcType=VARCHAR},
+      CBD_ITEM_NUM = #{record.CBD_ITEM_NUM,jdbcType=DECIMAL},
+      CBD_SEQUENCE = #{record.CBD_SEQUENCE,jdbcType=DECIMAL},
+      CBD_POINT = #{record.CBD_POINT,jdbcType=VARCHAR},
+      CBD_UNITS = #{record.CBD_UNITS,jdbcType=VARCHAR},
+      CBD_ITEM_TYPE = #{record.CBD_ITEM_TYPE,jdbcType=VARCHAR},
+      DEPT_ID = #{record.DEPT_ID,jdbcType=VARCHAR},
+      CREATE_USER = #{record.CREATE_USER,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.CREATE_TIME,jdbcType=DATE},
+      EDIT_USER = #{record.EDIT_USER,jdbcType=VARCHAR},
+      EDIT_TIME = #{record.EDIT_TIME,jdbcType=DATE},
+      DATA_AUTH = #{record.DATA_AUTH,jdbcType=VARCHAR},
+      PROJECT_BIN = #{record.PROJECT_BIN,jdbcType=VARCHAR},
+      WORKCENTER_SEQ = #{record.WORKCENTER_SEQ,jdbcType=VARCHAR},
+      WORKCENTER_NO = #{record.WORKCENTER_NO,jdbcType=VARCHAR},
+      WORKCENTER = #{record.WORKCENTER,jdbcType=VARCHAR},
+      OUTPUT_RATE = #{record.OUTPUT_RATE,jdbcType=DECIMAL},
+      MEMO = #{record.MEMO,jdbcType=VARCHAR},
+      WORK_SPACE = #{record.WORK_SPACE,jdbcType=VARCHAR},
+      WARE_HOUSE = #{record.WARE_HOUSE,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
