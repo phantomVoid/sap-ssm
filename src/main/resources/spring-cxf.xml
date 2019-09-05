@@ -18,13 +18,13 @@
     <import resource="classpath*:META-INF/cxf/cxf-extension-soap.xml" />
     <import resource="classpath*:META-INF/cxf/cxf-servlet.xml" />
      <!-- 自动扫描webService -->
-    <context:component-scan base-package="com.phantom.wss.impl" />
+    <context:component-scan base-package="com.phantom.wss" />
 
     <!--物料主数据-->
-    <jaxws:endpoint implementor="com.phantom.sap.intf.impl.ItemIntfImpl" address="/ItemIntfImpl"/>
+    <jaxws:endpoint implementor="com.phantom.wss.impl.ItemIntfImpl" address="/ItemIntfImpl"/>
 
     <!--物料层级-->
-    <jaxws:endpoint implementor="com.phantom.sap.intf.impl.ItemLevelIntfImpl" address="/ItemLevelIntfImpl"/>
+    <jaxws:endpoint implementor="com.phantom.wss.impl.ItemLevelIntfImpl" address="/ItemLevelIntfImpl"/>
 
     <!--工单下达-->
     <jaxws:endpoint implementor="com.phantom.wss.impl.WorkOrderSynAddServerImpl" address="/WorkOrderSynAddServer"/>
@@ -33,12 +33,13 @@
     <jaxws:endpoint implementor="com.phantom.wss.impl.WorkOrderSynEditServiceImp" address="/WorkOrderSynEditService"/>
 
     <!--生产投料-->
-    <jaxws:endpoint implementor="com.phantom.sap.intf.impl.ProjectFeedIntfImpl" address="/ProjectFeedIntfImpl"/>
+    <jaxws:endpoint implementor="com.phantom.wss.impl.ProjectFeedIntfImpl" address="/ProjectFeedIntfImpl"/>
 
     <!--制造单-工单缴库-->
-    <jaxws:endpoint implementor="com.phantom.sap.intf.impl.ProjectPostPackIntfImpl" address="/ProjectPostPackIntfImpl"/>
-    <jaxws:endpoint implementor="com.phantom.sap.intf.impl.ProjectPackFeedIntfImpl" address="/ProjectPackFeedIntfImpl"/>
+    <jaxws:endpoint implementor="com.phantom.wss.impl.ProjectPostPackIntfImpl" address="/ProjectPostPackIntfImpl"/>
+
+    <jaxws:endpoint implementor="com.phantom.wss.impl.ProjectPackFeedIntfImpl" address="/ProjectPackFeedIntfImpl"/>
 
     <!--工时报工-->
-    <jaxws:endpoint implementor="com.phantom.sap.intf.impl.ProjectReportIntfImpl" address="/ProjectReportIntfImpl"/>
+    <jaxws:endpoint implementor="com.phantom.wss.impl.ProjectReportIntfImpl" address="/ProjectReportIntfImpl"/>
 </beans>

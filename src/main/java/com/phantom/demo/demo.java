@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.ibatis.executor.ResultExtractor;
 
 import java.util.Iterator;
+import java.util.List;
 
 public class demo {
     public static void main(String[] args) {
@@ -32,7 +33,12 @@ public class demo {
 //        JSONObject jsonObject1 = JSONObject.parseObject(result);
         String sflag = null;
 
-        for (Iterator iterator = jsonArray1.iterator(); iterator.hasNext();) {
+
+        String js = JSONObject.toJSONString(jsonArray1, SerializerFeature.WriteClassName);
+
+        List<TProjectSapLogDetail> collection = JSONObject.parseArray(js, TProjectSapLogDetail.class);//把字符串转换成集合
+
+        for (Iterator iterator = jsonArray1.iterator(); iterator.hasNext(); ) {
             JSONObject jo = (JSONObject) iterator.next();
             sflag = jo.get("SFLAG").toString();
             if (("N".equalsIgnoreCase(sflag)) && sflag == "N") {

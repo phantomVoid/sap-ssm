@@ -18,6 +18,8 @@
     <result column="ITEM_NUM" jdbcType="DECIMAL" property="ITEM_NUM" />
     <result column="MESSAGE" jdbcType="VARCHAR" property="MESSAGE" />
     <result column="SFLAG" jdbcType="VARCHAR" property="SFLAG" />
+    <result column="WORK_SPACE" jdbcType="VARCHAR" property="WORK_SPACE" />
+    <result column="WARE_HOUSE" jdbcType="VARCHAR" property="WARE_HOUSE" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -79,7 +81,8 @@
   </sql>
   <sql id="Base_Column_List">
     ID, DEPT_ID, CREATE_USER, CREATE_TIME, EDIT_USER, EDIT_TIME, DATA_AUTH, PROJECT_ID, 
-    ITEM_CODE, RECEIVE_COUNT, PACK_NUM, ITEM_MANE, ITEM_SPEC, ITEM_NUM, MESSAGE, SFLAG
+    ITEM_CODE, RECEIVE_COUNT, PACK_NUM, ITEM_MANE, ITEM_SPEC, ITEM_NUM, MESSAGE, SFLAG, 
+    WORK_SPACE, WARE_HOUSE
   </sql>
   <select id="selectByExample" parameterType="com.phantom.model.TProjectPackFeedExample" resultMap="BaseResultMap">
     select
@@ -117,13 +120,15 @@
       DATA_AUTH, PROJECT_ID, ITEM_CODE, 
       RECEIVE_COUNT, PACK_NUM, ITEM_MANE, 
       ITEM_SPEC, ITEM_NUM, MESSAGE, 
-      SFLAG)
+      SFLAG, WORK_SPACE, WARE_HOUSE
+      )
     values (#{ID,jdbcType=VARCHAR}, #{DEPT_ID,jdbcType=VARCHAR}, #{CREATE_USER,jdbcType=VARCHAR}, 
       #{CREATE_TIME,jdbcType=DATE}, #{EDIT_USER,jdbcType=VARCHAR}, #{EDIT_TIME,jdbcType=DATE}, 
       #{DATA_AUTH,jdbcType=VARCHAR}, #{PROJECT_ID,jdbcType=VARCHAR}, #{ITEM_CODE,jdbcType=VARCHAR}, 
       #{RECEIVE_COUNT,jdbcType=DECIMAL}, #{PACK_NUM,jdbcType=DECIMAL}, #{ITEM_MANE,jdbcType=VARCHAR}, 
       #{ITEM_SPEC,jdbcType=VARCHAR}, #{ITEM_NUM,jdbcType=DECIMAL}, #{MESSAGE,jdbcType=VARCHAR}, 
-      #{SFLAG,jdbcType=VARCHAR})
+      #{SFLAG,jdbcType=VARCHAR}, #{WORK_SPACE,jdbcType=VARCHAR}, #{WARE_HOUSE,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.phantom.model.TProjectPackFeed">
     insert into N2ADMIN.T_PROJECT_PACK_FEED
@@ -176,6 +181,12 @@
       <if test="SFLAG != null">
         SFLAG,
       </if>
+      <if test="WORK_SPACE != null">
+        WORK_SPACE,
+      </if>
+      <if test="WARE_HOUSE != null">
+        WARE_HOUSE,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="ID != null">
@@ -225,6 +236,12 @@
       </if>
       <if test="SFLAG != null">
         #{SFLAG,jdbcType=VARCHAR},
+      </if>
+      <if test="WORK_SPACE != null">
+        #{WORK_SPACE,jdbcType=VARCHAR},
+      </if>
+      <if test="WARE_HOUSE != null">
+        #{WARE_HOUSE,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -285,6 +302,12 @@
       <if test="record.SFLAG != null">
         SFLAG = #{record.SFLAG,jdbcType=VARCHAR},
       </if>
+      <if test="record.WORK_SPACE != null">
+        WORK_SPACE = #{record.WORK_SPACE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.WARE_HOUSE != null">
+        WARE_HOUSE = #{record.WARE_HOUSE,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -307,7 +330,9 @@
       ITEM_SPEC = #{record.ITEM_SPEC,jdbcType=VARCHAR},
       ITEM_NUM = #{record.ITEM_NUM,jdbcType=DECIMAL},
       MESSAGE = #{record.MESSAGE,jdbcType=VARCHAR},
-      SFLAG = #{record.SFLAG,jdbcType=VARCHAR}
+      SFLAG = #{record.SFLAG,jdbcType=VARCHAR},
+      WORK_SPACE = #{record.WORK_SPACE,jdbcType=VARCHAR},
+      WARE_HOUSE = #{record.WARE_HOUSE,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -360,6 +385,12 @@
       <if test="SFLAG != null">
         SFLAG = #{SFLAG,jdbcType=VARCHAR},
       </if>
+      <if test="WORK_SPACE != null">
+        WORK_SPACE = #{WORK_SPACE,jdbcType=VARCHAR},
+      </if>
+      <if test="WARE_HOUSE != null">
+        WARE_HOUSE = #{WARE_HOUSE,jdbcType=VARCHAR},
+      </if>
     </set>
     where ID = #{ID,jdbcType=VARCHAR}
   </update>
@@ -379,7 +410,9 @@
       ITEM_SPEC = #{ITEM_SPEC,jdbcType=VARCHAR},
       ITEM_NUM = #{ITEM_NUM,jdbcType=DECIMAL},
       MESSAGE = #{MESSAGE,jdbcType=VARCHAR},
-      SFLAG = #{SFLAG,jdbcType=VARCHAR}
+      SFLAG = #{SFLAG,jdbcType=VARCHAR},
+      WORK_SPACE = #{WORK_SPACE,jdbcType=VARCHAR},
+      WARE_HOUSE = #{WARE_HOUSE,jdbcType=VARCHAR}
     where ID = #{ID,jdbcType=VARCHAR}
   </update>
 </mapper>

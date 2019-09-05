@@ -1,4 +1,4 @@
-package com.phantom.sap.intf.impl;
+package com.phantom.wss.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -8,7 +8,7 @@ import com.phantom.comm.enums.IntfType;
 import com.phantom.dao.*;
 import com.phantom.model.*;
 import com.phantom.sap.comm.RfcManager;
-import com.phantom.sap.intf.ProjectPostPackIntf;
+import com.phantom.wss.ProjectPostPackIntf;
 import com.phantom.sap.intf.comm.impl.SapCommIntfImpl;
 import com.phantom.trans.ProjectPostTransEnum;
 import com.sap.conn.jco.JCoField;
@@ -17,6 +17,7 @@ import com.sap.conn.jco.JCoParameterList;
 import com.sap.conn.jco.JCoStructure;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
+
 import javax.annotation.Resource;
 import javax.jws.WebService;
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ import java.util.Map;
  * @email:phantomsaber@foxmail.com
  **/
 @Component
-@WebService(endpointInterface = "com.phantom.sap.intf.ProjectPostPackIntf", serviceName = "ProjectPostPackIntf", targetNamespace = "http://cxf.temptation.cn/")
+@WebService(endpointInterface = "com.phantom.wss.ProjectPostPackIntf", serviceName = "ProjectPostPackIntf", targetNamespace = "http://cxf.temptation.cn/")
 public class ProjectPostPackIntfImpl extends SapCommIntfImpl implements ProjectPostPackIntf {
     final Logger log = Logger.getLogger(this.getClass());
     final String funcName = "ZFM_MES_006";
@@ -51,6 +52,73 @@ public class ProjectPostPackIntfImpl extends SapCommIntfImpl implements ProjectP
 
     @Resource
     TProjectSapLogDetailDao sapLogDetailDao;
+
+    @Override
+    public String ajaxRedoBySapLogDetail(String logDetailIdsJson) {
+        List<String> dataList = JSONObject.parseArray(logDetailIdsJson, String.class);
+        TProjectSapLogDetailExample sapLogDetailExample = new TProjectSapLogDetailExample();
+        TProjectSapLogDetailExample.Criteria sapDetailCri = sapLogDetailExample.createCriteria();
+        sapDetailCri.andIDIn(dataList);
+
+        /**
+         * 获取log对象
+         */
+        List<TProjectSapLogDetail> logDetailList = sapLogDetailDao.selectByExample(sapLogDetailExample);
+        List<TProjectSapLog> sapLogList = new ArrayList<>();
+
+        List<String> projectIdList = new ArrayList<>();
+        List<String> itemCodeList = new ArrayList<>();
+        List<String> itemSnList = new ArrayList<>();
+
+        for (TProjectSapLogDetail sapLogDetail : logDetailList) {
+            if(logDetailList.indexOf(sapLogDetail.getPROJECT_ID())<1){
+                projectIdList.add(sapLogDetail.getPROJECT_ID());
+                itemCodeList.add(sapLogDetail.getITEM_CODE());
+                itemSnList.add(sapLogDetail.getITEM_SN());
+            }
+        }
+
+        TPmProjectPostExample postExample = new TPmProjectPostExample();
+        TPmProjectPostExample.Criteria postCri = postExample.createCriteria();
+
+        postCri.andPROJECT_IDIn(projectIdList);
+        postCri.andITEM_CODEIn(itemCodeList);
+
+        JSONObject.parseArray(logDetailIdsJson, String.class);
+
+        List<TPmProjectPost> projectPostList = projectPostDao.selectByExample(postExample);
+
+        List<TProjectSapLogDetail> resultLogDetailList = new ArrayList<>();
+        List<TPmProjectPost> resultPostList = new ArrayList<>();
+
+        TRfcLog rfcLog = new TRfcLog();
+        rfcLog.setRL_FUNC_NAME(funcName+"-工单缴库接口");
+        rfcLog.setRL_IMPORT(JSON.toJSONString(projectPostList));
+
+        for (TPmProjectPost projectPost : projectPostList) {
+            int index = projectPostList.indexOf(projectPost);
+            TPmProjectBase projectBase = projectBaseDao.selectByProjectId(projectPost.getPROJECT_ID());
+            String productMaterial = projectBase.getPRODUCT_MATERIAL();
+            TProjectSapLogDetail sapLogDetail = doExec(projectPost, funcName, String.valueOf(index), productMaterial);
+            resultLogDetailList.add(sapLogDetail);
+        }
+
+        for (TProjectSapLogDetail sapLogDetail : resultLogDetailList) {
+            sapLogDetail.setEDIT_TIME(DateUtils.getCurDateTime());
+            sapLogDetail.setEDIT_USER(StringUtils.getDefaultUserId());
+            sapDetailCri.andPROJECT_IDEqualTo(sapLogDetail.getPROJECT_ID());
+            sapLogDetailDao.updateByExample(sapLogDetail, sapLogDetailExample);
+        }
+
+        for (TPmProjectPost projectPost : projectPostList) {
+            projectPost.setEDIT_TIME(DateUtils.getCurDateTime());
+            projectPost.setEDIT_USER(StringUtils.getDefaultUserId());
+            postCri.andPROJECT_IDEqualTo(projectPost.getPROJECT_ID());
+            projectPostDao.updateByExample(projectPost, postExample);
+        }
+
+        return StringUtils.getJsonStr(resultLogDetailList);
+    }
 
     /**
      * exec ajaxExecByIds
@@ -93,19 +161,51 @@ public class ProjectPostPackIntfImpl extends SapCommIntfImpl implements ProjectP
                 }else{
                     sapLogList.add(projectSapLog);
                 }
+                /*
                 if("Y" != sflag && !("Y").equalsIgnoreCase(sflag)){
                     break;
                 }
+                */
             }
         }
 
 
+        TProjectSapLogDetailExample sapLogDetailExp = new TProjectSapLogDetailExample();
+        TProjectSapLogExample sapLogExp = new TProjectSapLogExample();
+
+        TProjectSapLogExample.Criteria sapLogCriteria = sapLogExp.createCriteria();
+        TProjectSapLogDetailExample.Criteria sapLogDetailCriteria = sapLogDetailExp.createCriteria();
+
         for (TProjectSapLogDetail logDetail : logDetailList) {
-            sapLogDetailDao.insert(logDetail);
+            sapLogDetailCriteria.andPROJECT_IDEqualTo(logDetail.getPROJECT_ID());
+            sapLogDetailCriteria.andITEM_SNEqualTo(logDetail.getITEM_SN());
+            sapLogDetailCriteria.andITEM_CODEEqualTo(logDetail.getITEM_CODE());
+            sapLogDetailCriteria.andINTF_NAMEEqualTo(funcName);
+
+            List<TProjectSapLogDetail> curSapLogDetailList = sapLogDetailDao.selectByExample(sapLogDetailExp);
+
+            if(curSapLogDetailList.size() > 0){
+                logDetail.setEDIT_USER(StringUtils.getDefaultUserId());
+                logDetail.setEDIT_TIME(DateUtils.getCurDateTime());
+                sapLogDetailDao.updateByExample(logDetail, sapLogDetailExp);
+            }else{
+                sapLogDetailDao.insert(logDetail);
+            }
         }
 
         for (TProjectSapLog sapLog : sapLogList) {
-            sapLogDao.insert(sapLog);
+            sapLogCriteria.andPROJECT_IDEqualTo(sapLog.getPROJECT_ID());
+            sapLogCriteria.andITEM_SNEqualTo(sapLog.getITEM_SN());
+            sapLogCriteria.andINTF_NAMEEqualTo(funcName);
+
+            List<TProjectSapLog> projectSapLogList = sapLogDao.selectByExample(sapLogExp);
+            if(projectSapLogList.size() > 0){
+                sapLog.setEDIT_USER(StringUtils.getDefaultUserId());
+                sapLog.setEDIT_TIME(DateUtils.getCurDateTime());
+                sapLogDao.updateByExample(sapLog, sapLogExp);
+            }else{
+                sapLogDao.insert(sapLog);
+            }
         }
 
         rfcLog.setRL_EXPORT(StringUtils.getJsonStr(sapLogList));
@@ -179,7 +279,7 @@ public class ProjectPostPackIntfImpl extends SapCommIntfImpl implements ProjectP
         sapLogDetail.setDATA_AUTH(StringUtils.getDefaultDataAuth());
         sapLogDetail.setCREATE_TIME(DateUtils.getCurDateTime());
         sapLogDetail.setINTF_TYPE(IntfType.projectPost.getCode());
-        sapLogDetail.setINTF_NAME(IntfType.projectPost.getDesc());
+        sapLogDetail.setINTF_NAME(IntfType.projectPost.getFuncName());
 
         return sapLogDetail;
     }
@@ -204,7 +304,7 @@ public class ProjectPostPackIntfImpl extends SapCommIntfImpl implements ProjectP
         sapLog.setDATA_AUTH(StringUtils.getDefaultDataAuth());
         sapLog.setCREATE_TIME(DateUtils.getCurDateTime());
         sapLog.setINTF_TYPE(IntfType.projectPost.getCode());
-        sapLog.setINTF_NAME(IntfType.projectPost.getDesc());
+        sapLog.setINTF_NAME(IntfType.projectPost.getFuncName());
         return sapLog;
     }
 

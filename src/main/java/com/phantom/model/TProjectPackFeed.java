@@ -41,6 +41,10 @@ public class TProjectPackFeed implements Serializable {
 
     private String SFLAG;
 
+    private String WORK_SPACE;
+
+    private String WARE_HOUSE;
+
     private static final long serialVersionUID = 1L;
 
     public String getID() {
@@ -171,6 +175,22 @@ public class TProjectPackFeed implements Serializable {
         this.SFLAG = SFLAG;
     }
 
+    public String getWORK_SPACE() {
+        return WORK_SPACE;
+    }
+
+    public void setWORK_SPACE(String WORK_SPACE) {
+        this.WORK_SPACE = WORK_SPACE;
+    }
+
+    public String getWARE_HOUSE() {
+        return WARE_HOUSE;
+    }
+
+    public void setWARE_HOUSE(String WARE_HOUSE) {
+        this.WARE_HOUSE = WARE_HOUSE;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -198,7 +218,9 @@ public class TProjectPackFeed implements Serializable {
             && (this.getITEM_SPEC() == null ? other.getITEM_SPEC() == null : this.getITEM_SPEC().equals(other.getITEM_SPEC()))
             && (this.getITEM_NUM() == null ? other.getITEM_NUM() == null : this.getITEM_NUM().equals(other.getITEM_NUM()))
             && (this.getMESSAGE() == null ? other.getMESSAGE() == null : this.getMESSAGE().equals(other.getMESSAGE()))
-            && (this.getSFLAG() == null ? other.getSFLAG() == null : this.getSFLAG().equals(other.getSFLAG()));
+            && (this.getSFLAG() == null ? other.getSFLAG() == null : this.getSFLAG().equals(other.getSFLAG()))
+            && (this.getWORK_SPACE() == null ? other.getWORK_SPACE() == null : this.getWORK_SPACE().equals(other.getWORK_SPACE()))
+            && (this.getWARE_HOUSE() == null ? other.getWARE_HOUSE() == null : this.getWARE_HOUSE().equals(other.getWARE_HOUSE()));
     }
 
     @Override
@@ -221,6 +243,8 @@ public class TProjectPackFeed implements Serializable {
         result = prime * result + ((getITEM_NUM() == null) ? 0 : getITEM_NUM().hashCode());
         result = prime * result + ((getMESSAGE() == null) ? 0 : getMESSAGE().hashCode());
         result = prime * result + ((getSFLAG() == null) ? 0 : getSFLAG().hashCode());
+        result = prime * result + ((getWORK_SPACE() == null) ? 0 : getWORK_SPACE().hashCode());
+        result = prime * result + ((getWARE_HOUSE() == null) ? 0 : getWARE_HOUSE().hashCode());
         return result;
     }
 
@@ -246,6 +270,8 @@ public class TProjectPackFeed implements Serializable {
         sb.append(", ITEM_NUM=").append(ITEM_NUM);
         sb.append(", MESSAGE=").append(MESSAGE);
         sb.append(", SFLAG=").append(SFLAG);
+        sb.append(", WORK_SPACE=").append(WORK_SPACE);
+        sb.append(", WARE_HOUSE=").append(WARE_HOUSE);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

@@ -10,7 +10,7 @@
                         http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <!-- 自动扫描 -->
-    <context:component-scan base-package="com.phantom.sap"/>
+    <context:component-scan base-package="com.phantom.wss"/>
     <!--<context:component-scan base-package="com.phantom.sap.*"/>-->
 
     <!-- 第一种方式：加载一个properties文件 -->

@@ -1202,6 +1202,146 @@ public class TProjectPackFeedExample {
             addCriterion("SFLAG not between", value1, value2, "SFLAG");
             return (Criteria) this;
         }
+
+        public Criteria andWORK_SPACEIsNull() {
+            addCriterion("WORK_SPACE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWORK_SPACEIsNotNull() {
+            addCriterion("WORK_SPACE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWORK_SPACEEqualTo(String value) {
+            addCriterion("WORK_SPACE =", value, "WORK_SPACE");
+            return (Criteria) this;
+        }
+
+        public Criteria andWORK_SPACENotEqualTo(String value) {
+            addCriterion("WORK_SPACE <>", value, "WORK_SPACE");
+            return (Criteria) this;
+        }
+
+        public Criteria andWORK_SPACEGreaterThan(String value) {
+            addCriterion("WORK_SPACE >", value, "WORK_SPACE");
+            return (Criteria) this;
+        }
+
+        public Criteria andWORK_SPACEGreaterThanOrEqualTo(String value) {
+            addCriterion("WORK_SPACE >=", value, "WORK_SPACE");
+            return (Criteria) this;
+        }
+
+        public Criteria andWORK_SPACELessThan(String value) {
+            addCriterion("WORK_SPACE <", value, "WORK_SPACE");
+            return (Criteria) this;
+        }
+
+        public Criteria andWORK_SPACELessThanOrEqualTo(String value) {
+            addCriterion("WORK_SPACE <=", value, "WORK_SPACE");
+            return (Criteria) this;
+        }
+
+        public Criteria andWORK_SPACELike(String value) {
+            addCriterion("WORK_SPACE like", value, "WORK_SPACE");
+            return (Criteria) this;
+        }
+
+        public Criteria andWORK_SPACENotLike(String value) {
+            addCriterion("WORK_SPACE not like", value, "WORK_SPACE");
+            return (Criteria) this;
+        }
+
+        public Criteria andWORK_SPACEIn(List<String> values) {
+            addCriterion("WORK_SPACE in", values, "WORK_SPACE");
+            return (Criteria) this;
+        }
+
+        public Criteria andWORK_SPACENotIn(List<String> values) {
+            addCriterion("WORK_SPACE not in", values, "WORK_SPACE");
+            return (Criteria) this;
+        }
+
+        public Criteria andWORK_SPACEBetween(String value1, String value2) {
+            addCriterion("WORK_SPACE between", value1, value2, "WORK_SPACE");
+            return (Criteria) this;
+        }
+
+        public Criteria andWORK_SPACENotBetween(String value1, String value2) {
+            addCriterion("WORK_SPACE not between", value1, value2, "WORK_SPACE");
+            return (Criteria) this;
+        }
+
+        public Criteria andWARE_HOUSEIsNull() {
+            addCriterion("WARE_HOUSE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWARE_HOUSEIsNotNull() {
+            addCriterion("WARE_HOUSE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWARE_HOUSEEqualTo(String value) {
+            addCriterion("WARE_HOUSE =", value, "WARE_HOUSE");
+            return (Criteria) this;
+        }
+
+        public Criteria andWARE_HOUSENotEqualTo(String value) {
+            addCriterion("WARE_HOUSE <>", value, "WARE_HOUSE");
+            return (Criteria) this;
+        }
+
+        public Criteria andWARE_HOUSEGreaterThan(String value) {
+            addCriterion("WARE_HOUSE >", value, "WARE_HOUSE");
+            return (Criteria) this;
+        }
+
+        public Criteria andWARE_HOUSEGreaterThanOrEqualTo(String value) {
+            addCriterion("WARE_HOUSE >=", value, "WARE_HOUSE");
+            return (Criteria) this;
+        }
+
+        public Criteria andWARE_HOUSELessThan(String value) {
+            addCriterion("WARE_HOUSE <", value, "WARE_HOUSE");
+            return (Criteria) this;
+        }
+
+        public Criteria andWARE_HOUSELessThanOrEqualTo(String value) {
+            addCriterion("WARE_HOUSE <=", value, "WARE_HOUSE");
+            return (Criteria) this;
+        }
+
+        public Criteria andWARE_HOUSELike(String value) {
+            addCriterion("WARE_HOUSE like", value, "WARE_HOUSE");
+            return (Criteria) this;
+        }
+
+        public Criteria andWARE_HOUSENotLike(String value) {
+            addCriterion("WARE_HOUSE not like", value, "WARE_HOUSE");
+            return (Criteria) this;
+        }
+
+        public Criteria andWARE_HOUSEIn(List<String> values) {
+            addCriterion("WARE_HOUSE in", values, "WARE_HOUSE");
+            return (Criteria) this;
+        }
+
+        public Criteria andWARE_HOUSENotIn(List<String> values) {
+            addCriterion("WARE_HOUSE not in", values, "WARE_HOUSE");
+            return (Criteria) this;
+        }
+
+        public Criteria andWARE_HOUSEBetween(String value1, String value2) {
+            addCriterion("WARE_HOUSE between", value1, value2, "WARE_HOUSE");
+            return (Criteria) this;
+        }
+
+        public Criteria andWARE_HOUSENotBetween(String value1, String value2) {
+            addCriterion("WARE_HOUSE not between", value1, value2, "WARE_HOUSE");
+            return (Criteria) this;
+        }
     }
 
     /**
