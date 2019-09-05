@@ -8,6 +8,7 @@ import com.phantom.comm.enums.Message;
 import com.phantom.dao.TPmProjectBaseDao;
 import com.phantom.dao.TRfcLogDao;
 import com.phantom.model.TPmProjectBase;
+import com.phantom.model.TPmProjectBaseExample;
 import com.phantom.model.TRfcLog;
 import com.phantom.pojo.*;
 import com.phantom.wss.WorkOrderSynEditService;
@@ -64,6 +65,12 @@ public class WorkOrderSynEditServiceImp implements WorkOrderSynEditService {
             TRfcLog rfcLog = new TRfcLog();
             List<String> logList = new ArrayList<>();
             List<TPmProjectBase> projectBaseList = ProjectUtils.getProjectBase(orderBaseList, null, null);
+
+            List<String> projectIdList = new ArrayList<>();
+            for (TPmProjectBase projectBase : projectBaseList) {
+                projectIdList.add(projectBase.getPROJECT_ID());
+            }
+
             if (projectBaseList.size() > 0) {
                 List<String> projectBaseLogs = ProjectUtils.saveProjectBase(rfcLog,projectBaseDao, projectBaseList);
                 if(projectBaseLogs.size()>0){

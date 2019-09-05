@@ -66,7 +66,13 @@ public class SapOrderSales implements Serializable {
      * BOM文本
      */
     @XmlElement
-    public StringBuffer ZTEXT;
+    public String ZTEXT;
+
+    /**
+     * 特性值
+     */
+    @XmlElement
+    public String TX;
 
     @XmlTransient
     public String getKDAUF() {
@@ -109,8 +115,17 @@ public class SapOrderSales implements Serializable {
     }
 
     @XmlTransient
-    public StringBuffer getZTEXT() {
+    public String getZTEXT() {
         return ZTEXT;
+    }
+
+    @XmlTransient
+    public String getTX() {
+        return TX;
+    }
+
+    public void setTX(String TX) {
+        this.TX = TX;
     }
 
     public void setKDAUF(String KDAUF) {
@@ -145,7 +160,7 @@ public class SapOrderSales implements Serializable {
         this.ORT01 = ORT01;
     }
 
-    public void setZTEXT(StringBuffer ZTEXT) {
+    public void setZTEXT(String ZTEXT) {
         this.ZTEXT = ZTEXT;
     }
 

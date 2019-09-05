@@ -22,19 +22,9 @@ public class RfcManager {
     private static JCOProvider provider;
     private static JCoDestination destination;
 
-/*
-    private static final String ABAP_AS_POOLED = ReadProperties.getPorpertie("sapconfig.properties","ABAP_AS_POOLED");
-    private static String host = ReadProperties.getPorpertie("sapconfig.properties","HOST");
-    private static String user = ReadProperties.getPorpertie("sapconfig.properties","USER");
-    private static String pwd = ReadProperties.getPorpertie("sapconfig.properties","PWD");
-    private static String lang = ReadProperties.getPorpertie("sapconfig.properties","LANG");
-    private static String client = ReadProperties.getPorpertie("sapconfig.properties","CLIENT");
-    private static String sysnr = ReadProperties.getPorpertie("sapconfig.properties","SYSNR");
-    private static String peakLimit = ReadProperties.getPorpertie("sapconfig.properties","PEAKLIMIT");
-    private static String poolCapacity = ReadProperties.getPorpertie("sapconfig.properties","POOLCAPACITY");
-*/
-
     private static final String ABAP_AS_POOLED = "ABAP_AS_POOL";
+
+/*
     private static String host = "10.10.79.112";
     private static String user = "moer";
     private static String pwd = "123456";
@@ -43,6 +33,18 @@ public class RfcManager {
     private static String sysnr = "00";
     private static String peakLimit = "10";
     private static String poolCapacity = "3";
+*/
+
+/*
+    private static String host = "10.10.80.23";
+    private static String user = "sap_mes";
+    private static String pwd = "mes@3456";
+    private static String lang = "zh";
+    private static String client = "800";
+    private static String sysnr = "00";
+    private static String peakLimit = "10";
+    private static String poolCapacity = "3";
+*/
 
 /*
     private static String host = "10.10.80.23";
@@ -54,6 +56,15 @@ public class RfcManager {
     private static String peakLimit = "10";
     private static String poolCapacity = "3";
 */
+
+    private static String host = "10.10.80.211";
+    private static String user = "sap_smes";
+    private static String pwd = "Sks_smes098";
+    private static String lang = "zh";
+    private static String client = "800";
+    private static String sysnr = "02";
+    private static String peakLimit = "10";
+    private static String poolCapacity = "3";
 
     static {
         Properties properties = loadProperties(host,user,pwd,lang,client,sysnr,peakLimit,poolCapacity);

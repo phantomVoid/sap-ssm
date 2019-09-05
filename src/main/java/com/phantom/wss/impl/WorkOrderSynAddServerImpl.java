@@ -96,8 +96,8 @@ public class WorkOrderSynAddServerImpl implements WorkOrderSynAddService {
                 message = "工单明细新增失败|" + projectList.size();
                 throw new NullPointerException(message);
             }
-            SapOrderRes res = new SapOrderRes(Flag.N.toString(), "ERROR LOG TEST");
-            res.setMESSAGE("ERROR LOG TEST");
+            SapOrderRes res = new SapOrderRes(Flag.Y.toString(), "SUCCESS");
+            res.setMESSAGE("SUCCESS");
             if(logList.size()>0){
                 tLog.setRL_SY_ERROR(StringUtils.getJsonStr(logList));
             }

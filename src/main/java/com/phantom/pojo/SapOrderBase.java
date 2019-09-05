@@ -2,6 +2,7 @@ package com.phantom.pojo;
 
 import javax.jws.WebParam;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
@@ -43,6 +44,12 @@ public class SapOrderBase implements Serializable {
      */
     @XmlElement
     public String CHARG;
+
+    /**
+     * 客户名称
+     */
+    @XmlElement
+    public String NAME1;
 
     /**
      * 计划开始时间
@@ -158,6 +165,15 @@ public class SapOrderBase implements Serializable {
     @XmlTransient
     public String getZTEXT() {
         return ZTEXT;
+    }
+
+    @XmlTransient
+    public String getNAME1() {
+        return NAME1;
+    }
+
+    public void setNAME1(String NAME1) {
+        this.NAME1 = NAME1;
     }
 
     public void setZTEXT(String ZTEXT) {

@@ -85,7 +85,7 @@ public class ProjectUtils {
                 projectBase.setPROJECT_ID(StringUtils.formatZero(orderBase.getAUFNR()));
                 projectBase.setPRODUCT_MATERIAL(StringUtils.formatZero(orderBase.getPLNBEZ()));
                 projectBase.setDESTROY_NO(StringUtils.formatZero(orderSales.getKDAUF()));
-                projectBase.setCUST_CODE(StringUtils.formatZero(orderSales.getKUNNR()));
+                projectBase.setCUST_CODE(orderBase.getNAME1());
                 projectBase.setPRODUCT_COUNT(NumUtils.formatBigDecimal(orderBase.getGAMNG()));
                 projectBase.setFINISH_COUNT(NumUtils.formatBigDecimal(orderBase.getGAMNG()));
                 projectBase.setPROJECT_TYPE(orderBase.getAUART());
@@ -308,7 +308,7 @@ public class ProjectUtils {
                     if (update < 1) {
                         break;
                     }
-                } else {
+                }else {
                     int insert = projectBaseDao.insert(projectBase);
                     if (insert < 1) {
                         break;
