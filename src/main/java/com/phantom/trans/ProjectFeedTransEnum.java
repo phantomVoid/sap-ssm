@@ -5,7 +5,7 @@ public enum ProjectFeedTransEnum {
     /**
      * ZGUID
      */
-    uuid("uuid","ZGUID"),
+    zguid("uuid","ZGUID"),
 
     /**
      * 工单号

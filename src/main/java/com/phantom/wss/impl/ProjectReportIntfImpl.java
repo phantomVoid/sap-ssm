@@ -55,13 +55,24 @@ public class ProjectReportIntfImpl extends SapCommIntfImpl implements ProjectRep
     @Resource
     TProjectSapLogDetailDao sapLogDetailDao;
 
+    /**
+     * 工单报工接口异常重发
+     * @param logDetailIdsJson
+     * @return
+     */
     @Override
     public String ajaxRedoBySapLogDetail(String logDetailIdsJson) {
+        /**
+         * 1-解析获取日志参数logDetailIdsJson
+         */
         List<String> dataList = JSONObject.parseArray(logDetailIdsJson, String.class);
         TProjectSapLogDetailExample sapLogDetailExample = new TProjectSapLogDetailExample();
         TProjectSapLogDetailExample.Criteria sapDetailCri = sapLogDetailExample.createCriteria();
         sapDetailCri.andIDIn(dataList);
 
+        /**
+         * 2-获取传输异常记录logDetailList
+         */
         List<TProjectSapLogDetail> logDetailList = sapLogDetailDao.selectByExample(sapLogDetailExample);
         List<TProjectSapLog> sapLogList = new ArrayList<>();
         List<TProjectSapLogDetail> resultLogDetailList = new ArrayList<>();
@@ -70,12 +81,16 @@ public class ProjectReportIntfImpl extends SapCommIntfImpl implements ProjectRep
         TPmProjectReportExample reportExample = new TPmProjectReportExample();
         TPmProjectReportExample.Criteria reportCri = reportExample.createCriteria();
 
+        /**
+         * 3-获取工单报工数据reportList
+         */
         for (TProjectSapLogDetail sapLogDetail : logDetailList) {
             reportCri.andPROJECT_IDEqualTo(sapLogDetail.getPROJECT_ID());
             List<TPmProjectReport> reportList = projectReportDao.selectByExample(reportExample);
 
             for (TPmProjectReport projectReport : reportList) {
                 int indexOf = reportList.indexOf(projectReport);
+                //执行SAP接口
                 TProjectSapLogDetail projectSapLogDetail = doExec(projectReport, funcName, String.valueOf(indexOf), sapLogDetail.getITEM_SN());
                 resultLogDetailList.add(projectSapLogDetail);
             }
@@ -85,6 +100,9 @@ public class ProjectReportIntfImpl extends SapCommIntfImpl implements ProjectRep
             }
         }
 
+        /**
+         * 4-更新日志传输明细记录
+         */
         for (TProjectSapLogDetail sapLogDetail : resultLogDetailList) {
             sapLogDetail.setEDIT_TIME(DateUtils.getCurDateTime());
             sapLogDetail.setEDIT_USER(StringUtils.getDefaultUserId());
@@ -92,6 +110,9 @@ public class ProjectReportIntfImpl extends SapCommIntfImpl implements ProjectRep
             sapLogDetailDao.updateByExample(sapLogDetail, sapLogDetailExample);
         }
 
+        /**
+         * 5-更新工单报工记录
+         */
         for (TPmProjectReport projectReport : resultReportList) {
             projectReport.setEDIT_TIME(DateUtils.getCurDateTime());
             projectReport.setEDIT_USER(StringUtils.getDefaultUserId());
@@ -165,8 +186,16 @@ public class ProjectReportIntfImpl extends SapCommIntfImpl implements ProjectRep
         return null;
     }
 
+    /**
+     * 输入参数处理
+     * @param function
+     * @param projectReport
+     * @param index
+     * @return
+     */
     private JCoStructure getInPutParam(JCoFunction function, TPmProjectReport projectReport, String index) {
         JCoStructure inPutParam = function.getImportParameterList().getStructure("W_INPUT");
+        inPutParam.setValue(ProjectReportTransEnum.zguid.getSapParam(),projectReport.getID());
         inPutParam.setValue(ProjectReportTransEnum.curDate.getSapParam(), DateUtils.getCurDateStr());
         inPutParam.setValue(ProjectReportTransEnum.curDateTime.getSapParam(), DateUtils.getCurTimeStr());
         inPutParam.setValue(ProjectReportTransEnum.Index.getSapParam(), index);
@@ -205,11 +234,6 @@ public class ProjectReportIntfImpl extends SapCommIntfImpl implements ProjectRep
             JCoParameterList inPut = function.getImportParameterList();
             JCoStructure inPutParam = getInPutParam(function, projectReport,index);
             inPut.setValue("W_INPUT",inPutParam);
-
-            Map<String, String> inParamMap = new HashMap<>(getInitialCapacity());
-//            for (JCoField jCoField : inPutParam) {
-//                inParamMap.put(jCoField.getName(), jCoField.getValue().toString());
-//            }
             RfcManager.execute(function);
             JCoParameterList outPut = function.getExportParameterList();
             return getSapDetailLog(projectReport, outPut,productMaterial);
@@ -218,12 +242,6 @@ public class ProjectReportIntfImpl extends SapCommIntfImpl implements ProjectRep
         }
     }
 
-    /**
-     * SAP工单同步日志明细
-     * @param projectReport
-     * @param outPut
-     * @return
-     */
     /**
      * SAP工单同步日志明细
      * @param projectReport

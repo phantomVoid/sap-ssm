@@ -5,7 +5,7 @@ public enum ProjectPostTransEnum {
     /**
      * ZGUID
      */
-    uuid("uuid","ZGUID"),
+    zguid("zguid","ZGUID"),
 
     /**
      * 服务器日期

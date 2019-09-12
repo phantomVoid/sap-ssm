@@ -315,7 +315,7 @@ public class ProjectFeedIntfImpl extends SapCommIntfImpl implements ProjectFeedI
      */
     private JCoStructure getInPutParam(JCoFunction function, TPmProjectFeedDetail feedDetail){
         JCoStructure inPutParam = function.getImportParameterList().getStructure("W_INPUT");
-        inPutParam.setValue(ProjectFeedTransEnum.uuid.getSapParam(),feedDetail.getID());
+        inPutParam.setValue(ProjectFeedTransEnum.zguid.getSapParam(),feedDetail.getID());
         inPutParam.setValue(ProjectFeedTransEnum.projectId.getSapParam(),feedDetail.getPROJECT_ID());
         inPutParam.setValue(ProjectFeedTransEnum.curDate.getSapParam(),DateUtils.getCurDateStr());
         inPutParam.setValue(ProjectFeedTransEnum.curDateTime.getSapParam(), DateUtils.getCurTimeStr());

@@ -117,6 +117,8 @@ public class ItemLevelIntfImpl extends SapCommIntfImpl implements ItemLevelIntf 
         } else {
             TCoItemLevelExample levelExample = new TCoItemLevelExample();
             TCoItemLevelExample.Criteria levelExampleCriteria = levelExample.createCriteria();
+            itemLevel.setEDIT_TIME(DateUtils.getCurDateTime());
+            itemLevel.setEDIT_USER(StringUtils.getDefaultUserId());
             levelExampleCriteria.andLEVEL_CODEEqualTo(itemLevel.getLEVEL_CODE());
             levelDao.updateByExample(itemLevel, levelExample);
         }
@@ -154,7 +156,7 @@ public class ItemLevelIntfImpl extends SapCommIntfImpl implements ItemLevelIntf 
      */
     private JCoStructure getInPutParam(JCoFunction function, TPmProjectFeedDetail feedDetail) {
         JCoStructure inPutParam = function.getImportParameterList().getStructure("W_INPUT");
-        inPutParam.setValue(ProjectFeedTransEnum.uuid.getSapParam(), feedDetail.getID());
+        inPutParam.setValue(ProjectFeedTransEnum.zguid.getSapParam(), feedDetail.getID());
         inPutParam.setValue(ProjectFeedTransEnum.projectId.getSapParam(), feedDetail.getPROJECT_ID());
         inPutParam.setValue(ProjectFeedTransEnum.curDate.getSapParam(), DateUtils.getCurDateStr());
         inPutParam.setValue(ProjectFeedTransEnum.curDateTime.getSapParam(), DateUtils.getCurTimeStr());

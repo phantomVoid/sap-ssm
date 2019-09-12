@@ -1,13 +1,18 @@
 package com.phantom.sap.demo;
 
+import com.phantom.comm.DateUtils;
+import com.phantom.model.TRfcLog;
 import com.phantom.sap.comm.RfcManager;
 import com.sap.conn.jco.JCoFunction;
 import com.sap.conn.jco.JCoParameterList;
+import com.sap.conn.jco.JCoTable;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * JCO SAP连接测试
@@ -19,16 +24,30 @@ public class SapJCOTest {
 	private final Log log = LogFactory.getLog(this.getClass());
 
 	public static void main(String[] args) {
+		String low = "";
+		String hight = "";
 
-		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String sysDate = sdf1.format(new Date());
-		Time sysTime = new Time((new Date()).getTime());
+		String funcName = "ZFM_MES_001";
+		TRfcLog rfcLog = new TRfcLog();
+		List<TRfcLog> logList = new ArrayList<>();
+		rfcLog.setRL_FUNC_NAME(funcName+"-物料主数据同步");
+		JCoFunction function = RfcManager.getFunction(funcName);
 
-		JCoFunction function = RfcManager.getFunction("ZFM_MES_005");
+		JCoParameterList importParameterList = function.getImportParameterList();
+		importParameterList.setValue("IV_DATE", DateUtils.getCurDateTimeStr());
+		importParameterList.setValue("IV_TIME", DateUtils.getCurTimeStr());
 
-		JCoParameterList inPut = function.getImportParameterList();
+		JCoParameterList tableParameterList = function.getTableParameterList();
 
-		inPut.setValue("W_INPUT","");
+		JCoTable itMatnr = tableParameterList.getTable("IT_MATNR");
+
+		itMatnr.appendRow();
+		itMatnr.setValue("SIGN", "I");
+		itMatnr.setValue("OPTION", "BT");
+		itMatnr.setValue("LOW", low);
+		itMatnr.setValue("HIGH", hight);
+
+		tableParameterList.setValue("IT_MATNR", itMatnr);
 		RfcManager.execute(function);
 
 		JCoParameterList outPut = function.getExportParameterList();

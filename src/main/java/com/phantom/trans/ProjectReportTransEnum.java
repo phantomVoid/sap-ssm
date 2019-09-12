@@ -3,6 +3,11 @@ package com.phantom.trans;
 public enum ProjectReportTransEnum {
 
     /**
+     * zguid 去重标识
+     */
+    zguid("去重标识","ZGUID"),
+
+    /**
      * 服务器日期
      */
     curDate("服务器日期", "DATUM"),

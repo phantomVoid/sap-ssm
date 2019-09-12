@@ -8,6 +8,7 @@ import com.sap.conn.jco.ext.Environment;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import java.util.Properties;
+import java.util.ResourceBundle;
 
 /**
  * JCO SAP连接测试
@@ -23,50 +24,20 @@ public class RfcManager {
     private static JCoDestination destination;
 
     private static final String ABAP_AS_POOLED = "ABAP_AS_POOL";
-
-/*
-    private static String host = "10.10.79.112";
-    private static String user = "moer";
-    private static String pwd = "123456";
     private static String lang = "zh";
-    private static String client = "800";
-    private static String sysnr = "00";
-    private static String peakLimit = "10";
-    private static String poolCapacity = "3";
-*/
 
-/*
-    private static String host = "10.10.80.23";
-    private static String user = "sap_mes";
-    private static String pwd = "mes@3456";
-    private static String lang = "zh";
-    private static String client = "800";
-    private static String sysnr = "00";
-    private static String peakLimit = "10";
-    private static String poolCapacity = "3";
-*/
-
-/*
-    private static String host = "10.10.80.23";
-    private static String user = "sap_oa";
-    private static String pwd = "20150568";
-    private static String lang = "zh";
-    private static String client = "800";
-    private static String sysnr = "00";
-    private static String peakLimit = "10";
-    private static String poolCapacity = "3";
-*/
-
-    private static String host = "10.10.80.211";
-    private static String user = "sap_smes";
-    private static String pwd = "Sks_smes098";
-    private static String lang = "zh";
-    private static String client = "800";
-    private static String sysnr = "02";
-    private static String peakLimit = "10";
-    private static String poolCapacity = "3";
+    private static ResourceBundle resourceBundle = ResourceBundle.getBundle("sap");
 
     static {
+        String host = resourceBundle.getString("sap-host");
+        String user = resourceBundle.getString("sap-user");
+        String pwd = resourceBundle.getString("sap-pwd");
+        String lang = resourceBundle.getString("sap-lang");
+        String client = resourceBundle.getString("sap-client");
+        String sysnr = resourceBundle.getString("sap-sysnr");
+        String peakLimit = resourceBundle.getString("sap-peakLimit");
+        String poolCapacity = resourceBundle.getString("sap-poolCapacity");
+
         Properties properties = loadProperties(host,user,pwd,lang,client,sysnr,peakLimit,poolCapacity);
         try {
             provider = new JCOProvider();
@@ -91,6 +62,8 @@ public class RfcManager {
      */
     public static Properties loadProperties(String host,String user,String pwd,String lang,String client,String sysnr,String peakLimit,String poolCapacity) {
         Properties props = new Properties();
+        Properties properties = new Properties();
+
         //服务器
         props.setProperty("jco.client.ashost", host);
 
@@ -111,6 +84,7 @@ public class RfcManager {
         props.setProperty("jco.destination.pool_capacity", poolCapacity);
         return props;
     }
+
 
     public static JCoDestination getDestination() throws JCoException {
         if (destination == null) {

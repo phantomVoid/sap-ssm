@@ -307,7 +307,7 @@ public class ProjectPackFeedIntfImpl extends SapCommIntfImpl implements ProjectP
 
     private JCoStructure getInPutParam(JCoFunction function, TProjectPackFeed packFeed,String index){
         JCoStructure inPutParam = function.getImportParameterList().getStructure("W_INPUT");
-        inPutParam.setValue(ProjectFeedTransEnum.uuid.getSapParam(),packFeed.getID());
+        inPutParam.setValue(ProjectFeedTransEnum.zguid.getSapParam(),packFeed.getID());
         inPutParam.setValue(ProjectFeedTransEnum.projectId.getSapParam(),packFeed.getPROJECT_ID());
         inPutParam.setValue(ProjectFeedTransEnum.curDate.getSapParam(),DateUtils.getCurDateStr());
         inPutParam.setValue(ProjectFeedTransEnum.curDateTime.getSapParam(), DateUtils.getCurTimeStr());

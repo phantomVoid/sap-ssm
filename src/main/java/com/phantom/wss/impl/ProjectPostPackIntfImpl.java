@@ -318,7 +318,7 @@ public class ProjectPostPackIntfImpl extends SapCommIntfImpl implements ProjectP
      */
     private JCoStructure getInPutParam(JCoFunction function, TPmProjectPost projectPost, String index) {
         JCoStructure inPutParam = function.getImportParameterList().getStructure("W_INPUT");
-        inPutParam.setValue(ProjectPostTransEnum.uuid.getSapParam(), projectPost.getID());
+        inPutParam.setValue(ProjectPostTransEnum.zguid.getSapParam(), projectPost.getID());
         inPutParam.setValue(ProjectPostTransEnum.curDate.getSapParam(), DateUtils.getCurDateStr());
         inPutParam.setValue(ProjectPostTransEnum.curDateTime.getSapParam(), DateUtils.getCurTimeStr());
         inPutParam.setValue(ProjectPostTransEnum.Index.getSapParam(), index);
