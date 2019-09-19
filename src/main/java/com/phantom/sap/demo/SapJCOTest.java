@@ -8,10 +8,7 @@ import com.sap.conn.jco.JCoParameterList;
 import com.sap.conn.jco.JCoTable;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import java.sql.Time;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,9 +25,6 @@ public class SapJCOTest {
 		String hight = "";
 
 		String funcName = "ZFM_MES_001";
-		TRfcLog rfcLog = new TRfcLog();
-		List<TRfcLog> logList = new ArrayList<>();
-		rfcLog.setRL_FUNC_NAME(funcName+"-物料主数据同步");
 		JCoFunction function = RfcManager.getFunction(funcName);
 
 		JCoParameterList importParameterList = function.getImportParameterList();
