@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.phantom.dao.TAccountCheckInfoDao">
+  <resultMap id="BaseResultMap" type="com.phantom.model.TAccountCheckInfo">
+    <id column="ID" jdbcType="VARCHAR" property="ID" />
+    <result column="DEPT_ID" jdbcType="VARCHAR" property="DEPT_ID" />
+    <result column="CREATE_USER" jdbcType="VARCHAR" property="CREATE_USER" />
+    <result column="CREATE_TIME" jdbcType="DATE" property="CREATE_TIME" />
+    <result column="EDIT_USER" jdbcType="VARCHAR" property="EDIT_USER" />
+    <result column="EDIT_TIME" jdbcType="DATE" property="EDIT_TIME" />
+    <result column="DATA_AUTH" jdbcType="VARCHAR" property="DATA_AUTH" />
+    <result column="CERT_SN" jdbcType="VARCHAR" property="CERT_SN" />
+    <result column="CERT_YEAR" jdbcType="VARCHAR" property="CERT_YEAR" />
+    <result column="CERT_THING" jdbcType="VARCHAR" property="CERT_THING" />
+    <result column="MOVE_TYPE" jdbcType="VARCHAR" property="MOVE_TYPE" />
+    <result column="ITEM_CODE" jdbcType="VARCHAR" property="ITEM_CODE" />
+    <result column="WORK_SPACE" jdbcType="VARCHAR" property="WORK_SPACE" />
+    <result column="WARE_HOUSE" jdbcType="VARCHAR" property="WARE_HOUSE" />
+    <result column="LOT" jdbcType="VARCHAR" property="LOT" />
+    <result column="ITEM_NUM" jdbcType="DECIMAL" property="ITEM_NUM" />
+    <result column="BASE_UNIT" jdbcType="VARCHAR" property="BASE_UNIT" />
+    <result column="PROJECT_ID" jdbcType="VARCHAR" property="PROJECT_ID" />
+    <result column="POST_DATE" jdbcType="DATE" property="POST_DATE" />
+    <result column="CERT_DATE" jdbcType="DATE" property="CERT_DATE" />
+    <result column="CONFIRM_OUTPUT" jdbcType="DECIMAL" property="CONFIRM_OUTPUT" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, DEPT_ID, CREATE_USER, CREATE_TIME, EDIT_USER, EDIT_TIME, DATA_AUTH, CERT_SN, 
+    CERT_YEAR, CERT_THING, MOVE_TYPE, ITEM_CODE, WORK_SPACE, WARE_HOUSE, LOT, ITEM_NUM, 
+    BASE_UNIT, PROJECT_ID, POST_DATE, CERT_DATE, CONFIRM_OUTPUT
+  </sql>
+  <select id="selectByExample" parameterType="com.phantom.model.TAccountCheckInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from N2ADMIN.T_ACCOUNT_CHECK_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from N2ADMIN.T_ACCOUNT_CHECK_INFO
+    where ID = #{ID,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from N2ADMIN.T_ACCOUNT_CHECK_INFO
+    where ID = #{ID,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.phantom.model.TAccountCheckInfoExample">
+    delete from N2ADMIN.T_ACCOUNT_CHECK_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.phantom.model.TAccountCheckInfo">
+    insert into N2ADMIN.T_ACCOUNT_CHECK_INFO (ID, DEPT_ID, CREATE_USER, 
+      CREATE_TIME, EDIT_USER, EDIT_TIME, 
+      DATA_AUTH, CERT_SN, CERT_YEAR, 
+      CERT_THING, MOVE_TYPE, ITEM_CODE, 
+      WORK_SPACE, WARE_HOUSE, LOT, 
+      ITEM_NUM, BASE_UNIT, PROJECT_ID, 
+      POST_DATE, CERT_DATE, CONFIRM_OUTPUT
+      )
+    values (#{ID,jdbcType=VARCHAR}, #{DEPT_ID,jdbcType=VARCHAR}, #{CREATE_USER,jdbcType=VARCHAR}, 
+      #{CREATE_TIME,jdbcType=DATE}, #{EDIT_USER,jdbcType=VARCHAR}, #{EDIT_TIME,jdbcType=DATE}, 
+      #{DATA_AUTH,jdbcType=VARCHAR}, #{CERT_SN,jdbcType=VARCHAR}, #{CERT_YEAR,jdbcType=VARCHAR}, 
+      #{CERT_THING,jdbcType=VARCHAR}, #{MOVE_TYPE,jdbcType=VARCHAR}, #{ITEM_CODE,jdbcType=VARCHAR}, 
+      #{WORK_SPACE,jdbcType=VARCHAR}, #{WARE_HOUSE,jdbcType=VARCHAR}, #{LOT,jdbcType=VARCHAR}, 
+      #{ITEM_NUM,jdbcType=DECIMAL}, #{BASE_UNIT,jdbcType=VARCHAR}, #{PROJECT_ID,jdbcType=VARCHAR}, 
+      #{POST_DATE,jdbcType=DATE}, #{CERT_DATE,jdbcType=DATE}, #{CONFIRM_OUTPUT,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.phantom.model.TAccountCheckInfo">
+    insert into N2ADMIN.T_ACCOUNT_CHECK_INFO
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ID != null">
+        ID,
+      </if>
+      <if test="DEPT_ID != null">
+        DEPT_ID,
+      </if>
+      <if test="CREATE_USER != null">
+        CREATE_USER,
+      </if>
+      <if test="CREATE_TIME != null">
+        CREATE_TIME,
+      </if>
+      <if test="EDIT_USER != null">
+        EDIT_USER,
+      </if>
+      <if test="EDIT_TIME != null">
+        EDIT_TIME,
+      </if>
+      <if test="DATA_AUTH != null">
+        DATA_AUTH,
+      </if>
+      <if test="CERT_SN != null">
+        CERT_SN,
+      </if>
+      <if test="CERT_YEAR != null">
+        CERT_YEAR,
+      </if>
+      <if test="CERT_THING != null">
+        CERT_THING,
+      </if>
+      <if test="MOVE_TYPE != null">
+        MOVE_TYPE,
+      </if>
+      <if test="ITEM_CODE != null">
+        ITEM_CODE,
+      </if>
+      <if test="WORK_SPACE != null">
+        WORK_SPACE,
+      </if>
+      <if test="WARE_HOUSE != null">
+        WARE_HOUSE,
+      </if>
+      <if test="LOT != null">
+        LOT,
+      </if>
+      <if test="ITEM_NUM != null">
+        ITEM_NUM,
+      </if>
+      <if test="BASE_UNIT != null">
+        BASE_UNIT,
+      </if>
+      <if test="PROJECT_ID != null">
+        PROJECT_ID,
+      </if>
+      <if test="POST_DATE != null">
+        POST_DATE,
+      </if>
+      <if test="CERT_DATE != null">
+        CERT_DATE,
+      </if>
+      <if test="CONFIRM_OUTPUT != null">
+        CONFIRM_OUTPUT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ID != null">
+        #{ID,jdbcType=VARCHAR},
+      </if>
+      <if test="DEPT_ID != null">
+        #{DEPT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="CREATE_USER != null">
+        #{CREATE_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="CREATE_TIME != null">
+        #{CREATE_TIME,jdbcType=DATE},
+      </if>
+      <if test="EDIT_USER != null">
+        #{EDIT_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="EDIT_TIME != null">
+        #{EDIT_TIME,jdbcType=DATE},
+      </if>
+      <if test="DATA_AUTH != null">
+        #{DATA_AUTH,jdbcType=VARCHAR},
+      </if>
+      <if test="CERT_SN != null">
+        #{CERT_SN,jdbcType=VARCHAR},
+      </if>
+      <if test="CERT_YEAR != null">
+        #{CERT_YEAR,jdbcType=VARCHAR},
+      </if>
+      <if test="CERT_THING != null">
+        #{CERT_THING,jdbcType=VARCHAR},
+      </if>
+      <if test="MOVE_TYPE != null">
+        #{MOVE_TYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="ITEM_CODE != null">
+        #{ITEM_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="WORK_SPACE != null">
+        #{WORK_SPACE,jdbcType=VARCHAR},
+      </if>
+      <if test="WARE_HOUSE != null">
+        #{WARE_HOUSE,jdbcType=VARCHAR},
+      </if>
+      <if test="LOT != null">
+        #{LOT,jdbcType=VARCHAR},
+      </if>
+      <if test="ITEM_NUM != null">
+        #{ITEM_NUM,jdbcType=DECIMAL},
+      </if>
+      <if test="BASE_UNIT != null">
+        #{BASE_UNIT,jdbcType=VARCHAR},
+      </if>
+      <if test="PROJECT_ID != null">
+        #{PROJECT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="POST_DATE != null">
+        #{POST_DATE,jdbcType=DATE},
+      </if>
+      <if test="CERT_DATE != null">
+        #{CERT_DATE,jdbcType=DATE},
+      </if>
+      <if test="CONFIRM_OUTPUT != null">
+        #{CONFIRM_OUTPUT,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.phantom.model.TAccountCheckInfoExample" resultType="java.lang.Long">
+    select count(*) from N2ADMIN.T_ACCOUNT_CHECK_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update N2ADMIN.T_ACCOUNT_CHECK_INFO
+    <set>
+      <if test="record.ID != null">
+        ID = #{record.ID,jdbcType=VARCHAR},
+      </if>
+      <if test="record.DEPT_ID != null">
+        DEPT_ID = #{record.DEPT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CREATE_USER != null">
+        CREATE_USER = #{record.CREATE_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CREATE_TIME != null">
+        CREATE_TIME = #{record.CREATE_TIME,jdbcType=DATE},
+      </if>
+      <if test="record.EDIT_USER != null">
+        EDIT_USER = #{record.EDIT_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="record.EDIT_TIME != null">
+        EDIT_TIME = #{record.EDIT_TIME,jdbcType=DATE},
+      </if>
+      <if test="record.DATA_AUTH != null">
+        DATA_AUTH = #{record.DATA_AUTH,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CERT_SN != null">
+        CERT_SN = #{record.CERT_SN,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CERT_YEAR != null">
+        CERT_YEAR = #{record.CERT_YEAR,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CERT_THING != null">
+        CERT_THING = #{record.CERT_THING,jdbcType=VARCHAR},
+      </if>
+      <if test="record.MOVE_TYPE != null">
+        MOVE_TYPE = #{record.MOVE_TYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ITEM_CODE != null">
+        ITEM_CODE = #{record.ITEM_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.WORK_SPACE != null">
+        WORK_SPACE = #{record.WORK_SPACE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.WARE_HOUSE != null">
+        WARE_HOUSE = #{record.WARE_HOUSE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.LOT != null">
+        LOT = #{record.LOT,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ITEM_NUM != null">
+        ITEM_NUM = #{record.ITEM_NUM,jdbcType=DECIMAL},
+      </if>
+      <if test="record.BASE_UNIT != null">
+        BASE_UNIT = #{record.BASE_UNIT,jdbcType=VARCHAR},
+      </if>
+      <if test="record.PROJECT_ID != null">
+        PROJECT_ID = #{record.PROJECT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="record.POST_DATE != null">
+        POST_DATE = #{record.POST_DATE,jdbcType=DATE},
+      </if>
+      <if test="record.CERT_DATE != null">
+        CERT_DATE = #{record.CERT_DATE,jdbcType=DATE},
+      </if>
+      <if test="record.CONFIRM_OUTPUT != null">
+        CONFIRM_OUTPUT = #{record.CONFIRM_OUTPUT,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update N2ADMIN.T_ACCOUNT_CHECK_INFO
+    set ID = #{record.ID,jdbcType=VARCHAR},
+      DEPT_ID = #{record.DEPT_ID,jdbcType=VARCHAR},
+      CREATE_USER = #{record.CREATE_USER,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.CREATE_TIME,jdbcType=DATE},
+      EDIT_USER = #{record.EDIT_USER,jdbcType=VARCHAR},
+      EDIT_TIME = #{record.EDIT_TIME,jdbcType=DATE},
+      DATA_AUTH = #{record.DATA_AUTH,jdbcType=VARCHAR},
+      CERT_SN = #{record.CERT_SN,jdbcType=VARCHAR},
+      CERT_YEAR = #{record.CERT_YEAR,jdbcType=VARCHAR},
+      CERT_THING = #{record.CERT_THING,jdbcType=VARCHAR},
+      MOVE_TYPE = #{record.MOVE_TYPE,jdbcType=VARCHAR},
+      ITEM_CODE = #{record.ITEM_CODE,jdbcType=VARCHAR},
+      WORK_SPACE = #{record.WORK_SPACE,jdbcType=VARCHAR},
+      WARE_HOUSE = #{record.WARE_HOUSE,jdbcType=VARCHAR},
+      LOT = #{record.LOT,jdbcType=VARCHAR},
+      ITEM_NUM = #{record.ITEM_NUM,jdbcType=DECIMAL},
+      BASE_UNIT = #{record.BASE_UNIT,jdbcType=VARCHAR},
+      PROJECT_ID = #{record.PROJECT_ID,jdbcType=VARCHAR},
+      POST_DATE = #{record.POST_DATE,jdbcType=DATE},
+      CERT_DATE = #{record.CERT_DATE,jdbcType=DATE},
+      CONFIRM_OUTPUT = #{record.CONFIRM_OUTPUT,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.phantom.model.TAccountCheckInfo">
+    update N2ADMIN.T_ACCOUNT_CHECK_INFO
+    <set>
+      <if test="DEPT_ID != null">
+        DEPT_ID = #{DEPT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="CREATE_USER != null">
+        CREATE_USER = #{CREATE_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="CREATE_TIME != null">
+        CREATE_TIME = #{CREATE_TIME,jdbcType=DATE},
+      </if>
+      <if test="EDIT_USER != null">
+        EDIT_USER = #{EDIT_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="EDIT_TIME != null">
+        EDIT_TIME = #{EDIT_TIME,jdbcType=DATE},
+      </if>
+      <if test="DATA_AUTH != null">
+        DATA_AUTH = #{DATA_AUTH,jdbcType=VARCHAR},
+      </if>
+      <if test="CERT_SN != null">
+        CERT_SN = #{CERT_SN,jdbcType=VARCHAR},
+      </if>
+      <if test="CERT_YEAR != null">
+        CERT_YEAR = #{CERT_YEAR,jdbcType=VARCHAR},
+      </if>
+      <if test="CERT_THING != null">
+        CERT_THING = #{CERT_THING,jdbcType=VARCHAR},
+      </if>
+      <if test="MOVE_TYPE != null">
+        MOVE_TYPE = #{MOVE_TYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="ITEM_CODE != null">
+        ITEM_CODE = #{ITEM_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="WORK_SPACE != null">
+        WORK_SPACE = #{WORK_SPACE,jdbcType=VARCHAR},
+      </if>
+      <if test="WARE_HOUSE != null">
+        WARE_HOUSE = #{WARE_HOUSE,jdbcType=VARCHAR},
+      </if>
+      <if test="LOT != null">
+        LOT = #{LOT,jdbcType=VARCHAR},
+      </if>
+      <if test="ITEM_NUM != null">
+        ITEM_NUM = #{ITEM_NUM,jdbcType=DECIMAL},
+      </if>
+      <if test="BASE_UNIT != null">
+        BASE_UNIT = #{BASE_UNIT,jdbcType=VARCHAR},
+      </if>
+      <if test="PROJECT_ID != null">
+        PROJECT_ID = #{PROJECT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="POST_DATE != null">
+        POST_DATE = #{POST_DATE,jdbcType=DATE},
+      </if>
+      <if test="CERT_DATE != null">
+        CERT_DATE = #{CERT_DATE,jdbcType=DATE},
+      </if>
+      <if test="CONFIRM_OUTPUT != null">
+        CONFIRM_OUTPUT = #{CONFIRM_OUTPUT,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.phantom.model.TAccountCheckInfo">
+    update N2ADMIN.T_ACCOUNT_CHECK_INFO
+    set DEPT_ID = #{DEPT_ID,jdbcType=VARCHAR},
+      CREATE_USER = #{CREATE_USER,jdbcType=VARCHAR},
+      CREATE_TIME = #{CREATE_TIME,jdbcType=DATE},
+      EDIT_USER = #{EDIT_USER,jdbcType=VARCHAR},
+      EDIT_TIME = #{EDIT_TIME,jdbcType=DATE},
+      DATA_AUTH = #{DATA_AUTH,jdbcType=VARCHAR},
+      CERT_SN = #{CERT_SN,jdbcType=VARCHAR},
+      CERT_YEAR = #{CERT_YEAR,jdbcType=VARCHAR},
+      CERT_THING = #{CERT_THING,jdbcType=VARCHAR},
+      MOVE_TYPE = #{MOVE_TYPE,jdbcType=VARCHAR},
+      ITEM_CODE = #{ITEM_CODE,jdbcType=VARCHAR},
+      WORK_SPACE = #{WORK_SPACE,jdbcType=VARCHAR},
+      WARE_HOUSE = #{WARE_HOUSE,jdbcType=VARCHAR},
+      LOT = #{LOT,jdbcType=VARCHAR},
+      ITEM_NUM = #{ITEM_NUM,jdbcType=DECIMAL},
+      BASE_UNIT = #{BASE_UNIT,jdbcType=VARCHAR},
+      PROJECT_ID = #{PROJECT_ID,jdbcType=VARCHAR},
+      POST_DATE = #{POST_DATE,jdbcType=DATE},
+      CERT_DATE = #{CERT_DATE,jdbcType=DATE},
+      CONFIRM_OUTPUT = #{CONFIRM_OUTPUT,jdbcType=DECIMAL}
+    where ID = #{ID,jdbcType=VARCHAR}
+  </update>
+</mapper>
