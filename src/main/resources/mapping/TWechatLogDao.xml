@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.phantom.dao.TWechatLogDao">
+  <resultMap id="BaseResultMap" type="com.phantom.model.TWechatLog">
+    <id column="ID" jdbcType="VARCHAR" property="ID" />
+    <result column="DEPT_ID" jdbcType="VARCHAR" property="DEPT_ID" />
+    <result column="CREATE_USER" jdbcType="VARCHAR" property="CREATE_USER" />
+    <result column="CREATE_TIME" jdbcType="DATE" property="CREATE_TIME" />
+    <result column="EDIT_USER" jdbcType="VARCHAR" property="EDIT_USER" />
+    <result column="EDIT_TIME" jdbcType="DATE" property="EDIT_TIME" />
+    <result column="DATA_AUTH" jdbcType="VARCHAR" property="DATA_AUTH" />
+    <result column="USER_CODE" jdbcType="VARCHAR" property="USER_CODE" />
+    <result column="LINK_URL" jdbcType="VARCHAR" property="LINK_URL" />
+    <result column="PHONE" jdbcType="VARCHAR" property="PHONE" />
+    <result column="SEND_TIME" jdbcType="DATE" property="SEND_TIME" />
+    <result column="SEND_TYPE" jdbcType="VARCHAR" property="SEND_TYPE" />
+    <result column="MESSAGE" jdbcType="VARCHAR" property="MESSAGE" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.phantom.model.TWechatLog">
+    <result column="CONTENT" jdbcType="CLOB" property="CONTENT" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, DEPT_ID, CREATE_USER, CREATE_TIME, EDIT_USER, EDIT_TIME, DATA_AUTH, USER_CODE, 
+    LINK_URL, PHONE, SEND_TIME, SEND_TYPE, MESSAGE
+  </sql>
+  <sql id="Blob_Column_List">
+    CONTENT
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.phantom.model.TWechatLogExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from N2ADMIN.T_WECHAT_LOG
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.phantom.model.TWechatLogExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from N2ADMIN.T_WECHAT_LOG
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from N2ADMIN.T_WECHAT_LOG
+    where ID = #{ID,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from N2ADMIN.T_WECHAT_LOG
+    where ID = #{ID,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.phantom.model.TWechatLogExample">
+    delete from N2ADMIN.T_WECHAT_LOG
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.phantom.model.TWechatLog">
+    insert into N2ADMIN.T_WECHAT_LOG (ID, DEPT_ID, CREATE_USER, 
+      CREATE_TIME, EDIT_USER, EDIT_TIME, 
+      DATA_AUTH, USER_CODE, LINK_URL, 
+      PHONE, SEND_TIME, SEND_TYPE, 
+      MESSAGE, CONTENT)
+    values (#{ID,jdbcType=VARCHAR}, #{DEPT_ID,jdbcType=VARCHAR}, #{CREATE_USER,jdbcType=VARCHAR}, 
+      #{CREATE_TIME,jdbcType=DATE}, #{EDIT_USER,jdbcType=VARCHAR}, #{EDIT_TIME,jdbcType=DATE}, 
+      #{DATA_AUTH,jdbcType=VARCHAR}, #{USER_CODE,jdbcType=VARCHAR}, #{LINK_URL,jdbcType=VARCHAR}, 
+      #{PHONE,jdbcType=VARCHAR}, #{SEND_TIME,jdbcType=DATE}, #{SEND_TYPE,jdbcType=VARCHAR}, 
+      #{MESSAGE,jdbcType=VARCHAR}, #{CONTENT,jdbcType=CLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="com.phantom.model.TWechatLog">
+    insert into N2ADMIN.T_WECHAT_LOG
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ID != null">
+        ID,
+      </if>
+      <if test="DEPT_ID != null">
+        DEPT_ID,
+      </if>
+      <if test="CREATE_USER != null">
+        CREATE_USER,
+      </if>
+      <if test="CREATE_TIME != null">
+        CREATE_TIME,
+      </if>
+      <if test="EDIT_USER != null">
+        EDIT_USER,
+      </if>
+      <if test="EDIT_TIME != null">
+        EDIT_TIME,
+      </if>
+      <if test="DATA_AUTH != null">
+        DATA_AUTH,
+      </if>
+      <if test="USER_CODE != null">
+        USER_CODE,
+      </if>
+      <if test="LINK_URL != null">
+        LINK_URL,
+      </if>
+      <if test="PHONE != null">
+        PHONE,
+      </if>
+      <if test="SEND_TIME != null">
+        SEND_TIME,
+      </if>
+      <if test="SEND_TYPE != null">
+        SEND_TYPE,
+      </if>
+      <if test="MESSAGE != null">
+        MESSAGE,
+      </if>
+      <if test="CONTENT != null">
+        CONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ID != null">
+        #{ID,jdbcType=VARCHAR},
+      </if>
+      <if test="DEPT_ID != null">
+        #{DEPT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="CREATE_USER != null">
+        #{CREATE_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="CREATE_TIME != null">
+        #{CREATE_TIME,jdbcType=DATE},
+      </if>
+      <if test="EDIT_USER != null">
+        #{EDIT_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="EDIT_TIME != null">
+        #{EDIT_TIME,jdbcType=DATE},
+      </if>
+      <if test="DATA_AUTH != null">
+        #{DATA_AUTH,jdbcType=VARCHAR},
+      </if>
+      <if test="USER_CODE != null">
+        #{USER_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="LINK_URL != null">
+        #{LINK_URL,jdbcType=VARCHAR},
+      </if>
+      <if test="PHONE != null">
+        #{PHONE,jdbcType=VARCHAR},
+      </if>
+      <if test="SEND_TIME != null">
+        #{SEND_TIME,jdbcType=DATE},
+      </if>
+      <if test="SEND_TYPE != null">
+        #{SEND_TYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="MESSAGE != null">
+        #{MESSAGE,jdbcType=VARCHAR},
+      </if>
+      <if test="CONTENT != null">
+        #{CONTENT,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.phantom.model.TWechatLogExample" resultType="java.lang.Long">
+    select count(*) from N2ADMIN.T_WECHAT_LOG
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update N2ADMIN.T_WECHAT_LOG
+    <set>
+      <if test="record.ID != null">
+        ID = #{record.ID,jdbcType=VARCHAR},
+      </if>
+      <if test="record.DEPT_ID != null">
+        DEPT_ID = #{record.DEPT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CREATE_USER != null">
+        CREATE_USER = #{record.CREATE_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CREATE_TIME != null">
+        CREATE_TIME = #{record.CREATE_TIME,jdbcType=DATE},
+      </if>
+      <if test="record.EDIT_USER != null">
+        EDIT_USER = #{record.EDIT_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="record.EDIT_TIME != null">
+        EDIT_TIME = #{record.EDIT_TIME,jdbcType=DATE},
+      </if>
+      <if test="record.DATA_AUTH != null">
+        DATA_AUTH = #{record.DATA_AUTH,jdbcType=VARCHAR},
+      </if>
+      <if test="record.USER_CODE != null">
+        USER_CODE = #{record.USER_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.LINK_URL != null">
+        LINK_URL = #{record.LINK_URL,jdbcType=VARCHAR},
+      </if>
+      <if test="record.PHONE != null">
+        PHONE = #{record.PHONE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.SEND_TIME != null">
+        SEND_TIME = #{record.SEND_TIME,jdbcType=DATE},
+      </if>
+      <if test="record.SEND_TYPE != null">
+        SEND_TYPE = #{record.SEND_TYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.MESSAGE != null">
+        MESSAGE = #{record.MESSAGE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CONTENT != null">
+        CONTENT = #{record.CONTENT,jdbcType=CLOB},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update N2ADMIN.T_WECHAT_LOG
+    set ID = #{record.ID,jdbcType=VARCHAR},
+      DEPT_ID = #{record.DEPT_ID,jdbcType=VARCHAR},
+      CREATE_USER = #{record.CREATE_USER,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.CREATE_TIME,jdbcType=DATE},
+      EDIT_USER = #{record.EDIT_USER,jdbcType=VARCHAR},
+      EDIT_TIME = #{record.EDIT_TIME,jdbcType=DATE},
+      DATA_AUTH = #{record.DATA_AUTH,jdbcType=VARCHAR},
+      USER_CODE = #{record.USER_CODE,jdbcType=VARCHAR},
+      LINK_URL = #{record.LINK_URL,jdbcType=VARCHAR},
+      PHONE = #{record.PHONE,jdbcType=VARCHAR},
+      SEND_TIME = #{record.SEND_TIME,jdbcType=DATE},
+      SEND_TYPE = #{record.SEND_TYPE,jdbcType=VARCHAR},
+      MESSAGE = #{record.MESSAGE,jdbcType=VARCHAR},
+      CONTENT = #{record.CONTENT,jdbcType=CLOB}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update N2ADMIN.T_WECHAT_LOG
+    set ID = #{record.ID,jdbcType=VARCHAR},
+      DEPT_ID = #{record.DEPT_ID,jdbcType=VARCHAR},
+      CREATE_USER = #{record.CREATE_USER,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.CREATE_TIME,jdbcType=DATE},
+      EDIT_USER = #{record.EDIT_USER,jdbcType=VARCHAR},
+      EDIT_TIME = #{record.EDIT_TIME,jdbcType=DATE},
+      DATA_AUTH = #{record.DATA_AUTH,jdbcType=VARCHAR},
+      USER_CODE = #{record.USER_CODE,jdbcType=VARCHAR},
+      LINK_URL = #{record.LINK_URL,jdbcType=VARCHAR},
+      PHONE = #{record.PHONE,jdbcType=VARCHAR},
+      SEND_TIME = #{record.SEND_TIME,jdbcType=DATE},
+      SEND_TYPE = #{record.SEND_TYPE,jdbcType=VARCHAR},
+      MESSAGE = #{record.MESSAGE,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.phantom.model.TWechatLog">
+    update N2ADMIN.T_WECHAT_LOG
+    <set>
+      <if test="DEPT_ID != null">
+        DEPT_ID = #{DEPT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="CREATE_USER != null">
+        CREATE_USER = #{CREATE_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="CREATE_TIME != null">
+        CREATE_TIME = #{CREATE_TIME,jdbcType=DATE},
+      </if>
+      <if test="EDIT_USER != null">
+        EDIT_USER = #{EDIT_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="EDIT_TIME != null">
+        EDIT_TIME = #{EDIT_TIME,jdbcType=DATE},
+      </if>
+      <if test="DATA_AUTH != null">
+        DATA_AUTH = #{DATA_AUTH,jdbcType=VARCHAR},
+      </if>
+      <if test="USER_CODE != null">
+        USER_CODE = #{USER_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="LINK_URL != null">
+        LINK_URL = #{LINK_URL,jdbcType=VARCHAR},
+      </if>
+      <if test="PHONE != null">
+        PHONE = #{PHONE,jdbcType=VARCHAR},
+      </if>
+      <if test="SEND_TIME != null">
+        SEND_TIME = #{SEND_TIME,jdbcType=DATE},
+      </if>
+      <if test="SEND_TYPE != null">
+        SEND_TYPE = #{SEND_TYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="MESSAGE != null">
+        MESSAGE = #{MESSAGE,jdbcType=VARCHAR},
+      </if>
+      <if test="CONTENT != null">
+        CONTENT = #{CONTENT,jdbcType=CLOB},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.phantom.model.TWechatLog">
+    update N2ADMIN.T_WECHAT_LOG
+    set DEPT_ID = #{DEPT_ID,jdbcType=VARCHAR},
+      CREATE_USER = #{CREATE_USER,jdbcType=VARCHAR},
+      CREATE_TIME = #{CREATE_TIME,jdbcType=DATE},
+      EDIT_USER = #{EDIT_USER,jdbcType=VARCHAR},
+      EDIT_TIME = #{EDIT_TIME,jdbcType=DATE},
+      DATA_AUTH = #{DATA_AUTH,jdbcType=VARCHAR},
+      USER_CODE = #{USER_CODE,jdbcType=VARCHAR},
+      LINK_URL = #{LINK_URL,jdbcType=VARCHAR},
+      PHONE = #{PHONE,jdbcType=VARCHAR},
+      SEND_TIME = #{SEND_TIME,jdbcType=DATE},
+      SEND_TYPE = #{SEND_TYPE,jdbcType=VARCHAR},
+      MESSAGE = #{MESSAGE,jdbcType=VARCHAR},
+      CONTENT = #{CONTENT,jdbcType=CLOB}
+    where ID = #{ID,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.phantom.model.TWechatLog">
+    update N2ADMIN.T_WECHAT_LOG
+    set DEPT_ID = #{DEPT_ID,jdbcType=VARCHAR},
+      CREATE_USER = #{CREATE_USER,jdbcType=VARCHAR},
+      CREATE_TIME = #{CREATE_TIME,jdbcType=DATE},
+      EDIT_USER = #{EDIT_USER,jdbcType=VARCHAR},
+      EDIT_TIME = #{EDIT_TIME,jdbcType=DATE},
+      DATA_AUTH = #{DATA_AUTH,jdbcType=VARCHAR},
+      USER_CODE = #{USER_CODE,jdbcType=VARCHAR},
+      LINK_URL = #{LINK_URL,jdbcType=VARCHAR},
+      PHONE = #{PHONE,jdbcType=VARCHAR},
+      SEND_TIME = #{SEND_TIME,jdbcType=DATE},
+      SEND_TYPE = #{SEND_TYPE,jdbcType=VARCHAR},
+      MESSAGE = #{MESSAGE,jdbcType=VARCHAR}
+    where ID = #{ID,jdbcType=VARCHAR}
+  </update>
+</mapper>
