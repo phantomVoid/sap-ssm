@@ -4,7 +4,9 @@ import com.phantom.model.TProjectSapLogDetail;
 import com.phantom.model.TProjectSapLogDetailExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository("TProjectSapLogDetailDao")
 public interface TProjectSapLogDetailDao {
     long countByExample(TProjectSapLogDetailExample example);
 

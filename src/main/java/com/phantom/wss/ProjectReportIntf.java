@@ -30,4 +30,6 @@ public interface ProjectReportIntf {
      * @return
      */
     String ajaxRedoBySapLogDetail(@WebParam(name = "logDetailIdsJson", partName = "logDetailIdsJson") String logDetailIdsJson);
+
+    String quartzExec();
 }

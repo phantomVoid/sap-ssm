@@ -59,6 +59,52 @@ public class ProjectFeedIntfImpl extends SapCommIntfImpl implements ProjectFeedI
     @Resource
     TPmProjectBaseDao projectBaseDao;
 
+    @Resource
+    TQuartzLogDao quartzLogDao;
+
+    @Override
+    public String quartzExec() {
+        String result = null;
+        try {
+            TPmProjectPostExample postExample = new TPmProjectPostExample();
+            TPmProjectPostExample.Criteria postExampleCriteria = postExample.createCriteria();
+            List<String> sflagList = new ArrayList<>();
+            sflagList.add("NULL");
+            sflagList.add("");
+            sflagList.add("0");
+            postExampleCriteria.andSFLAGIn(sflagList);
+
+            List<TPmProjectPost> projectPostList = postDao.selectByExample(postExample);
+
+            for (TPmProjectPost projectPost : projectPostList) {
+                result = ajaxExecByIds(StringUtils.toJsonArrStr(projectPost.getID()));
+
+                TQuartzLog quartzLog = new TQuartzLog();
+                quartzLog.setID(StringUtils.getUUID());
+                quartzLog.setCREATE_TIME(DateUtils.getCurDateTime());
+                quartzLog.setCREATE_USER(StringUtils.getDefaultUserId());
+                quartzLog.setDATA_AUTH(StringUtils.getDefaultDataAuth());
+                quartzLog.setDEPT_ID(StringUtils.getDefaultDeptId());
+
+                quartzLog.setINTF_TYPE(IntfType.projectPost.getCode());
+                quartzLog.setINTF_NAME(IntfType.projectPost.getFuncName());
+                quartzLog.setPROJECT_ID(projectPost.getID());
+                quartzLog.setITEM_CODE(projectPost.getITEM_SN());
+                quartzLog.setITEM_CODE(projectPost.getITEM_CODE());
+                quartzLog.setLOG_INFO(result);
+                quartzLog.setSFLAG("Y");
+                quartzLog.setMESSAGE("quartz");
+
+                quartzLogDao.insert(quartzLog);
+
+                log.info("projectId:"+projectPost.getPROJECT_ID()+"|result:"+result);
+            }
+        } catch (Exception e) {
+            log.info(e.getMessage());
+        }
+        return result;
+    }
+
     @Override
     public String ajaxRedoBySapLogDetail(String logDetailIdsJson) {
         List<String> dataList = JSONObject.parseArray(logDetailIdsJson, String.class);

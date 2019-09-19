@@ -4,7 +4,9 @@ import com.phantom.model.TPmProjectBase;
 import com.phantom.model.TPmProjectBaseExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository("TPmProjectBaseDao")
 public interface TPmProjectBaseDao {
     long countByExample(TPmProjectBaseExample example);
 

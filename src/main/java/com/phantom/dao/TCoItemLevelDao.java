@@ -4,7 +4,9 @@ import com.phantom.model.TCoItemLevel;
 import com.phantom.model.TCoItemLevelExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository("TCoItemLevelDao")
 public interface TCoItemLevelDao {
     long countByExample(TCoItemLevelExample example);
 

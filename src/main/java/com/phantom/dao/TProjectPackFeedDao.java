@@ -4,7 +4,9 @@ import com.phantom.model.TProjectPackFeed;
 import com.phantom.model.TProjectPackFeedExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository("TProjectPackFeedDao")
 public interface TProjectPackFeedDao {
     long countByExample(TProjectPackFeedExample example);
 

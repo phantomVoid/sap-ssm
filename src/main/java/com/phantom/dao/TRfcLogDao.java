@@ -4,7 +4,9 @@ import com.phantom.model.TRfcLog;
 import com.phantom.model.TRfcLogExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository("TRfcLogDao")
 public interface TRfcLogDao {
     long countByExample(TRfcLogExample example);
 

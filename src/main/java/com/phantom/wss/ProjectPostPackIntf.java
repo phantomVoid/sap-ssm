@@ -31,5 +31,6 @@ public interface ProjectPostPackIntf {
      */
     String ajaxRedoBySapLogDetail(@WebParam(name = "logDetailIdsJson", partName = "logDetailIdsJson") String logDetailIdsJson);
 
+    String quartzExec();
 }
 

@@ -55,6 +55,54 @@ public class ProjectReportIntfImpl extends SapCommIntfImpl implements ProjectRep
     @Resource
     TProjectSapLogDetailDao sapLogDetailDao;
 
+    @Resource
+    TQuartzLogDao quartzLogDao;
+
+    @Override
+    public String quartzExec() {
+        String result = null;
+        try {
+            TPmProjectReportExample reportExample = new TPmProjectReportExample();
+            TPmProjectReportExample.Criteria reportExampleCriteria = reportExample.createCriteria();
+
+            List<String> sflagList = new ArrayList<>();
+            sflagList.add("NULL");
+            sflagList.add("");
+            sflagList.add("0");
+            reportExampleCriteria.andSFLAGIn(sflagList);
+
+            List<TPmProjectReport> reportList = projectReportDao.selectByExample(reportExample);
+
+            for (TPmProjectReport projectReport : reportList) {
+                ProjectReportIntf reportIntf = new ProjectReportIntfImpl();
+                result = reportIntf.ajaxExecByIds(StringUtils.toJsonArrStr(projectReport.getID()));
+
+                TQuartzLog quartzLog = new TQuartzLog();
+                quartzLog.setID(StringUtils.getUUID());
+                quartzLog.setCREATE_TIME(DateUtils.getCurDateTime());
+                quartzLog.setCREATE_USER(StringUtils.getDefaultUserId());
+                quartzLog.setDATA_AUTH(StringUtils.getDefaultDataAuth());
+                quartzLog.setDEPT_ID(StringUtils.getDefaultDeptId());
+
+                quartzLog.setINTF_TYPE(IntfType.packFeed.getCode());
+                quartzLog.setINTF_NAME(IntfType.packFeed.getFuncName());
+                quartzLog.setPROJECT_ID(projectReport.getID());
+                quartzLog.setITEM_CODE("");
+                quartzLog.setITEM_CODE("");
+                quartzLog.setLOG_INFO(result);
+                quartzLog.setSFLAG("Y");
+                quartzLog.setMESSAGE("quartz");
+
+                quartzLogDao.insert(quartzLog);
+
+                log.info("projectId:"+projectReport.getPROJECT_ID()+"|result:"+result);
+            }
+        } catch (Exception e) {
+            log.info(e.getMessage());
+        }
+        return result;
+    }
+
     /**
      * 工单报工接口异常重发
      * @param logDetailIdsJson

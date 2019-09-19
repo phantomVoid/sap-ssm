@@ -4,7 +4,9 @@ import com.phantom.model.TCoItem;
 import com.phantom.model.TCoItemExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository("TCoItemDao")
 public interface TCoItemDao {
     long countByExample(TCoItemExample example);
 
