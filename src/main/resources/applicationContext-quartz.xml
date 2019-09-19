@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+        xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:task="http://www.springframework.org/schema/task"
+        xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd ">
+
+    <context:component-scan base-package="com.phantom.timer.jobs" />
+
+    <!-- 注入任务处理类bean -->
+    <bean id="ItemIntfJob" class="com.phantom.timer.jobs.ItemIntfJob"></bean>
+    <bean id="ProjectFeedIntfJob" class="com.phantom.timer.jobs.ProjectFeedIntfJob"></bean>
+    <bean id="ProjectPackFeedIntfJob" class="com.phantom.timer.jobs.ProjectPackFeedIntfJob"></bean>
+    <bean id="ProjectPostIntfJob" class="com.phantom.timer.jobs.ProjectPostIntfJob"></bean>
+    <bean id="ProjectReportIntfJob" class="com.phantom.timer.jobs.ProjectReportIntfJob"></bean>
+
+    <!-- 任务触发器详细信息bean -->
+
+    <!--1.物料数据同步接口-->
+    <bean id="ItemIntfJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="ItemIntfJob"></property>
+        <property name="targetMethod" value="execute"></property>
+        <!-- 作业不并发调度  -->
+        <property name="concurrent" value="false" />
+    </bean>
+
+    <!--2.制造单投料接口-->
+    <bean id="ProjectFeedIntfJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="ProjectFeedIntfJob"></property>
+        <property name="targetMethod" value="execute"></property>
+        <!-- 作业不并发调度  -->
+        <property name="concurrent" value="false" />
+    </bean>
+
+    <!--3.包装单投料接口-->
+    <bean id="ProjectPackFeedIntfJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="ProjectPackFeedIntfJob"></property>
+        <property name="targetMethod" value="execute"></property>
+        <!-- 作业不并发调度  -->
+        <property name="concurrent" value="false" />
+    </bean>
+
+    <!--4.工单缴库接口-->
+    <bean id="ProjectPostIntfJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="ProjectPostIntfJob"></property>
+        <property name="targetMethod" value="execute"></property>
+        <!-- 作业不并发调度  -->
+        <property name="concurrent" value="false" />
+    </bean>
+
+    <!--5.工单报工接口-->
+    <bean id="ProjectReportIntfJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="ProjectReportIntfJob"></property>
+        <property name="targetMethod" value="execute"></property>
+        <!-- 作业不并发调度  -->
+        <property name="concurrent" value="false" />
+    </bean>
+
+    <!-- 定义trigger 触发器 -->
+
+    <bean id="ItemIntfJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="ItemIntfJobDetail"></property>
+        <property name="cronExpression" value="${crond.OtherJob}"></property>
+    </bean>
+
+    <bean id="ProjectFeedIntfJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="ProjectFeedIntfJobDetail"></property>
+        <property name="cronExpression" value="${crond.OtherJob}"></property>
+    </bean>
+
+    <bean id="ProjectPackFeedIntfJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="ProjectPackFeedIntfJobDetail"></property>
+        <property name="cronExpression" value="${crond.OtherJob}"></property>
+    </bean>
+
+    <bean id="ProjectPostIntfJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="ProjectPostIntfJobDetail"></property>
+        <property name="cronExpression" value="${crond.OtherJob}"></property>
+    </bean>
+
+    <bean id="ProjectReportIntfJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="ProjectReportIntfJobDetail"></property>
+        <property name="cronExpression" value="${crond.OtherJob}"></property>
+    </bean>
+
+    <!-- 设置触发器调度工厂 -->
+    <bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="ItemIntfJobTrigger"/>
+                <ref bean="ProjectFeedIntfJobTrigger"/>
+                <ref bean="ProjectPackFeedIntfJobTrigger"/>
+                <ref bean="ProjectPostIntfJobTrigger"/>
+                <ref bean="ProjectReportIntfJobTrigger"/>
+            </list>
+        </property>
+    </bean>
+</beans>
