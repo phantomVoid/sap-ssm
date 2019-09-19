@@ -22,6 +22,9 @@ import javax.annotation.Resource;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 import java.util.*;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
 
 /**
  * 工单信息同步
@@ -61,6 +64,66 @@ public class WorkOrderSynAddServerImpl implements WorkOrderSynAddService {
                                     @WebParam(name = "orderProcessList") List<SapOrderProcess> orderProcessList,
                                     @WebParam(name = "orderReservedList") List<SapOrderReserved> orderReservedList,
                                     @WebParam(name = "orderSalesList") List<SapOrderSales> orderSalesList) {
+        String message = "";
+        TRfcLog tLog = new TRfcLog();
+        try {
+            tLog.setRL_FUNC_NAME("ZFM_MES_003-工单下达");
+            List<Object> list = new ArrayList<>();
+            list.add(orderBaseList);
+            list.add(orderProcessList);
+            list.add(orderReservedList);
+            list.add(orderSalesList);
+            tLog.setRL_IMPORT(JSON.toJSONString(list));
+        } catch (Exception e) {
+            logDao.insert(new TRfcLog(Flag.N.toString(), Message.FAILURE.toString()));
+            SapOrderRes res = new SapOrderRes(Flag.N.toString(), Message.FAILURE.toString());
+            return res;
+        }
+
+        SapOrderRes res = new SapOrderRes();
+        try {
+            TRfcLog rfcLog = new TRfcLog();
+            List<String> logList = new ArrayList<>();
+            List<TPmProjectBase> projectList = ProjectUtils.getProjectBase(orderBaseList, orderProcessList, orderSalesList);
+
+            if(projectList.size() > 0){
+                res.setSFLAG(Flag.Y.toString());
+                res.setMESSAGE("SUCCESS");
+            }else{
+                res.setSFLAG(Flag.N.toString());
+                res.setMESSAGE("参数接收异常");
+            }
+        } catch (Exception e) {
+            message = e.toString();
+            logDao.insert(new TRfcLog(Flag.N.toString(), message, e.toString()));
+            res = new SapOrderRes(Flag.N.toString(), e.getMessage());
+        }
+
+        // 创建线程任务
+        Callable<SapOrderRes> call = () -> {
+            System.out.println("线程任务开始执行....");
+            SapOrderRes sapOrderRes = doHandleOrderList(orderBaseList, orderProcessList, orderReservedList, orderSalesList);
+            Thread.sleep(5000);
+            return sapOrderRes;
+        };
+
+        // 将任务封装为FutureTask
+        FutureTask<SapOrderRes> task = new FutureTask<>(call);
+        // 开启线程，执行线程任务
+        new Thread(task).start();
+
+        // 这里是在线程启动之后，线程结果返回之前
+        System.out.println("这里可以为所欲为....");
+        return res;
+//        try {
+//            SapOrderRes sapOrderRes = task.get();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return res;
+    }
+
+    public SapOrderRes doHandleOrderList(List<SapOrderBase> orderBaseList,List<SapOrderProcess> orderProcessList,List<SapOrderReserved> orderReservedList,List<SapOrderSales> orderSalesList){
         String message = "";
         TRfcLog tLog = new TRfcLog();
         try {
