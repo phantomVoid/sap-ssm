@@ -1512,6 +1512,66 @@ public class TPmProjectReportExample {
             addCriterion("BASE_NUM not between", value1, value2, "BASE_NUM");
             return (Criteria) this;
         }
+
+        public Criteria andSYNC_FLAGIsNull() {
+            addCriterion("SYNC_FLAG is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSYNC_FLAGIsNotNull() {
+            addCriterion("SYNC_FLAG is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSYNC_FLAGEqualTo(BigDecimal value) {
+            addCriterion("SYNC_FLAG =", value, "SYNC_FLAG");
+            return (Criteria) this;
+        }
+
+        public Criteria andSYNC_FLAGNotEqualTo(BigDecimal value) {
+            addCriterion("SYNC_FLAG <>", value, "SYNC_FLAG");
+            return (Criteria) this;
+        }
+
+        public Criteria andSYNC_FLAGGreaterThan(BigDecimal value) {
+            addCriterion("SYNC_FLAG >", value, "SYNC_FLAG");
+            return (Criteria) this;
+        }
+
+        public Criteria andSYNC_FLAGGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("SYNC_FLAG >=", value, "SYNC_FLAG");
+            return (Criteria) this;
+        }
+
+        public Criteria andSYNC_FLAGLessThan(BigDecimal value) {
+            addCriterion("SYNC_FLAG <", value, "SYNC_FLAG");
+            return (Criteria) this;
+        }
+
+        public Criteria andSYNC_FLAGLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("SYNC_FLAG <=", value, "SYNC_FLAG");
+            return (Criteria) this;
+        }
+
+        public Criteria andSYNC_FLAGIn(List<BigDecimal> values) {
+            addCriterion("SYNC_FLAG in", values, "SYNC_FLAG");
+            return (Criteria) this;
+        }
+
+        public Criteria andSYNC_FLAGNotIn(List<BigDecimal> values) {
+            addCriterion("SYNC_FLAG not in", values, "SYNC_FLAG");
+            return (Criteria) this;
+        }
+
+        public Criteria andSYNC_FLAGBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("SYNC_FLAG between", value1, value2, "SYNC_FLAG");
+            return (Criteria) this;
+        }
+
+        public Criteria andSYNC_FLAGNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("SYNC_FLAG not between", value1, value2, "SYNC_FLAG");
+            return (Criteria) this;
+        }
     }
 
     /**

@@ -76,7 +76,7 @@
     </bean>
 
     <import resource="classpath:spring-cxf.xml"/>
-    <import resource="classpath:applicationContext-quartz.xml"/>
+    <!--<import resource="classpath:applicationContext-quartz.xml"/>-->
 
     <!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

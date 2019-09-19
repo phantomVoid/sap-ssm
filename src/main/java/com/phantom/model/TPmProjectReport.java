@@ -51,6 +51,8 @@ public class TPmProjectReport implements Serializable {
 
     private BigDecimal BASE_NUM;
 
+    private BigDecimal SYNC_FLAG;
+
     private static final long serialVersionUID = 1L;
 
     public String getID() {
@@ -221,6 +223,14 @@ public class TPmProjectReport implements Serializable {
         this.BASE_NUM = BASE_NUM;
     }
 
+    public BigDecimal getSYNC_FLAG() {
+        return SYNC_FLAG;
+    }
+
+    public void setSYNC_FLAG(BigDecimal SYNC_FLAG) {
+        this.SYNC_FLAG = SYNC_FLAG;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -253,7 +263,8 @@ public class TPmProjectReport implements Serializable {
             && (this.getREVERSE_FLAG() == null ? other.getREVERSE_FLAG() == null : this.getREVERSE_FLAG().equals(other.getREVERSE_FLAG()))
             && (this.getSFLAG() == null ? other.getSFLAG() == null : this.getSFLAG().equals(other.getSFLAG()))
             && (this.getMESSAGE() == null ? other.getMESSAGE() == null : this.getMESSAGE().equals(other.getMESSAGE()))
-            && (this.getBASE_NUM() == null ? other.getBASE_NUM() == null : this.getBASE_NUM().equals(other.getBASE_NUM()));
+            && (this.getBASE_NUM() == null ? other.getBASE_NUM() == null : this.getBASE_NUM().equals(other.getBASE_NUM()))
+            && (this.getSYNC_FLAG() == null ? other.getSYNC_FLAG() == null : this.getSYNC_FLAG().equals(other.getSYNC_FLAG()));
     }
 
     @Override
@@ -281,6 +292,7 @@ public class TPmProjectReport implements Serializable {
         result = prime * result + ((getSFLAG() == null) ? 0 : getSFLAG().hashCode());
         result = prime * result + ((getMESSAGE() == null) ? 0 : getMESSAGE().hashCode());
         result = prime * result + ((getBASE_NUM() == null) ? 0 : getBASE_NUM().hashCode());
+        result = prime * result + ((getSYNC_FLAG() == null) ? 0 : getSYNC_FLAG().hashCode());
         return result;
     }
 
@@ -311,6 +323,7 @@ public class TPmProjectReport implements Serializable {
         sb.append(", SFLAG=").append(SFLAG);
         sb.append(", MESSAGE=").append(MESSAGE);
         sb.append(", BASE_NUM=").append(BASE_NUM);
+        sb.append(", SYNC_FLAG=").append(SYNC_FLAG);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

@@ -1,466 +1,481 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.phantom.dao.TPmProjectReportDao">
-    <resultMap id="BaseResultMap" type="com.phantom.model.TPmProjectReport">
-        <id column="ID" jdbcType="VARCHAR" property="ID"/>
-        <result column="DEPT_ID" jdbcType="VARCHAR" property="DEPT_ID"/>
-        <result column="CREATE_USER" jdbcType="VARCHAR" property="CREATE_USER"/>
-        <result column="CREATE_TIME" jdbcType="DATE" property="CREATE_TIME"/>
-        <result column="EDIT_USER" jdbcType="VARCHAR" property="EDIT_USER"/>
-        <result column="EDIT_TIME" jdbcType="DATE" property="EDIT_TIME"/>
-        <result column="DATA_AUTH" jdbcType="VARCHAR" property="DATA_AUTH"/>
-        <result column="PROJECT_ID" jdbcType="VARCHAR" property="PROJECT_ID"/>
-        <result column="REP_NUM" jdbcType="DECIMAL" property="REP_NUM"/>
-        <result column="PROJECT_UNIT" jdbcType="VARCHAR" property="PROJECT_UNIT"/>
-        <result column="PREPARE_TIME" jdbcType="DECIMAL" property="PREPARE_TIME"/>
-        <result column="MEASURE_UNIT1" jdbcType="VARCHAR" property="MEASURE_UNIT1"/>
-        <result column="MACHINE_TIME" jdbcType="DECIMAL" property="MACHINE_TIME"/>
-        <result column="MEASURE_UNIT2" jdbcType="VARCHAR" property="MEASURE_UNIT2"/>
-        <result column="PEOPLE_TIME" jdbcType="DECIMAL" property="PEOPLE_TIME"/>
-        <result column="MEASURE_TIME3" jdbcType="VARCHAR" property="MEASURE_TIME3"/>
-        <result column="FINISH_DATE" jdbcType="DATE" property="FINISH_DATE"/>
-        <result column="REVERSE_FLAG" jdbcType="DECIMAL" property="REVERSE_FLAG"/>
-        <result column="SFLAG" jdbcType="VARCHAR" property="SFLAG"/>
-        <result column="MESSAGE" jdbcType="VARCHAR" property="MESSAGE"/>
-        <result column="BASE_NUM" jdbcType="DECIMAL" property="BASE_NUM"/>
-    </resultMap>
-    <sql id="Example_Where_Clause">
-        <where>
-            <foreach collection="oredCriteria" item="criteria" separator="or">
-                <if test="criteria.valid">
-                    <trim prefix="(" prefixOverrides="and" suffix=")">
-                        <foreach collection="criteria.criteria" item="criterion">
-                            <choose>
-                                <when test="criterion.noValue">
-                                    and ${criterion.condition}
-                                </when>
-                                <when test="criterion.singleValue">
-                                    and ${criterion.condition} #{criterion.value}
-                                </when>
-                                <when test="criterion.betweenValue">
-                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                                </when>
-                                <when test="criterion.listValue">
-                                    and ${criterion.condition}
-                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
-                                             separator=",">
-                                        #{listItem}
-                                    </foreach>
-                                </when>
-                            </choose>
-                        </foreach>
-                    </trim>
-                </if>
+  <resultMap id="BaseResultMap" type="com.phantom.model.TPmProjectReport">
+    <id column="ID" jdbcType="VARCHAR" property="ID" />
+    <result column="DEPT_ID" jdbcType="VARCHAR" property="DEPT_ID" />
+    <result column="CREATE_USER" jdbcType="VARCHAR" property="CREATE_USER" />
+    <result column="CREATE_TIME" jdbcType="DATE" property="CREATE_TIME" />
+    <result column="EDIT_USER" jdbcType="VARCHAR" property="EDIT_USER" />
+    <result column="EDIT_TIME" jdbcType="DATE" property="EDIT_TIME" />
+    <result column="DATA_AUTH" jdbcType="VARCHAR" property="DATA_AUTH" />
+    <result column="PROJECT_ID" jdbcType="VARCHAR" property="PROJECT_ID" />
+    <result column="REP_NUM" jdbcType="DECIMAL" property="REP_NUM" />
+    <result column="PROJECT_UNIT" jdbcType="VARCHAR" property="PROJECT_UNIT" />
+    <result column="PREPARE_TIME" jdbcType="DECIMAL" property="PREPARE_TIME" />
+    <result column="MEASURE_UNIT1" jdbcType="VARCHAR" property="MEASURE_UNIT1" />
+    <result column="MACHINE_TIME" jdbcType="DECIMAL" property="MACHINE_TIME" />
+    <result column="MEASURE_UNIT2" jdbcType="VARCHAR" property="MEASURE_UNIT2" />
+    <result column="PEOPLE_TIME" jdbcType="DECIMAL" property="PEOPLE_TIME" />
+    <result column="MEASURE_TIME3" jdbcType="VARCHAR" property="MEASURE_TIME3" />
+    <result column="FINISH_DATE" jdbcType="DATE" property="FINISH_DATE" />
+    <result column="REVERSE_FLAG" jdbcType="DECIMAL" property="REVERSE_FLAG" />
+    <result column="SFLAG" jdbcType="VARCHAR" property="SFLAG" />
+    <result column="MESSAGE" jdbcType="VARCHAR" property="MESSAGE" />
+    <result column="BASE_NUM" jdbcType="DECIMAL" property="BASE_NUM" />
+    <result column="SYNC_FLAG" jdbcType="DECIMAL" property="SYNC_FLAG" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
             </foreach>
-        </where>
-    </sql>
-    <sql id="Update_By_Example_Where_Clause">
-        <where>
-            <foreach collection="example.oredCriteria" item="criteria" separator="or">
-                <if test="criteria.valid">
-                    <trim prefix="(" prefixOverrides="and" suffix=")">
-                        <foreach collection="criteria.criteria" item="criterion">
-                            <choose>
-                                <when test="criterion.noValue">
-                                    and ${criterion.condition}
-                                </when>
-                                <when test="criterion.singleValue">
-                                    and ${criterion.condition} #{criterion.value}
-                                </when>
-                                <when test="criterion.betweenValue">
-                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                                </when>
-                                <when test="criterion.listValue">
-                                    and ${criterion.condition}
-                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
-                                             separator=",">
-                                        #{listItem}
-                                    </foreach>
-                                </when>
-                            </choose>
-                        </foreach>
-                    </trim>
-                </if>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
             </foreach>
-        </where>
-    </sql>
-    <sql id="Base_Column_List">
-        ID, DEPT_ID, CREATE_USER, CREATE_TIME, EDIT_USER, EDIT_TIME, DATA_AUTH, PROJECT_ID,
-        REP_NUM, PROJECT_UNIT, PREPARE_TIME, MEASURE_UNIT1, MACHINE_TIME, MEASURE_UNIT2,
-        PEOPLE_TIME, MEASURE_TIME3, FINISH_DATE, REVERSE_FLAG, SFLAG, MESSAGE, BASE_NUM
-    </sql>
-    <select id="selectByExample" parameterType="com.phantom.model.TPmProjectReportExample" resultMap="BaseResultMap">
-        select
-        <if test="distinct">
-            distinct
+          </trim>
         </if>
-        <include refid="Base_Column_List"/>
-        from N2ADMIN.T_PM_PROJECT_REPORT
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
-        </if>
-        <if test="orderByClause != null">
-            order by ${orderByClause}
-        </if>
-    </select>
-    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from N2ADMIN.T_PM_PROJECT_REPORT
-        where ID = #{ID,jdbcType=VARCHAR}
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        delete from N2ADMIN.T_PM_PROJECT_REPORT
-        where ID = #{ID,jdbcType=VARCHAR}
-    </delete>
-    <delete id="deleteByExample" parameterType="com.phantom.model.TPmProjectReportExample">
-        delete from N2ADMIN.T_PM_PROJECT_REPORT
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
-        </if>
-    </delete>
-    <insert id="insert" parameterType="com.phantom.model.TPmProjectReport">
-        <!--<selectKey keyProperty="ID" order="BEFORE" resultType="java.lang.String">-->
-        <!--SELECT F_C_GETNEWID_VOID AS ID FROM DUAL-->
-        <!--</selectKey>-->
-        insert into N2ADMIN.T_PM_PROJECT_REPORT (ID,DEPT_ID, CREATE_USER, CREATE_TIME,
-        EDIT_USER, EDIT_TIME, DATA_AUTH,
-        PROJECT_ID, REP_NUM, PROJECT_UNIT,
-        PREPARE_TIME, MEASURE_UNIT1, MACHINE_TIME,
-        MEASURE_UNIT2, PEOPLE_TIME, MEASURE_TIME3,
-        FINISH_DATE, REVERSE_FLAG, SFLAG,
-        MESSAGE, BASE_NUM)
-        values (#{ID,jdbcType=VARCHAR},#{DEPT_ID,jdbcType=VARCHAR}, #{CREATE_USER,jdbcType=VARCHAR},
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, DEPT_ID, CREATE_USER, CREATE_TIME, EDIT_USER, EDIT_TIME, DATA_AUTH, PROJECT_ID, 
+    REP_NUM, PROJECT_UNIT, PREPARE_TIME, MEASURE_UNIT1, MACHINE_TIME, MEASURE_UNIT2, 
+    PEOPLE_TIME, MEASURE_TIME3, FINISH_DATE, REVERSE_FLAG, SFLAG, MESSAGE, BASE_NUM, 
+    SYNC_FLAG
+  </sql>
+  <select id="selectByExample" parameterType="com.phantom.model.TPmProjectReportExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from N2ADMIN.T_PM_PROJECT_REPORT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from N2ADMIN.T_PM_PROJECT_REPORT
+    where ID = #{ID,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from N2ADMIN.T_PM_PROJECT_REPORT
+    where ID = #{ID,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.phantom.model.TPmProjectReportExample">
+    delete from N2ADMIN.T_PM_PROJECT_REPORT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.phantom.model.TPmProjectReport">
+    insert into N2ADMIN.T_PM_PROJECT_REPORT (ID, DEPT_ID, CREATE_USER, 
+      CREATE_TIME, EDIT_USER, EDIT_TIME, 
+      DATA_AUTH, PROJECT_ID, REP_NUM, 
+      PROJECT_UNIT, PREPARE_TIME, MEASURE_UNIT1, 
+      MACHINE_TIME, MEASURE_UNIT2, PEOPLE_TIME, 
+      MEASURE_TIME3, FINISH_DATE, REVERSE_FLAG, 
+      SFLAG, MESSAGE, BASE_NUM, 
+      SYNC_FLAG)
+    values (#{ID,jdbcType=VARCHAR}, #{DEPT_ID,jdbcType=VARCHAR}, #{CREATE_USER,jdbcType=VARCHAR}, 
+      #{CREATE_TIME,jdbcType=DATE}, #{EDIT_USER,jdbcType=VARCHAR}, #{EDIT_TIME,jdbcType=DATE}, 
+      #{DATA_AUTH,jdbcType=VARCHAR}, #{PROJECT_ID,jdbcType=VARCHAR}, #{REP_NUM,jdbcType=DECIMAL}, 
+      #{PROJECT_UNIT,jdbcType=VARCHAR}, #{PREPARE_TIME,jdbcType=DECIMAL}, #{MEASURE_UNIT1,jdbcType=VARCHAR}, 
+      #{MACHINE_TIME,jdbcType=DECIMAL}, #{MEASURE_UNIT2,jdbcType=VARCHAR}, #{PEOPLE_TIME,jdbcType=DECIMAL}, 
+      #{MEASURE_TIME3,jdbcType=VARCHAR}, #{FINISH_DATE,jdbcType=DATE}, #{REVERSE_FLAG,jdbcType=DECIMAL}, 
+      #{SFLAG,jdbcType=VARCHAR}, #{MESSAGE,jdbcType=VARCHAR}, #{BASE_NUM,jdbcType=DECIMAL}, 
+      #{SYNC_FLAG,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.phantom.model.TPmProjectReport">
+    insert into N2ADMIN.T_PM_PROJECT_REPORT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ID != null">
+        ID,
+      </if>
+      <if test="DEPT_ID != null">
+        DEPT_ID,
+      </if>
+      <if test="CREATE_USER != null">
+        CREATE_USER,
+      </if>
+      <if test="CREATE_TIME != null">
+        CREATE_TIME,
+      </if>
+      <if test="EDIT_USER != null">
+        EDIT_USER,
+      </if>
+      <if test="EDIT_TIME != null">
+        EDIT_TIME,
+      </if>
+      <if test="DATA_AUTH != null">
+        DATA_AUTH,
+      </if>
+      <if test="PROJECT_ID != null">
+        PROJECT_ID,
+      </if>
+      <if test="REP_NUM != null">
+        REP_NUM,
+      </if>
+      <if test="PROJECT_UNIT != null">
+        PROJECT_UNIT,
+      </if>
+      <if test="PREPARE_TIME != null">
+        PREPARE_TIME,
+      </if>
+      <if test="MEASURE_UNIT1 != null">
+        MEASURE_UNIT1,
+      </if>
+      <if test="MACHINE_TIME != null">
+        MACHINE_TIME,
+      </if>
+      <if test="MEASURE_UNIT2 != null">
+        MEASURE_UNIT2,
+      </if>
+      <if test="PEOPLE_TIME != null">
+        PEOPLE_TIME,
+      </if>
+      <if test="MEASURE_TIME3 != null">
+        MEASURE_TIME3,
+      </if>
+      <if test="FINISH_DATE != null">
+        FINISH_DATE,
+      </if>
+      <if test="REVERSE_FLAG != null">
+        REVERSE_FLAG,
+      </if>
+      <if test="SFLAG != null">
+        SFLAG,
+      </if>
+      <if test="MESSAGE != null">
+        MESSAGE,
+      </if>
+      <if test="BASE_NUM != null">
+        BASE_NUM,
+      </if>
+      <if test="SYNC_FLAG != null">
+        SYNC_FLAG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ID != null">
+        #{ID,jdbcType=VARCHAR},
+      </if>
+      <if test="DEPT_ID != null">
+        #{DEPT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="CREATE_USER != null">
+        #{CREATE_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="CREATE_TIME != null">
         #{CREATE_TIME,jdbcType=DATE},
-        #{EDIT_USER,jdbcType=VARCHAR}, #{EDIT_TIME,jdbcType=DATE}, #{DATA_AUTH,jdbcType=VARCHAR},
-        #{PROJECT_ID,jdbcType=VARCHAR}, #{REP_NUM,jdbcType=DECIMAL}, #{PROJECT_UNIT,jdbcType=VARCHAR},
-        #{PREPARE_TIME,jdbcType=DECIMAL}, #{MEASURE_UNIT1,jdbcType=VARCHAR}, #{MACHINE_TIME,jdbcType=DECIMAL},
-        #{MEASURE_UNIT2,jdbcType=VARCHAR}, #{PEOPLE_TIME,jdbcType=DECIMAL}, #{MEASURE_TIME3,jdbcType=VARCHAR},
-        #{FINISH_DATE,jdbcType=DATE}, #{REVERSE_FLAG,jdbcType=DECIMAL}, #{SFLAG,jdbcType=VARCHAR},
-        #{MESSAGE,jdbcType=VARCHAR}, #{BASE_NUM,jdbcType=DECIMAL})
-    </insert>
-    <insert id="insertSelective" parameterType="com.phantom.model.TPmProjectReport">
-        <selectKey keyProperty="ID" order="BEFORE" resultType="java.lang.String">
-            SELECT F_C_GETNEWID_VOID AS ID FROM DUAL
-        </selectKey>
-        insert into N2ADMIN.T_PM_PROJECT_REPORT
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="DEPT_ID != null">
-                DEPT_ID,
-            </if>
-            <if test="CREATE_USER != null">
-                CREATE_USER,
-            </if>
-            <if test="CREATE_TIME != null">
-                CREATE_TIME,
-            </if>
-            <if test="EDIT_USER != null">
-                EDIT_USER,
-            </if>
-            <if test="EDIT_TIME != null">
-                EDIT_TIME,
-            </if>
-            <if test="DATA_AUTH != null">
-                DATA_AUTH,
-            </if>
-            <if test="PROJECT_ID != null">
-                PROJECT_ID,
-            </if>
-            <if test="REP_NUM != null">
-                REP_NUM,
-            </if>
-            <if test="PROJECT_UNIT != null">
-                PROJECT_UNIT,
-            </if>
-            <if test="PREPARE_TIME != null">
-                PREPARE_TIME,
-            </if>
-            <if test="MEASURE_UNIT1 != null">
-                MEASURE_UNIT1,
-            </if>
-            <if test="MACHINE_TIME != null">
-                MACHINE_TIME,
-            </if>
-            <if test="MEASURE_UNIT2 != null">
-                MEASURE_UNIT2,
-            </if>
-            <if test="PEOPLE_TIME != null">
-                PEOPLE_TIME,
-            </if>
-            <if test="MEASURE_TIME3 != null">
-                MEASURE_TIME3,
-            </if>
-            <if test="FINISH_DATE != null">
-                FINISH_DATE,
-            </if>
-            <if test="REVERSE_FLAG != null">
-                REVERSE_FLAG,
-            </if>
-            <if test="SFLAG != null">
-                SFLAG,
-            </if>
-            <if test="MESSAGE != null">
-                MESSAGE,
-            </if>
-            <if test="BASE_NUM != null">
-                BASE_NUM,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="DEPT_ID != null">
-                #{DEPT_ID,jdbcType=VARCHAR},
-            </if>
-            <if test="CREATE_USER != null">
-                #{CREATE_USER,jdbcType=VARCHAR},
-            </if>
-            <if test="CREATE_TIME != null">
-                #{CREATE_TIME,jdbcType=DATE},
-            </if>
-            <if test="EDIT_USER != null">
-                #{EDIT_USER,jdbcType=VARCHAR},
-            </if>
-            <if test="EDIT_TIME != null">
-                #{EDIT_TIME,jdbcType=DATE},
-            </if>
-            <if test="DATA_AUTH != null">
-                #{DATA_AUTH,jdbcType=VARCHAR},
-            </if>
-            <if test="PROJECT_ID != null">
-                #{PROJECT_ID,jdbcType=VARCHAR},
-            </if>
-            <if test="REP_NUM != null">
-                #{REP_NUM,jdbcType=DECIMAL},
-            </if>
-            <if test="PROJECT_UNIT != null">
-                #{PROJECT_UNIT,jdbcType=VARCHAR},
-            </if>
-            <if test="PREPARE_TIME != null">
-                #{PREPARE_TIME,jdbcType=DECIMAL},
-            </if>
-            <if test="MEASURE_UNIT1 != null">
-                #{MEASURE_UNIT1,jdbcType=VARCHAR},
-            </if>
-            <if test="MACHINE_TIME != null">
-                #{MACHINE_TIME,jdbcType=DECIMAL},
-            </if>
-            <if test="MEASURE_UNIT2 != null">
-                #{MEASURE_UNIT2,jdbcType=VARCHAR},
-            </if>
-            <if test="PEOPLE_TIME != null">
-                #{PEOPLE_TIME,jdbcType=DECIMAL},
-            </if>
-            <if test="MEASURE_TIME3 != null">
-                #{MEASURE_TIME3,jdbcType=VARCHAR},
-            </if>
-            <if test="FINISH_DATE != null">
-                #{FINISH_DATE,jdbcType=DATE},
-            </if>
-            <if test="REVERSE_FLAG != null">
-                #{REVERSE_FLAG,jdbcType=DECIMAL},
-            </if>
-            <if test="SFLAG != null">
-                #{SFLAG,jdbcType=VARCHAR},
-            </if>
-            <if test="MESSAGE != null">
-                #{MESSAGE,jdbcType=VARCHAR},
-            </if>
-            <if test="BASE_NUM != null">
-                #{BASE_NUM,jdbcType=DECIMAL},
-            </if>
-        </trim>
-    </insert>
-    <select id="countByExample" parameterType="com.phantom.model.TPmProjectReportExample" resultType="java.lang.Long">
-        select count(*) from N2ADMIN.T_PM_PROJECT_REPORT
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
-        </if>
-    </select>
-    <update id="updateByExampleSelective" parameterType="map">
-        update N2ADMIN.T_PM_PROJECT_REPORT
-        <set>
-            <if test="record.ID != null">
-                ID = #{record.ID,jdbcType=VARCHAR},
-            </if>
-            <if test="record.DEPT_ID != null">
-                DEPT_ID = #{record.DEPT_ID,jdbcType=VARCHAR},
-            </if>
-            <if test="record.CREATE_USER != null">
-                CREATE_USER = #{record.CREATE_USER,jdbcType=VARCHAR},
-            </if>
-            <if test="record.CREATE_TIME != null">
-                CREATE_TIME = #{record.CREATE_TIME,jdbcType=DATE},
-            </if>
-            <if test="record.EDIT_USER != null">
-                EDIT_USER = #{record.EDIT_USER,jdbcType=VARCHAR},
-            </if>
-            <if test="record.EDIT_TIME != null">
-                EDIT_TIME = #{record.EDIT_TIME,jdbcType=DATE},
-            </if>
-            <if test="record.DATA_AUTH != null">
-                DATA_AUTH = #{record.DATA_AUTH,jdbcType=VARCHAR},
-            </if>
-            <if test="record.PROJECT_ID != null">
-                PROJECT_ID = #{record.PROJECT_ID,jdbcType=VARCHAR},
-            </if>
-            <if test="record.REP_NUM != null">
-                REP_NUM = #{record.REP_NUM,jdbcType=DECIMAL},
-            </if>
-            <if test="record.PROJECT_UNIT != null">
-                PROJECT_UNIT = #{record.PROJECT_UNIT,jdbcType=VARCHAR},
-            </if>
-            <if test="record.PREPARE_TIME != null">
-                PREPARE_TIME = #{record.PREPARE_TIME,jdbcType=DECIMAL},
-            </if>
-            <if test="record.MEASURE_UNIT1 != null">
-                MEASURE_UNIT1 = #{record.MEASURE_UNIT1,jdbcType=VARCHAR},
-            </if>
-            <if test="record.MACHINE_TIME != null">
-                MACHINE_TIME = #{record.MACHINE_TIME,jdbcType=DECIMAL},
-            </if>
-            <if test="record.MEASURE_UNIT2 != null">
-                MEASURE_UNIT2 = #{record.MEASURE_UNIT2,jdbcType=VARCHAR},
-            </if>
-            <if test="record.PEOPLE_TIME != null">
-                PEOPLE_TIME = #{record.PEOPLE_TIME,jdbcType=DECIMAL},
-            </if>
-            <if test="record.MEASURE_TIME3 != null">
-                MEASURE_TIME3 = #{record.MEASURE_TIME3,jdbcType=VARCHAR},
-            </if>
-            <if test="record.FINISH_DATE != null">
-                FINISH_DATE = #{record.FINISH_DATE,jdbcType=DATE},
-            </if>
-            <if test="record.REVERSE_FLAG != null">
-                REVERSE_FLAG = #{record.REVERSE_FLAG,jdbcType=DECIMAL},
-            </if>
-            <if test="record.SFLAG != null">
-                SFLAG = #{record.SFLAG,jdbcType=VARCHAR},
-            </if>
-            <if test="record.MESSAGE != null">
-                MESSAGE = #{record.MESSAGE,jdbcType=VARCHAR},
-            </if>
-            <if test="record.BASE_NUM != null">
-                BASE_NUM = #{record.BASE_NUM,jdbcType=DECIMAL},
-            </if>
-        </set>
-        <if test="_parameter != null">
-            <include refid="Update_By_Example_Where_Clause"/>
-        </if>
-    </update>
-    <update id="updateByExample" parameterType="map">
-        update N2ADMIN.T_PM_PROJECT_REPORT
-        set ID = #{record.ID,jdbcType=VARCHAR},
+      </if>
+      <if test="EDIT_USER != null">
+        #{EDIT_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="EDIT_TIME != null">
+        #{EDIT_TIME,jdbcType=DATE},
+      </if>
+      <if test="DATA_AUTH != null">
+        #{DATA_AUTH,jdbcType=VARCHAR},
+      </if>
+      <if test="PROJECT_ID != null">
+        #{PROJECT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="REP_NUM != null">
+        #{REP_NUM,jdbcType=DECIMAL},
+      </if>
+      <if test="PROJECT_UNIT != null">
+        #{PROJECT_UNIT,jdbcType=VARCHAR},
+      </if>
+      <if test="PREPARE_TIME != null">
+        #{PREPARE_TIME,jdbcType=DECIMAL},
+      </if>
+      <if test="MEASURE_UNIT1 != null">
+        #{MEASURE_UNIT1,jdbcType=VARCHAR},
+      </if>
+      <if test="MACHINE_TIME != null">
+        #{MACHINE_TIME,jdbcType=DECIMAL},
+      </if>
+      <if test="MEASURE_UNIT2 != null">
+        #{MEASURE_UNIT2,jdbcType=VARCHAR},
+      </if>
+      <if test="PEOPLE_TIME != null">
+        #{PEOPLE_TIME,jdbcType=DECIMAL},
+      </if>
+      <if test="MEASURE_TIME3 != null">
+        #{MEASURE_TIME3,jdbcType=VARCHAR},
+      </if>
+      <if test="FINISH_DATE != null">
+        #{FINISH_DATE,jdbcType=DATE},
+      </if>
+      <if test="REVERSE_FLAG != null">
+        #{REVERSE_FLAG,jdbcType=DECIMAL},
+      </if>
+      <if test="SFLAG != null">
+        #{SFLAG,jdbcType=VARCHAR},
+      </if>
+      <if test="MESSAGE != null">
+        #{MESSAGE,jdbcType=VARCHAR},
+      </if>
+      <if test="BASE_NUM != null">
+        #{BASE_NUM,jdbcType=DECIMAL},
+      </if>
+      <if test="SYNC_FLAG != null">
+        #{SYNC_FLAG,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.phantom.model.TPmProjectReportExample" resultType="java.lang.Long">
+    select count(*) from N2ADMIN.T_PM_PROJECT_REPORT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update N2ADMIN.T_PM_PROJECT_REPORT
+    <set>
+      <if test="record.ID != null">
+        ID = #{record.ID,jdbcType=VARCHAR},
+      </if>
+      <if test="record.DEPT_ID != null">
         DEPT_ID = #{record.DEPT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CREATE_USER != null">
         CREATE_USER = #{record.CREATE_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CREATE_TIME != null">
         CREATE_TIME = #{record.CREATE_TIME,jdbcType=DATE},
+      </if>
+      <if test="record.EDIT_USER != null">
         EDIT_USER = #{record.EDIT_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="record.EDIT_TIME != null">
         EDIT_TIME = #{record.EDIT_TIME,jdbcType=DATE},
+      </if>
+      <if test="record.DATA_AUTH != null">
         DATA_AUTH = #{record.DATA_AUTH,jdbcType=VARCHAR},
+      </if>
+      <if test="record.PROJECT_ID != null">
         PROJECT_ID = #{record.PROJECT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="record.REP_NUM != null">
         REP_NUM = #{record.REP_NUM,jdbcType=DECIMAL},
+      </if>
+      <if test="record.PROJECT_UNIT != null">
         PROJECT_UNIT = #{record.PROJECT_UNIT,jdbcType=VARCHAR},
+      </if>
+      <if test="record.PREPARE_TIME != null">
         PREPARE_TIME = #{record.PREPARE_TIME,jdbcType=DECIMAL},
+      </if>
+      <if test="record.MEASURE_UNIT1 != null">
         MEASURE_UNIT1 = #{record.MEASURE_UNIT1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.MACHINE_TIME != null">
         MACHINE_TIME = #{record.MACHINE_TIME,jdbcType=DECIMAL},
+      </if>
+      <if test="record.MEASURE_UNIT2 != null">
         MEASURE_UNIT2 = #{record.MEASURE_UNIT2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.PEOPLE_TIME != null">
         PEOPLE_TIME = #{record.PEOPLE_TIME,jdbcType=DECIMAL},
+      </if>
+      <if test="record.MEASURE_TIME3 != null">
         MEASURE_TIME3 = #{record.MEASURE_TIME3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.FINISH_DATE != null">
         FINISH_DATE = #{record.FINISH_DATE,jdbcType=DATE},
+      </if>
+      <if test="record.REVERSE_FLAG != null">
         REVERSE_FLAG = #{record.REVERSE_FLAG,jdbcType=DECIMAL},
+      </if>
+      <if test="record.SFLAG != null">
         SFLAG = #{record.SFLAG,jdbcType=VARCHAR},
+      </if>
+      <if test="record.MESSAGE != null">
         MESSAGE = #{record.MESSAGE,jdbcType=VARCHAR},
-        BASE_NUM = #{record.BASE_NUM,jdbcType=DECIMAL}
-        <if test="_parameter != null">
-            <include refid="Update_By_Example_Where_Clause"/>
-        </if>
-    </update>
-    <update id="updateByPrimaryKeySelective" parameterType="com.phantom.model.TPmProjectReport">
-        update N2ADMIN.T_PM_PROJECT_REPORT
-        <set>
-            <if test="DEPT_ID != null">
-                DEPT_ID = #{DEPT_ID,jdbcType=VARCHAR},
-            </if>
-            <if test="CREATE_USER != null">
-                CREATE_USER = #{CREATE_USER,jdbcType=VARCHAR},
-            </if>
-            <if test="CREATE_TIME != null">
-                CREATE_TIME = #{CREATE_TIME,jdbcType=DATE},
-            </if>
-            <if test="EDIT_USER != null">
-                EDIT_USER = #{EDIT_USER,jdbcType=VARCHAR},
-            </if>
-            <if test="EDIT_TIME != null">
-                EDIT_TIME = #{EDIT_TIME,jdbcType=DATE},
-            </if>
-            <if test="DATA_AUTH != null">
-                DATA_AUTH = #{DATA_AUTH,jdbcType=VARCHAR},
-            </if>
-            <if test="PROJECT_ID != null">
-                PROJECT_ID = #{PROJECT_ID,jdbcType=VARCHAR},
-            </if>
-            <if test="REP_NUM != null">
-                REP_NUM = #{REP_NUM,jdbcType=DECIMAL},
-            </if>
-            <if test="PROJECT_UNIT != null">
-                PROJECT_UNIT = #{PROJECT_UNIT,jdbcType=VARCHAR},
-            </if>
-            <if test="PREPARE_TIME != null">
-                PREPARE_TIME = #{PREPARE_TIME,jdbcType=DECIMAL},
-            </if>
-            <if test="MEASURE_UNIT1 != null">
-                MEASURE_UNIT1 = #{MEASURE_UNIT1,jdbcType=VARCHAR},
-            </if>
-            <if test="MACHINE_TIME != null">
-                MACHINE_TIME = #{MACHINE_TIME,jdbcType=DECIMAL},
-            </if>
-            <if test="MEASURE_UNIT2 != null">
-                MEASURE_UNIT2 = #{MEASURE_UNIT2,jdbcType=VARCHAR},
-            </if>
-            <if test="PEOPLE_TIME != null">
-                PEOPLE_TIME = #{PEOPLE_TIME,jdbcType=DECIMAL},
-            </if>
-            <if test="MEASURE_TIME3 != null">
-                MEASURE_TIME3 = #{MEASURE_TIME3,jdbcType=VARCHAR},
-            </if>
-            <if test="FINISH_DATE != null">
-                FINISH_DATE = #{FINISH_DATE,jdbcType=DATE},
-            </if>
-            <if test="REVERSE_FLAG != null">
-                REVERSE_FLAG = #{REVERSE_FLAG,jdbcType=DECIMAL},
-            </if>
-            <if test="SFLAG != null">
-                SFLAG = #{SFLAG,jdbcType=VARCHAR},
-            </if>
-            <if test="MESSAGE != null">
-                MESSAGE = #{MESSAGE,jdbcType=VARCHAR},
-            </if>
-            <if test="BASE_NUM != null">
-                BASE_NUM = #{BASE_NUM,jdbcType=DECIMAL},
-            </if>
-        </set>
-        where ID = #{ID,jdbcType=VARCHAR}
-    </update>
-    <update id="updateByPrimaryKey" parameterType="com.phantom.model.TPmProjectReport">
-        update N2ADMIN.T_PM_PROJECT_REPORT
-        set DEPT_ID       = #{DEPT_ID,jdbcType=VARCHAR},
-            CREATE_USER   = #{CREATE_USER,jdbcType=VARCHAR},
-            CREATE_TIME   = #{CREATE_TIME,jdbcType=DATE},
-            EDIT_USER     = #{EDIT_USER,jdbcType=VARCHAR},
-            EDIT_TIME     = #{EDIT_TIME,jdbcType=DATE},
-            DATA_AUTH     = #{DATA_AUTH,jdbcType=VARCHAR},
-            PROJECT_ID    = #{PROJECT_ID,jdbcType=VARCHAR},
-            REP_NUM       = #{REP_NUM,jdbcType=DECIMAL},
-            PROJECT_UNIT  = #{PROJECT_UNIT,jdbcType=VARCHAR},
-            PREPARE_TIME  = #{PREPARE_TIME,jdbcType=DECIMAL},
-            MEASURE_UNIT1 = #{MEASURE_UNIT1,jdbcType=VARCHAR},
-            MACHINE_TIME  = #{MACHINE_TIME,jdbcType=DECIMAL},
-            MEASURE_UNIT2 = #{MEASURE_UNIT2,jdbcType=VARCHAR},
-            PEOPLE_TIME   = #{PEOPLE_TIME,jdbcType=DECIMAL},
-            MEASURE_TIME3 = #{MEASURE_TIME3,jdbcType=VARCHAR},
-            FINISH_DATE   = #{FINISH_DATE,jdbcType=DATE},
-            REVERSE_FLAG  = #{REVERSE_FLAG,jdbcType=DECIMAL},
-            SFLAG         = #{SFLAG,jdbcType=VARCHAR},
-            MESSAGE       = #{MESSAGE,jdbcType=VARCHAR},
-            BASE_NUM      = #{BASE_NUM,jdbcType=DECIMAL}
-        where ID = #{ID,jdbcType=VARCHAR}
-    </update>
+      </if>
+      <if test="record.BASE_NUM != null">
+        BASE_NUM = #{record.BASE_NUM,jdbcType=DECIMAL},
+      </if>
+      <if test="record.SYNC_FLAG != null">
+        SYNC_FLAG = #{record.SYNC_FLAG,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update N2ADMIN.T_PM_PROJECT_REPORT
+    set ID = #{record.ID,jdbcType=VARCHAR},
+      DEPT_ID = #{record.DEPT_ID,jdbcType=VARCHAR},
+      CREATE_USER = #{record.CREATE_USER,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.CREATE_TIME,jdbcType=DATE},
+      EDIT_USER = #{record.EDIT_USER,jdbcType=VARCHAR},
+      EDIT_TIME = #{record.EDIT_TIME,jdbcType=DATE},
+      DATA_AUTH = #{record.DATA_AUTH,jdbcType=VARCHAR},
+      PROJECT_ID = #{record.PROJECT_ID,jdbcType=VARCHAR},
+      REP_NUM = #{record.REP_NUM,jdbcType=DECIMAL},
+      PROJECT_UNIT = #{record.PROJECT_UNIT,jdbcType=VARCHAR},
+      PREPARE_TIME = #{record.PREPARE_TIME,jdbcType=DECIMAL},
+      MEASURE_UNIT1 = #{record.MEASURE_UNIT1,jdbcType=VARCHAR},
+      MACHINE_TIME = #{record.MACHINE_TIME,jdbcType=DECIMAL},
+      MEASURE_UNIT2 = #{record.MEASURE_UNIT2,jdbcType=VARCHAR},
+      PEOPLE_TIME = #{record.PEOPLE_TIME,jdbcType=DECIMAL},
+      MEASURE_TIME3 = #{record.MEASURE_TIME3,jdbcType=VARCHAR},
+      FINISH_DATE = #{record.FINISH_DATE,jdbcType=DATE},
+      REVERSE_FLAG = #{record.REVERSE_FLAG,jdbcType=DECIMAL},
+      SFLAG = #{record.SFLAG,jdbcType=VARCHAR},
+      MESSAGE = #{record.MESSAGE,jdbcType=VARCHAR},
+      BASE_NUM = #{record.BASE_NUM,jdbcType=DECIMAL},
+      SYNC_FLAG = #{record.SYNC_FLAG,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.phantom.model.TPmProjectReport">
+    update N2ADMIN.T_PM_PROJECT_REPORT
+    <set>
+      <if test="DEPT_ID != null">
+        DEPT_ID = #{DEPT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="CREATE_USER != null">
+        CREATE_USER = #{CREATE_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="CREATE_TIME != null">
+        CREATE_TIME = #{CREATE_TIME,jdbcType=DATE},
+      </if>
+      <if test="EDIT_USER != null">
+        EDIT_USER = #{EDIT_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="EDIT_TIME != null">
+        EDIT_TIME = #{EDIT_TIME,jdbcType=DATE},
+      </if>
+      <if test="DATA_AUTH != null">
+        DATA_AUTH = #{DATA_AUTH,jdbcType=VARCHAR},
+      </if>
+      <if test="PROJECT_ID != null">
+        PROJECT_ID = #{PROJECT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="REP_NUM != null">
+        REP_NUM = #{REP_NUM,jdbcType=DECIMAL},
+      </if>
+      <if test="PROJECT_UNIT != null">
+        PROJECT_UNIT = #{PROJECT_UNIT,jdbcType=VARCHAR},
+      </if>
+      <if test="PREPARE_TIME != null">
+        PREPARE_TIME = #{PREPARE_TIME,jdbcType=DECIMAL},
+      </if>
+      <if test="MEASURE_UNIT1 != null">
+        MEASURE_UNIT1 = #{MEASURE_UNIT1,jdbcType=VARCHAR},
+      </if>
+      <if test="MACHINE_TIME != null">
+        MACHINE_TIME = #{MACHINE_TIME,jdbcType=DECIMAL},
+      </if>
+      <if test="MEASURE_UNIT2 != null">
+        MEASURE_UNIT2 = #{MEASURE_UNIT2,jdbcType=VARCHAR},
+      </if>
+      <if test="PEOPLE_TIME != null">
+        PEOPLE_TIME = #{PEOPLE_TIME,jdbcType=DECIMAL},
+      </if>
+      <if test="MEASURE_TIME3 != null">
+        MEASURE_TIME3 = #{MEASURE_TIME3,jdbcType=VARCHAR},
+      </if>
+      <if test="FINISH_DATE != null">
+        FINISH_DATE = #{FINISH_DATE,jdbcType=DATE},
+      </if>
+      <if test="REVERSE_FLAG != null">
+        REVERSE_FLAG = #{REVERSE_FLAG,jdbcType=DECIMAL},
+      </if>
+      <if test="SFLAG != null">
+        SFLAG = #{SFLAG,jdbcType=VARCHAR},
+      </if>
+      <if test="MESSAGE != null">
+        MESSAGE = #{MESSAGE,jdbcType=VARCHAR},
+      </if>
+      <if test="BASE_NUM != null">
+        BASE_NUM = #{BASE_NUM,jdbcType=DECIMAL},
+      </if>
+      <if test="SYNC_FLAG != null">
+        SYNC_FLAG = #{SYNC_FLAG,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.phantom.model.TPmProjectReport">
+    update N2ADMIN.T_PM_PROJECT_REPORT
+    set DEPT_ID = #{DEPT_ID,jdbcType=VARCHAR},
+      CREATE_USER = #{CREATE_USER,jdbcType=VARCHAR},
+      CREATE_TIME = #{CREATE_TIME,jdbcType=DATE},
+      EDIT_USER = #{EDIT_USER,jdbcType=VARCHAR},
+      EDIT_TIME = #{EDIT_TIME,jdbcType=DATE},
+      DATA_AUTH = #{DATA_AUTH,jdbcType=VARCHAR},
+      PROJECT_ID = #{PROJECT_ID,jdbcType=VARCHAR},
+      REP_NUM = #{REP_NUM,jdbcType=DECIMAL},
+      PROJECT_UNIT = #{PROJECT_UNIT,jdbcType=VARCHAR},
+      PREPARE_TIME = #{PREPARE_TIME,jdbcType=DECIMAL},
+      MEASURE_UNIT1 = #{MEASURE_UNIT1,jdbcType=VARCHAR},
+      MACHINE_TIME = #{MACHINE_TIME,jdbcType=DECIMAL},
+      MEASURE_UNIT2 = #{MEASURE_UNIT2,jdbcType=VARCHAR},
+      PEOPLE_TIME = #{PEOPLE_TIME,jdbcType=DECIMAL},
+      MEASURE_TIME3 = #{MEASURE_TIME3,jdbcType=VARCHAR},
+      FINISH_DATE = #{FINISH_DATE,jdbcType=DATE},
+      REVERSE_FLAG = #{REVERSE_FLAG,jdbcType=DECIMAL},
+      SFLAG = #{SFLAG,jdbcType=VARCHAR},
+      MESSAGE = #{MESSAGE,jdbcType=VARCHAR},
+      BASE_NUM = #{BASE_NUM,jdbcType=DECIMAL},
+      SYNC_FLAG = #{SYNC_FLAG,jdbcType=DECIMAL}
+    where ID = #{ID,jdbcType=VARCHAR}
+  </update>
 </mapper>
