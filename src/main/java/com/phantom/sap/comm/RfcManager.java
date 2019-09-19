@@ -24,19 +24,20 @@ public class RfcManager {
     private static JCoDestination destination;
 
     private static final String ABAP_AS_POOLED = "ABAP_AS_POOL";
-    private static String lang = "zh";
 
     private static ResourceBundle resourceBundle = ResourceBundle.getBundle("sap");
 
+    private static String lang = "zh";
+
     static {
-        String host = resourceBundle.getString("sap-host");
-        String user = resourceBundle.getString("sap-user");
-        String pwd = resourceBundle.getString("sap-pwd");
-        String lang = resourceBundle.getString("sap-lang");
-        String client = resourceBundle.getString("sap-client");
-        String sysnr = resourceBundle.getString("sap-sysnr");
-        String peakLimit = resourceBundle.getString("sap-peakLimit");
-        String poolCapacity = resourceBundle.getString("sap-poolCapacity");
+        String host = resourceBundle.getString("sap.host");
+        String user = resourceBundle.getString("sap.user");
+        String pwd = resourceBundle.getString("sap.pwd");
+        String lang = resourceBundle.getString("sap.lang");
+        String client = resourceBundle.getString("sap.client");
+        String sysnr = resourceBundle.getString("sap.sysnr");
+        String peakLimit = resourceBundle.getString("sap.peakLimit");
+        String poolCapacity = resourceBundle.getString("sap.poolCapacity");
 
         Properties properties = loadProperties(host,user,pwd,lang,client,sysnr,peakLimit,poolCapacity);
         try {

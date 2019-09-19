@@ -14,17 +14,22 @@
     <!--<context:component-scan base-package="com.phantom.sap.*"/>-->
 
     <!-- 第一种方式：加载一个properties文件 -->
+<!--
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="location" value="classpath:jdbc.properties"/>
     </bean>
+-->
 
 
-    <!-- 第二种方式：加载多个properties文件
+    <!-- 第二种方式：加载多个properties文件 -->
     <bean id="configProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
         <property name="locations">
             <list>
                 <value>classpath:jdbc.properties</value>
-                <value>classpath:common.properties</value>
+                <value>classpath:sap.properties</value>
+                <value>classpath:sap-dev.properties</value>
+                <value>classpath:crontab.properties</value>
+                <value>classpath:weChat.properties</value>
             </list>
         </property>
         <property name="fileEncoding" value="UTF-8"/>
@@ -32,7 +37,6 @@
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
         <property name="properties" ref="configProperties"/>
     </bean>
-    -->
 
     <!-- 配置数据源 -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
@@ -72,6 +76,7 @@
     </bean>
 
     <import resource="classpath:spring-cxf.xml"/>
+    <import resource="classpath:applicationContext-quartz.xml"/>
 
     <!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
