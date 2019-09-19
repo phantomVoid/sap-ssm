@@ -1,13 +1,7 @@
 package com.phantom.wss;
 
-import com.phantom.comm.DateUtils;
-import com.phantom.comm.StringUtils;
 import com.phantom.sap.comm.RfcManager;
-import com.phantom.trans.ItemTransEnum;
-import com.phantom.trans.ProjectAccountCheckTransEnum;
 import com.sap.conn.jco.*;
-
-import java.util.Date;
 
 public class CheckDemo {
     public static void main(String[] args) {
