@@ -42,4 +42,8 @@
 
     <!--工时报工-->
     <jaxws:endpoint implementor="com.phantom.wss.impl.ProjectReportIntfImpl" address="/ProjectReportIntfImpl"/>
+
+    <!--账目同步-->
+    <jaxws:endpoint implementor="com.phantom.wss.impl.ProjectAccountCheckIntfImpl" address="/ProjectAccountCheckIntfImpl"/>
+
 </beans>
