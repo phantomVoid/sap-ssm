@@ -74,6 +74,30 @@ public class StringUtils {
         return JSON.toJSONString(idList);
     }
 
+    public static String parseWithZero(int size, String projectId) {
+        String str = null;
+        try {
+            str = String.format("%" + size + "d", Integer.valueOf(projectId)).replace(" ", "0");
+        } catch (NumberFormatException e) {
+            str = addZeroForNum(projectId, size);
+        }
+        return str;
+    }
+
+    public static String addZeroForNum(String str, int strLength) {
+        int strLen = str.length();
+        if (strLen < strLength) {
+            while (strLen < strLength) {
+                StringBuffer sb = new StringBuffer();
+                sb.append("0").append(str);//左补0
+                // sb.append(str).append("0");//右补0
+                str = sb.toString();
+                strLen = str.length();
+            }
+        }
+        return str;
+    }
+
     public static Boolean isEmpty(String str) {
         Boolean ret = true;
         try {
