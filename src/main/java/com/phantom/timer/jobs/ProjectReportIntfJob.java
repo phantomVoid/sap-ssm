@@ -106,6 +106,73 @@ public class ProjectReportIntfJob extends SapCommIntfImpl {
         return result;
     }
 
+    /**
+     * 工单报工接口异常重发
+     * @param logDetailIdsJson
+     * @return
+     */
+    public String ajaxRedoBySapLogDetail(String logDetailIdsJson) {
+        /**
+         * 1-解析获取日志参数logDetailIdsJson
+         */
+        List<String> dataList = JSONObject.parseArray(logDetailIdsJson, String.class);
+        TProjectSapLogDetailExample sapLogDetailExample = new TProjectSapLogDetailExample();
+        TProjectSapLogDetailExample.Criteria sapDetailCri = sapLogDetailExample.createCriteria();
+        sapDetailCri.andIDIn(dataList);
+
+        /**
+         * 2-获取传输异常记录logDetailList
+         */
+        List<TProjectSapLogDetail> logDetailList = sapLogDetailDao.selectByExample(sapLogDetailExample);
+        List<TProjectSapLog> sapLogList = new ArrayList<>();
+        List<TProjectSapLogDetail> resultLogDetailList = new ArrayList<>();
+        List<TPmProjectReport> resultReportList = new ArrayList<>();
+
+        TPmProjectReportExample reportExample = new TPmProjectReportExample();
+        TPmProjectReportExample.Criteria reportCri = reportExample.createCriteria();
+
+        /**
+         * 3-获取工单报工数据reportList
+         */
+        for (TProjectSapLogDetail sapLogDetail : logDetailList) {
+            reportCri.andPROJECT_IDEqualTo(sapLogDetail.getPROJECT_ID());
+            List<TPmProjectReport> reportList = projectReportDao.selectByExample(reportExample);
+
+            for (TPmProjectReport projectReport : reportList) {
+                int indexOf = reportList.indexOf(projectReport);
+                //执行SAP接口
+                TProjectSapLogDetail projectSapLogDetail = doExec(projectReport, funcName, String.valueOf(indexOf), sapLogDetail.getITEM_SN());
+                resultLogDetailList.add(projectSapLogDetail);
+            }
+
+            for (TPmProjectReport projectReport : reportList) {
+                resultReportList.add(projectReport);
+            }
+        }
+
+        /**
+         * 4-更新日志传输明细记录
+         */
+        for (TProjectSapLogDetail sapLogDetail : resultLogDetailList) {
+            sapLogDetail.setEDIT_TIME(DateUtils.getCurDateTime());
+            sapLogDetail.setEDIT_USER(StringUtils.getDefaultUserId());
+            sapDetailCri.andPROJECT_IDEqualTo(sapLogDetail.getPROJECT_ID());
+            sapLogDetailDao.updateByExample(sapLogDetail, sapLogDetailExample);
+        }
+
+        /**
+         * 5-更新工单报工记录
+         */
+        for (TPmProjectReport projectReport : resultReportList) {
+            projectReport.setEDIT_TIME(DateUtils.getCurDateTime());
+            projectReport.setEDIT_USER(StringUtils.getDefaultUserId());
+            reportCri.andPROJECT_IDEqualTo(projectReport.getPROJECT_ID());
+            projectReportDao.updateByExample(projectReport, reportExample);
+        }
+
+        return StringUtils.getJsonStr(resultReportList);
+    }
+
     public String ajaxExecByIds(String idsJson) {
         TPmProjectReportExample reportExample = new TPmProjectReportExample();
         TPmProjectReportExample.Criteria reportCriteria = reportExample.createCriteria();

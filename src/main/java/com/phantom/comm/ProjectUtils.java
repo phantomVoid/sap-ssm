@@ -10,6 +10,7 @@ import com.phantom.pojo.SapOrderProcess;
 import com.phantom.pojo.SapOrderReserved;
 import com.phantom.pojo.SapOrderSales;
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,7 +88,7 @@ public class ProjectUtils {
                 projectBase.setDESTROY_NO(StringUtils.formatZero(orderSales.getKDAUF()));
                 projectBase.setCUST_CODE(orderBase.getNAME1());
                 projectBase.setPRODUCT_COUNT(NumUtils.formatBigDecimal(orderBase.getGAMNG()));
-                projectBase.setFINISH_COUNT(NumUtils.formatBigDecimal(orderBase.getGAMNG()));
+                projectBase.setFINISH_COUNT(BigDecimal.ZERO);
                 projectBase.setPROJECT_TYPE(orderBase.getAUART());
                 projectBase.setPROLEPSIS_START_DATE(DateUtils.formatDate(orderBase.getGSTRP()));
                 projectBase.setPROLEPSIS_END_DATE(DateUtils.formatDate(orderBase.getGLTRP()));

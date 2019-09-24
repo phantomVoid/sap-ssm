@@ -243,7 +243,7 @@ public class ProjectReportIntfImpl extends SapCommIntfImpl implements ProjectRep
      */
     private JCoStructure getInPutParam(JCoFunction function, TPmProjectReport projectReport, String index) {
         JCoStructure inPutParam = function.getImportParameterList().getStructure("W_INPUT");
-//        inPutParam.setValue(ProjectReportTransEnum.zguid.getSapParam(),projectReport.getID());
+        inPutParam.setValue(ProjectReportTransEnum.zguid.getSapParam(),projectReport.getID());
         inPutParam.setValue(ProjectReportTransEnum.curDate.getSapParam(), DateUtils.getCurDateStr());
         inPutParam.setValue(ProjectReportTransEnum.curDateTime.getSapParam(), DateUtils.getCurTimeStr());
         inPutParam.setValue(ProjectReportTransEnum.Index.getSapParam(), index);

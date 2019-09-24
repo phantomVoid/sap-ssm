@@ -18,10 +18,13 @@
     </context-param>
 
     <!-- quartz -->
+<!--
     <context-param>
         <param-name>quartz:config-file</param-name>
         <param-value>scan-quartz.properties</param-value>
     </context-param>
+-->
+
     <context-param>
         <param-name>quartz:shutdown-on-unload</param-name>
         <param-value>true</param-value>
@@ -39,7 +42,6 @@
             org.quartz.ee.servlet.QuartzInitializerListener
         </listener-class>
     </listener>
-
 
     <!-- 编码过滤器 -->
     <filter>
