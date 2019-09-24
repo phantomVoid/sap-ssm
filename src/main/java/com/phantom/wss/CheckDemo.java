@@ -1,6 +1,7 @@
 package com.phantom.wss;
 
 import com.phantom.sap.comm.RfcManager;
+import com.phantom.trans.ProjectAccountCheckTransEnum;
 import com.sap.conn.jco.*;
 
 public class CheckDemo {
@@ -33,16 +34,16 @@ public class CheckDemo {
         for (int i = 0; i < itOut.getNumRows(); i++) {
             itOut.setRow(i);
             for (JCoField fld : itOut) {
+                System.out.print(String.format("%s\t", fld.getName()));
+
                 System.out.print(String.format("%s\t", fld.getValue()));
             }
             System.out.println();
         }
 
-        JCoParameterList outPut = function.getExportParameterList();
         String sflag = exportParameterList.getString("SFLAG");
         String message = exportParameterList.getString("MESSAGE");
         System.out.println("sflag: >>> " + sflag);
         System.out.println("message: >>> " + message);
-        System.out.println("outPut: >>> "+outPut);
     }
 }

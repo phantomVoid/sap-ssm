@@ -1,27 +1,25 @@
 package com.phantom.demo;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-import org.apache.commons.lang3.StringEscapeUtils;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class jsonDemo {
     public static void main(String[] args) {
-        String id = "4548444a5531475242494e4e4a465047";
+        String str = String.format("%12d", Integer.valueOf("400811837")).replace(" ", "0");
+        System.out.println(str);
 
-        String[] ids = id.split(",");
-        List<String> dataIdList = new ArrayList<>();
-        for (String curId : ids) {
-            dataIdList.add(curId);
+        String zeroForNum = addZeroForNum("400811837", 12);
+        System.out.println(zeroForNum);
+    }
+
+    public static String addZeroForNum(String str, int strLength) {
+        int strLen = str.length();
+        if (strLen < strLength) {
+            while (strLen < strLength) {
+                StringBuffer sb = new StringBuffer();
+                sb.append("0").append(str);//左补0
+                // sb.append(str).append("0");//右补0
+                str = sb.toString();
+                strLen = str.length();
+            }
         }
-        String dataIdJson = StringEscapeUtils.unescapeJava(JSON.toJSONString(dataIdList));
-
-        System.out.println(dataIdJson);
-
-        List<String> dataList = JSONObject.parseArray(dataIdJson, String.class);
-        System.out.println(JSON.toJSONString(dataList));
+        return str;
     }
 }
