@@ -71,13 +71,6 @@ public class ProjectAccountCheckIntfImpl extends SapCommIntfImpl implements Proj
             JCoTable itOut = jcoTables.getTable("IT_OUT");
             JCoTable itGltrp = jcoTables.getTable("IT_GLTRP");
 
-//            itGltrp.appendRow();
-//            itGltrp.setValue("SIGN", "I");
-//            itGltrp.setValue("OPTION", "BT");
-//            itGltrp.setValue("LOW", startDay);
-//            itGltrp.setValue("HIGH", endDay);
-//            jcoTables.setValue("IT_GLTRP", itGltrp);
-
             RfcManager.execute(function);
 
             int numRows = itOut.getNumRows();

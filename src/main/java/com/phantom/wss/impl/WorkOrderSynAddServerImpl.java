@@ -84,7 +84,7 @@ public class WorkOrderSynAddServerImpl implements WorkOrderSynAddService {
         try {
             TRfcLog rfcLog = new TRfcLog();
             List<String> logList = new ArrayList<>();
-            List<TPmProjectBase> projectList = ProjectUtils.getProjectBase(orderBaseList, orderProcessList, orderSalesList);
+            List<TPmProjectBase> projectList = ProjectUtils.getProjectBase(orderBaseList, orderProcessList, orderSalesList,projectBaseDao);
 
             if(projectList.size() > 0){
                 res.setSFLAG(Flag.Y.toString());
@@ -143,7 +143,7 @@ public class WorkOrderSynAddServerImpl implements WorkOrderSynAddService {
         try {
             TRfcLog rfcLog = new TRfcLog();
             List<String> logList = new ArrayList<>();
-            List<TPmProjectBase> projectList = ProjectUtils.getProjectBase(orderBaseList, orderProcessList, orderSalesList);
+            List<TPmProjectBase> projectList = ProjectUtils.getProjectBase(orderBaseList, orderProcessList, orderSalesList,projectBaseDao);
             List<TPmProjectDetail> detailList = ProjectUtils.getProjectDetail(orderReservedList, orderProcessList);
             List<TPmProjectReport> reportList = ProjectUtils.syncPorjectReport(orderBaseList, orderProcessList);
 

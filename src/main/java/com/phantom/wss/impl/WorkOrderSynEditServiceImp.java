@@ -6,9 +6,12 @@ import com.phantom.comm.StringUtils;
 import com.phantom.comm.enums.Flag;
 import com.phantom.comm.enums.Message;
 import com.phantom.dao.TPmProjectBaseDao;
+import com.phantom.dao.TPmProjectPostDao;
+import com.phantom.dao.TPmProjectReportDao;
 import com.phantom.dao.TRfcLogDao;
 import com.phantom.model.TPmProjectBase;
 import com.phantom.model.TPmProjectBaseExample;
+import com.phantom.model.TPmProjectReport;
 import com.phantom.model.TRfcLog;
 import com.phantom.pojo.*;
 import com.phantom.wss.WorkOrderSynEditService;
@@ -39,6 +42,12 @@ public class WorkOrderSynEditServiceImp implements WorkOrderSynEditService {
     @Resource
     private TPmProjectBaseDao projectBaseDao;
 
+    @Resource
+    private TPmProjectPostDao projectPostDao;
+
+    @Resource
+    private TPmProjectReportDao projectReportDao;
+
     /**
      * 获取工单信息
      *
@@ -64,7 +73,7 @@ public class WorkOrderSynEditServiceImp implements WorkOrderSynEditService {
         try {
             TRfcLog rfcLog = new TRfcLog();
             List<String> logList = new ArrayList<>();
-            List<TPmProjectBase> projectBaseList = ProjectUtils.getProjectBase(orderBaseList, null, null);
+            List<TPmProjectBase> projectBaseList = ProjectUtils.getProjectBase(orderBaseList, null, null,projectBaseDao);
 
             List<String> projectIdList = new ArrayList<>();
             for (TPmProjectBase projectBase : projectBaseList) {
@@ -80,10 +89,12 @@ public class WorkOrderSynEditServiceImp implements WorkOrderSynEditService {
                 message = "工单修改失败|" + projectBaseList.size();
                 throw new NullPointerException(message);
             }
+
             SapOrderRes res = new SapOrderRes(Flag.Y.toString(), Message.TEST.toString());
             if(logList.size()>0){
                 tLog.setRL_SY_ERROR(StringUtils.getJsonStr(logList));
             }
+
             logDao.insert(tLog);
             return res;
         } catch (Exception e) {

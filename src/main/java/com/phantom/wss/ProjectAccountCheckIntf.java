@@ -17,4 +17,6 @@ import java.util.List;
 public interface ProjectAccountCheckIntf {
 
     String sync(@WebParam(name = "projectIdList") List<SapAccountCheck> projectList, @WebParam(name = "startDay") String startDay, @WebParam(name = "endDay") String endDay);
+
+    String syncByProjectId(@WebParam(name = "projectId", partName = "projectId") String projectId);
 }

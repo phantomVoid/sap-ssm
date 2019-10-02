@@ -9,7 +9,6 @@ import com.phantom.pojo.SapOrderBase;
 import com.phantom.pojo.SapOrderProcess;
 import com.phantom.pojo.SapOrderReserved;
 import com.phantom.pojo.SapOrderSales;
-import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,9 +21,6 @@ import java.util.List;
  * @email:phantomsaber@foxmail.com
  **/
 public class ProjectUtils {
-
-    @Resource
-    TPmProjectBaseDao projectBaseDao;
 
     public static String pack = "5";
     public static String manufacture = "3";
@@ -57,7 +53,8 @@ public class ProjectUtils {
      */
     public static List<TPmProjectBase> getProjectBase(List<SapOrderBase> orderBaseList,
                                                       List<SapOrderProcess> orderProcessList,
-                                                      List<SapOrderSales> orderSalesList) {
+                                                      List<SapOrderSales> orderSalesList,
+                                                      TPmProjectBaseDao projectBaseDao) {
         List<TPmProjectBase> projectBaseList = new ArrayList<>();
         try {
             for (SapOrderBase orderBase : orderBaseList) {
@@ -79,67 +76,94 @@ public class ProjectUtils {
                     orderSales = new SapOrderSales();
                 }
 
-                TPmProjectBase projectBase = new TPmProjectBase();
-                projectBase.setID(StringUtils.getUUID());
+                String projectId = StringUtils.formatZero(orderBase.getAUFNR());
+                TPmProjectBaseExample projectBaseExp = new TPmProjectBaseExample();
+                TPmProjectBaseExample.Criteria baseExpCriteria = projectBaseExp.createCriteria();
+                baseExpCriteria.andPROJECT_IDEqualTo(projectId);
 
-                /*-- version:2019/8/11 17:13 | desc:接收参数 --*/
-                projectBase.setPROJECT_ID(StringUtils.formatZero(orderBase.getAUFNR()));
-                projectBase.setPRODUCT_MATERIAL(StringUtils.formatZero(orderBase.getPLNBEZ()));
-                projectBase.setDESTROY_NO(StringUtils.formatZero(orderSales.getKDAUF()));
-                projectBase.setCUST_CODE(orderBase.getNAME1());
-                projectBase.setPRODUCT_COUNT(NumUtils.formatBigDecimal(orderBase.getGAMNG()));
-                projectBase.setFINISH_COUNT(BigDecimal.ZERO);
-                projectBase.setPROJECT_TYPE(orderBase.getAUART());
-                projectBase.setPROLEPSIS_START_DATE(DateUtils.formatDate(orderBase.getGSTRP()));
-                projectBase.setPROLEPSIS_END_DATE(DateUtils.formatDate(orderBase.getGLTRP()));
-                projectBase.setTPPB_PLAN_DELIVERY_DATE(DateUtils.formatDate(orderSales.getKDAUF()));
-                projectBase.setDESTROY_NO(StringUtils.formatZero(orderSales.getKDAUF()));
-                projectBase.setPM_MEMO(StringUtils.formatZero(orderBase.getZTEXT()));
-                projectBase.setPRODUCT_LINE(orderProcess.getARBPL());
-                projectBase.setPROJECT_ERPTYPE(orderBase.getAUART());
-                projectBase.setLOT_NUMBER(orderBase.getCHARG());
+                List<TPmProjectBase> baseList = projectBaseDao.selectByExample(projectBaseExp);
+                if(baseList.size()>0){
+                    for (TPmProjectBase projectBase : baseList) {
+                        projectBase.setPRODUCT_COUNT(NumUtils.formatBigDecimal(orderBase.getGAMNG()));
+                        projectBase.setPROJECT_TYPE(orderBase.getAUART());
+                        projectBase.setTPPB_PLAN_DELIVERY_DATE(DateUtils.formatDate(orderSales.getKDAUF()));
+                        projectBase.setDESTROY_NO(StringUtils.formatZero(orderSales.getKDAUF()));
+                        projectBase.setPM_MEMO(StringUtils.formatZero(orderBase.getZTEXT()));
+                        projectBase.setPRODUCT_LINE(orderProcess.getARBPL());
+                        projectBase.setPROJECT_ERPTYPE(orderBase.getAUART());
+                        projectBase.setPROJECT_SORT(NumUtils.formatBigDecimal(ProjectUtils.getProjectSort(StringUtils.formatZero(orderBase.getPLNBEZ()))));
+                        projectBase.setWARE_HOUSE(StringUtils.formatEmpty(orderBase.getLGORT()));
+                        projectBase.setBASE_UNIT(StringUtils.formatEmpty(orderBase.getGMEIN()));
+                        projectBase.setLOT_NUMBER(orderBase.getCHARG());
+                        projectBase.setPROLEPSIS_START_DATE(DateUtils.formatDate(orderBase.getGSTRP()));
+                        projectBase.setPROLEPSIS_END_DATE(DateUtils.formatDate(orderBase.getGLTRP()));
+                        projectBase.setEDIT_USER(StringUtils.getDefaultUserId());
+                        projectBase.setEDIT_TIME(DateUtils.getCurDateTime());
+                        projectBaseList.add(projectBase);
+                    }
+                }else{
+                    TPmProjectBase projectBase = new TPmProjectBase();
+                    projectBase.setID(StringUtils.getUUID());
 
-                projectBase.setPROJECT_SORT(NumUtils.formatBigDecimal(ProjectUtils.getProjectSort(StringUtils.formatZero(orderBase.getPLNBEZ()))));
+                    /*-- version:2019/8/11 17:13 | desc:接收参数 --*/
+                    projectBase.setPROJECT_ID(StringUtils.formatZero(orderBase.getAUFNR()));
+                    projectBase.setPRODUCT_MATERIAL(StringUtils.formatZero(orderBase.getPLNBEZ()));
+                    projectBase.setDESTROY_NO(StringUtils.formatZero(orderSales.getKDAUF()));
+                    projectBase.setCUST_CODE(orderBase.getNAME1());
+                    projectBase.setPRODUCT_COUNT(NumUtils.formatBigDecimal(orderBase.getGAMNG()));
+                    projectBase.setFINISH_COUNT(BigDecimal.ZERO);
+                    projectBase.setPROJECT_TYPE(orderBase.getAUART());
+                    projectBase.setPROLEPSIS_START_DATE(DateUtils.formatDate(orderBase.getGSTRP()));
+                    projectBase.setPROLEPSIS_END_DATE(DateUtils.formatDate(orderBase.getGLTRP()));
+                    projectBase.setTPPB_PLAN_DELIVERY_DATE(DateUtils.formatDate(orderSales.getKDAUF()));
+                    projectBase.setDESTROY_NO(StringUtils.formatZero(orderSales.getKDAUF()));
+                    projectBase.setPM_MEMO(StringUtils.formatZero(orderBase.getZTEXT()));
+                    projectBase.setPRODUCT_LINE(orderProcess.getARBPL());
+                    projectBase.setPROJECT_ERPTYPE(orderBase.getAUART());
+                    projectBase.setLOT_NUMBER(orderBase.getCHARG());
 
-                projectBase.setWORK_SPACE(StringUtils.formatEmpty(orderBase.getWERKS()));
-                projectBase.setWARE_HOUSE(StringUtils.formatEmpty(orderBase.getLGORT()));
-                projectBase.setBASE_UNIT(StringUtils.formatEmpty(orderBase.getGMEIN()));
+                    projectBase.setPROJECT_SORT(NumUtils.formatBigDecimal(ProjectUtils.getProjectSort(StringUtils.formatZero(orderBase.getPLNBEZ()))));
 
-                /*-- version:2019/8/11 17:14 | desc:默认值 --*/
-                projectBase.setDEPT_ID(StringUtils.getDefaultDeptId());
-                projectBase.setCREATE_USER(StringUtils.getDefaultUserId());
-                projectBase.setCREATE_TIME(DateUtils.getCurDateTime());
-                projectBase.setACTUAL_START_DATE(DateUtils.formatDate(orderBase.getFTRMI()));
-                projectBase.setDATA_AUTH(StringUtils.getDefaultDataAuth());
+                    projectBase.setWORK_SPACE(StringUtils.formatEmpty(orderBase.getWERKS()));
+                    projectBase.setWARE_HOUSE(StringUtils.formatEmpty(orderBase.getLGORT()));
+                    projectBase.setBASE_UNIT(StringUtils.formatEmpty(orderBase.getGMEIN()));
 
-                /*-- version:2019/8/11 17:14 | desc:空 --*/
-                projectBase.setPRODUCT_NAME("");
-                projectBase.setPRODUCT_STANDARD("");
-                projectBase.setSCRAPPED_QTY(NumUtils.formatBigDecimal("0"));
-                projectBase.setFQC_COUNT(NumUtils.formatBigDecimal("0"));
-                projectBase.setPROJECT_STATUS("0");
-                projectBase.setWORKING_SC(null);
-                projectBase.setEDIT_USER(null);
-                projectBase.setEDIT_TIME(null);
-                projectBase.setACTUAL_END_DATE(null);
-                projectBase.setPM_CLOSE_REASON(null);
-                projectBase.setPROJECT_STEP(null);
-                projectBase.setFAI_NUM(NumUtils.formatBigDecimal("0"));
-                projectBase.setPROJECT_OFONESELF("N");
-                projectBase.setPRODUCT_SN_START("");
-                projectBase.setPRODUCT_SN_END("");
-                projectBase.setPRODUCT_SN_PREFIX("");
-                projectBase.setPRODUCT_PACK_SEQ("");
-                projectBase.setPM_CHANGE_TIMES(NumUtils.formatBigDecimal("0"));
-                projectBase.setPRODUCT_MATERIAL_VER("");
-                projectBase.setPROJECT_FLAG("N");
-                projectBase.setIS_REL("0");
-                projectBase.setREL_NUM(NumUtils.formatBigDecimal("0"));
-                projectBase.setPM_CHECK_STUST(null);
-                projectBase.setCHECK_MON("");
-                projectBase.setCHECK_USER("");
+                    /*-- version:2019/8/11 17:14 | desc:默认值 --*/
+                    projectBase.setDEPT_ID(StringUtils.getDefaultDeptId());
+                    projectBase.setCREATE_USER(StringUtils.getDefaultUserId());
+                    projectBase.setCREATE_TIME(DateUtils.getCurDateTime());
+                    projectBase.setACTUAL_START_DATE(DateUtils.formatDate(orderBase.getFTRMI()));
+                    projectBase.setDATA_AUTH(StringUtils.getDefaultDataAuth());
 
-                projectBaseList.add(projectBase);
+                    /*-- version:2019/8/11 17:14 | desc:空 --*/
+                    projectBase.setPRODUCT_NAME("");
+                    projectBase.setPRODUCT_STANDARD("");
+                    projectBase.setSCRAPPED_QTY(NumUtils.formatBigDecimal("0"));
+                    projectBase.setFQC_COUNT(NumUtils.formatBigDecimal("0"));
+                    projectBase.setPROJECT_STATUS("0");
+                    projectBase.setWORKING_SC(null);
+                    projectBase.setEDIT_USER(null);
+                    projectBase.setEDIT_TIME(null);
+                    projectBase.setACTUAL_END_DATE(null);
+                    projectBase.setPM_CLOSE_REASON(null);
+                    projectBase.setPROJECT_STEP(null);
+                    projectBase.setFAI_NUM(NumUtils.formatBigDecimal("0"));
+                    projectBase.setPROJECT_OFONESELF("N");
+                    projectBase.setPRODUCT_SN_START("");
+                    projectBase.setPRODUCT_SN_END("");
+                    projectBase.setPRODUCT_SN_PREFIX("");
+                    projectBase.setPRODUCT_PACK_SEQ("");
+                    projectBase.setPM_CHANGE_TIMES(NumUtils.formatBigDecimal("0"));
+                    projectBase.setPRODUCT_MATERIAL_VER("");
+                    projectBase.setPROJECT_FLAG("N");
+                    projectBase.setIS_REL("0");
+                    projectBase.setREL_NUM(NumUtils.formatBigDecimal("0"));
+                    projectBase.setPM_CHECK_STUST(null);
+                    projectBase.setCHECK_MON("");
+                    projectBase.setCHECK_USER("");
+
+                    projectBaseList.add(projectBase);
+                }
             }
         } catch (Exception e) {
             throw e;
@@ -280,7 +304,6 @@ public class ProjectUtils {
             TRfcLog tRfcLog = new TRfcLog();
             tRfcLog.setRL_FUNC_NAME(projectReport.getPROJECT_ID());
         }
-
     }
 
 
@@ -301,24 +324,27 @@ public class ProjectUtils {
             String projectStatus = projectBase.getPROJECT_STATUS();
 
             tRfcLog.setRL_FUNC_NAME(projectBase.getPROJECT_ID());
+
+            if (countProjectId > 0) {
+                projectBase.setEDIT_TIME(DateUtils.getCurDate());
+                projectBase.setEDIT_USER(StringUtils.getDefaultUserId());
+                int update = projectBaseDao.updateByExample(projectBase, baseExample);
+                if (update < 1) {
+                    break;
+                }
+            }else {
+                int insert = projectBaseDao.insert(projectBase);
+                if (insert < 1) {
+                    break;
+                }
+            }
+
             if("0".equalsIgnoreCase(projectStatus)){
-                if (countProjectId > 0) {
-                    projectBase.setEDIT_TIME(DateUtils.getCurDate());
-                    projectBase.setEDIT_USER(StringUtils.getDefaultUserId());
-                    int update = projectBaseDao.updateByExample(projectBase, baseExample);
-                    if (update < 1) {
-                        break;
-                    }
-                }else {
-                    int insert = projectBaseDao.insert(projectBase);
-                    if (insert < 1) {
-                        break;
-                    }
+                if(!StringUtils.isEmpty(tRfcLog.getRL_SY_ERROR())){
+                    logList.add(StringUtils.getJsonStr(tRfcLog));
                 }
             }else{
-                tRfcLog.setRL_SY_ERROR("工单:"+projectBase.getPROJECT_ID()+"|状态:"+projectStatus+"|res:禁止更新");
-            }
-            if(!StringUtils.isEmpty(tRfcLog.getRL_SY_ERROR())){
+                tRfcLog.setRL_EXCEPTIONS("工单:"+projectBase.getPROJECT_ID()+"|状态:"+projectStatus+"|res:更新成功,账目数据请在SAP端处理");
                 logList.add(StringUtils.getJsonStr(tRfcLog));
             }
         }
