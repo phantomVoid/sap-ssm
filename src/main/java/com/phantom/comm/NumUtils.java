@@ -20,4 +20,14 @@ public class NumUtils {
             return ret;
         }
     }
+
+    public static BigDecimal setBigDecimal(BigDecimal num){
+        BigDecimal ret = null;
+        try {
+            ret = num;
+        } catch (Exception e) {
+            ret = BigDecimal.ZERO;
+        }
+        return ret;
+    }
 }
