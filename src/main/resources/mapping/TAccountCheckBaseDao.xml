@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.phantom.dao.TAccountCheckBaseDao">
+  <resultMap id="BaseResultMap" type="com.phantom.model.TAccountCheckBase">
+    <id column="ID" jdbcType="VARCHAR" property="ID" />
+    <result column="DEPT_ID" jdbcType="VARCHAR" property="DEPT_ID" />
+    <result column="CREATE_USER" jdbcType="VARCHAR" property="CREATE_USER" />
+    <result column="CREATE_TIME" jdbcType="DATE" property="CREATE_TIME" />
+    <result column="EDIT_USER" jdbcType="VARCHAR" property="EDIT_USER" />
+    <result column="EDIT_TIME" jdbcType="DATE" property="EDIT_TIME" />
+    <result column="DATA_AUTH" jdbcType="VARCHAR" property="DATA_AUTH" />
+    <result column="PROJECT_ID" jdbcType="VARCHAR" property="PROJECT_ID" />
+    <result column="MES_ROWS" jdbcType="DECIMAL" property="MES_ROWS" />
+    <result column="MES_ITEM_SUM" jdbcType="DECIMAL" property="MES_ITEM_SUM" />
+    <result column="MES_FINISH_SUM" jdbcType="DECIMAL" property="MES_FINISH_SUM" />
+    <result column="SAP_ROWS" jdbcType="DECIMAL" property="SAP_ROWS" />
+    <result column="SAP_ITEM_SUM" jdbcType="DECIMAL" property="SAP_ITEM_SUM" />
+    <result column="SAP_FINISH_SUM" jdbcType="DECIMAL" property="SAP_FINISH_SUM" />
+    <result column="CHECK_FLAG" jdbcType="VARCHAR" property="CHECK_FLAG" />
+    <result column="CHECK_DESC" jdbcType="VARCHAR" property="CHECK_DESC" />
+    <result column="MOVE_TYPE" jdbcType="VARCHAR" property="MOVE_TYPE" />
+    <result column="REL_ID" jdbcType="VARCHAR" property="REL_ID" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, DEPT_ID, CREATE_USER, CREATE_TIME, EDIT_USER, EDIT_TIME, DATA_AUTH, PROJECT_ID, 
+    MES_ROWS, MES_ITEM_SUM, MES_FINISH_SUM, SAP_ROWS, SAP_ITEM_SUM, SAP_FINISH_SUM, CHECK_FLAG, 
+    CHECK_DESC, MOVE_TYPE, REL_ID
+  </sql>
+  <select id="selectByExample" parameterType="com.phantom.model.TAccountCheckBaseExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from N2ADMIN.T_ACCOUNT_CHECK_BASE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from N2ADMIN.T_ACCOUNT_CHECK_BASE
+    where ID = #{ID,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from N2ADMIN.T_ACCOUNT_CHECK_BASE
+    where ID = #{ID,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.phantom.model.TAccountCheckBaseExample">
+    delete from N2ADMIN.T_ACCOUNT_CHECK_BASE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.phantom.model.TAccountCheckBase">
+    insert into N2ADMIN.T_ACCOUNT_CHECK_BASE (ID, DEPT_ID, CREATE_USER, 
+      CREATE_TIME, EDIT_USER, EDIT_TIME, 
+      DATA_AUTH, PROJECT_ID, MES_ROWS, 
+      MES_ITEM_SUM, MES_FINISH_SUM, SAP_ROWS, 
+      SAP_ITEM_SUM, SAP_FINISH_SUM, CHECK_FLAG, 
+      CHECK_DESC, MOVE_TYPE, REL_ID
+      )
+    values (#{ID,jdbcType=VARCHAR}, #{DEPT_ID,jdbcType=VARCHAR}, #{CREATE_USER,jdbcType=VARCHAR}, 
+      #{CREATE_TIME,jdbcType=DATE}, #{EDIT_USER,jdbcType=VARCHAR}, #{EDIT_TIME,jdbcType=DATE}, 
+      #{DATA_AUTH,jdbcType=VARCHAR}, #{PROJECT_ID,jdbcType=VARCHAR}, #{MES_ROWS,jdbcType=DECIMAL}, 
+      #{MES_ITEM_SUM,jdbcType=DECIMAL}, #{MES_FINISH_SUM,jdbcType=DECIMAL}, #{SAP_ROWS,jdbcType=DECIMAL}, 
+      #{SAP_ITEM_SUM,jdbcType=DECIMAL}, #{SAP_FINISH_SUM,jdbcType=DECIMAL}, #{CHECK_FLAG,jdbcType=VARCHAR}, 
+      #{CHECK_DESC,jdbcType=VARCHAR}, #{MOVE_TYPE,jdbcType=VARCHAR}, #{REL_ID,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.phantom.model.TAccountCheckBase">
+    insert into N2ADMIN.T_ACCOUNT_CHECK_BASE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ID != null">
+        ID,
+      </if>
+      <if test="DEPT_ID != null">
+        DEPT_ID,
+      </if>
+      <if test="CREATE_USER != null">
+        CREATE_USER,
+      </if>
+      <if test="CREATE_TIME != null">
+        CREATE_TIME,
+      </if>
+      <if test="EDIT_USER != null">
+        EDIT_USER,
+      </if>
+      <if test="EDIT_TIME != null">
+        EDIT_TIME,
+      </if>
+      <if test="DATA_AUTH != null">
+        DATA_AUTH,
+      </if>
+      <if test="PROJECT_ID != null">
+        PROJECT_ID,
+      </if>
+      <if test="MES_ROWS != null">
+        MES_ROWS,
+      </if>
+      <if test="MES_ITEM_SUM != null">
+        MES_ITEM_SUM,
+      </if>
+      <if test="MES_FINISH_SUM != null">
+        MES_FINISH_SUM,
+      </if>
+      <if test="SAP_ROWS != null">
+        SAP_ROWS,
+      </if>
+      <if test="SAP_ITEM_SUM != null">
+        SAP_ITEM_SUM,
+      </if>
+      <if test="SAP_FINISH_SUM != null">
+        SAP_FINISH_SUM,
+      </if>
+      <if test="CHECK_FLAG != null">
+        CHECK_FLAG,
+      </if>
+      <if test="CHECK_DESC != null">
+        CHECK_DESC,
+      </if>
+      <if test="MOVE_TYPE != null">
+        MOVE_TYPE,
+      </if>
+      <if test="REL_ID != null">
+        REL_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ID != null">
+        #{ID,jdbcType=VARCHAR},
+      </if>
+      <if test="DEPT_ID != null">
+        #{DEPT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="CREATE_USER != null">
+        #{CREATE_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="CREATE_TIME != null">
+        #{CREATE_TIME,jdbcType=DATE},
+      </if>
+      <if test="EDIT_USER != null">
+        #{EDIT_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="EDIT_TIME != null">
+        #{EDIT_TIME,jdbcType=DATE},
+      </if>
+      <if test="DATA_AUTH != null">
+        #{DATA_AUTH,jdbcType=VARCHAR},
+      </if>
+      <if test="PROJECT_ID != null">
+        #{PROJECT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="MES_ROWS != null">
+        #{MES_ROWS,jdbcType=DECIMAL},
+      </if>
+      <if test="MES_ITEM_SUM != null">
+        #{MES_ITEM_SUM,jdbcType=DECIMAL},
+      </if>
+      <if test="MES_FINISH_SUM != null">
+        #{MES_FINISH_SUM,jdbcType=DECIMAL},
+      </if>
+      <if test="SAP_ROWS != null">
+        #{SAP_ROWS,jdbcType=DECIMAL},
+      </if>
+      <if test="SAP_ITEM_SUM != null">
+        #{SAP_ITEM_SUM,jdbcType=DECIMAL},
+      </if>
+      <if test="SAP_FINISH_SUM != null">
+        #{SAP_FINISH_SUM,jdbcType=DECIMAL},
+      </if>
+      <if test="CHECK_FLAG != null">
+        #{CHECK_FLAG,jdbcType=VARCHAR},
+      </if>
+      <if test="CHECK_DESC != null">
+        #{CHECK_DESC,jdbcType=VARCHAR},
+      </if>
+      <if test="MOVE_TYPE != null">
+        #{MOVE_TYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="REL_ID != null">
+        #{REL_ID,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.phantom.model.TAccountCheckBaseExample" resultType="java.lang.Long">
+    select count(*) from N2ADMIN.T_ACCOUNT_CHECK_BASE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update N2ADMIN.T_ACCOUNT_CHECK_BASE
+    <set>
+      <if test="record.ID != null">
+        ID = #{record.ID,jdbcType=VARCHAR},
+      </if>
+      <if test="record.DEPT_ID != null">
+        DEPT_ID = #{record.DEPT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CREATE_USER != null">
+        CREATE_USER = #{record.CREATE_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CREATE_TIME != null">
+        CREATE_TIME = #{record.CREATE_TIME,jdbcType=DATE},
+      </if>
+      <if test="record.EDIT_USER != null">
+        EDIT_USER = #{record.EDIT_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="record.EDIT_TIME != null">
+        EDIT_TIME = #{record.EDIT_TIME,jdbcType=DATE},
+      </if>
+      <if test="record.DATA_AUTH != null">
+        DATA_AUTH = #{record.DATA_AUTH,jdbcType=VARCHAR},
+      </if>
+      <if test="record.PROJECT_ID != null">
+        PROJECT_ID = #{record.PROJECT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="record.MES_ROWS != null">
+        MES_ROWS = #{record.MES_ROWS,jdbcType=DECIMAL},
+      </if>
+      <if test="record.MES_ITEM_SUM != null">
+        MES_ITEM_SUM = #{record.MES_ITEM_SUM,jdbcType=DECIMAL},
+      </if>
+      <if test="record.MES_FINISH_SUM != null">
+        MES_FINISH_SUM = #{record.MES_FINISH_SUM,jdbcType=DECIMAL},
+      </if>
+      <if test="record.SAP_ROWS != null">
+        SAP_ROWS = #{record.SAP_ROWS,jdbcType=DECIMAL},
+      </if>
+      <if test="record.SAP_ITEM_SUM != null">
+        SAP_ITEM_SUM = #{record.SAP_ITEM_SUM,jdbcType=DECIMAL},
+      </if>
+      <if test="record.SAP_FINISH_SUM != null">
+        SAP_FINISH_SUM = #{record.SAP_FINISH_SUM,jdbcType=DECIMAL},
+      </if>
+      <if test="record.CHECK_FLAG != null">
+        CHECK_FLAG = #{record.CHECK_FLAG,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CHECK_DESC != null">
+        CHECK_DESC = #{record.CHECK_DESC,jdbcType=VARCHAR},
+      </if>
+      <if test="record.MOVE_TYPE != null">
+        MOVE_TYPE = #{record.MOVE_TYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.REL_ID != null">
+        REL_ID = #{record.REL_ID,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update N2ADMIN.T_ACCOUNT_CHECK_BASE
+    set ID = #{record.ID,jdbcType=VARCHAR},
+      DEPT_ID = #{record.DEPT_ID,jdbcType=VARCHAR},
+      CREATE_USER = #{record.CREATE_USER,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.CREATE_TIME,jdbcType=DATE},
+      EDIT_USER = #{record.EDIT_USER,jdbcType=VARCHAR},
+      EDIT_TIME = #{record.EDIT_TIME,jdbcType=DATE},
+      DATA_AUTH = #{record.DATA_AUTH,jdbcType=VARCHAR},
+      PROJECT_ID = #{record.PROJECT_ID,jdbcType=VARCHAR},
+      MES_ROWS = #{record.MES_ROWS,jdbcType=DECIMAL},
+      MES_ITEM_SUM = #{record.MES_ITEM_SUM,jdbcType=DECIMAL},
+      MES_FINISH_SUM = #{record.MES_FINISH_SUM,jdbcType=DECIMAL},
+      SAP_ROWS = #{record.SAP_ROWS,jdbcType=DECIMAL},
+      SAP_ITEM_SUM = #{record.SAP_ITEM_SUM,jdbcType=DECIMAL},
+      SAP_FINISH_SUM = #{record.SAP_FINISH_SUM,jdbcType=DECIMAL},
+      CHECK_FLAG = #{record.CHECK_FLAG,jdbcType=VARCHAR},
+      CHECK_DESC = #{record.CHECK_DESC,jdbcType=VARCHAR},
+      MOVE_TYPE = #{record.MOVE_TYPE,jdbcType=VARCHAR},
+      REL_ID = #{record.REL_ID,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.phantom.model.TAccountCheckBase">
+    update N2ADMIN.T_ACCOUNT_CHECK_BASE
+    <set>
+      <if test="DEPT_ID != null">
+        DEPT_ID = #{DEPT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="CREATE_USER != null">
+        CREATE_USER = #{CREATE_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="CREATE_TIME != null">
+        CREATE_TIME = #{CREATE_TIME,jdbcType=DATE},
+      </if>
+      <if test="EDIT_USER != null">
+        EDIT_USER = #{EDIT_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="EDIT_TIME != null">
+        EDIT_TIME = #{EDIT_TIME,jdbcType=DATE},
+      </if>
+      <if test="DATA_AUTH != null">
+        DATA_AUTH = #{DATA_AUTH,jdbcType=VARCHAR},
+      </if>
+      <if test="PROJECT_ID != null">
+        PROJECT_ID = #{PROJECT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="MES_ROWS != null">
+        MES_ROWS = #{MES_ROWS,jdbcType=DECIMAL},
+      </if>
+      <if test="MES_ITEM_SUM != null">
+        MES_ITEM_SUM = #{MES_ITEM_SUM,jdbcType=DECIMAL},
+      </if>
+      <if test="MES_FINISH_SUM != null">
+        MES_FINISH_SUM = #{MES_FINISH_SUM,jdbcType=DECIMAL},
+      </if>
+      <if test="SAP_ROWS != null">
+        SAP_ROWS = #{SAP_ROWS,jdbcType=DECIMAL},
+      </if>
+      <if test="SAP_ITEM_SUM != null">
+        SAP_ITEM_SUM = #{SAP_ITEM_SUM,jdbcType=DECIMAL},
+      </if>
+      <if test="SAP_FINISH_SUM != null">
+        SAP_FINISH_SUM = #{SAP_FINISH_SUM,jdbcType=DECIMAL},
+      </if>
+      <if test="CHECK_FLAG != null">
+        CHECK_FLAG = #{CHECK_FLAG,jdbcType=VARCHAR},
+      </if>
+      <if test="CHECK_DESC != null">
+        CHECK_DESC = #{CHECK_DESC,jdbcType=VARCHAR},
+      </if>
+      <if test="MOVE_TYPE != null">
+        MOVE_TYPE = #{MOVE_TYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="REL_ID != null">
+        REL_ID = #{REL_ID,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{ID,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.phantom.model.TAccountCheckBase">
+    update N2ADMIN.T_ACCOUNT_CHECK_BASE
+    set DEPT_ID = #{DEPT_ID,jdbcType=VARCHAR},
+      CREATE_USER = #{CREATE_USER,jdbcType=VARCHAR},
+      CREATE_TIME = #{CREATE_TIME,jdbcType=DATE},
+      EDIT_USER = #{EDIT_USER,jdbcType=VARCHAR},
+      EDIT_TIME = #{EDIT_TIME,jdbcType=DATE},
+      DATA_AUTH = #{DATA_AUTH,jdbcType=VARCHAR},
+      PROJECT_ID = #{PROJECT_ID,jdbcType=VARCHAR},
+      MES_ROWS = #{MES_ROWS,jdbcType=DECIMAL},
+      MES_ITEM_SUM = #{MES_ITEM_SUM,jdbcType=DECIMAL},
+      MES_FINISH_SUM = #{MES_FINISH_SUM,jdbcType=DECIMAL},
+      SAP_ROWS = #{SAP_ROWS,jdbcType=DECIMAL},
+      SAP_ITEM_SUM = #{SAP_ITEM_SUM,jdbcType=DECIMAL},
+      SAP_FINISH_SUM = #{SAP_FINISH_SUM,jdbcType=DECIMAL},
+      CHECK_FLAG = #{CHECK_FLAG,jdbcType=VARCHAR},
+      CHECK_DESC = #{CHECK_DESC,jdbcType=VARCHAR},
+      MOVE_TYPE = #{MOVE_TYPE,jdbcType=VARCHAR},
+      REL_ID = #{REL_ID,jdbcType=VARCHAR}
+    where ID = #{ID,jdbcType=VARCHAR}
+  </update>
+</mapper>

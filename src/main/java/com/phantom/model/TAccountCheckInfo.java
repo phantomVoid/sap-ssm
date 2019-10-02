@@ -51,6 +51,8 @@ public class TAccountCheckInfo implements Serializable {
 
     private BigDecimal CONFIRM_OUTPUT;
 
+    private String REL_ID;
+
     private static final long serialVersionUID = 1L;
 
     public String getID() {
@@ -221,6 +223,14 @@ public class TAccountCheckInfo implements Serializable {
         this.CONFIRM_OUTPUT = CONFIRM_OUTPUT;
     }
 
+    public String getREL_ID() {
+        return REL_ID;
+    }
+
+    public void setREL_ID(String REL_ID) {
+        this.REL_ID = REL_ID;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -253,7 +263,8 @@ public class TAccountCheckInfo implements Serializable {
             && (this.getPROJECT_ID() == null ? other.getPROJECT_ID() == null : this.getPROJECT_ID().equals(other.getPROJECT_ID()))
             && (this.getPOST_DATE() == null ? other.getPOST_DATE() == null : this.getPOST_DATE().equals(other.getPOST_DATE()))
             && (this.getCERT_DATE() == null ? other.getCERT_DATE() == null : this.getCERT_DATE().equals(other.getCERT_DATE()))
-            && (this.getCONFIRM_OUTPUT() == null ? other.getCONFIRM_OUTPUT() == null : this.getCONFIRM_OUTPUT().equals(other.getCONFIRM_OUTPUT()));
+            && (this.getCONFIRM_OUTPUT() == null ? other.getCONFIRM_OUTPUT() == null : this.getCONFIRM_OUTPUT().equals(other.getCONFIRM_OUTPUT()))
+            && (this.getREL_ID() == null ? other.getREL_ID() == null : this.getREL_ID().equals(other.getREL_ID()));
     }
 
     @Override
@@ -281,6 +292,7 @@ public class TAccountCheckInfo implements Serializable {
         result = prime * result + ((getPOST_DATE() == null) ? 0 : getPOST_DATE().hashCode());
         result = prime * result + ((getCERT_DATE() == null) ? 0 : getCERT_DATE().hashCode());
         result = prime * result + ((getCONFIRM_OUTPUT() == null) ? 0 : getCONFIRM_OUTPUT().hashCode());
+        result = prime * result + ((getREL_ID() == null) ? 0 : getREL_ID().hashCode());
         return result;
     }
 
@@ -311,6 +323,7 @@ public class TAccountCheckInfo implements Serializable {
         sb.append(", POST_DATE=").append(POST_DATE);
         sb.append(", CERT_DATE=").append(CERT_DATE);
         sb.append(", CONFIRM_OUTPUT=").append(CONFIRM_OUTPUT);
+        sb.append(", REL_ID=").append(REL_ID);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

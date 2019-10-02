@@ -23,6 +23,7 @@
     <result column="POST_DATE" jdbcType="DATE" property="POST_DATE" />
     <result column="CERT_DATE" jdbcType="DATE" property="CERT_DATE" />
     <result column="CONFIRM_OUTPUT" jdbcType="DECIMAL" property="CONFIRM_OUTPUT" />
+    <result column="REL_ID" jdbcType="VARCHAR" property="REL_ID" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -85,7 +86,7 @@
   <sql id="Base_Column_List">
     ID, DEPT_ID, CREATE_USER, CREATE_TIME, EDIT_USER, EDIT_TIME, DATA_AUTH, CERT_SN, 
     CERT_YEAR, CERT_THING, MOVE_TYPE, ITEM_CODE, WORK_SPACE, WARE_HOUSE, LOT, ITEM_NUM, 
-    BASE_UNIT, PROJECT_ID, POST_DATE, CERT_DATE, CONFIRM_OUTPUT
+    BASE_UNIT, PROJECT_ID, POST_DATE, CERT_DATE, CONFIRM_OUTPUT, REL_ID
   </sql>
   <select id="selectByExample" parameterType="com.phantom.model.TAccountCheckInfoExample" resultMap="BaseResultMap">
     select
@@ -124,16 +125,16 @@
       CERT_THING, MOVE_TYPE, ITEM_CODE, 
       WORK_SPACE, WARE_HOUSE, LOT, 
       ITEM_NUM, BASE_UNIT, PROJECT_ID, 
-      POST_DATE, CERT_DATE, CONFIRM_OUTPUT
-      )
+      POST_DATE, CERT_DATE, CONFIRM_OUTPUT, 
+      REL_ID)
     values (#{ID,jdbcType=VARCHAR}, #{DEPT_ID,jdbcType=VARCHAR}, #{CREATE_USER,jdbcType=VARCHAR}, 
       #{CREATE_TIME,jdbcType=DATE}, #{EDIT_USER,jdbcType=VARCHAR}, #{EDIT_TIME,jdbcType=DATE}, 
       #{DATA_AUTH,jdbcType=VARCHAR}, #{CERT_SN,jdbcType=VARCHAR}, #{CERT_YEAR,jdbcType=VARCHAR}, 
       #{CERT_THING,jdbcType=VARCHAR}, #{MOVE_TYPE,jdbcType=VARCHAR}, #{ITEM_CODE,jdbcType=VARCHAR}, 
       #{WORK_SPACE,jdbcType=VARCHAR}, #{WARE_HOUSE,jdbcType=VARCHAR}, #{LOT,jdbcType=VARCHAR}, 
       #{ITEM_NUM,jdbcType=DECIMAL}, #{BASE_UNIT,jdbcType=VARCHAR}, #{PROJECT_ID,jdbcType=VARCHAR}, 
-      #{POST_DATE,jdbcType=DATE}, #{CERT_DATE,jdbcType=DATE}, #{CONFIRM_OUTPUT,jdbcType=DECIMAL}
-      )
+      #{POST_DATE,jdbcType=DATE}, #{CERT_DATE,jdbcType=DATE}, #{CONFIRM_OUTPUT,jdbcType=DECIMAL}, 
+      #{REL_ID,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.phantom.model.TAccountCheckInfo">
     insert into N2ADMIN.T_ACCOUNT_CHECK_INFO
@@ -201,6 +202,9 @@
       <if test="CONFIRM_OUTPUT != null">
         CONFIRM_OUTPUT,
       </if>
+      <if test="REL_ID != null">
+        REL_ID,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="ID != null">
@@ -265,6 +269,9 @@
       </if>
       <if test="CONFIRM_OUTPUT != null">
         #{CONFIRM_OUTPUT,jdbcType=DECIMAL},
+      </if>
+      <if test="REL_ID != null">
+        #{REL_ID,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -340,6 +347,9 @@
       <if test="record.CONFIRM_OUTPUT != null">
         CONFIRM_OUTPUT = #{record.CONFIRM_OUTPUT,jdbcType=DECIMAL},
       </if>
+      <if test="record.REL_ID != null">
+        REL_ID = #{record.REL_ID,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -367,7 +377,8 @@
       PROJECT_ID = #{record.PROJECT_ID,jdbcType=VARCHAR},
       POST_DATE = #{record.POST_DATE,jdbcType=DATE},
       CERT_DATE = #{record.CERT_DATE,jdbcType=DATE},
-      CONFIRM_OUTPUT = #{record.CONFIRM_OUTPUT,jdbcType=DECIMAL}
+      CONFIRM_OUTPUT = #{record.CONFIRM_OUTPUT,jdbcType=DECIMAL},
+      REL_ID = #{record.REL_ID,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -435,6 +446,9 @@
       <if test="CONFIRM_OUTPUT != null">
         CONFIRM_OUTPUT = #{CONFIRM_OUTPUT,jdbcType=DECIMAL},
       </if>
+      <if test="REL_ID != null">
+        REL_ID = #{REL_ID,jdbcType=VARCHAR},
+      </if>
     </set>
     where ID = #{ID,jdbcType=VARCHAR}
   </update>
@@ -459,7 +473,8 @@
       PROJECT_ID = #{PROJECT_ID,jdbcType=VARCHAR},
       POST_DATE = #{POST_DATE,jdbcType=DATE},
       CERT_DATE = #{CERT_DATE,jdbcType=DATE},
-      CONFIRM_OUTPUT = #{CONFIRM_OUTPUT,jdbcType=DECIMAL}
+      CONFIRM_OUTPUT = #{CONFIRM_OUTPUT,jdbcType=DECIMAL},
+      REL_ID = #{REL_ID,jdbcType=VARCHAR}
     where ID = #{ID,jdbcType=VARCHAR}
   </update>
 </mapper>
