@@ -36,6 +36,16 @@ public class StringUtils {
         return "FA174AFF136D496A87B65443D22357E3";
     }
 
+    public static String getUrlString(String str){
+        String res = null;
+        try {
+            res = new String(str.getBytes("ISO-8859-1"),"UTF-8");
+        } catch (Exception e) {
+            res = str;
+        }
+        return res;
+    }
+
     public static String formatZero(String str) {
         String ret = null;
         try {

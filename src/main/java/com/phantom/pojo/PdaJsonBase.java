@@ -1,7 +1,10 @@
 package com.phantom.pojo;
 
+import com.alibaba.fastjson.JSONObject;
+
 /**
  * pda接口封装类
+ *
  * @author:phantomsaber
  * @version:2019/9/30 23:16
  * @email:phantomsaber@foxmail.com
@@ -20,15 +23,9 @@ public class PdaJsonBase {
     /**
      * json消息体
      */
-    public String json;
+    public JSONObject json;
 
     public PdaJsonBase() {
-    }
-
-    public PdaJsonBase(String sflag, String message, String json) {
-        this.sflag = sflag;
-        this.message = message;
-        this.json = json;
     }
 
     public String getSflag() {
@@ -47,11 +44,11 @@ public class PdaJsonBase {
         this.message = message;
     }
 
-    public String getJson() {
+    public JSONObject getJson() {
         return json;
     }
 
-    public void setJson(String json) {
+    public void setJson(JSONObject json) {
         this.json = json;
     }
 }
