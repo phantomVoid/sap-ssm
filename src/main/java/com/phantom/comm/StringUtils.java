@@ -1,6 +1,9 @@
 package com.phantom.comm;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.phantom.comm.enums.ListFlag;
+import com.phantom.model.TCoItem;
 import org.apache.commons.lang3.StringEscapeUtils;
 
 import java.util.ArrayList;
@@ -15,6 +18,7 @@ import java.util.UUID;
  * @email:phantomsaber@foxmail.com
  **/
 public class StringUtils {
+
     /**
      * 获取32位uuid
      *
@@ -73,7 +77,7 @@ public class StringUtils {
     }
 
     public static String getJsonStr(Object obj) {
-        String unescapeJava = StringEscapeUtils.unescapeJava(JSON.toJSONString(obj));
+        String unescapeJava = StringEscapeUtils.unescapeJava(JSON.toJSONString(obj,SerializerFeature.DisableCircularReferenceDetect));
 //        unescapeJava = unescapeJava.replace("[\"", "[").replace("\"]", "]");
         return unescapeJava;
     }

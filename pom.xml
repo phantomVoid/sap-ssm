@@ -32,8 +32,9 @@
     <log4j.version>1.2.17</log4j.version>
 
     <!--cxf 版本-->
-    <!-- <cxf.version>3.0.4</cxf.version>-->
-    <cxf.version>2.7.7</cxf.version>
+    <cxf.version>3.1.0</cxf.version>
+    <restCxf.version>3.1.0</restCxf.version>
+
   </properties>
   <dependencies>
     <dependency>
@@ -229,22 +230,50 @@
       <version>7.0</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/org.apache.cxf/cxf-rt-frontend-jaxws -->
-    <dependency>
-      <groupId>org.apache.cxf</groupId>
-      <artifactId>cxf-rt-frontend-jaxws</artifactId>
-      <version>3.1.6</version>
-    </dependency>
     <!-- https://mvnrepository.com/artifact/org.apache.cxf/cxf-core -->
     <dependency>
       <groupId>org.apache.cxf</groupId>
       <artifactId>cxf-core</artifactId>
       <version>3.1.6</version>
     </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.apache.cxf/cxf-rt-frontend-jaxws -->
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-frontend-jaxws</artifactId>
+      <version>3.1.6</version>
+    </dependency>
+
     <!-- https://mvnrepository.com/artifact/org.apache.cxf/cxf-rt-transports-http -->
     <dependency>
       <groupId>org.apache.cxf</groupId>
       <artifactId>cxf-rt-transports-http</artifactId>
+      <version>3.1.6</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-transports-http-jetty</artifactId>
+      <version>3.1.6</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.apache.cxf/cxf-rt-frontend-jaxrs -->
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-frontend-jaxrs</artifactId>
+      <version>3.1.6</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/javax.ws.rs/javax.ws.rs-api -->
+    <dependency>
+      <groupId>javax.ws.rs</groupId>
+      <artifactId>javax.ws.rs-api</artifactId>
+      <version>2.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-rs-client</artifactId>
       <version>3.1.6</version>
     </dependency>
 
@@ -303,7 +332,6 @@
       <artifactId>httpclient</artifactId>
       <version>4.5.3</version>
     </dependency>
-
   </dependencies>
 
   <build>

@@ -6,19 +6,21 @@
        xmlns:jee="http://www.springframework.org/schema/jee"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:jaxws="http://cxf.apache.org/jaxws"
+       xmlns:jaxrs="http://cxf.apache.org/jaxrs"
        xsi:schemaLocation="
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
         http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
-        http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+        http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+        http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd">
 
-    <import resource="classpath*:META-INF/cxf/cxf.xml" />
-    <import resource="classpath*:META-INF/cxf/cxf-extension-soap.xml" />
-    <import resource="classpath*:META-INF/cxf/cxf-servlet.xml" />
-     <!-- 自动扫描webService -->
-    <context:component-scan base-package="com.phantom.wss" />
+    <import resource="classpath*:META-INF/cxf/cxf.xml"/>
+    <import resource="classpath*:META-INF/cxf/cxf-extension-soap.xml"/>
+    <import resource="classpath*:META-INF/cxf/cxf-servlet.xml"/>
+    <!-- 自动扫描webService -->
+    <context:component-scan base-package="com.phantom.wss"/>
 
     <!--物料主数据-->
     <jaxws:endpoint implementor="com.phantom.wss.impl.ItemIntfImpl" address="/ItemIntfImpl"/>
@@ -45,5 +47,21 @@
 
     <!--账目同步-->
     <jaxws:endpoint implementor="com.phantom.wss.impl.ProjectAccountCheckIntfImpl" address="/ProjectAccountCheckIntfImpl"/>
+
+
+    <jaxws:endpoint id="RestFulController" implementor="com.phantom.controller.RestFulController" address="/RestFulController"/>
+
+    <jaxrs:server id="jaxrs" address="/regedit">
+        <jaxrs:serviceBeans>
+            <ref bean="RestFulController"/>
+        </jaxrs:serviceBeans>
+        <jaxrs:extensionMappings>
+            <entry key="json" value="application/json"/>
+            <entry key="xml" value="application/xml"/>
+        </jaxrs:extensionMappings>
+        <jaxrs:languageMappings>
+            <entry key="en" value="en-gb"/>
+        </jaxrs:languageMappings>
+    </jaxrs:server>
 
 </beans>

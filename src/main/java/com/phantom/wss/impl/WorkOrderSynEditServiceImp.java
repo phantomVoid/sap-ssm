@@ -24,6 +24,8 @@ import javax.jws.WebService;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
+
 /**
  * 工单修改同步
  *
@@ -73,24 +75,38 @@ public class WorkOrderSynEditServiceImp implements WorkOrderSynEditService {
         try {
             TRfcLog rfcLog = new TRfcLog();
             List<String> logList = new ArrayList<>();
-            List<TPmProjectBase> projectBaseList = ProjectUtils.getProjectBase(orderBaseList, null, null,projectBaseDao);
+            List<TPmProjectBase> projectBaseList = ProjectUtils.getProjectBaseEdit(orderBaseList, projectBaseDao);
+
+            List<String> orderIdList = new ArrayList<>();
+
+            for (SapOrderBase orderBase : orderBaseList) {
+                orderIdList.add(StringUtils.formatZero(orderBase.getAUFNR()));
+            }
 
             List<String> projectIdList = new ArrayList<>();
             for (TPmProjectBase projectBase : projectBaseList) {
                 projectIdList.add(projectBase.getPROJECT_ID());
             }
 
+            List<String> diffList = new ArrayList<>();
+
             if (projectBaseList.size() > 0) {
-                List<String> projectBaseLogs = ProjectUtils.saveProjectBase(rfcLog,projectBaseDao, projectBaseList);
-                if(projectBaseLogs.size()>0){
-                    logList.add(StringUtils.getJsonStr(projectBaseLogs));
+
+                if(orderBaseList.size() == projectBaseList.size()){
+                    List<String> projectBaseLogs = ProjectUtils.saveProjectBase(rfcLog,projectBaseDao, projectBaseList);
+                    if(projectBaseLogs.size()>0){
+                        logList.add(StringUtils.getJsonStr(projectBaseLogs));
+                    }
                 }
+                // 差集 (orderIdList - projectIdList)
+                diffList = orderIdList.stream().filter(item -> !projectIdList.contains(item)).collect(toList());
+                message = "工单尚未同步SMES,不允许修改|" + StringUtils.getJsonStr(diffList);
             } else {
                 message = "工单修改失败|" + projectBaseList.size();
                 throw new NullPointerException(message);
             }
 
-            SapOrderRes res = new SapOrderRes(Flag.Y.toString(), Message.TEST.toString());
+            SapOrderRes res = new SapOrderRes(Flag.Y.toString(), message);
             if(logList.size()>0){
                 tLog.setRL_SY_ERROR(StringUtils.getJsonStr(logList));
             }

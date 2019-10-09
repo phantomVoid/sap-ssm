@@ -1,5 +1,6 @@
 package com.phantom.comm;
 
+import com.phantom.comm.enums.ListFlag;
 import com.phantom.comm.enums.ProjectSort;
 import com.phantom.dao.TPmProjectBaseDao;
 import com.phantom.dao.TPmProjectDetailDao;
@@ -26,6 +27,29 @@ public class ProjectUtils {
     public static String manufacture = "3";
 
     /**
+     * 获取ProjectBaseList
+     * @param baseDao
+     * @param projectId 工单号
+     * @return
+     */
+    public static List<TPmProjectBase> getBaseByProjectId(TPmProjectBaseDao baseDao,String projectId){
+        List<TPmProjectBase> res = new ArrayList<>();
+        try {
+            TPmProjectBaseExample baseExp = new TPmProjectBaseExample();
+            TPmProjectBaseExample.Criteria baseExpCriteria = baseExp.createCriteria();
+            baseExpCriteria.andPROJECT_IDEqualTo(projectId);
+            res = baseDao.selectByExample(baseExp);
+        } catch (Exception e) {
+            res = null;
+        }
+        return res;
+    }
+
+    public static TPmProjectBase getBaseByList(List<TPmProjectBase> baseList){
+        return baseList.get(0);
+    }
+
+    /**
      * 获取projectSort
      *
      * @param itemCode
@@ -41,6 +65,57 @@ public class ProjectUtils {
             retSort = ProjectSort.UNSORT.getCode();
         }
         return retSort;
+    }
+
+    /**
+     * 解析工单数据
+     *
+     * @param orderBaseList
+     * @param orderProcessList
+     * @param orderSalesList
+     * @return
+     */
+    public static List<TPmProjectBase> getProjectBaseEdit(List<SapOrderBase> orderBaseList,TPmProjectBaseDao projectBaseDao) {
+        List<TPmProjectBase> projectBaseList = new ArrayList<>();
+        try {
+            for (SapOrderBase orderBase : orderBaseList) {
+
+                SapOrderSales orderSales = null;
+                SapOrderProcess orderProcess = null;
+
+                int index = orderBaseList.indexOf(orderBase);
+
+                String projectId = StringUtils.formatZero(orderBase.getAUFNR());
+                TPmProjectBaseExample projectBaseExp = new TPmProjectBaseExample();
+                TPmProjectBaseExample.Criteria baseExpCriteria = projectBaseExp.createCriteria();
+                baseExpCriteria.andPROJECT_IDEqualTo(projectId);
+
+                List<TPmProjectBase> baseList = projectBaseDao.selectByExample(projectBaseExp);
+                if(baseList.size()>0){
+                    for (TPmProjectBase projectBase : baseList) {
+                        projectBase.setPRODUCT_COUNT(NumUtils.formatBigDecimal(orderBase.getGAMNG()));
+                        projectBase.setPROJECT_TYPE(orderBase.getAUART());
+                        projectBase.setTPPB_PLAN_DELIVERY_DATE(DateUtils.formatDate(orderSales.getKDAUF()));
+                        projectBase.setDESTROY_NO(StringUtils.formatZero(orderSales.getKDAUF()));
+                        projectBase.setPM_MEMO(StringUtils.formatZero(orderBase.getZTEXT()));
+                        projectBase.setPRODUCT_LINE(orderProcess.getARBPL());
+                        projectBase.setPROJECT_ERPTYPE(orderBase.getAUART());
+                        projectBase.setPROJECT_SORT(NumUtils.formatBigDecimal(ProjectUtils.getProjectSort(StringUtils.formatZero(orderBase.getPLNBEZ()))));
+                        projectBase.setWARE_HOUSE(StringUtils.formatEmpty(orderBase.getLGORT()));
+                        projectBase.setBASE_UNIT(StringUtils.formatEmpty(orderBase.getGMEIN()));
+                        projectBase.setLOT_NUMBER(orderBase.getCHARG());
+                        projectBase.setPROLEPSIS_START_DATE(DateUtils.formatDate(orderBase.getGSTRP()));
+                        projectBase.setPROLEPSIS_END_DATE(DateUtils.formatDate(orderBase.getGLTRP()));
+                        projectBase.setEDIT_USER(StringUtils.getDefaultUserId());
+                        projectBase.setEDIT_TIME(DateUtils.getCurDateTime());
+                        projectBaseList.add(projectBase);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+        return projectBaseList;
     }
 
     /**

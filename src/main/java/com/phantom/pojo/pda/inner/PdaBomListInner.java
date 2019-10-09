@@ -1,5 +1,7 @@
 package com.phantom.pojo.pda.inner;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.math.BigDecimal;
 
 /**
@@ -21,24 +23,27 @@ public class PdaBomListInner {
     public PdaBomListInner() {
     }
 
+    @JSONField(name = "ITEM_CODE")
     public String getITEM_CODE() {
         return ITEM_CODE;
+    }
+
+    @JSONField(name = "STOCK_CODE")
+    public String getSTOCK_CODE() {
+        return STOCK_CODE;
+    }
+
+    @JSONField(name = "ITEM_NUM")
+    public BigDecimal getITEM_NUM() {
+        return ITEM_NUM;
     }
 
     public void setITEM_CODE(String ITEM_CODE) {
         this.ITEM_CODE = ITEM_CODE;
     }
 
-    public String getSTOCK_CODE() {
-        return STOCK_CODE;
-    }
-
     public void setSTOCK_CODE(String STOCK_CODE) {
         this.STOCK_CODE = STOCK_CODE;
-    }
-
-    public BigDecimal getITEM_NUM() {
-        return ITEM_NUM;
     }
 
     public void setITEM_NUM(BigDecimal ITEM_NUM) {
