@@ -58,7 +58,7 @@ public class WorkOrderSynEditServiceImp implements WorkOrderSynEditService {
      */
     @Override
     public SapOrderRes getEditOrderList(@WebParam(name = "orderBaseList") List<SapOrderBase> orderBaseList) {
-        String message = "";
+         String message = "";
         TRfcLog tLog = new TRfcLog();
         try {
             tLog.setRL_FUNC_NAME("ZFM_MES_004-工单修改");
@@ -100,10 +100,11 @@ public class WorkOrderSynEditServiceImp implements WorkOrderSynEditService {
                 }
                 // 差集 (orderIdList - projectIdList)
                 diffList = orderIdList.stream().filter(item -> !projectIdList.contains(item)).collect(toList());
-                message = "工单尚未同步SMES,不允许修改|" + StringUtils.getJsonStr(diffList);
+                if(diffList.size() > 0){
+                    message = "工单尚未同步SMES,不允许修改|" + StringUtils.getJsonStr(diffList);
+                }
             } else {
                 message = "工单修改失败|" + projectBaseList.size();
-                throw new NullPointerException(message);
             }
 
             SapOrderRes res = new SapOrderRes(Flag.Y.toString(), message);
@@ -116,7 +117,7 @@ public class WorkOrderSynEditServiceImp implements WorkOrderSynEditService {
         } catch (Exception e) {
             message = e.toString();
             logDao.insert(new TRfcLog(Flag.N.toString(), message, e.toString()));
-            SapOrderRes res = new SapOrderRes(Flag.N.toString(), e.getMessage());
+            SapOrderRes res = new SapOrderRes(Flag.Y.toString(), Flag.N.getDesc()+e.getMessage());
             return res;
         }
     }

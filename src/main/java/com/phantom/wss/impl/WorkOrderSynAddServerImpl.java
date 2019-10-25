@@ -96,7 +96,7 @@ public class WorkOrderSynAddServerImpl implements WorkOrderSynAddService {
         } catch (Exception e) {
             message = e.toString();
             logDao.insert(new TRfcLog(Flag.N.toString(), message, e.toString()));
-            res = new SapOrderRes(Flag.N.toString(), e.getMessage());
+            res = new SapOrderRes(Flag.N.toString(), Flag.N.getDesc());
         }
 
         // 创建线程任务
