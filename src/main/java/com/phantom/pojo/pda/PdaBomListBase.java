@@ -3,6 +3,8 @@ package com.phantom.pojo.pda;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.phantom.pojo.pda.inner.PdaBomListInner;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -15,67 +17,83 @@ import java.util.List;
 public class PdaBomListBase {
 
     //1.车间编码
+    @XmlElement
     public String PRODUCT_LINE;
 
     //2.工单号
+    @XmlElement
     public String PROJECT_ID;
 
     //3.产品编码
+    @XmlElement
     public String PRODUCT_MATERIAL;
 
     //4.产品名称
+    @XmlElement
     public String PRODUCT_NAME;
 
     //5.批次号
+    @XmlElement
     public String LOT_NUMBER;
 
     //6.计划数量
+    @XmlElement
     public BigDecimal PRODUCT_COUNT;
 
     //7.产出数量
+    @XmlElement
     public BigDecimal FINISH_COUNT;
 
     //8.物料列表
+    @XmlElement
     public List<PdaBomListInner> ITEM_LIST;
 
     public PdaBomListBase() {
     }
 
+    @XmlTransient
     @JSONField(name = "PRODUCT_LINE")
     public String getPRODUCT_LINE() {
         return PRODUCT_LINE;
     }
 
+    @XmlTransient
     @JSONField(name = "PROJECT_ID")
     public String getPROJECT_ID() {
         return PROJECT_ID;
     }
 
+    @XmlTransient
     @JSONField(name = "PRODUCT_MATERIAL")
     public String getPRODUCT_MATERIAL() {
         return PRODUCT_MATERIAL;
     }
 
+    @XmlTransient
     @JSONField(name = "PRODUCT_NAME")
     public String getPRODUCT_NAME() {
         return PRODUCT_NAME;
     }
 
+    @XmlTransient
     @JSONField(name = "LOT_NUMBER")
     public String getLOT_NUMBER() {
         return LOT_NUMBER;
     }
 
+    @XmlTransient
     @JSONField(name = "PRODUCT_COUNT")
     public BigDecimal getPRODUCT_COUNT() {
         return PRODUCT_COUNT;
     }
 
+    @XmlTransient
     @JSONField(name = "FINISH_COUNT")
     public BigDecimal getFINISH_COUNT() {
         return FINISH_COUNT;
     }
 
+    @XmlTransient
     @JSONField(name = "ITEM_LIST")
     public List<PdaBomListInner> getITEM_LIST() {
         return ITEM_LIST;
