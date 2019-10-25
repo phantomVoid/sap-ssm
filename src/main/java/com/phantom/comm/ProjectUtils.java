@@ -71,8 +71,8 @@ public class ProjectUtils {
      * 解析工单数据
      *
      * @param orderBaseList
-     * @param orderProcessList
-     * @param orderSalesList
+     * @param orderBaseList
+     * @param projectBaseDao
      * @return
      */
     public static List<TPmProjectBase> getProjectBaseEdit(List<SapOrderBase> orderBaseList,TPmProjectBaseDao projectBaseDao) {
@@ -80,8 +80,8 @@ public class ProjectUtils {
         try {
             for (SapOrderBase orderBase : orderBaseList) {
 
-                SapOrderSales orderSales = null;
-                SapOrderProcess orderProcess = null;
+                SapOrderSales orderSales = new SapOrderSales();
+                SapOrderProcess orderProcess = new SapOrderProcess();
 
                 int index = orderBaseList.indexOf(orderBase);
 

@@ -37,7 +37,8 @@ public class StringUtils {
     }
 
     public static String getDefaultDataAuth() {
-        return "FA174AFF136D496A87B65443D22357E3";
+        //莆田三棵树
+        return "69cfb4a5492449978fc7f24a145eafe9";
     }
 
     public static String getUrlString(String str){
