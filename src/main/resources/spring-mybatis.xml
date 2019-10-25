@@ -87,11 +87,13 @@
     <import resource="classpath:spring-cxf.xml"/>
     <!--<import resource="classpath:applicationContext-quartz.xml"/>-->
 
-    <bean id="restfulRegeditService" class="com.phantom.controller.RestFulController"/>
+    <bean id="PdaJsonController" class="com.phantom.controller.PdaJsonController"/>
+
     <!--restful服务 -->
-    <jaxrs:server id="restServiceContainer" address="/regedit">
+<!--
+    <jaxrs:server id="PdaJson" address="/pda">
         <jaxrs:serviceBeans>
-            <ref bean="restfulRegeditService"/>
+            <ref bean="PdaJsonController"/>
         </jaxrs:serviceBeans>
         <jaxrs:extensionMappings>
             <entry key="json" value="application/json"/>
@@ -101,6 +103,10 @@
             <entry key="en" value="en-gb"/>
         </jaxrs:languageMappings>
     </jaxrs:server>
+-->
+
+
+
 
     <!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
