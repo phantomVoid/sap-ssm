@@ -85,9 +85,9 @@ public class PdaJsonController {
             jsonBase.setSflag(Flag.N.toString());
             jsonBase.setMessage(Flag.N.getDesc());
             if (size > 0) {
-                map.put("STATUS", "工单信息匹配失败，工单号|线体:" + projectId + "|" + productLine + "存在多个匹配项");
+                map.put("STATUS", "工单" + projectId + "存在多个匹配项,工单信息匹配失败");
             } else {
-                map.put("STATUS", "工单信息匹配失败，工单号|线体:" + projectId + "|" + productLine + "不存在匹配项");
+                map.put("STATUS", "工单" + projectId + "不存在匹配项,工单信息匹配失败");
             }
 
             jsonBase.setMessage(String.valueOf(map.get("STATUS")));

@@ -234,7 +234,7 @@ public class ProjectUtils {
                     projectBase.setIS_REL("0");
                     projectBase.setREL_NUM(NumUtils.formatBigDecimal("0"));
                     projectBase.setPM_CHECK_STUST(null);
-                    projectBase.setCHECK_MON("");
+                    projectBase.setCHECK_MON(null);
                     projectBase.setCHECK_USER("");
 
                     projectBaseList.add(projectBase);

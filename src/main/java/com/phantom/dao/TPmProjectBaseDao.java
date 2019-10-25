@@ -4,9 +4,7 @@ import com.phantom.model.TPmProjectBase;
 import com.phantom.model.TPmProjectBaseExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
-@Repository("TPmProjectBaseDao")
 public interface TPmProjectBaseDao {
     long countByExample(TPmProjectBaseExample example);
 
@@ -16,9 +14,13 @@ public interface TPmProjectBaseDao {
 
     int insertSelective(TPmProjectBase record);
 
+    List<TPmProjectBase> selectByExampleWithBLOBs(TPmProjectBaseExample example);
+
     List<TPmProjectBase> selectByExample(TPmProjectBaseExample example);
 
     int updateByExampleSelective(@Param("record") TPmProjectBase record, @Param("example") TPmProjectBaseExample example);
+
+    int updateByExampleWithBLOBs(@Param("record") TPmProjectBase record, @Param("example") TPmProjectBaseExample example);
 
     int updateByExample(@Param("record") TPmProjectBase record, @Param("example") TPmProjectBaseExample example);
 
