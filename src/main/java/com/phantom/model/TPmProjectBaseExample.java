@@ -1243,76 +1243,6 @@ public class TPmProjectBaseExample {
             return (Criteria) this;
         }
 
-        public Criteria andPM_MEMOIsNull() {
-            addCriterion("PM_MEMO is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPM_MEMOIsNotNull() {
-            addCriterion("PM_MEMO is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPM_MEMOEqualTo(String value) {
-            addCriterion("PM_MEMO =", value, "PM_MEMO");
-            return (Criteria) this;
-        }
-
-        public Criteria andPM_MEMONotEqualTo(String value) {
-            addCriterion("PM_MEMO <>", value, "PM_MEMO");
-            return (Criteria) this;
-        }
-
-        public Criteria andPM_MEMOGreaterThan(String value) {
-            addCriterion("PM_MEMO >", value, "PM_MEMO");
-            return (Criteria) this;
-        }
-
-        public Criteria andPM_MEMOGreaterThanOrEqualTo(String value) {
-            addCriterion("PM_MEMO >=", value, "PM_MEMO");
-            return (Criteria) this;
-        }
-
-        public Criteria andPM_MEMOLessThan(String value) {
-            addCriterion("PM_MEMO <", value, "PM_MEMO");
-            return (Criteria) this;
-        }
-
-        public Criteria andPM_MEMOLessThanOrEqualTo(String value) {
-            addCriterion("PM_MEMO <=", value, "PM_MEMO");
-            return (Criteria) this;
-        }
-
-        public Criteria andPM_MEMOLike(String value) {
-            addCriterion("PM_MEMO like", value, "PM_MEMO");
-            return (Criteria) this;
-        }
-
-        public Criteria andPM_MEMONotLike(String value) {
-            addCriterion("PM_MEMO not like", value, "PM_MEMO");
-            return (Criteria) this;
-        }
-
-        public Criteria andPM_MEMOIn(List<String> values) {
-            addCriterion("PM_MEMO in", values, "PM_MEMO");
-            return (Criteria) this;
-        }
-
-        public Criteria andPM_MEMONotIn(List<String> values) {
-            addCriterion("PM_MEMO not in", values, "PM_MEMO");
-            return (Criteria) this;
-        }
-
-        public Criteria andPM_MEMOBetween(String value1, String value2) {
-            addCriterion("PM_MEMO between", value1, value2, "PM_MEMO");
-            return (Criteria) this;
-        }
-
-        public Criteria andPM_MEMONotBetween(String value1, String value2) {
-            addCriterion("PM_MEMO not between", value1, value2, "PM_MEMO");
-            return (Criteria) this;
-        }
-
         public Criteria andDEPT_IDIsNull() {
             addCriterion("DEPT_ID is null");
             return (Criteria) this;
@@ -3123,63 +3053,53 @@ public class TPmProjectBaseExample {
             return (Criteria) this;
         }
 
-        public Criteria andCHECK_MONEqualTo(String value) {
-            addCriterion("CHECK_MON =", value, "CHECK_MON");
+        public Criteria andCHECK_MONEqualTo(Date value) {
+            addCriterionForJDBCDate("CHECK_MON =", value, "CHECK_MON");
             return (Criteria) this;
         }
 
-        public Criteria andCHECK_MONNotEqualTo(String value) {
-            addCriterion("CHECK_MON <>", value, "CHECK_MON");
+        public Criteria andCHECK_MONNotEqualTo(Date value) {
+            addCriterionForJDBCDate("CHECK_MON <>", value, "CHECK_MON");
             return (Criteria) this;
         }
 
-        public Criteria andCHECK_MONGreaterThan(String value) {
-            addCriterion("CHECK_MON >", value, "CHECK_MON");
+        public Criteria andCHECK_MONGreaterThan(Date value) {
+            addCriterionForJDBCDate("CHECK_MON >", value, "CHECK_MON");
             return (Criteria) this;
         }
 
-        public Criteria andCHECK_MONGreaterThanOrEqualTo(String value) {
-            addCriterion("CHECK_MON >=", value, "CHECK_MON");
+        public Criteria andCHECK_MONGreaterThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("CHECK_MON >=", value, "CHECK_MON");
             return (Criteria) this;
         }
 
-        public Criteria andCHECK_MONLessThan(String value) {
-            addCriterion("CHECK_MON <", value, "CHECK_MON");
+        public Criteria andCHECK_MONLessThan(Date value) {
+            addCriterionForJDBCDate("CHECK_MON <", value, "CHECK_MON");
             return (Criteria) this;
         }
 
-        public Criteria andCHECK_MONLessThanOrEqualTo(String value) {
-            addCriterion("CHECK_MON <=", value, "CHECK_MON");
+        public Criteria andCHECK_MONLessThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("CHECK_MON <=", value, "CHECK_MON");
             return (Criteria) this;
         }
 
-        public Criteria andCHECK_MONLike(String value) {
-            addCriterion("CHECK_MON like", value, "CHECK_MON");
+        public Criteria andCHECK_MONIn(List<Date> values) {
+            addCriterionForJDBCDate("CHECK_MON in", values, "CHECK_MON");
             return (Criteria) this;
         }
 
-        public Criteria andCHECK_MONNotLike(String value) {
-            addCriterion("CHECK_MON not like", value, "CHECK_MON");
+        public Criteria andCHECK_MONNotIn(List<Date> values) {
+            addCriterionForJDBCDate("CHECK_MON not in", values, "CHECK_MON");
             return (Criteria) this;
         }
 
-        public Criteria andCHECK_MONIn(List<String> values) {
-            addCriterion("CHECK_MON in", values, "CHECK_MON");
+        public Criteria andCHECK_MONBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("CHECK_MON between", value1, value2, "CHECK_MON");
             return (Criteria) this;
         }
 
-        public Criteria andCHECK_MONNotIn(List<String> values) {
-            addCriterion("CHECK_MON not in", values, "CHECK_MON");
-            return (Criteria) this;
-        }
-
-        public Criteria andCHECK_MONBetween(String value1, String value2) {
-            addCriterion("CHECK_MON between", value1, value2, "CHECK_MON");
-            return (Criteria) this;
-        }
-
-        public Criteria andCHECK_MONNotBetween(String value1, String value2) {
-            addCriterion("CHECK_MON not between", value1, value2, "CHECK_MON");
+        public Criteria andCHECK_MONNotBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("CHECK_MON not between", value1, value2, "CHECK_MON");
             return (Criteria) this;
         }
 

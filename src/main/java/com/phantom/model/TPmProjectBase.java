@@ -43,8 +43,6 @@ public class TPmProjectBase implements Serializable {
 
     private Date TPPB_PLAN_DELIVERY_DATE;
 
-    private String PM_MEMO;
-
     private String DEPT_ID;
 
     private String CREATE_USER;
@@ -99,7 +97,7 @@ public class TPmProjectBase implements Serializable {
 
     private BigDecimal PM_CHECK_STUST;
 
-    private String CHECK_MON;
+    private Date CHECK_MON;
 
     private String CHECK_USER;
 
@@ -108,6 +106,8 @@ public class TPmProjectBase implements Serializable {
     private String BASE_UNIT;
 
     private String WARE_HOUSE;
+
+    private String PM_MEMO;
 
     private static final long serialVersionUID = 1L;
 
@@ -245,14 +245,6 @@ public class TPmProjectBase implements Serializable {
 
     public void setTPPB_PLAN_DELIVERY_DATE(Date TPPB_PLAN_DELIVERY_DATE) {
         this.TPPB_PLAN_DELIVERY_DATE = TPPB_PLAN_DELIVERY_DATE;
-    }
-
-    public String getPM_MEMO() {
-        return PM_MEMO;
-    }
-
-    public void setPM_MEMO(String PM_MEMO) {
-        this.PM_MEMO = PM_MEMO;
     }
 
     public String getDEPT_ID() {
@@ -471,11 +463,11 @@ public class TPmProjectBase implements Serializable {
         this.PM_CHECK_STUST = PM_CHECK_STUST;
     }
 
-    public String getCHECK_MON() {
+    public Date getCHECK_MON() {
         return CHECK_MON;
     }
 
-    public void setCHECK_MON(String CHECK_MON) {
+    public void setCHECK_MON(Date CHECK_MON) {
         this.CHECK_MON = CHECK_MON;
     }
 
@@ -511,6 +503,14 @@ public class TPmProjectBase implements Serializable {
         this.WARE_HOUSE = WARE_HOUSE;
     }
 
+    public String getPM_MEMO() {
+        return PM_MEMO;
+    }
+
+    public void setPM_MEMO(String PM_MEMO) {
+        this.PM_MEMO = PM_MEMO;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -540,7 +540,6 @@ public class TPmProjectBase implements Serializable {
             && (this.getPROLEPSIS_START_DATE() == null ? other.getPROLEPSIS_START_DATE() == null : this.getPROLEPSIS_START_DATE().equals(other.getPROLEPSIS_START_DATE()))
             && (this.getPROLEPSIS_END_DATE() == null ? other.getPROLEPSIS_END_DATE() == null : this.getPROLEPSIS_END_DATE().equals(other.getPROLEPSIS_END_DATE()))
             && (this.getTPPB_PLAN_DELIVERY_DATE() == null ? other.getTPPB_PLAN_DELIVERY_DATE() == null : this.getTPPB_PLAN_DELIVERY_DATE().equals(other.getTPPB_PLAN_DELIVERY_DATE()))
-            && (this.getPM_MEMO() == null ? other.getPM_MEMO() == null : this.getPM_MEMO().equals(other.getPM_MEMO()))
             && (this.getDEPT_ID() == null ? other.getDEPT_ID() == null : this.getDEPT_ID().equals(other.getDEPT_ID()))
             && (this.getCREATE_USER() == null ? other.getCREATE_USER() == null : this.getCREATE_USER().equals(other.getCREATE_USER()))
             && (this.getCREATE_TIME() == null ? other.getCREATE_TIME() == null : this.getCREATE_TIME().equals(other.getCREATE_TIME()))
@@ -572,7 +571,8 @@ public class TPmProjectBase implements Serializable {
             && (this.getCHECK_USER() == null ? other.getCHECK_USER() == null : this.getCHECK_USER().equals(other.getCHECK_USER()))
             && (this.getWORK_SPACE() == null ? other.getWORK_SPACE() == null : this.getWORK_SPACE().equals(other.getWORK_SPACE()))
             && (this.getBASE_UNIT() == null ? other.getBASE_UNIT() == null : this.getBASE_UNIT().equals(other.getBASE_UNIT()))
-            && (this.getWARE_HOUSE() == null ? other.getWARE_HOUSE() == null : this.getWARE_HOUSE().equals(other.getWARE_HOUSE()));
+            && (this.getWARE_HOUSE() == null ? other.getWARE_HOUSE() == null : this.getWARE_HOUSE().equals(other.getWARE_HOUSE()))
+            && (this.getPM_MEMO() == null ? other.getPM_MEMO() == null : this.getPM_MEMO().equals(other.getPM_MEMO()));
     }
 
     @Override
@@ -596,7 +596,6 @@ public class TPmProjectBase implements Serializable {
         result = prime * result + ((getPROLEPSIS_START_DATE() == null) ? 0 : getPROLEPSIS_START_DATE().hashCode());
         result = prime * result + ((getPROLEPSIS_END_DATE() == null) ? 0 : getPROLEPSIS_END_DATE().hashCode());
         result = prime * result + ((getTPPB_PLAN_DELIVERY_DATE() == null) ? 0 : getTPPB_PLAN_DELIVERY_DATE().hashCode());
-        result = prime * result + ((getPM_MEMO() == null) ? 0 : getPM_MEMO().hashCode());
         result = prime * result + ((getDEPT_ID() == null) ? 0 : getDEPT_ID().hashCode());
         result = prime * result + ((getCREATE_USER() == null) ? 0 : getCREATE_USER().hashCode());
         result = prime * result + ((getCREATE_TIME() == null) ? 0 : getCREATE_TIME().hashCode());
@@ -629,6 +628,7 @@ public class TPmProjectBase implements Serializable {
         result = prime * result + ((getWORK_SPACE() == null) ? 0 : getWORK_SPACE().hashCode());
         result = prime * result + ((getBASE_UNIT() == null) ? 0 : getBASE_UNIT().hashCode());
         result = prime * result + ((getWARE_HOUSE() == null) ? 0 : getWARE_HOUSE().hashCode());
+        result = prime * result + ((getPM_MEMO() == null) ? 0 : getPM_MEMO().hashCode());
         return result;
     }
 
@@ -655,7 +655,6 @@ public class TPmProjectBase implements Serializable {
         sb.append(", PROLEPSIS_START_DATE=").append(PROLEPSIS_START_DATE);
         sb.append(", PROLEPSIS_END_DATE=").append(PROLEPSIS_END_DATE);
         sb.append(", TPPB_PLAN_DELIVERY_DATE=").append(TPPB_PLAN_DELIVERY_DATE);
-        sb.append(", PM_MEMO=").append(PM_MEMO);
         sb.append(", DEPT_ID=").append(DEPT_ID);
         sb.append(", CREATE_USER=").append(CREATE_USER);
         sb.append(", CREATE_TIME=").append(CREATE_TIME);
@@ -688,6 +687,7 @@ public class TPmProjectBase implements Serializable {
         sb.append(", WORK_SPACE=").append(WORK_SPACE);
         sb.append(", BASE_UNIT=").append(BASE_UNIT);
         sb.append(", WARE_HOUSE=").append(WARE_HOUSE);
+        sb.append(", PM_MEMO=").append(PM_MEMO);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
