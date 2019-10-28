@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
@@ -39,7 +38,7 @@ public class PdaJsonController {
     TPmProjectDetailDao detailDao;
 
     /**
-     * 获取工单基础信息
+     * 获取工单基础信息(工单号+车间编码)
      *
      * @param projectId   工单号
      * @param productLine 车间编码
@@ -59,7 +58,7 @@ public class PdaJsonController {
         TPmProjectDetailExample.Criteria detailCri = detailExample.createCriteria();
 
         baseCri.andPROJECT_IDEqualTo(projectId);
-        baseCri.andPRODUCT_LINEEqualTo(productLine);
+//        baseCri.andPRODUCT_LINEEqualTo(productLine);
 
         detailCri.andPROJECT_IDEqualTo(projectId);
 
@@ -127,7 +126,7 @@ public class PdaJsonController {
     }
 
     /**
-     * 获取工单基础信息（工单号）
+     * 获取工单基础信息(工单号)
      *
      * @param projectId 工单号
      * @param response
