@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.phantom.dao.SyUserDao">
+  <resultMap id="BaseResultMap" type="com.phantom.model.SyUser">
+    <result column="ID" jdbcType="VARCHAR" property="ID" />
+    <result column="LOGIN_NAME" jdbcType="VARCHAR" property="LOGIN_NAME" />
+    <result column="NAME" jdbcType="VARCHAR" property="NAME" />
+    <result column="PW" jdbcType="VARCHAR" property="PW" />
+    <result column="ENABLE" jdbcType="CHAR" property="ENABLE" />
+    <result column="DEPT_ID" jdbcType="VARCHAR" property="DEPT_ID" />
+    <result column="PHONE" jdbcType="VARCHAR" property="PHONE" />
+    <result column="MOBILE" jdbcType="VARCHAR" property="MOBILE" />
+    <result column="WEIXIN" jdbcType="VARCHAR" property="WEIXIN" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="EMAIL" />
+    <result column="USER_TYPE" jdbcType="CHAR" property="USER_TYPE" />
+    <result column="FINGERPRINT" jdbcType="VARCHAR" property="FINGERPRINT" />
+    <result column="EDIT_PW_TIME" jdbcType="DATE" property="EDIT_PW_TIME" />
+    <result column="PHOTO_NAME" jdbcType="VARCHAR" property="PHOTO_NAME" />
+    <result column="ENGLISH_NAME" jdbcType="VARCHAR" property="ENGLISH_NAME" />
+    <result column="EMP_SUP_CODE" jdbcType="VARCHAR" property="EMP_SUP_CODE" />
+    <result column="EMP_CUST_CODE" jdbcType="VARCHAR" property="EMP_CUST_CODE" />
+    <result column="US_TIME_ZONE" jdbcType="VARCHAR" property="US_TIME_ZONE" />
+    <result column="WX_USER_ID" jdbcType="VARCHAR" property="WX_USER_ID" />
+    <result column="DING_USER_ID" jdbcType="VARCHAR" property="DING_USER_ID" />
+    <result column="INIT_LOGIN" jdbcType="CHAR" property="INIT_LOGIN" />
+    <result column="DATA_AUTH" jdbcType="VARCHAR" property="DATA_AUTH" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.phantom.model.SyUser">
+    <result column="PHOTO" jdbcType="BLOB" property="PHOTO" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, LOGIN_NAME, `NAME`, PW, `ENABLE`, DEPT_ID, PHONE, MOBILE, WEIXIN, EMAIL, USER_TYPE, 
+    FINGERPRINT, EDIT_PW_TIME, PHOTO_NAME, ENGLISH_NAME, EMP_SUP_CODE, EMP_CUST_CODE, 
+    US_TIME_ZONE, WX_USER_ID, DING_USER_ID, INIT_LOGIN, DATA_AUTH
+  </sql>
+  <sql id="Blob_Column_List">
+    PHOTO
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.phantom.model.SyUserExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from N2ADMIN.SY_USER
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.phantom.model.SyUserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from N2ADMIN.SY_USER
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.phantom.model.SyUserExample">
+    delete from N2ADMIN.SY_USER
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.phantom.model.SyUser">
+    insert into N2ADMIN.SY_USER (ID, LOGIN_NAME, `NAME`, 
+      PW, `ENABLE`, DEPT_ID, PHONE, 
+      MOBILE, WEIXIN, EMAIL, 
+      USER_TYPE, FINGERPRINT, EDIT_PW_TIME, 
+      PHOTO_NAME, ENGLISH_NAME, EMP_SUP_CODE, 
+      EMP_CUST_CODE, US_TIME_ZONE, WX_USER_ID, 
+      DING_USER_ID, INIT_LOGIN, DATA_AUTH, 
+      PHOTO)
+    values (#{ID,jdbcType=VARCHAR}, #{LOGIN_NAME,jdbcType=VARCHAR}, #{NAME,jdbcType=VARCHAR}, 
+      #{PW,jdbcType=VARCHAR}, #{ENABLE,jdbcType=CHAR}, #{DEPT_ID,jdbcType=VARCHAR}, #{PHONE,jdbcType=VARCHAR}, 
+      #{MOBILE,jdbcType=VARCHAR}, #{WEIXIN,jdbcType=VARCHAR}, #{EMAIL,jdbcType=VARCHAR}, 
+      #{USER_TYPE,jdbcType=CHAR}, #{FINGERPRINT,jdbcType=VARCHAR}, #{EDIT_PW_TIME,jdbcType=DATE}, 
+      #{PHOTO_NAME,jdbcType=VARCHAR}, #{ENGLISH_NAME,jdbcType=VARCHAR}, #{EMP_SUP_CODE,jdbcType=VARCHAR}, 
+      #{EMP_CUST_CODE,jdbcType=VARCHAR}, #{US_TIME_ZONE,jdbcType=VARCHAR}, #{WX_USER_ID,jdbcType=VARCHAR}, 
+      #{DING_USER_ID,jdbcType=VARCHAR}, #{INIT_LOGIN,jdbcType=CHAR}, #{DATA_AUTH,jdbcType=VARCHAR}, 
+      #{PHOTO,jdbcType=BLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="com.phantom.model.SyUser">
+    insert into N2ADMIN.SY_USER
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ID != null">
+        ID,
+      </if>
+      <if test="LOGIN_NAME != null">
+        LOGIN_NAME,
+      </if>
+      <if test="NAME != null">
+        `NAME`,
+      </if>
+      <if test="PW != null">
+        PW,
+      </if>
+      <if test="ENABLE != null">
+        `ENABLE`,
+      </if>
+      <if test="DEPT_ID != null">
+        DEPT_ID,
+      </if>
+      <if test="PHONE != null">
+        PHONE,
+      </if>
+      <if test="MOBILE != null">
+        MOBILE,
+      </if>
+      <if test="WEIXIN != null">
+        WEIXIN,
+      </if>
+      <if test="EMAIL != null">
+        EMAIL,
+      </if>
+      <if test="USER_TYPE != null">
+        USER_TYPE,
+      </if>
+      <if test="FINGERPRINT != null">
+        FINGERPRINT,
+      </if>
+      <if test="EDIT_PW_TIME != null">
+        EDIT_PW_TIME,
+      </if>
+      <if test="PHOTO_NAME != null">
+        PHOTO_NAME,
+      </if>
+      <if test="ENGLISH_NAME != null">
+        ENGLISH_NAME,
+      </if>
+      <if test="EMP_SUP_CODE != null">
+        EMP_SUP_CODE,
+      </if>
+      <if test="EMP_CUST_CODE != null">
+        EMP_CUST_CODE,
+      </if>
+      <if test="US_TIME_ZONE != null">
+        US_TIME_ZONE,
+      </if>
+      <if test="WX_USER_ID != null">
+        WX_USER_ID,
+      </if>
+      <if test="DING_USER_ID != null">
+        DING_USER_ID,
+      </if>
+      <if test="INIT_LOGIN != null">
+        INIT_LOGIN,
+      </if>
+      <if test="DATA_AUTH != null">
+        DATA_AUTH,
+      </if>
+      <if test="PHOTO != null">
+        PHOTO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ID != null">
+        #{ID,jdbcType=VARCHAR},
+      </if>
+      <if test="LOGIN_NAME != null">
+        #{LOGIN_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="NAME != null">
+        #{NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="PW != null">
+        #{PW,jdbcType=VARCHAR},
+      </if>
+      <if test="ENABLE != null">
+        #{ENABLE,jdbcType=CHAR},
+      </if>
+      <if test="DEPT_ID != null">
+        #{DEPT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="PHONE != null">
+        #{PHONE,jdbcType=VARCHAR},
+      </if>
+      <if test="MOBILE != null">
+        #{MOBILE,jdbcType=VARCHAR},
+      </if>
+      <if test="WEIXIN != null">
+        #{WEIXIN,jdbcType=VARCHAR},
+      </if>
+      <if test="EMAIL != null">
+        #{EMAIL,jdbcType=VARCHAR},
+      </if>
+      <if test="USER_TYPE != null">
+        #{USER_TYPE,jdbcType=CHAR},
+      </if>
+      <if test="FINGERPRINT != null">
+        #{FINGERPRINT,jdbcType=VARCHAR},
+      </if>
+      <if test="EDIT_PW_TIME != null">
+        #{EDIT_PW_TIME,jdbcType=DATE},
+      </if>
+      <if test="PHOTO_NAME != null">
+        #{PHOTO_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="ENGLISH_NAME != null">
+        #{ENGLISH_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="EMP_SUP_CODE != null">
+        #{EMP_SUP_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="EMP_CUST_CODE != null">
+        #{EMP_CUST_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="US_TIME_ZONE != null">
+        #{US_TIME_ZONE,jdbcType=VARCHAR},
+      </if>
+      <if test="WX_USER_ID != null">
+        #{WX_USER_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="DING_USER_ID != null">
+        #{DING_USER_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="INIT_LOGIN != null">
+        #{INIT_LOGIN,jdbcType=CHAR},
+      </if>
+      <if test="DATA_AUTH != null">
+        #{DATA_AUTH,jdbcType=VARCHAR},
+      </if>
+      <if test="PHOTO != null">
+        #{PHOTO,jdbcType=BLOB},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.phantom.model.SyUserExample" resultType="java.lang.Long">
+    select count(*) from N2ADMIN.SY_USER
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update N2ADMIN.SY_USER
+    <set>
+      <if test="record.ID != null">
+        ID = #{record.ID,jdbcType=VARCHAR},
+      </if>
+      <if test="record.LOGIN_NAME != null">
+        LOGIN_NAME = #{record.LOGIN_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="record.NAME != null">
+        `NAME` = #{record.NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="record.PW != null">
+        PW = #{record.PW,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ENABLE != null">
+        `ENABLE` = #{record.ENABLE,jdbcType=CHAR},
+      </if>
+      <if test="record.DEPT_ID != null">
+        DEPT_ID = #{record.DEPT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="record.PHONE != null">
+        PHONE = #{record.PHONE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.MOBILE != null">
+        MOBILE = #{record.MOBILE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.WEIXIN != null">
+        WEIXIN = #{record.WEIXIN,jdbcType=VARCHAR},
+      </if>
+      <if test="record.EMAIL != null">
+        EMAIL = #{record.EMAIL,jdbcType=VARCHAR},
+      </if>
+      <if test="record.USER_TYPE != null">
+        USER_TYPE = #{record.USER_TYPE,jdbcType=CHAR},
+      </if>
+      <if test="record.FINGERPRINT != null">
+        FINGERPRINT = #{record.FINGERPRINT,jdbcType=VARCHAR},
+      </if>
+      <if test="record.EDIT_PW_TIME != null">
+        EDIT_PW_TIME = #{record.EDIT_PW_TIME,jdbcType=DATE},
+      </if>
+      <if test="record.PHOTO_NAME != null">
+        PHOTO_NAME = #{record.PHOTO_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ENGLISH_NAME != null">
+        ENGLISH_NAME = #{record.ENGLISH_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="record.EMP_SUP_CODE != null">
+        EMP_SUP_CODE = #{record.EMP_SUP_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.EMP_CUST_CODE != null">
+        EMP_CUST_CODE = #{record.EMP_CUST_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.US_TIME_ZONE != null">
+        US_TIME_ZONE = #{record.US_TIME_ZONE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.WX_USER_ID != null">
+        WX_USER_ID = #{record.WX_USER_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="record.DING_USER_ID != null">
+        DING_USER_ID = #{record.DING_USER_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="record.INIT_LOGIN != null">
+        INIT_LOGIN = #{record.INIT_LOGIN,jdbcType=CHAR},
+      </if>
+      <if test="record.DATA_AUTH != null">
+        DATA_AUTH = #{record.DATA_AUTH,jdbcType=VARCHAR},
+      </if>
+      <if test="record.PHOTO != null">
+        PHOTO = #{record.PHOTO,jdbcType=BLOB},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update N2ADMIN.SY_USER
+    set ID = #{record.ID,jdbcType=VARCHAR},
+      LOGIN_NAME = #{record.LOGIN_NAME,jdbcType=VARCHAR},
+      `NAME` = #{record.NAME,jdbcType=VARCHAR},
+      PW = #{record.PW,jdbcType=VARCHAR},
+      `ENABLE` = #{record.ENABLE,jdbcType=CHAR},
+      DEPT_ID = #{record.DEPT_ID,jdbcType=VARCHAR},
+      PHONE = #{record.PHONE,jdbcType=VARCHAR},
+      MOBILE = #{record.MOBILE,jdbcType=VARCHAR},
+      WEIXIN = #{record.WEIXIN,jdbcType=VARCHAR},
+      EMAIL = #{record.EMAIL,jdbcType=VARCHAR},
+      USER_TYPE = #{record.USER_TYPE,jdbcType=CHAR},
+      FINGERPRINT = #{record.FINGERPRINT,jdbcType=VARCHAR},
+      EDIT_PW_TIME = #{record.EDIT_PW_TIME,jdbcType=DATE},
+      PHOTO_NAME = #{record.PHOTO_NAME,jdbcType=VARCHAR},
+      ENGLISH_NAME = #{record.ENGLISH_NAME,jdbcType=VARCHAR},
+      EMP_SUP_CODE = #{record.EMP_SUP_CODE,jdbcType=VARCHAR},
+      EMP_CUST_CODE = #{record.EMP_CUST_CODE,jdbcType=VARCHAR},
+      US_TIME_ZONE = #{record.US_TIME_ZONE,jdbcType=VARCHAR},
+      WX_USER_ID = #{record.WX_USER_ID,jdbcType=VARCHAR},
+      DING_USER_ID = #{record.DING_USER_ID,jdbcType=VARCHAR},
+      INIT_LOGIN = #{record.INIT_LOGIN,jdbcType=CHAR},
+      DATA_AUTH = #{record.DATA_AUTH,jdbcType=VARCHAR},
+      PHOTO = #{record.PHOTO,jdbcType=BLOB}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update N2ADMIN.SY_USER
+    set ID = #{record.ID,jdbcType=VARCHAR},
+      LOGIN_NAME = #{record.LOGIN_NAME,jdbcType=VARCHAR},
+      `NAME` = #{record.NAME,jdbcType=VARCHAR},
+      PW = #{record.PW,jdbcType=VARCHAR},
+      `ENABLE` = #{record.ENABLE,jdbcType=CHAR},
+      DEPT_ID = #{record.DEPT_ID,jdbcType=VARCHAR},
+      PHONE = #{record.PHONE,jdbcType=VARCHAR},
+      MOBILE = #{record.MOBILE,jdbcType=VARCHAR},
+      WEIXIN = #{record.WEIXIN,jdbcType=VARCHAR},
+      EMAIL = #{record.EMAIL,jdbcType=VARCHAR},
+      USER_TYPE = #{record.USER_TYPE,jdbcType=CHAR},
+      FINGERPRINT = #{record.FINGERPRINT,jdbcType=VARCHAR},
+      EDIT_PW_TIME = #{record.EDIT_PW_TIME,jdbcType=DATE},
+      PHOTO_NAME = #{record.PHOTO_NAME,jdbcType=VARCHAR},
+      ENGLISH_NAME = #{record.ENGLISH_NAME,jdbcType=VARCHAR},
+      EMP_SUP_CODE = #{record.EMP_SUP_CODE,jdbcType=VARCHAR},
+      EMP_CUST_CODE = #{record.EMP_CUST_CODE,jdbcType=VARCHAR},
+      US_TIME_ZONE = #{record.US_TIME_ZONE,jdbcType=VARCHAR},
+      WX_USER_ID = #{record.WX_USER_ID,jdbcType=VARCHAR},
+      DING_USER_ID = #{record.DING_USER_ID,jdbcType=VARCHAR},
+      INIT_LOGIN = #{record.INIT_LOGIN,jdbcType=CHAR},
+      DATA_AUTH = #{record.DATA_AUTH,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

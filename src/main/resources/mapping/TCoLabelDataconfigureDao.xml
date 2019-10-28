@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.phantom.dao.TCoLabelDataconfigureDao">
+  <resultMap id="BaseResultMap" type="com.phantom.model.TCoLabelDataconfigure">
+    <result column="CLD_LABEL_ID" jdbcType="VARCHAR" property="CLD_LABEL_ID" />
+    <result column="CLD_ITEM_ALIAS" jdbcType="VARCHAR" property="CLD_ITEM_ALIAS" />
+    <result column="CLD_COLUMN_NAME" jdbcType="VARCHAR" property="CLD_COLUMN_NAME" />
+    <result column="ID" jdbcType="VARCHAR" property="ID" />
+    <result column="DEPT_ID" jdbcType="VARCHAR" property="DEPT_ID" />
+    <result column="CREATE_USER" jdbcType="VARCHAR" property="CREATE_USER" />
+    <result column="CREATE_TIME" jdbcType="DATE" property="CREATE_TIME" />
+    <result column="EDIT_USER" jdbcType="VARCHAR" property="EDIT_USER" />
+    <result column="EDIT_TIME" jdbcType="DATE" property="EDIT_TIME" />
+    <result column="DATA_AUTH" jdbcType="VARCHAR" property="DATA_AUTH" />
+    <result column="CLD_LIST_FLAG" jdbcType="VARCHAR" property="CLD_LIST_FLAG" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.phantom.model.TCoLabelDataconfigure">
+    <result column="CLD_SQL" jdbcType="CLOB" property="CLD_SQL" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    CLD_LABEL_ID, CLD_ITEM_ALIAS, CLD_COLUMN_NAME, ID, DEPT_ID, CREATE_USER, CREATE_TIME, 
+    EDIT_USER, EDIT_TIME, DATA_AUTH, CLD_LIST_FLAG
+  </sql>
+  <sql id="Blob_Column_List">
+    CLD_SQL
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.phantom.model.TCoLabelDataconfigureExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from N2ADMIN.T_CO_LABEL_DATACONFIGURE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.phantom.model.TCoLabelDataconfigureExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from N2ADMIN.T_CO_LABEL_DATACONFIGURE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.phantom.model.TCoLabelDataconfigureExample">
+    delete from N2ADMIN.T_CO_LABEL_DATACONFIGURE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.phantom.model.TCoLabelDataconfigure">
+    insert into N2ADMIN.T_CO_LABEL_DATACONFIGURE (CLD_LABEL_ID, CLD_ITEM_ALIAS, CLD_COLUMN_NAME, 
+      ID, DEPT_ID, CREATE_USER, 
+      CREATE_TIME, EDIT_USER, EDIT_TIME, 
+      DATA_AUTH, CLD_LIST_FLAG, CLD_SQL
+      )
+    values (#{CLD_LABEL_ID,jdbcType=VARCHAR}, #{CLD_ITEM_ALIAS,jdbcType=VARCHAR}, #{CLD_COLUMN_NAME,jdbcType=VARCHAR}, 
+      #{ID,jdbcType=VARCHAR}, #{DEPT_ID,jdbcType=VARCHAR}, #{CREATE_USER,jdbcType=VARCHAR}, 
+      #{CREATE_TIME,jdbcType=DATE}, #{EDIT_USER,jdbcType=VARCHAR}, #{EDIT_TIME,jdbcType=DATE}, 
+      #{DATA_AUTH,jdbcType=VARCHAR}, #{CLD_LIST_FLAG,jdbcType=VARCHAR}, #{CLD_SQL,jdbcType=CLOB}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.phantom.model.TCoLabelDataconfigure">
+    insert into N2ADMIN.T_CO_LABEL_DATACONFIGURE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="CLD_LABEL_ID != null">
+        CLD_LABEL_ID,
+      </if>
+      <if test="CLD_ITEM_ALIAS != null">
+        CLD_ITEM_ALIAS,
+      </if>
+      <if test="CLD_COLUMN_NAME != null">
+        CLD_COLUMN_NAME,
+      </if>
+      <if test="ID != null">
+        ID,
+      </if>
+      <if test="DEPT_ID != null">
+        DEPT_ID,
+      </if>
+      <if test="CREATE_USER != null">
+        CREATE_USER,
+      </if>
+      <if test="CREATE_TIME != null">
+        CREATE_TIME,
+      </if>
+      <if test="EDIT_USER != null">
+        EDIT_USER,
+      </if>
+      <if test="EDIT_TIME != null">
+        EDIT_TIME,
+      </if>
+      <if test="DATA_AUTH != null">
+        DATA_AUTH,
+      </if>
+      <if test="CLD_LIST_FLAG != null">
+        CLD_LIST_FLAG,
+      </if>
+      <if test="CLD_SQL != null">
+        CLD_SQL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="CLD_LABEL_ID != null">
+        #{CLD_LABEL_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="CLD_ITEM_ALIAS != null">
+        #{CLD_ITEM_ALIAS,jdbcType=VARCHAR},
+      </if>
+      <if test="CLD_COLUMN_NAME != null">
+        #{CLD_COLUMN_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="ID != null">
+        #{ID,jdbcType=VARCHAR},
+      </if>
+      <if test="DEPT_ID != null">
+        #{DEPT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="CREATE_USER != null">
+        #{CREATE_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="CREATE_TIME != null">
+        #{CREATE_TIME,jdbcType=DATE},
+      </if>
+      <if test="EDIT_USER != null">
+        #{EDIT_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="EDIT_TIME != null">
+        #{EDIT_TIME,jdbcType=DATE},
+      </if>
+      <if test="DATA_AUTH != null">
+        #{DATA_AUTH,jdbcType=VARCHAR},
+      </if>
+      <if test="CLD_LIST_FLAG != null">
+        #{CLD_LIST_FLAG,jdbcType=VARCHAR},
+      </if>
+      <if test="CLD_SQL != null">
+        #{CLD_SQL,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.phantom.model.TCoLabelDataconfigureExample" resultType="java.lang.Long">
+    select count(*) from N2ADMIN.T_CO_LABEL_DATACONFIGURE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+
+  <select id="getLabelList" resultType="java.util.Map">
+    SELECT DISTINCT T.CLD_LABEL_ID,
+      T.CLD_ITEM_ALIAS,
+      T.CLD_COLUMN_NAME,
+      T1.DATA_ITEMS_NAME
+    FROM T_CO_LABEL_DATACONFIGURE T
+      LEFT JOIN ML_DATA_ITEMS T1
+        ON T.CLD_ITEM_ALIAS = T1.DATA_ITEMS_ALIAS
+    WHERE 1=1
+          AND T.CLD_LABEL_ID = #{labelId,jdbcType=VARCHAR},
+          AND T1.TEMPLATE_ID = #{labelId,jdbcType=VARCHAR},
+          AND T1.PICTURE_FLAG != 'Y'
+          AND T.DATA_AUTH = #{dataAuth,jdbcType=VARCHAR},
+          AND T1.DATA_AUTH = #{dataAuth,jdbcType=VARCHAR}
+  </select>
+
+  <update id="updateByExampleSelective" parameterType="map">
+    update N2ADMIN.T_CO_LABEL_DATACONFIGURE
+    <set>
+      <if test="record.CLD_LABEL_ID != null">
+        CLD_LABEL_ID = #{record.CLD_LABEL_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CLD_ITEM_ALIAS != null">
+        CLD_ITEM_ALIAS = #{record.CLD_ITEM_ALIAS,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CLD_COLUMN_NAME != null">
+        CLD_COLUMN_NAME = #{record.CLD_COLUMN_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ID != null">
+        ID = #{record.ID,jdbcType=VARCHAR},
+      </if>
+      <if test="record.DEPT_ID != null">
+        DEPT_ID = #{record.DEPT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CREATE_USER != null">
+        CREATE_USER = #{record.CREATE_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CREATE_TIME != null">
+        CREATE_TIME = #{record.CREATE_TIME,jdbcType=DATE},
+      </if>
+      <if test="record.EDIT_USER != null">
+        EDIT_USER = #{record.EDIT_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="record.EDIT_TIME != null">
+        EDIT_TIME = #{record.EDIT_TIME,jdbcType=DATE},
+      </if>
+      <if test="record.DATA_AUTH != null">
+        DATA_AUTH = #{record.DATA_AUTH,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CLD_LIST_FLAG != null">
+        CLD_LIST_FLAG = #{record.CLD_LIST_FLAG,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CLD_SQL != null">
+        CLD_SQL = #{record.CLD_SQL,jdbcType=CLOB},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update N2ADMIN.T_CO_LABEL_DATACONFIGURE
+    set CLD_LABEL_ID = #{record.CLD_LABEL_ID,jdbcType=VARCHAR},
+      CLD_ITEM_ALIAS = #{record.CLD_ITEM_ALIAS,jdbcType=VARCHAR},
+      CLD_COLUMN_NAME = #{record.CLD_COLUMN_NAME,jdbcType=VARCHAR},
+      ID = #{record.ID,jdbcType=VARCHAR},
+      DEPT_ID = #{record.DEPT_ID,jdbcType=VARCHAR},
+      CREATE_USER = #{record.CREATE_USER,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.CREATE_TIME,jdbcType=DATE},
+      EDIT_USER = #{record.EDIT_USER,jdbcType=VARCHAR},
+      EDIT_TIME = #{record.EDIT_TIME,jdbcType=DATE},
+      DATA_AUTH = #{record.DATA_AUTH,jdbcType=VARCHAR},
+      CLD_LIST_FLAG = #{record.CLD_LIST_FLAG,jdbcType=VARCHAR},
+      CLD_SQL = #{record.CLD_SQL,jdbcType=CLOB}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update N2ADMIN.T_CO_LABEL_DATACONFIGURE
+    set CLD_LABEL_ID = #{record.CLD_LABEL_ID,jdbcType=VARCHAR},
+      CLD_ITEM_ALIAS = #{record.CLD_ITEM_ALIAS,jdbcType=VARCHAR},
+      CLD_COLUMN_NAME = #{record.CLD_COLUMN_NAME,jdbcType=VARCHAR},
+      ID = #{record.ID,jdbcType=VARCHAR},
+      DEPT_ID = #{record.DEPT_ID,jdbcType=VARCHAR},
+      CREATE_USER = #{record.CREATE_USER,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.CREATE_TIME,jdbcType=DATE},
+      EDIT_USER = #{record.EDIT_USER,jdbcType=VARCHAR},
+      EDIT_TIME = #{record.EDIT_TIME,jdbcType=DATE},
+      DATA_AUTH = #{record.DATA_AUTH,jdbcType=VARCHAR},
+      CLD_LIST_FLAG = #{record.CLD_LIST_FLAG,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

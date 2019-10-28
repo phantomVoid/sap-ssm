@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.phantom.dao.MlDataItemsDao">
+  <resultMap id="BaseResultMap" type="com.phantom.model.MlDataItems">
+    <result column="TEMPLATE_ID" jdbcType="VARCHAR" property="TEMPLATE_ID" />
+    <result column="DATA_ITEMS_NAME" jdbcType="VARCHAR" property="DATA_ITEMS_NAME" />
+    <result column="DATA_ITEMS_ALIAS" jdbcType="VARCHAR" property="DATA_ITEMS_ALIAS" />
+    <result column="BARCODE_ITEM" jdbcType="VARCHAR" property="BARCODE_ITEM" />
+    <result column="EMPTY_FLAG" jdbcType="VARCHAR" property="EMPTY_FLAG" />
+    <result column="ALLOW_EDIT" jdbcType="VARCHAR" property="ALLOW_EDIT" />
+    <result column="ALLOW_DISPLAY" jdbcType="VARCHAR" property="ALLOW_DISPLAY" />
+    <result column="MATCH_CODE" jdbcType="VARCHAR" property="MATCH_CODE" />
+    <result column="LABEL_COUNT" jdbcType="VARCHAR" property="LABEL_COUNT" />
+    <result column="PICTURE_FLAG" jdbcType="VARCHAR" property="PICTURE_FLAG" />
+    <result column="PICTURE_PATH" jdbcType="VARCHAR" property="PICTURE_PATH" />
+    <result column="SEQ" jdbcType="DECIMAL" property="SEQ" />
+    <result column="TEST_DATA" jdbcType="VARCHAR" property="TEST_DATA" />
+    <result column="PICTURE_NAME_S" jdbcType="VARCHAR" property="PICTURE_NAME_S" />
+    <result column="COLUMN_TYPE" jdbcType="VARCHAR" property="COLUMN_TYPE" />
+    <result column="COLUMN_DATA" jdbcType="VARCHAR" property="COLUMN_DATA" />
+    <result column="ID" jdbcType="VARCHAR" property="ID" />
+    <result column="DEPT_ID" jdbcType="VARCHAR" property="DEPT_ID" />
+    <result column="CREATE_USER" jdbcType="VARCHAR" property="CREATE_USER" />
+    <result column="CREATE_TIME" jdbcType="DATE" property="CREATE_TIME" />
+    <result column="EDIT_USER" jdbcType="VARCHAR" property="EDIT_USER" />
+    <result column="EDIT_TIME" jdbcType="DATE" property="EDIT_TIME" />
+    <result column="DATA_AUTH" jdbcType="VARCHAR" property="DATA_AUTH" />
+    <result column="SUBLEVEL_QTY_FLAG" jdbcType="VARCHAR" property="SUBLEVEL_QTY_FLAG" />
+    <result column="SOURCE_ITEM_ID" jdbcType="VARCHAR" property="SOURCE_ITEM_ID" />
+    <result column="SOURCE_TEMPLATE_ID" jdbcType="VARCHAR" property="SOURCE_TEMPLATE_ID" />
+    <result column="EXTERNAL_SOURCE" jdbcType="VARCHAR" property="EXTERNAL_SOURCE" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    TEMPLATE_ID, DATA_ITEMS_NAME, DATA_ITEMS_ALIAS, BARCODE_ITEM, EMPTY_FLAG, ALLOW_EDIT, 
+    ALLOW_DISPLAY, MATCH_CODE, LABEL_COUNT, PICTURE_FLAG, PICTURE_PATH, SEQ, TEST_DATA, 
+    PICTURE_NAME_S, COLUMN_TYPE, COLUMN_DATA, ID, DEPT_ID, CREATE_USER, CREATE_TIME, 
+    EDIT_USER, EDIT_TIME, DATA_AUTH, SUBLEVEL_QTY_FLAG, SOURCE_ITEM_ID, SOURCE_TEMPLATE_ID, 
+    EXTERNAL_SOURCE
+  </sql>
+  <select id="selectByExample" parameterType="com.phantom.model.MlDataItemsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from N2ADMIN.ML_DATA_ITEMS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.phantom.model.MlDataItemsExample">
+    delete from N2ADMIN.ML_DATA_ITEMS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.phantom.model.MlDataItems">
+    insert into N2ADMIN.ML_DATA_ITEMS (TEMPLATE_ID, DATA_ITEMS_NAME, DATA_ITEMS_ALIAS, 
+      BARCODE_ITEM, EMPTY_FLAG, ALLOW_EDIT, 
+      ALLOW_DISPLAY, MATCH_CODE, LABEL_COUNT, 
+      PICTURE_FLAG, PICTURE_PATH, SEQ, 
+      TEST_DATA, PICTURE_NAME_S, COLUMN_TYPE, 
+      COLUMN_DATA, ID, DEPT_ID, 
+      CREATE_USER, CREATE_TIME, EDIT_USER, 
+      EDIT_TIME, DATA_AUTH, SUBLEVEL_QTY_FLAG, 
+      SOURCE_ITEM_ID, SOURCE_TEMPLATE_ID, EXTERNAL_SOURCE
+      )
+    values (#{TEMPLATE_ID,jdbcType=VARCHAR}, #{DATA_ITEMS_NAME,jdbcType=VARCHAR}, #{DATA_ITEMS_ALIAS,jdbcType=VARCHAR}, 
+      #{BARCODE_ITEM,jdbcType=VARCHAR}, #{EMPTY_FLAG,jdbcType=VARCHAR}, #{ALLOW_EDIT,jdbcType=VARCHAR}, 
+      #{ALLOW_DISPLAY,jdbcType=VARCHAR}, #{MATCH_CODE,jdbcType=VARCHAR}, #{LABEL_COUNT,jdbcType=VARCHAR}, 
+      #{PICTURE_FLAG,jdbcType=VARCHAR}, #{PICTURE_PATH,jdbcType=VARCHAR}, #{SEQ,jdbcType=DECIMAL}, 
+      #{TEST_DATA,jdbcType=VARCHAR}, #{PICTURE_NAME_S,jdbcType=VARCHAR}, #{COLUMN_TYPE,jdbcType=VARCHAR}, 
+      #{COLUMN_DATA,jdbcType=VARCHAR}, #{ID,jdbcType=VARCHAR}, #{DEPT_ID,jdbcType=VARCHAR}, 
+      #{CREATE_USER,jdbcType=VARCHAR}, #{CREATE_TIME,jdbcType=DATE}, #{EDIT_USER,jdbcType=VARCHAR}, 
+      #{EDIT_TIME,jdbcType=DATE}, #{DATA_AUTH,jdbcType=VARCHAR}, #{SUBLEVEL_QTY_FLAG,jdbcType=VARCHAR}, 
+      #{SOURCE_ITEM_ID,jdbcType=VARCHAR}, #{SOURCE_TEMPLATE_ID,jdbcType=VARCHAR}, #{EXTERNAL_SOURCE,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.phantom.model.MlDataItems">
+    insert into N2ADMIN.ML_DATA_ITEMS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="TEMPLATE_ID != null">
+        TEMPLATE_ID,
+      </if>
+      <if test="DATA_ITEMS_NAME != null">
+        DATA_ITEMS_NAME,
+      </if>
+      <if test="DATA_ITEMS_ALIAS != null">
+        DATA_ITEMS_ALIAS,
+      </if>
+      <if test="BARCODE_ITEM != null">
+        BARCODE_ITEM,
+      </if>
+      <if test="EMPTY_FLAG != null">
+        EMPTY_FLAG,
+      </if>
+      <if test="ALLOW_EDIT != null">
+        ALLOW_EDIT,
+      </if>
+      <if test="ALLOW_DISPLAY != null">
+        ALLOW_DISPLAY,
+      </if>
+      <if test="MATCH_CODE != null">
+        MATCH_CODE,
+      </if>
+      <if test="LABEL_COUNT != null">
+        LABEL_COUNT,
+      </if>
+      <if test="PICTURE_FLAG != null">
+        PICTURE_FLAG,
+      </if>
+      <if test="PICTURE_PATH != null">
+        PICTURE_PATH,
+      </if>
+      <if test="SEQ != null">
+        SEQ,
+      </if>
+      <if test="TEST_DATA != null">
+        TEST_DATA,
+      </if>
+      <if test="PICTURE_NAME_S != null">
+        PICTURE_NAME_S,
+      </if>
+      <if test="COLUMN_TYPE != null">
+        COLUMN_TYPE,
+      </if>
+      <if test="COLUMN_DATA != null">
+        COLUMN_DATA,
+      </if>
+      <if test="ID != null">
+        ID,
+      </if>
+      <if test="DEPT_ID != null">
+        DEPT_ID,
+      </if>
+      <if test="CREATE_USER != null">
+        CREATE_USER,
+      </if>
+      <if test="CREATE_TIME != null">
+        CREATE_TIME,
+      </if>
+      <if test="EDIT_USER != null">
+        EDIT_USER,
+      </if>
+      <if test="EDIT_TIME != null">
+        EDIT_TIME,
+      </if>
+      <if test="DATA_AUTH != null">
+        DATA_AUTH,
+      </if>
+      <if test="SUBLEVEL_QTY_FLAG != null">
+        SUBLEVEL_QTY_FLAG,
+      </if>
+      <if test="SOURCE_ITEM_ID != null">
+        SOURCE_ITEM_ID,
+      </if>
+      <if test="SOURCE_TEMPLATE_ID != null">
+        SOURCE_TEMPLATE_ID,
+      </if>
+      <if test="EXTERNAL_SOURCE != null">
+        EXTERNAL_SOURCE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="TEMPLATE_ID != null">
+        #{TEMPLATE_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="DATA_ITEMS_NAME != null">
+        #{DATA_ITEMS_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="DATA_ITEMS_ALIAS != null">
+        #{DATA_ITEMS_ALIAS,jdbcType=VARCHAR},
+      </if>
+      <if test="BARCODE_ITEM != null">
+        #{BARCODE_ITEM,jdbcType=VARCHAR},
+      </if>
+      <if test="EMPTY_FLAG != null">
+        #{EMPTY_FLAG,jdbcType=VARCHAR},
+      </if>
+      <if test="ALLOW_EDIT != null">
+        #{ALLOW_EDIT,jdbcType=VARCHAR},
+      </if>
+      <if test="ALLOW_DISPLAY != null">
+        #{ALLOW_DISPLAY,jdbcType=VARCHAR},
+      </if>
+      <if test="MATCH_CODE != null">
+        #{MATCH_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="LABEL_COUNT != null">
+        #{LABEL_COUNT,jdbcType=VARCHAR},
+      </if>
+      <if test="PICTURE_FLAG != null">
+        #{PICTURE_FLAG,jdbcType=VARCHAR},
+      </if>
+      <if test="PICTURE_PATH != null">
+        #{PICTURE_PATH,jdbcType=VARCHAR},
+      </if>
+      <if test="SEQ != null">
+        #{SEQ,jdbcType=DECIMAL},
+      </if>
+      <if test="TEST_DATA != null">
+        #{TEST_DATA,jdbcType=VARCHAR},
+      </if>
+      <if test="PICTURE_NAME_S != null">
+        #{PICTURE_NAME_S,jdbcType=VARCHAR},
+      </if>
+      <if test="COLUMN_TYPE != null">
+        #{COLUMN_TYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="COLUMN_DATA != null">
+        #{COLUMN_DATA,jdbcType=VARCHAR},
+      </if>
+      <if test="ID != null">
+        #{ID,jdbcType=VARCHAR},
+      </if>
+      <if test="DEPT_ID != null">
+        #{DEPT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="CREATE_USER != null">
+        #{CREATE_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="CREATE_TIME != null">
+        #{CREATE_TIME,jdbcType=DATE},
+      </if>
+      <if test="EDIT_USER != null">
+        #{EDIT_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="EDIT_TIME != null">
+        #{EDIT_TIME,jdbcType=DATE},
+      </if>
+      <if test="DATA_AUTH != null">
+        #{DATA_AUTH,jdbcType=VARCHAR},
+      </if>
+      <if test="SUBLEVEL_QTY_FLAG != null">
+        #{SUBLEVEL_QTY_FLAG,jdbcType=VARCHAR},
+      </if>
+      <if test="SOURCE_ITEM_ID != null">
+        #{SOURCE_ITEM_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="SOURCE_TEMPLATE_ID != null">
+        #{SOURCE_TEMPLATE_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="EXTERNAL_SOURCE != null">
+        #{EXTERNAL_SOURCE,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.phantom.model.MlDataItemsExample" resultType="java.lang.Long">
+    select count(*) from N2ADMIN.ML_DATA_ITEMS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update N2ADMIN.ML_DATA_ITEMS
+    <set>
+      <if test="record.TEMPLATE_ID != null">
+        TEMPLATE_ID = #{record.TEMPLATE_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="record.DATA_ITEMS_NAME != null">
+        DATA_ITEMS_NAME = #{record.DATA_ITEMS_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="record.DATA_ITEMS_ALIAS != null">
+        DATA_ITEMS_ALIAS = #{record.DATA_ITEMS_ALIAS,jdbcType=VARCHAR},
+      </if>
+      <if test="record.BARCODE_ITEM != null">
+        BARCODE_ITEM = #{record.BARCODE_ITEM,jdbcType=VARCHAR},
+      </if>
+      <if test="record.EMPTY_FLAG != null">
+        EMPTY_FLAG = #{record.EMPTY_FLAG,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ALLOW_EDIT != null">
+        ALLOW_EDIT = #{record.ALLOW_EDIT,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ALLOW_DISPLAY != null">
+        ALLOW_DISPLAY = #{record.ALLOW_DISPLAY,jdbcType=VARCHAR},
+      </if>
+      <if test="record.MATCH_CODE != null">
+        MATCH_CODE = #{record.MATCH_CODE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.LABEL_COUNT != null">
+        LABEL_COUNT = #{record.LABEL_COUNT,jdbcType=VARCHAR},
+      </if>
+      <if test="record.PICTURE_FLAG != null">
+        PICTURE_FLAG = #{record.PICTURE_FLAG,jdbcType=VARCHAR},
+      </if>
+      <if test="record.PICTURE_PATH != null">
+        PICTURE_PATH = #{record.PICTURE_PATH,jdbcType=VARCHAR},
+      </if>
+      <if test="record.SEQ != null">
+        SEQ = #{record.SEQ,jdbcType=DECIMAL},
+      </if>
+      <if test="record.TEST_DATA != null">
+        TEST_DATA = #{record.TEST_DATA,jdbcType=VARCHAR},
+      </if>
+      <if test="record.PICTURE_NAME_S != null">
+        PICTURE_NAME_S = #{record.PICTURE_NAME_S,jdbcType=VARCHAR},
+      </if>
+      <if test="record.COLUMN_TYPE != null">
+        COLUMN_TYPE = #{record.COLUMN_TYPE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.COLUMN_DATA != null">
+        COLUMN_DATA = #{record.COLUMN_DATA,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ID != null">
+        ID = #{record.ID,jdbcType=VARCHAR},
+      </if>
+      <if test="record.DEPT_ID != null">
+        DEPT_ID = #{record.DEPT_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CREATE_USER != null">
+        CREATE_USER = #{record.CREATE_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="record.CREATE_TIME != null">
+        CREATE_TIME = #{record.CREATE_TIME,jdbcType=DATE},
+      </if>
+      <if test="record.EDIT_USER != null">
+        EDIT_USER = #{record.EDIT_USER,jdbcType=VARCHAR},
+      </if>
+      <if test="record.EDIT_TIME != null">
+        EDIT_TIME = #{record.EDIT_TIME,jdbcType=DATE},
+      </if>
+      <if test="record.DATA_AUTH != null">
+        DATA_AUTH = #{record.DATA_AUTH,jdbcType=VARCHAR},
+      </if>
+      <if test="record.SUBLEVEL_QTY_FLAG != null">
+        SUBLEVEL_QTY_FLAG = #{record.SUBLEVEL_QTY_FLAG,jdbcType=VARCHAR},
+      </if>
+      <if test="record.SOURCE_ITEM_ID != null">
+        SOURCE_ITEM_ID = #{record.SOURCE_ITEM_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="record.SOURCE_TEMPLATE_ID != null">
+        SOURCE_TEMPLATE_ID = #{record.SOURCE_TEMPLATE_ID,jdbcType=VARCHAR},
+      </if>
+      <if test="record.EXTERNAL_SOURCE != null">
+        EXTERNAL_SOURCE = #{record.EXTERNAL_SOURCE,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update N2ADMIN.ML_DATA_ITEMS
+    set TEMPLATE_ID = #{record.TEMPLATE_ID,jdbcType=VARCHAR},
+      DATA_ITEMS_NAME = #{record.DATA_ITEMS_NAME,jdbcType=VARCHAR},
+      DATA_ITEMS_ALIAS = #{record.DATA_ITEMS_ALIAS,jdbcType=VARCHAR},
+      BARCODE_ITEM = #{record.BARCODE_ITEM,jdbcType=VARCHAR},
+      EMPTY_FLAG = #{record.EMPTY_FLAG,jdbcType=VARCHAR},
+      ALLOW_EDIT = #{record.ALLOW_EDIT,jdbcType=VARCHAR},
+      ALLOW_DISPLAY = #{record.ALLOW_DISPLAY,jdbcType=VARCHAR},
+      MATCH_CODE = #{record.MATCH_CODE,jdbcType=VARCHAR},
+      LABEL_COUNT = #{record.LABEL_COUNT,jdbcType=VARCHAR},
+      PICTURE_FLAG = #{record.PICTURE_FLAG,jdbcType=VARCHAR},
+      PICTURE_PATH = #{record.PICTURE_PATH,jdbcType=VARCHAR},
+      SEQ = #{record.SEQ,jdbcType=DECIMAL},
+      TEST_DATA = #{record.TEST_DATA,jdbcType=VARCHAR},
+      PICTURE_NAME_S = #{record.PICTURE_NAME_S,jdbcType=VARCHAR},
+      COLUMN_TYPE = #{record.COLUMN_TYPE,jdbcType=VARCHAR},
+      COLUMN_DATA = #{record.COLUMN_DATA,jdbcType=VARCHAR},
+      ID = #{record.ID,jdbcType=VARCHAR},
+      DEPT_ID = #{record.DEPT_ID,jdbcType=VARCHAR},
+      CREATE_USER = #{record.CREATE_USER,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.CREATE_TIME,jdbcType=DATE},
+      EDIT_USER = #{record.EDIT_USER,jdbcType=VARCHAR},
+      EDIT_TIME = #{record.EDIT_TIME,jdbcType=DATE},
+      DATA_AUTH = #{record.DATA_AUTH,jdbcType=VARCHAR},
+      SUBLEVEL_QTY_FLAG = #{record.SUBLEVEL_QTY_FLAG,jdbcType=VARCHAR},
+      SOURCE_ITEM_ID = #{record.SOURCE_ITEM_ID,jdbcType=VARCHAR},
+      SOURCE_TEMPLATE_ID = #{record.SOURCE_TEMPLATE_ID,jdbcType=VARCHAR},
+      EXTERNAL_SOURCE = #{record.EXTERNAL_SOURCE,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
