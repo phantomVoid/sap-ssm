@@ -44,11 +44,24 @@ public class PdaBomListBase {
     @XmlElement
     public BigDecimal FINISH_COUNT;
 
+    @XmlElement
+    public String PROJECT_REL;
+
     //8.物料列表
     @XmlElement
     public List<PdaBomListInner> ITEM_LIST;
 
     public PdaBomListBase() {
+    }
+
+    @XmlTransient
+    @JSONField(name = "PROJECT_REL")
+    public String getPROJECT_REL() {
+        return PROJECT_REL;
+    }
+
+    public void setPROJECT_REL(String PROJECT_REL) {
+        this.PROJECT_REL = PROJECT_REL;
     }
 
     @XmlTransient
