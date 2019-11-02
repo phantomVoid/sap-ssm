@@ -89,25 +89,6 @@
 
     <bean id="PdaJsonController" class="com.phantom.controller.PdaJsonController"/>
 
-    <!--restful服务 -->
-<!--
-    <jaxrs:server id="PdaJson" address="/pda">
-        <jaxrs:serviceBeans>
-            <ref bean="PdaJsonController"/>
-        </jaxrs:serviceBeans>
-        <jaxrs:extensionMappings>
-            <entry key="json" value="application/json"/>
-            <entry key="xml" value="application/xml"/>
-        </jaxrs:extensionMappings>
-        <jaxrs:languageMappings>
-            <entry key="en" value="en-gb"/>
-        </jaxrs:languageMappings>
-    </jaxrs:server>
--->
-
-
-
-
     <!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>

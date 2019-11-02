@@ -46,6 +46,21 @@
     <jaxws:endpoint implementor="com.phantom.wss.impl.ProjectReportIntfImpl" address="/ProjectReportIntfImpl"/>
 
     <!--账目同步-->
-    <jaxws:endpoint implementor="com.phantom.wss.impl.ProjectAccountCheckIntfImpl" address="/ProjectAccountCheckIntfImpl"/>
+    <jaxws:endpoint implementor="com.phantom.wss.impl.ProjectAccountCheckIntfImpl"
+                    address="/ProjectAccountCheckIntfImpl"/>
 
+    <!-- RestFull接口测试 -->
+    <!--<jaxws:endpoint implementor="com.phantom.controller.RestFulController" address="/RestFulController"/>-->
+<!--
+    <jaxrs:server id="RestFulService" address="/restFul">
+        <jaxrs:serviceBeans>
+            <ref bean="RestFulService"/>
+        </jaxrs:serviceBeans>
+        <jaxrs:extensionMappings>
+            <entry key="json" value="application/json"/>
+            <entry key="xml" value="application/xml"/>
+        </jaxrs:extensionMappings>
+    </jaxrs:server>
+    -->
+    <!--<bean id="RestFull" class="com.phantom.restful.RestFulService"/>-->
 </beans>
