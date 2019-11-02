@@ -27,7 +27,6 @@ import java.util.*;
 @Controller
 @CrossOrigin
 public class PdaJsonController {
-
     @Resource
     TCoItemDao itemDao;
 
@@ -163,6 +162,7 @@ public class PdaJsonController {
         bomBase.setLOT_NUMBER(projectBase.getLOT_NUMBER());
         bomBase.setPRODUCT_COUNT(projectBase.getPRODUCT_COUNT());
         bomBase.setFINISH_COUNT(projectBase.getFINISH_COUNT());
+        bomBase.setPROJECT_REL(projectBase.getPROJECT_ID());
 
         List<PdaBomListInner> bomInnerList = new ArrayList<>();
         for (TPmProjectDetail detail : detailList) {

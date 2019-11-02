@@ -41,13 +41,6 @@ public class PdaGetDataItemController {
 
     /**
      * 获取工单基础信息(原材合格证)
-     *
-     * @param licenseSn 原材合格SN
-     * @param response
-     * @return
-     */
-    /**
-     * 获取工单基础信息(原材合格证)
      * @param itemSn    物料编码
      * @param rawLicenseSn  原材批次
      * @param weightNum 重量
