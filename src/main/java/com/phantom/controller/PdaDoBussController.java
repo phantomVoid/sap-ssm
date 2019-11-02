@@ -83,6 +83,8 @@ public class PdaDoBussController {
                 projectBase.setEDIT_USER(userId);
                 projectBase.setCHECK_MON(DateUtils.getCurDateTime());
                 projectBase.setCHECK_USER(userId);
+
+                baseDao.updateByExample(projectBase, baseExp);
             }
 
             //查询关联工单
@@ -105,6 +107,8 @@ public class PdaDoBussController {
                 projectBase.setEDIT_USER(userId);
                 projectBase.setCHECK_MON(DateUtils.getCurDateTime());
                 projectBase.setCHECK_USER(userId);
+
+                baseDao.updateByExample(projectBase, baseExp);
             }
         } catch (Exception e) {
             jsonBase.setSflag(Flag.N.toString());
@@ -162,16 +166,22 @@ public class PdaDoBussController {
                     throw new Exception(jsonBase.getMessage());
                 }
 
-                if(state >= 3){
+                if(state != 3){
                     String curStatus = null;
                     switch (state) {
+                        case 0:
+                            curStatus = "开立";
+                            break;
                         case 2:
                             curStatus = "关结";
                             break;
                         case 3:
-                            curStatus = "投料";
+                            curStatus = "备料";
                             break;
                         case 4:
+                            curStatus = "投料";
+                            break;
+                        case 5:
                             curStatus = "包装";
                             break;
                         default:
@@ -181,6 +191,8 @@ public class PdaDoBussController {
                     jsonBase.setSflag(Flag.N.toString());
                     jsonBase.setMessage(projectId+"工单状态:"+curStatus+"无法取消备料");
                     throw new Exception(jsonBase.getMessage());
+                }else if(state == 3){
+                    break;
                 }else{
                     jsonBase.setSflag(Flag.N.toString());
                     jsonBase.setMessage(projectId+"工单未备料,无法取消备料");
@@ -200,8 +212,6 @@ public class PdaDoBussController {
                 throw new Exception(projectId+"该工单不存在");
             }
 
-
-
             for (TPmProjectBase projectBase : baseList) {
                 //更新工单状态（0开立1投产2关结3备料4投料5包装）
                 projectBase.setPROJECT_STATUS("0");
@@ -209,6 +219,7 @@ public class PdaDoBussController {
                 projectBase.setEDIT_USER(userId);
                 projectBase.setCHECK_MON(DateUtils.getCurDateTime());
                 projectBase.setCHECK_USER(userId);
+                baseDao.updateByExample(projectBase, baseExp);
             }
 
             //查询关联工单
@@ -231,6 +242,7 @@ public class PdaDoBussController {
                 projectBase.setEDIT_USER(userId);
                 projectBase.setCHECK_MON(DateUtils.getCurDateTime());
                 projectBase.setCHECK_USER(userId);
+                baseDao.updateByExample(projectBase, baseExp);
             }
         } catch (Exception e) {
             jsonBase.setSflag(Flag.N.toString());
