@@ -25,7 +25,7 @@ public class RfcManager {
 
     private static final String ABAP_AS_POOLED = "ABAP_AS_POOL";
 
-    private static ResourceBundle resourceBundle = ResourceBundle.getBundle("sap");
+    private static ResourceBundle resourceBundle = ResourceBundle.getBundle("/dev/sap");
 
     private static String lang = "zh";
 
