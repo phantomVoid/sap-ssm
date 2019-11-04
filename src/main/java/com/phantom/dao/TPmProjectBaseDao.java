@@ -25,4 +25,6 @@ public interface TPmProjectBaseDao {
     int updateByExample(@Param("record") TPmProjectBase record, @Param("example") TPmProjectBaseExample example);
 
     TPmProjectBase selectByProjectId(@Param("PROJECT_ID") String projectId);
+
+    int updateProjectQuickRel(@Param("PROJECT_ID") String projectId,@Param("DATA_AUTH") String dataAuth,@Param("USER_ID") String userId);
 }

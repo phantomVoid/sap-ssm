@@ -4,15 +4,16 @@ import com.phantom.comm.enums.ListFlag;
 import com.phantom.comm.enums.ProjectSort;
 import com.phantom.dao.TPmProjectBaseDao;
 import com.phantom.dao.TPmProjectDetailDao;
+import com.phantom.dao.TPmProjectRelDao;
 import com.phantom.dao.TPmProjectReportDao;
 import com.phantom.model.*;
-import com.phantom.pojo.SapOrderBase;
-import com.phantom.pojo.SapOrderProcess;
-import com.phantom.pojo.SapOrderReserved;
-import com.phantom.pojo.SapOrderSales;
+import com.phantom.pojo.*;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 用户工具类
@@ -460,5 +461,72 @@ public class ProjectUtils {
             TRfcLog tRfcLog = new TRfcLog();
             tRfcLog.setRL_FUNC_NAME(projectDetail.getCBD_ITEM_CODE());
         }
+    }
+
+    /**
+     * 快速通道工单关联
+     * @param baseDao
+     * @param relDao
+     * @param projectId
+     * @param dataAuth
+     * @param userId
+     * @return
+     */
+    public static MapRes doQuickRel(TPmProjectBaseDao baseDao, TPmProjectRelDao relDao, String projectId, String dataAuth ,String userId){
+        MapRes res = new MapRes();
+        res.setFlag(true);
+        res.setDesc("快速关联成功");
+        try {
+            TPmProjectBaseExample baseExp = new TPmProjectBaseExample();
+            TPmProjectBaseExample.Criteria baseExpCri = baseExp.createCriteria();
+
+            baseExpCri.andPROJECT_IDEqualTo(projectId);
+
+            List<TPmProjectBase> baseList = baseDao.selectByExample(baseExp);
+
+            if(baseList.size() < 1){
+                res.setFlag(false);
+                res.setDesc("该工单号不存在");
+                throw new Exception(res.getDesc());
+            }
+
+            TPmProjectRelExample relExp = new TPmProjectRelExample();
+            relExp.or().andPROJECT_IDEqualTo(projectId).andREL_PROJECT_IDEqualTo(projectId);
+            List<TPmProjectRel> relList = relDao.selectByExample(relExp);
+
+            if(relList.size() < 1){
+                TPmProjectRel projectRel = new TPmProjectRel();
+                for (TPmProjectBase projectBase : baseList) {
+                    projectRel.setID(StringUtils.getUUID());
+                    projectRel.setDEPT_ID(projectBase.getDEPT_ID());
+                    projectRel.setCREATE_USER(projectBase.getCREATE_USER());
+                    projectRel.setCREATE_TIME(DateUtils.getCurDateTime());
+                    projectRel.setEDIT_TIME(null);
+                    projectRel.setEDIT_USER(null);
+                    projectRel.setDATA_AUTH(dataAuth);
+                    projectRel.setPROJECT_ID(projectId);
+                    projectRel.setREL_PROJECT_ID(projectId);
+
+                    projectBase.setIS_REL("3");
+                    projectBase.setREL_NUM(BigDecimal.valueOf(1));
+                    projectBase.setDATA_AUTH(dataAuth);
+
+                    baseDao.updateByExample(projectBase, baseExp);
+                    relDao.insert(projectRel);
+                }
+
+                baseDao.updateProjectQuickRel(projectId, dataAuth, userId);
+
+            }else{
+                res.setFlag(false);
+                res.setDesc("已存在对应关联关系");
+                throw new Exception(res.getDesc());
+            }
+        } catch (Exception e) {
+            res.setFlag(false);
+            res.setDesc(e.getMessage());
+            return res;
+        }
+        return res;
     }
 }

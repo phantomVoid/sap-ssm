@@ -6,6 +6,7 @@ import com.phantom.dao.SyUserDao;
 import com.phantom.dao.TPmProjectBaseDao;
 import com.phantom.dao.TPmProjectRelDao;
 import com.phantom.model.*;
+import com.phantom.pojo.MapRes;
 import com.phantom.pojo.PdaJsonBase;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -34,21 +35,22 @@ public class PdaDoBussController {
 
     /**
      * PDA工单备料接口
+     *
      * @param projectId 工单号
-     * @param userName 操作用户loginName
+     * @param userName  操作用户loginName
      * @param response
      * @return
      */
     @RequestMapping(value = "/doPrepare")
     @ResponseBody
-    public String doPrepare(@RequestParam(value = "PROJECT_ID") String projectId, @RequestParam(value = "CUR_USER") String userName, HttpServletResponse response) {
+    public String doPrepare(@RequestParam(value = "PROJECT_ID") String projectId, @RequestParam(value = "CUR_USER") String userName, @RequestParam(value = "DATA_AUTH") String dataAuth, HttpServletResponse response) {
         PdaJsonBase jsonBase = new PdaJsonBase();
 
         try {
 
             String userId = getUserId(userName);
             jsonBase.setSflag(Flag.Y.toString());
-            jsonBase.setMessage("生产备料"+Flag.Y.getDesc());
+            jsonBase.setMessage("生产备料" + Flag.Y.getDesc());
 
             TPmProjectBaseExample baseExp = new TPmProjectBaseExample();
             TPmProjectBaseExample.Criteria baseExpCri = baseExp.createCriteria();
@@ -57,19 +59,19 @@ public class PdaDoBussController {
 
             List<TPmProjectBase> baseList = baseDao.selectByExample(baseExp);
 
-            if(!(baseList.size()>0)){
+            if (!(baseList.size() > 0)) {
                 jsonBase.setSflag(Flag.N.toString());
-                jsonBase.setMessage(projectId+"该工单不存在");
-                throw new Exception(projectId+"该工单不存在");
+                jsonBase.setMessage(projectId + "该工单不存在");
+                throw new Exception(projectId + "该工单不存在");
             }
 
             //工单状态（0开立1投产2关结3备料4投料5包装）
             baseExpCri.andPROJECT_STATUSEqualTo("0");
 
             baseList = baseDao.selectByExample(baseExp);
-            if(!(baseList.size()>0)){
+            if (!(baseList.size() > 0)) {
                 jsonBase.setSflag(Flag.Y.toString());
-                jsonBase.setMessage(projectId+"该工单已备料");
+                jsonBase.setMessage(projectId + "该工单已备料");
                 return StringUtils.getJsonStr(jsonBase).toUpperCase();
             }
 
@@ -83,23 +85,27 @@ public class PdaDoBussController {
                 projectBase.setEDIT_USER(userId);
                 projectBase.setCHECK_MON(DateUtils.getCurDateTime());
                 projectBase.setCHECK_USER(userId);
+                projectBase.setDATA_AUTH(dataAuth);
 
                 baseDao.updateByExample(projectBase, baseExp);
             }
 
             //查询关联工单
             TPmProjectRelExample relExp = new TPmProjectRelExample();
-            TPmProjectRelExample.Criteria relExpCri = relExp.createCriteria();
-            relExpCri.andPROJECT_IDEqualTo(projectId);
+            relExp.or().andPROJECT_IDEqualTo(projectId).andREL_PROJECT_IDEqualTo(projectId);
 
             List<TPmProjectRel> relList = relDao.selectByExample(relExp);
+
+            if (relList.size() < 1) {
+                MapRes mapRes = ProjectUtils.doQuickRel(baseDao, relDao, projectId, dataAuth, userId);
+            }
 
             List<String> relProjectIdList = new ArrayList<>();
             for (TPmProjectRel projectRel : relList) {
                 relProjectIdList.add(projectRel.getREL_PROJECT_ID());
             }
 
-            baseExpCri.andPROJECT_IDIn(relProjectIdList);
+            baseExp.createCriteria().andPROJECT_IDIn(relProjectIdList);
             List<TPmProjectBase> relBaseList = baseDao.selectByExample(baseExp);
             for (TPmProjectBase projectBase : relBaseList) {
                 projectBase.setPROJECT_STATUS("3");
@@ -107,9 +113,19 @@ public class PdaDoBussController {
                 projectBase.setEDIT_USER(userId);
                 projectBase.setCHECK_MON(DateUtils.getCurDateTime());
                 projectBase.setCHECK_USER(userId);
+                projectBase.setDATA_AUTH(dataAuth);
 
                 baseDao.updateByExample(projectBase, baseExp);
             }
+
+            relExp.or().andPROJECT_IDEqualTo(projectId).andREL_PROJECT_IDEqualTo(projectId);
+            List<TPmProjectRel> rels = relDao.selectByExample(relExp);
+            for (TPmProjectRel rel : rels) {
+                rel.setDATA_AUTH(dataAuth);
+                relDao.updateByExample(rel, relExp);
+            }
+
+
         } catch (Exception e) {
             jsonBase.setSflag(Flag.N.toString());
             jsonBase.setMessage(e.getMessage());
@@ -126,8 +142,9 @@ public class PdaDoBussController {
 
     /**
      * PDA工单取消备料接口
+     *
      * @param projectId 工单号
-     * @param userName 操作用户ID
+     * @param userName  操作用户ID
      * @param response
      * @return
      */
@@ -140,17 +157,17 @@ public class PdaDoBussController {
             String userId = getUserId(userName);
 
             jsonBase.setSflag(Flag.Y.toString());
-            jsonBase.setMessage("取消备料"+Flag.Y.getDesc());
+            jsonBase.setMessage("取消备料" + Flag.Y.getDesc());
             TPmProjectBaseExample baseExp = new TPmProjectBaseExample();
             TPmProjectBaseExample.Criteria baseExpCri = baseExp.createCriteria();
 
             baseExpCri.andPROJECT_IDEqualTo(projectId);
             List<TPmProjectBase> baseList = baseDao.selectByExample(baseExp);
 
-            if(!(baseList.size()>0)){
+            if (!(baseList.size() > 0)) {
                 jsonBase.setSflag(Flag.N.toString());
-                jsonBase.setMessage(projectId+"该工单不存在");
-                throw new Exception(projectId+"该工单不存在");
+                jsonBase.setMessage(projectId + "该工单不存在");
+                throw new Exception(projectId + "该工单不存在");
             }
 
             //工单状态（0开立1投产2关结3备料4投料5包装）
@@ -162,11 +179,11 @@ public class PdaDoBussController {
                     state = Integer.valueOf(status);
                 } catch (Exception e) {
                     jsonBase.setSflag(Flag.N.toString());
-                    jsonBase.setMessage(projectId+"工单工单状态异常,无法取消备料");
+                    jsonBase.setMessage(projectId + "工单工单状态异常,无法取消备料");
                     throw new Exception(jsonBase.getMessage());
                 }
 
-                if(state != 3){
+                if (state != 3) {
                     String curStatus = null;
                     switch (state) {
                         case 0:
@@ -189,13 +206,13 @@ public class PdaDoBussController {
                             break;
                     }
                     jsonBase.setSflag(Flag.N.toString());
-                    jsonBase.setMessage(projectId+"工单状态:"+curStatus+"无法取消备料");
+                    jsonBase.setMessage(projectId + "工单状态:" + curStatus + "无法取消备料");
                     throw new Exception(jsonBase.getMessage());
-                }else if(state == 3){
+                } else if (state == 3) {
                     break;
-                }else{
+                } else {
                     jsonBase.setSflag(Flag.N.toString());
-                    jsonBase.setMessage(projectId+"工单未备料,无法取消备料");
+                    jsonBase.setMessage(projectId + "工单未备料,无法取消备料");
                     throw new Exception(jsonBase.getMessage());
                 }
             }
@@ -206,10 +223,10 @@ public class PdaDoBussController {
 
             baseList = baseDao.selectByExample(baseExp);
 
-            if(!(baseList.size()>0)){
+            if (!(baseList.size() > 0)) {
                 jsonBase.setSflag(Flag.N.toString());
-                jsonBase.setMessage(projectId+"该工单不存在");
-                throw new Exception(projectId+"该工单不存在");
+                jsonBase.setMessage(projectId + "该工单不存在");
+                throw new Exception(projectId + "该工单不存在");
             }
 
             for (TPmProjectBase projectBase : baseList) {
@@ -260,14 +277,14 @@ public class PdaDoBussController {
 
     /**
      * 获取登录用户ID
+     *
      * @return
      */
-    public String getUserId(String userName){
+    public String getUserId(String userName) {
         String userId = null;
         try {
             SyUserExample userExp = new SyUserExample();
-            SyUserExample.Criteria userExpCri = userExp.createCriteria();
-            userExpCri.andLOGIN_NAMEEqualTo(userName);
+            userExp.createCriteria().andLOGIN_NAMEEqualTo("wzx");
             List<SyUser> syUsers = userDao.selectByExample(userExp);
             userId = syUsers.get(0).getID();
         } catch (Exception e) {

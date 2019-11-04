@@ -1,790 +1,820 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.phantom.dao.TPmProjectBaseDao">
-  <resultMap id="BaseResultMap" type="com.phantom.model.TPmProjectBase">
-    <result column="ID" jdbcType="VARCHAR" property="ID" />
-    <result column="PROJECT_ID" jdbcType="VARCHAR" property="PROJECT_ID" />
-    <result column="PRODUCT_MATERIAL" jdbcType="VARCHAR" property="PRODUCT_MATERIAL" />
-    <result column="PRODUCT_NAME" jdbcType="VARCHAR" property="PRODUCT_NAME" />
-    <result column="PRODUCT_STANDARD" jdbcType="VARCHAR" property="PRODUCT_STANDARD" />
-    <result column="SCRAPPED_QTY" jdbcType="DECIMAL" property="SCRAPPED_QTY" />
-    <result column="DESTROY_NO" jdbcType="VARCHAR" property="DESTROY_NO" />
-    <result column="CUST_CODE" jdbcType="VARCHAR" property="CUST_CODE" />
-    <result column="PRODUCT_COUNT" jdbcType="DECIMAL" property="PRODUCT_COUNT" />
-    <result column="FQC_COUNT" jdbcType="DECIMAL" property="FQC_COUNT" />
-    <result column="FINISH_COUNT" jdbcType="DECIMAL" property="FINISH_COUNT" />
-    <result column="WORKING_SC" jdbcType="DECIMAL" property="WORKING_SC" />
-    <result column="PROJECT_STATUS" jdbcType="VARCHAR" property="PROJECT_STATUS" />
-    <result column="PROJECT_TYPE" jdbcType="VARCHAR" property="PROJECT_TYPE" />
-    <result column="PROLEPSIS_START_DATE" jdbcType="DATE" property="PROLEPSIS_START_DATE" />
-    <result column="PROLEPSIS_END_DATE" jdbcType="DATE" property="PROLEPSIS_END_DATE" />
-    <result column="TPPB_PLAN_DELIVERY_DATE" jdbcType="DATE" property="TPPB_PLAN_DELIVERY_DATE" />
-    <result column="DEPT_ID" jdbcType="VARCHAR" property="DEPT_ID" />
-    <result column="CREATE_USER" jdbcType="VARCHAR" property="CREATE_USER" />
-    <result column="CREATE_TIME" jdbcType="DATE" property="CREATE_TIME" />
-    <result column="EDIT_USER" jdbcType="VARCHAR" property="EDIT_USER" />
-    <result column="EDIT_TIME" jdbcType="DATE" property="EDIT_TIME" />
-    <result column="PRODUCT_LINE" jdbcType="VARCHAR" property="PRODUCT_LINE" />
-    <result column="ACTUAL_START_DATE" jdbcType="DATE" property="ACTUAL_START_DATE" />
-    <result column="ACTUAL_END_DATE" jdbcType="DATE" property="ACTUAL_END_DATE" />
-    <result column="PM_CLOSE_REASON" jdbcType="VARCHAR" property="PM_CLOSE_REASON" />
-    <result column="PROJECT_STEP" jdbcType="VARCHAR" property="PROJECT_STEP" />
-    <result column="FAI_NUM" jdbcType="DECIMAL" property="FAI_NUM" />
-    <result column="DATA_AUTH" jdbcType="VARCHAR" property="DATA_AUTH" />
-    <result column="PROJECT_ERPTYPE" jdbcType="VARCHAR" property="PROJECT_ERPTYPE" />
-    <result column="PROJECT_OFONESELF" jdbcType="VARCHAR" property="PROJECT_OFONESELF" />
-    <result column="LOT_NUMBER" jdbcType="VARCHAR" property="LOT_NUMBER" />
-    <result column="PRODUCT_SN_START" jdbcType="VARCHAR" property="PRODUCT_SN_START" />
-    <result column="PRODUCT_SN_END" jdbcType="VARCHAR" property="PRODUCT_SN_END" />
-    <result column="PRODUCT_SN_PREFIX" jdbcType="VARCHAR" property="PRODUCT_SN_PREFIX" />
-    <result column="PRODUCT_PACK_SEQ" jdbcType="VARCHAR" property="PRODUCT_PACK_SEQ" />
-    <result column="PM_CHANGE_TIMES" jdbcType="DECIMAL" property="PM_CHANGE_TIMES" />
-    <result column="PRODUCT_MATERIAL_VER" jdbcType="VARCHAR" property="PRODUCT_MATERIAL_VER" />
-    <result column="PRODUCT_CONFIGURE" jdbcType="VARCHAR" property="PRODUCT_CONFIGURE" />
-    <result column="PROJECT_FLAG" jdbcType="VARCHAR" property="PROJECT_FLAG" />
-    <result column="IS_REL" jdbcType="VARCHAR" property="IS_REL" />
-    <result column="REL_NUM" jdbcType="DECIMAL" property="REL_NUM" />
-    <result column="PROJECT_SORT" jdbcType="DECIMAL" property="PROJECT_SORT" />
-    <result column="PM_CHECK_STUST" jdbcType="DECIMAL" property="PM_CHECK_STUST" />
-    <result column="CHECK_MON" jdbcType="DATE" property="CHECK_MON" />
-    <result column="CHECK_USER" jdbcType="VARCHAR" property="CHECK_USER" />
-    <result column="WORK_SPACE" jdbcType="VARCHAR" property="WORK_SPACE" />
-    <result column="BASE_UNIT" jdbcType="VARCHAR" property="BASE_UNIT" />
-    <result column="WARE_HOUSE" jdbcType="VARCHAR" property="WARE_HOUSE" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.phantom.model.TPmProjectBase">
-    <result column="PM_MEMO" jdbcType="CLOB" property="PM_MEMO" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+    <resultMap id="BaseResultMap" type="com.phantom.model.TPmProjectBase">
+        <result column="ID" jdbcType="VARCHAR" property="ID"/>
+        <result column="PROJECT_ID" jdbcType="VARCHAR" property="PROJECT_ID"/>
+        <result column="PRODUCT_MATERIAL" jdbcType="VARCHAR" property="PRODUCT_MATERIAL"/>
+        <result column="PRODUCT_NAME" jdbcType="VARCHAR" property="PRODUCT_NAME"/>
+        <result column="PRODUCT_STANDARD" jdbcType="VARCHAR" property="PRODUCT_STANDARD"/>
+        <result column="SCRAPPED_QTY" jdbcType="DECIMAL" property="SCRAPPED_QTY"/>
+        <result column="DESTROY_NO" jdbcType="VARCHAR" property="DESTROY_NO"/>
+        <result column="CUST_CODE" jdbcType="VARCHAR" property="CUST_CODE"/>
+        <result column="PRODUCT_COUNT" jdbcType="DECIMAL" property="PRODUCT_COUNT"/>
+        <result column="FQC_COUNT" jdbcType="DECIMAL" property="FQC_COUNT"/>
+        <result column="FINISH_COUNT" jdbcType="DECIMAL" property="FINISH_COUNT"/>
+        <result column="WORKING_SC" jdbcType="DECIMAL" property="WORKING_SC"/>
+        <result column="PROJECT_STATUS" jdbcType="VARCHAR" property="PROJECT_STATUS"/>
+        <result column="PROJECT_TYPE" jdbcType="VARCHAR" property="PROJECT_TYPE"/>
+        <result column="PROLEPSIS_START_DATE" jdbcType="DATE" property="PROLEPSIS_START_DATE"/>
+        <result column="PROLEPSIS_END_DATE" jdbcType="DATE" property="PROLEPSIS_END_DATE"/>
+        <result column="TPPB_PLAN_DELIVERY_DATE" jdbcType="DATE" property="TPPB_PLAN_DELIVERY_DATE"/>
+        <result column="DEPT_ID" jdbcType="VARCHAR" property="DEPT_ID"/>
+        <result column="CREATE_USER" jdbcType="VARCHAR" property="CREATE_USER"/>
+        <result column="CREATE_TIME" jdbcType="DATE" property="CREATE_TIME"/>
+        <result column="EDIT_USER" jdbcType="VARCHAR" property="EDIT_USER"/>
+        <result column="EDIT_TIME" jdbcType="DATE" property="EDIT_TIME"/>
+        <result column="PRODUCT_LINE" jdbcType="VARCHAR" property="PRODUCT_LINE"/>
+        <result column="ACTUAL_START_DATE" jdbcType="DATE" property="ACTUAL_START_DATE"/>
+        <result column="ACTUAL_END_DATE" jdbcType="DATE" property="ACTUAL_END_DATE"/>
+        <result column="PM_CLOSE_REASON" jdbcType="VARCHAR" property="PM_CLOSE_REASON"/>
+        <result column="PROJECT_STEP" jdbcType="VARCHAR" property="PROJECT_STEP"/>
+        <result column="FAI_NUM" jdbcType="DECIMAL" property="FAI_NUM"/>
+        <result column="DATA_AUTH" jdbcType="VARCHAR" property="DATA_AUTH"/>
+        <result column="PROJECT_ERPTYPE" jdbcType="VARCHAR" property="PROJECT_ERPTYPE"/>
+        <result column="PROJECT_OFONESELF" jdbcType="VARCHAR" property="PROJECT_OFONESELF"/>
+        <result column="LOT_NUMBER" jdbcType="VARCHAR" property="LOT_NUMBER"/>
+        <result column="PRODUCT_SN_START" jdbcType="VARCHAR" property="PRODUCT_SN_START"/>
+        <result column="PRODUCT_SN_END" jdbcType="VARCHAR" property="PRODUCT_SN_END"/>
+        <result column="PRODUCT_SN_PREFIX" jdbcType="VARCHAR" property="PRODUCT_SN_PREFIX"/>
+        <result column="PRODUCT_PACK_SEQ" jdbcType="VARCHAR" property="PRODUCT_PACK_SEQ"/>
+        <result column="PM_CHANGE_TIMES" jdbcType="DECIMAL" property="PM_CHANGE_TIMES"/>
+        <result column="PRODUCT_MATERIAL_VER" jdbcType="VARCHAR" property="PRODUCT_MATERIAL_VER"/>
+        <result column="PRODUCT_CONFIGURE" jdbcType="VARCHAR" property="PRODUCT_CONFIGURE"/>
+        <result column="PROJECT_FLAG" jdbcType="VARCHAR" property="PROJECT_FLAG"/>
+        <result column="IS_REL" jdbcType="VARCHAR" property="IS_REL"/>
+        <result column="REL_NUM" jdbcType="DECIMAL" property="REL_NUM"/>
+        <result column="PROJECT_SORT" jdbcType="DECIMAL" property="PROJECT_SORT"/>
+        <result column="PM_CHECK_STUST" jdbcType="DECIMAL" property="PM_CHECK_STUST"/>
+        <result column="CHECK_MON" jdbcType="DATE" property="CHECK_MON"/>
+        <result column="CHECK_USER" jdbcType="VARCHAR" property="CHECK_USER"/>
+        <result column="WORK_SPACE" jdbcType="VARCHAR" property="WORK_SPACE"/>
+        <result column="BASE_UNIT" jdbcType="VARCHAR" property="BASE_UNIT"/>
+        <result column="WARE_HOUSE" jdbcType="VARCHAR" property="WARE_HOUSE"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.phantom.model.TPmProjectBase">
+        <result column="PM_MEMO" jdbcType="CLOB" property="PM_MEMO"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        ID, PROJECT_ID, PRODUCT_MATERIAL, PRODUCT_NAME, PRODUCT_STANDARD, SCRAPPED_QTY, DESTROY_NO,
+        CUST_CODE, PRODUCT_COUNT, FQC_COUNT, FINISH_COUNT, WORKING_SC, PROJECT_STATUS, PROJECT_TYPE,
+        PROLEPSIS_START_DATE, PROLEPSIS_END_DATE, TPPB_PLAN_DELIVERY_DATE, DEPT_ID, CREATE_USER,
+        CREATE_TIME, EDIT_USER, EDIT_TIME, PRODUCT_LINE, ACTUAL_START_DATE, ACTUAL_END_DATE,
+        PM_CLOSE_REASON, PROJECT_STEP, FAI_NUM, DATA_AUTH, PROJECT_ERPTYPE, PROJECT_OFONESELF,
+        LOT_NUMBER, PRODUCT_SN_START, PRODUCT_SN_END, PRODUCT_SN_PREFIX, PRODUCT_PACK_SEQ,
+        PM_CHANGE_TIMES, PRODUCT_MATERIAL_VER, PRODUCT_CONFIGURE, PROJECT_FLAG, IS_REL, REL_NUM,
+        PROJECT_SORT, PM_CHECK_STUST, CHECK_MON, CHECK_USER, WORK_SPACE, BASE_UNIT, WARE_HOUSE
+    </sql>
+    <sql id="Blob_Column_List">
+        PM_MEMO
+    </sql>
+    <select id="selectByExampleWithBLOBs" parameterType="com.phantom.model.TPmProjectBaseExample"
+            resultMap="ResultMapWithBLOBs">
+        select
+        <if test="distinct">
+            distinct
         </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
-    ID, PROJECT_ID, PRODUCT_MATERIAL, PRODUCT_NAME, PRODUCT_STANDARD, SCRAPPED_QTY, DESTROY_NO, 
-    CUST_CODE, PRODUCT_COUNT, FQC_COUNT, FINISH_COUNT, WORKING_SC, PROJECT_STATUS, PROJECT_TYPE, 
-    PROLEPSIS_START_DATE, PROLEPSIS_END_DATE, TPPB_PLAN_DELIVERY_DATE, DEPT_ID, CREATE_USER, 
-    CREATE_TIME, EDIT_USER, EDIT_TIME, PRODUCT_LINE, ACTUAL_START_DATE, ACTUAL_END_DATE, 
-    PM_CLOSE_REASON, PROJECT_STEP, FAI_NUM, DATA_AUTH, PROJECT_ERPTYPE, PROJECT_OFONESELF, 
-    LOT_NUMBER, PRODUCT_SN_START, PRODUCT_SN_END, PRODUCT_SN_PREFIX, PRODUCT_PACK_SEQ, 
-    PM_CHANGE_TIMES, PRODUCT_MATERIAL_VER, PRODUCT_CONFIGURE, PROJECT_FLAG, IS_REL, REL_NUM, 
-    PROJECT_SORT, PM_CHECK_STUST, CHECK_MON, CHECK_USER, WORK_SPACE, BASE_UNIT, WARE_HOUSE
-  </sql>
-  <sql id="Blob_Column_List">
-    PM_MEMO
-  </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.phantom.model.TPmProjectBaseExample" resultMap="ResultMapWithBLOBs">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from N2ADMIN.T_PM_PROJECT_BASE
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByExample" parameterType="com.phantom.model.TPmProjectBaseExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from N2ADMIN.T_PM_PROJECT_BASE
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <delete id="deleteByExample" parameterType="com.phantom.model.TPmProjectBaseExample">
-    delete from N2ADMIN.T_PM_PROJECT_BASE
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.phantom.model.TPmProjectBase">
-    insert into N2ADMIN.T_PM_PROJECT_BASE (ID, PROJECT_ID, PRODUCT_MATERIAL, 
-      PRODUCT_NAME, PRODUCT_STANDARD, SCRAPPED_QTY, 
-      DESTROY_NO, CUST_CODE, PRODUCT_COUNT, 
-      FQC_COUNT, FINISH_COUNT, WORKING_SC, 
-      PROJECT_STATUS, PROJECT_TYPE, PROLEPSIS_START_DATE, 
-      PROLEPSIS_END_DATE, TPPB_PLAN_DELIVERY_DATE, 
-      DEPT_ID, CREATE_USER, CREATE_TIME, 
-      EDIT_USER, EDIT_TIME, PRODUCT_LINE, 
-      ACTUAL_START_DATE, ACTUAL_END_DATE, PM_CLOSE_REASON, 
-      PROJECT_STEP, FAI_NUM, DATA_AUTH, 
-      PROJECT_ERPTYPE, PROJECT_OFONESELF, LOT_NUMBER, 
-      PRODUCT_SN_START, PRODUCT_SN_END, PRODUCT_SN_PREFIX, 
-      PRODUCT_PACK_SEQ, PM_CHANGE_TIMES, PRODUCT_MATERIAL_VER, 
-      PRODUCT_CONFIGURE, PROJECT_FLAG, IS_REL, 
-      REL_NUM, PROJECT_SORT, PM_CHECK_STUST, 
-      CHECK_MON, CHECK_USER, WORK_SPACE, 
-      BASE_UNIT, WARE_HOUSE, PM_MEMO
-      )
-    values (#{ID,jdbcType=VARCHAR}, #{PROJECT_ID,jdbcType=VARCHAR}, #{PRODUCT_MATERIAL,jdbcType=VARCHAR}, 
-      #{PRODUCT_NAME,jdbcType=VARCHAR}, #{PRODUCT_STANDARD,jdbcType=VARCHAR}, #{SCRAPPED_QTY,jdbcType=DECIMAL}, 
-      #{DESTROY_NO,jdbcType=VARCHAR}, #{CUST_CODE,jdbcType=VARCHAR}, #{PRODUCT_COUNT,jdbcType=DECIMAL}, 
-      #{FQC_COUNT,jdbcType=DECIMAL}, #{FINISH_COUNT,jdbcType=DECIMAL}, #{WORKING_SC,jdbcType=DECIMAL}, 
-      #{PROJECT_STATUS,jdbcType=VARCHAR}, #{PROJECT_TYPE,jdbcType=VARCHAR}, #{PROLEPSIS_START_DATE,jdbcType=DATE}, 
-      #{PROLEPSIS_END_DATE,jdbcType=DATE}, #{TPPB_PLAN_DELIVERY_DATE,jdbcType=DATE}, 
-      #{DEPT_ID,jdbcType=VARCHAR}, #{CREATE_USER,jdbcType=VARCHAR}, #{CREATE_TIME,jdbcType=DATE}, 
-      #{EDIT_USER,jdbcType=VARCHAR}, #{EDIT_TIME,jdbcType=DATE}, #{PRODUCT_LINE,jdbcType=VARCHAR}, 
-      #{ACTUAL_START_DATE,jdbcType=DATE}, #{ACTUAL_END_DATE,jdbcType=DATE}, #{PM_CLOSE_REASON,jdbcType=VARCHAR}, 
-      #{PROJECT_STEP,jdbcType=VARCHAR}, #{FAI_NUM,jdbcType=DECIMAL}, #{DATA_AUTH,jdbcType=VARCHAR}, 
-      #{PROJECT_ERPTYPE,jdbcType=VARCHAR}, #{PROJECT_OFONESELF,jdbcType=VARCHAR}, #{LOT_NUMBER,jdbcType=VARCHAR}, 
-      #{PRODUCT_SN_START,jdbcType=VARCHAR}, #{PRODUCT_SN_END,jdbcType=VARCHAR}, #{PRODUCT_SN_PREFIX,jdbcType=VARCHAR}, 
-      #{PRODUCT_PACK_SEQ,jdbcType=VARCHAR}, #{PM_CHANGE_TIMES,jdbcType=DECIMAL}, #{PRODUCT_MATERIAL_VER,jdbcType=VARCHAR}, 
-      #{PRODUCT_CONFIGURE,jdbcType=VARCHAR}, #{PROJECT_FLAG,jdbcType=VARCHAR}, #{IS_REL,jdbcType=VARCHAR}, 
-      #{REL_NUM,jdbcType=DECIMAL}, #{PROJECT_SORT,jdbcType=DECIMAL}, #{PM_CHECK_STUST,jdbcType=DECIMAL}, 
-      #{CHECK_MON,jdbcType=DATE}, #{CHECK_USER,jdbcType=VARCHAR}, #{WORK_SPACE,jdbcType=VARCHAR}, 
-      #{BASE_UNIT,jdbcType=VARCHAR}, #{WARE_HOUSE,jdbcType=VARCHAR}, #{PM_MEMO,jdbcType=CLOB}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.phantom.model.TPmProjectBase">
-    insert into N2ADMIN.T_PM_PROJECT_BASE
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="ID != null">
-        ID,
-      </if>
-      <if test="PROJECT_ID != null">
-        PROJECT_ID,
-      </if>
-      <if test="PRODUCT_MATERIAL != null">
-        PRODUCT_MATERIAL,
-      </if>
-      <if test="PRODUCT_NAME != null">
-        PRODUCT_NAME,
-      </if>
-      <if test="PRODUCT_STANDARD != null">
-        PRODUCT_STANDARD,
-      </if>
-      <if test="SCRAPPED_QTY != null">
-        SCRAPPED_QTY,
-      </if>
-      <if test="DESTROY_NO != null">
-        DESTROY_NO,
-      </if>
-      <if test="CUST_CODE != null">
-        CUST_CODE,
-      </if>
-      <if test="PRODUCT_COUNT != null">
-        PRODUCT_COUNT,
-      </if>
-      <if test="FQC_COUNT != null">
-        FQC_COUNT,
-      </if>
-      <if test="FINISH_COUNT != null">
-        FINISH_COUNT,
-      </if>
-      <if test="WORKING_SC != null">
-        WORKING_SC,
-      </if>
-      <if test="PROJECT_STATUS != null">
-        PROJECT_STATUS,
-      </if>
-      <if test="PROJECT_TYPE != null">
-        PROJECT_TYPE,
-      </if>
-      <if test="PROLEPSIS_START_DATE != null">
-        PROLEPSIS_START_DATE,
-      </if>
-      <if test="PROLEPSIS_END_DATE != null">
-        PROLEPSIS_END_DATE,
-      </if>
-      <if test="TPPB_PLAN_DELIVERY_DATE != null">
-        TPPB_PLAN_DELIVERY_DATE,
-      </if>
-      <if test="DEPT_ID != null">
-        DEPT_ID,
-      </if>
-      <if test="CREATE_USER != null">
-        CREATE_USER,
-      </if>
-      <if test="CREATE_TIME != null">
-        CREATE_TIME,
-      </if>
-      <if test="EDIT_USER != null">
-        EDIT_USER,
-      </if>
-      <if test="EDIT_TIME != null">
-        EDIT_TIME,
-      </if>
-      <if test="PRODUCT_LINE != null">
-        PRODUCT_LINE,
-      </if>
-      <if test="ACTUAL_START_DATE != null">
-        ACTUAL_START_DATE,
-      </if>
-      <if test="ACTUAL_END_DATE != null">
-        ACTUAL_END_DATE,
-      </if>
-      <if test="PM_CLOSE_REASON != null">
-        PM_CLOSE_REASON,
-      </if>
-      <if test="PROJECT_STEP != null">
-        PROJECT_STEP,
-      </if>
-      <if test="FAI_NUM != null">
-        FAI_NUM,
-      </if>
-      <if test="DATA_AUTH != null">
-        DATA_AUTH,
-      </if>
-      <if test="PROJECT_ERPTYPE != null">
-        PROJECT_ERPTYPE,
-      </if>
-      <if test="PROJECT_OFONESELF != null">
-        PROJECT_OFONESELF,
-      </if>
-      <if test="LOT_NUMBER != null">
-        LOT_NUMBER,
-      </if>
-      <if test="PRODUCT_SN_START != null">
-        PRODUCT_SN_START,
-      </if>
-      <if test="PRODUCT_SN_END != null">
-        PRODUCT_SN_END,
-      </if>
-      <if test="PRODUCT_SN_PREFIX != null">
-        PRODUCT_SN_PREFIX,
-      </if>
-      <if test="PRODUCT_PACK_SEQ != null">
-        PRODUCT_PACK_SEQ,
-      </if>
-      <if test="PM_CHANGE_TIMES != null">
-        PM_CHANGE_TIMES,
-      </if>
-      <if test="PRODUCT_MATERIAL_VER != null">
-        PRODUCT_MATERIAL_VER,
-      </if>
-      <if test="PRODUCT_CONFIGURE != null">
-        PRODUCT_CONFIGURE,
-      </if>
-      <if test="PROJECT_FLAG != null">
-        PROJECT_FLAG,
-      </if>
-      <if test="IS_REL != null">
-        IS_REL,
-      </if>
-      <if test="REL_NUM != null">
-        REL_NUM,
-      </if>
-      <if test="PROJECT_SORT != null">
-        PROJECT_SORT,
-      </if>
-      <if test="PM_CHECK_STUST != null">
-        PM_CHECK_STUST,
-      </if>
-      <if test="CHECK_MON != null">
-        CHECK_MON,
-      </if>
-      <if test="CHECK_USER != null">
-        CHECK_USER,
-      </if>
-      <if test="WORK_SPACE != null">
-        WORK_SPACE,
-      </if>
-      <if test="BASE_UNIT != null">
-        BASE_UNIT,
-      </if>
-      <if test="WARE_HOUSE != null">
-        WARE_HOUSE,
-      </if>
-      <if test="PM_MEMO != null">
-        PM_MEMO,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="ID != null">
-        #{ID,jdbcType=VARCHAR},
-      </if>
-      <if test="PROJECT_ID != null">
-        #{PROJECT_ID,jdbcType=VARCHAR},
-      </if>
-      <if test="PRODUCT_MATERIAL != null">
-        #{PRODUCT_MATERIAL,jdbcType=VARCHAR},
-      </if>
-      <if test="PRODUCT_NAME != null">
-        #{PRODUCT_NAME,jdbcType=VARCHAR},
-      </if>
-      <if test="PRODUCT_STANDARD != null">
-        #{PRODUCT_STANDARD,jdbcType=VARCHAR},
-      </if>
-      <if test="SCRAPPED_QTY != null">
-        #{SCRAPPED_QTY,jdbcType=DECIMAL},
-      </if>
-      <if test="DESTROY_NO != null">
-        #{DESTROY_NO,jdbcType=VARCHAR},
-      </if>
-      <if test="CUST_CODE != null">
-        #{CUST_CODE,jdbcType=VARCHAR},
-      </if>
-      <if test="PRODUCT_COUNT != null">
-        #{PRODUCT_COUNT,jdbcType=DECIMAL},
-      </if>
-      <if test="FQC_COUNT != null">
-        #{FQC_COUNT,jdbcType=DECIMAL},
-      </if>
-      <if test="FINISH_COUNT != null">
-        #{FINISH_COUNT,jdbcType=DECIMAL},
-      </if>
-      <if test="WORKING_SC != null">
-        #{WORKING_SC,jdbcType=DECIMAL},
-      </if>
-      <if test="PROJECT_STATUS != null">
-        #{PROJECT_STATUS,jdbcType=VARCHAR},
-      </if>
-      <if test="PROJECT_TYPE != null">
-        #{PROJECT_TYPE,jdbcType=VARCHAR},
-      </if>
-      <if test="PROLEPSIS_START_DATE != null">
-        #{PROLEPSIS_START_DATE,jdbcType=DATE},
-      </if>
-      <if test="PROLEPSIS_END_DATE != null">
-        #{PROLEPSIS_END_DATE,jdbcType=DATE},
-      </if>
-      <if test="TPPB_PLAN_DELIVERY_DATE != null">
-        #{TPPB_PLAN_DELIVERY_DATE,jdbcType=DATE},
-      </if>
-      <if test="DEPT_ID != null">
-        #{DEPT_ID,jdbcType=VARCHAR},
-      </if>
-      <if test="CREATE_USER != null">
-        #{CREATE_USER,jdbcType=VARCHAR},
-      </if>
-      <if test="CREATE_TIME != null">
-        #{CREATE_TIME,jdbcType=DATE},
-      </if>
-      <if test="EDIT_USER != null">
-        #{EDIT_USER,jdbcType=VARCHAR},
-      </if>
-      <if test="EDIT_TIME != null">
-        #{EDIT_TIME,jdbcType=DATE},
-      </if>
-      <if test="PRODUCT_LINE != null">
-        #{PRODUCT_LINE,jdbcType=VARCHAR},
-      </if>
-      <if test="ACTUAL_START_DATE != null">
-        #{ACTUAL_START_DATE,jdbcType=DATE},
-      </if>
-      <if test="ACTUAL_END_DATE != null">
-        #{ACTUAL_END_DATE,jdbcType=DATE},
-      </if>
-      <if test="PM_CLOSE_REASON != null">
-        #{PM_CLOSE_REASON,jdbcType=VARCHAR},
-      </if>
-      <if test="PROJECT_STEP != null">
-        #{PROJECT_STEP,jdbcType=VARCHAR},
-      </if>
-      <if test="FAI_NUM != null">
-        #{FAI_NUM,jdbcType=DECIMAL},
-      </if>
-      <if test="DATA_AUTH != null">
-        #{DATA_AUTH,jdbcType=VARCHAR},
-      </if>
-      <if test="PROJECT_ERPTYPE != null">
-        #{PROJECT_ERPTYPE,jdbcType=VARCHAR},
-      </if>
-      <if test="PROJECT_OFONESELF != null">
-        #{PROJECT_OFONESELF,jdbcType=VARCHAR},
-      </if>
-      <if test="LOT_NUMBER != null">
-        #{LOT_NUMBER,jdbcType=VARCHAR},
-      </if>
-      <if test="PRODUCT_SN_START != null">
-        #{PRODUCT_SN_START,jdbcType=VARCHAR},
-      </if>
-      <if test="PRODUCT_SN_END != null">
-        #{PRODUCT_SN_END,jdbcType=VARCHAR},
-      </if>
-      <if test="PRODUCT_SN_PREFIX != null">
-        #{PRODUCT_SN_PREFIX,jdbcType=VARCHAR},
-      </if>
-      <if test="PRODUCT_PACK_SEQ != null">
-        #{PRODUCT_PACK_SEQ,jdbcType=VARCHAR},
-      </if>
-      <if test="PM_CHANGE_TIMES != null">
-        #{PM_CHANGE_TIMES,jdbcType=DECIMAL},
-      </if>
-      <if test="PRODUCT_MATERIAL_VER != null">
-        #{PRODUCT_MATERIAL_VER,jdbcType=VARCHAR},
-      </if>
-      <if test="PRODUCT_CONFIGURE != null">
-        #{PRODUCT_CONFIGURE,jdbcType=VARCHAR},
-      </if>
-      <if test="PROJECT_FLAG != null">
-        #{PROJECT_FLAG,jdbcType=VARCHAR},
-      </if>
-      <if test="IS_REL != null">
-        #{IS_REL,jdbcType=VARCHAR},
-      </if>
-      <if test="REL_NUM != null">
-        #{REL_NUM,jdbcType=DECIMAL},
-      </if>
-      <if test="PROJECT_SORT != null">
-        #{PROJECT_SORT,jdbcType=DECIMAL},
-      </if>
-      <if test="PM_CHECK_STUST != null">
-        #{PM_CHECK_STUST,jdbcType=DECIMAL},
-      </if>
-      <if test="CHECK_MON != null">
-        #{CHECK_MON,jdbcType=DATE},
-      </if>
-      <if test="CHECK_USER != null">
-        #{CHECK_USER,jdbcType=VARCHAR},
-      </if>
-      <if test="WORK_SPACE != null">
-        #{WORK_SPACE,jdbcType=VARCHAR},
-      </if>
-      <if test="BASE_UNIT != null">
-        #{BASE_UNIT,jdbcType=VARCHAR},
-      </if>
-      <if test="WARE_HOUSE != null">
-        #{WARE_HOUSE,jdbcType=VARCHAR},
-      </if>
-      <if test="PM_MEMO != null">
-        #{PM_MEMO,jdbcType=CLOB},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.phantom.model.TPmProjectBaseExample" resultType="java.lang.Long">
-    select count(*) from N2ADMIN.T_PM_PROJECT_BASE
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from N2ADMIN.T_PM_PROJECT_BASE
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByExample" parameterType="com.phantom.model.TPmProjectBaseExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from N2ADMIN.T_PM_PROJECT_BASE
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <delete id="deleteByExample" parameterType="com.phantom.model.TPmProjectBaseExample">
+        delete from N2ADMIN.T_PM_PROJECT_BASE
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.phantom.model.TPmProjectBase">
+        insert into N2ADMIN.T_PM_PROJECT_BASE (ID, PROJECT_ID, PRODUCT_MATERIAL,
+                                               PRODUCT_NAME, PRODUCT_STANDARD, SCRAPPED_QTY,
+                                               DESTROY_NO, CUST_CODE, PRODUCT_COUNT,
+                                               FQC_COUNT, FINISH_COUNT, WORKING_SC,
+                                               PROJECT_STATUS, PROJECT_TYPE, PROLEPSIS_START_DATE,
+                                               PROLEPSIS_END_DATE, TPPB_PLAN_DELIVERY_DATE,
+                                               DEPT_ID, CREATE_USER, CREATE_TIME,
+                                               EDIT_USER, EDIT_TIME, PRODUCT_LINE,
+                                               ACTUAL_START_DATE, ACTUAL_END_DATE, PM_CLOSE_REASON,
+                                               PROJECT_STEP, FAI_NUM, DATA_AUTH,
+                                               PROJECT_ERPTYPE, PROJECT_OFONESELF, LOT_NUMBER,
+                                               PRODUCT_SN_START, PRODUCT_SN_END, PRODUCT_SN_PREFIX,
+                                               PRODUCT_PACK_SEQ, PM_CHANGE_TIMES, PRODUCT_MATERIAL_VER,
+                                               PRODUCT_CONFIGURE, PROJECT_FLAG, IS_REL,
+                                               REL_NUM, PROJECT_SORT, PM_CHECK_STUST,
+                                               CHECK_MON, CHECK_USER, WORK_SPACE,
+                                               BASE_UNIT, WARE_HOUSE, PM_MEMO
+        )
+        values (#{ID,jdbcType=VARCHAR}, #{PROJECT_ID,jdbcType=VARCHAR}, #{PRODUCT_MATERIAL,jdbcType=VARCHAR},
+                                                                        #{PRODUCT_NAME,jdbcType=VARCHAR},
+                                                                        #{PRODUCT_STANDARD,jdbcType=VARCHAR},
+                                                                        #{SCRAPPED_QTY,jdbcType=DECIMAL},
+                                                                        #{DESTROY_NO,jdbcType=VARCHAR},
+                                                                        #{CUST_CODE,jdbcType=VARCHAR},
+                                                                        #{PRODUCT_COUNT,jdbcType=DECIMAL},
+                                                                        #{FQC_COUNT,jdbcType=DECIMAL},
+                                                                        #{FINISH_COUNT,jdbcType=DECIMAL},
+                                                                        #{WORKING_SC,jdbcType=DECIMAL},
+            #{PROJECT_STATUS,jdbcType=VARCHAR}, #{PROJECT_TYPE,jdbcType=VARCHAR}, #{PROLEPSIS_START_DATE,jdbcType=DATE},
+            #{PROLEPSIS_END_DATE,jdbcType=DATE}, #{TPPB_PLAN_DELIVERY_DATE,jdbcType=DATE},
+            #{DEPT_ID,jdbcType=VARCHAR}, #{CREATE_USER,jdbcType=VARCHAR}, #{CREATE_TIME,jdbcType=DATE},
+            #{EDIT_USER,jdbcType=VARCHAR}, #{EDIT_TIME,jdbcType=DATE}, #{PRODUCT_LINE,jdbcType=VARCHAR},
+                                                                       #{ACTUAL_START_DATE,jdbcType=DATE},
+                                                                       #{ACTUAL_END_DATE,jdbcType=DATE},
+                                                                       #{PM_CLOSE_REASON,jdbcType=VARCHAR},
+                                                                       #{PROJECT_STEP,jdbcType=VARCHAR},
+                                                                       #{FAI_NUM,jdbcType=DECIMAL},
+                                                                       #{DATA_AUTH,jdbcType=VARCHAR},
+                                                                       #{PROJECT_ERPTYPE,jdbcType=VARCHAR},
+                                                                       #{PROJECT_OFONESELF,jdbcType=VARCHAR},
+                                                                       #{LOT_NUMBER,jdbcType=VARCHAR},
+            #{PRODUCT_SN_START,jdbcType=VARCHAR}, #{PRODUCT_SN_END,jdbcType=VARCHAR},
+            #{PRODUCT_SN_PREFIX,jdbcType=VARCHAR},
+            #{PRODUCT_PACK_SEQ,jdbcType=VARCHAR}, #{PM_CHANGE_TIMES,jdbcType=DECIMAL},
+            #{PRODUCT_MATERIAL_VER,jdbcType=VARCHAR},
+            #{PRODUCT_CONFIGURE,jdbcType=VARCHAR}, #{PROJECT_FLAG,jdbcType=VARCHAR}, #{IS_REL,jdbcType=VARCHAR},
+            #{REL_NUM,jdbcType=DECIMAL}, #{PROJECT_SORT,jdbcType=DECIMAL}, #{PM_CHECK_STUST,jdbcType=DECIMAL},
+                #{CHECK_MON,jdbcType=DATE}, #{CHECK_USER,jdbcType=VARCHAR}, #{WORK_SPACE,jdbcType=VARCHAR},
+                #{BASE_UNIT,jdbcType=VARCHAR}, #{WARE_HOUSE,jdbcType=VARCHAR}, #{PM_MEMO,jdbcType=CLOB}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.phantom.model.TPmProjectBase">
+        insert into N2ADMIN.T_PM_PROJECT_BASE
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="ID != null">
+                ID,
+            </if>
+            <if test="PROJECT_ID != null">
+                PROJECT_ID,
+            </if>
+            <if test="PRODUCT_MATERIAL != null">
+                PRODUCT_MATERIAL,
+            </if>
+            <if test="PRODUCT_NAME != null">
+                PRODUCT_NAME,
+            </if>
+            <if test="PRODUCT_STANDARD != null">
+                PRODUCT_STANDARD,
+            </if>
+            <if test="SCRAPPED_QTY != null">
+                SCRAPPED_QTY,
+            </if>
+            <if test="DESTROY_NO != null">
+                DESTROY_NO,
+            </if>
+            <if test="CUST_CODE != null">
+                CUST_CODE,
+            </if>
+            <if test="PRODUCT_COUNT != null">
+                PRODUCT_COUNT,
+            </if>
+            <if test="FQC_COUNT != null">
+                FQC_COUNT,
+            </if>
+            <if test="FINISH_COUNT != null">
+                FINISH_COUNT,
+            </if>
+            <if test="WORKING_SC != null">
+                WORKING_SC,
+            </if>
+            <if test="PROJECT_STATUS != null">
+                PROJECT_STATUS,
+            </if>
+            <if test="PROJECT_TYPE != null">
+                PROJECT_TYPE,
+            </if>
+            <if test="PROLEPSIS_START_DATE != null">
+                PROLEPSIS_START_DATE,
+            </if>
+            <if test="PROLEPSIS_END_DATE != null">
+                PROLEPSIS_END_DATE,
+            </if>
+            <if test="TPPB_PLAN_DELIVERY_DATE != null">
+                TPPB_PLAN_DELIVERY_DATE,
+            </if>
+            <if test="DEPT_ID != null">
+                DEPT_ID,
+            </if>
+            <if test="CREATE_USER != null">
+                CREATE_USER,
+            </if>
+            <if test="CREATE_TIME != null">
+                CREATE_TIME,
+            </if>
+            <if test="EDIT_USER != null">
+                EDIT_USER,
+            </if>
+            <if test="EDIT_TIME != null">
+                EDIT_TIME,
+            </if>
+            <if test="PRODUCT_LINE != null">
+                PRODUCT_LINE,
+            </if>
+            <if test="ACTUAL_START_DATE != null">
+                ACTUAL_START_DATE,
+            </if>
+            <if test="ACTUAL_END_DATE != null">
+                ACTUAL_END_DATE,
+            </if>
+            <if test="PM_CLOSE_REASON != null">
+                PM_CLOSE_REASON,
+            </if>
+            <if test="PROJECT_STEP != null">
+                PROJECT_STEP,
+            </if>
+            <if test="FAI_NUM != null">
+                FAI_NUM,
+            </if>
+            <if test="DATA_AUTH != null">
+                DATA_AUTH,
+            </if>
+            <if test="PROJECT_ERPTYPE != null">
+                PROJECT_ERPTYPE,
+            </if>
+            <if test="PROJECT_OFONESELF != null">
+                PROJECT_OFONESELF,
+            </if>
+            <if test="LOT_NUMBER != null">
+                LOT_NUMBER,
+            </if>
+            <if test="PRODUCT_SN_START != null">
+                PRODUCT_SN_START,
+            </if>
+            <if test="PRODUCT_SN_END != null">
+                PRODUCT_SN_END,
+            </if>
+            <if test="PRODUCT_SN_PREFIX != null">
+                PRODUCT_SN_PREFIX,
+            </if>
+            <if test="PRODUCT_PACK_SEQ != null">
+                PRODUCT_PACK_SEQ,
+            </if>
+            <if test="PM_CHANGE_TIMES != null">
+                PM_CHANGE_TIMES,
+            </if>
+            <if test="PRODUCT_MATERIAL_VER != null">
+                PRODUCT_MATERIAL_VER,
+            </if>
+            <if test="PRODUCT_CONFIGURE != null">
+                PRODUCT_CONFIGURE,
+            </if>
+            <if test="PROJECT_FLAG != null">
+                PROJECT_FLAG,
+            </if>
+            <if test="IS_REL != null">
+                IS_REL,
+            </if>
+            <if test="REL_NUM != null">
+                REL_NUM,
+            </if>
+            <if test="PROJECT_SORT != null">
+                PROJECT_SORT,
+            </if>
+            <if test="PM_CHECK_STUST != null">
+                PM_CHECK_STUST,
+            </if>
+            <if test="CHECK_MON != null">
+                CHECK_MON,
+            </if>
+            <if test="CHECK_USER != null">
+                CHECK_USER,
+            </if>
+            <if test="WORK_SPACE != null">
+                WORK_SPACE,
+            </if>
+            <if test="BASE_UNIT != null">
+                BASE_UNIT,
+            </if>
+            <if test="WARE_HOUSE != null">
+                WARE_HOUSE,
+            </if>
+            <if test="PM_MEMO != null">
+                PM_MEMO,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="ID != null">
+                #{ID,jdbcType=VARCHAR},
+            </if>
+            <if test="PROJECT_ID != null">
+                #{PROJECT_ID,jdbcType=VARCHAR},
+            </if>
+            <if test="PRODUCT_MATERIAL != null">
+                #{PRODUCT_MATERIAL,jdbcType=VARCHAR},
+            </if>
+            <if test="PRODUCT_NAME != null">
+                #{PRODUCT_NAME,jdbcType=VARCHAR},
+            </if>
+            <if test="PRODUCT_STANDARD != null">
+                #{PRODUCT_STANDARD,jdbcType=VARCHAR},
+            </if>
+            <if test="SCRAPPED_QTY != null">
+                #{SCRAPPED_QTY,jdbcType=DECIMAL},
+            </if>
+            <if test="DESTROY_NO != null">
+                #{DESTROY_NO,jdbcType=VARCHAR},
+            </if>
+            <if test="CUST_CODE != null">
+                #{CUST_CODE,jdbcType=VARCHAR},
+            </if>
+            <if test="PRODUCT_COUNT != null">
+                #{PRODUCT_COUNT,jdbcType=DECIMAL},
+            </if>
+            <if test="FQC_COUNT != null">
+                #{FQC_COUNT,jdbcType=DECIMAL},
+            </if>
+            <if test="FINISH_COUNT != null">
+                #{FINISH_COUNT,jdbcType=DECIMAL},
+            </if>
+            <if test="WORKING_SC != null">
+                #{WORKING_SC,jdbcType=DECIMAL},
+            </if>
+            <if test="PROJECT_STATUS != null">
+                #{PROJECT_STATUS,jdbcType=VARCHAR},
+            </if>
+            <if test="PROJECT_TYPE != null">
+                #{PROJECT_TYPE,jdbcType=VARCHAR},
+            </if>
+            <if test="PROLEPSIS_START_DATE != null">
+                #{PROLEPSIS_START_DATE,jdbcType=DATE},
+            </if>
+            <if test="PROLEPSIS_END_DATE != null">
+                #{PROLEPSIS_END_DATE,jdbcType=DATE},
+            </if>
+            <if test="TPPB_PLAN_DELIVERY_DATE != null">
+                #{TPPB_PLAN_DELIVERY_DATE,jdbcType=DATE},
+            </if>
+            <if test="DEPT_ID != null">
+                #{DEPT_ID,jdbcType=VARCHAR},
+            </if>
+            <if test="CREATE_USER != null">
+                #{CREATE_USER,jdbcType=VARCHAR},
+            </if>
+            <if test="CREATE_TIME != null">
+                #{CREATE_TIME,jdbcType=DATE},
+            </if>
+            <if test="EDIT_USER != null">
+                #{EDIT_USER,jdbcType=VARCHAR},
+            </if>
+            <if test="EDIT_TIME != null">
+                #{EDIT_TIME,jdbcType=DATE},
+            </if>
+            <if test="PRODUCT_LINE != null">
+                #{PRODUCT_LINE,jdbcType=VARCHAR},
+            </if>
+            <if test="ACTUAL_START_DATE != null">
+                #{ACTUAL_START_DATE,jdbcType=DATE},
+            </if>
+            <if test="ACTUAL_END_DATE != null">
+                #{ACTUAL_END_DATE,jdbcType=DATE},
+            </if>
+            <if test="PM_CLOSE_REASON != null">
+                #{PM_CLOSE_REASON,jdbcType=VARCHAR},
+            </if>
+            <if test="PROJECT_STEP != null">
+                #{PROJECT_STEP,jdbcType=VARCHAR},
+            </if>
+            <if test="FAI_NUM != null">
+                #{FAI_NUM,jdbcType=DECIMAL},
+            </if>
+            <if test="DATA_AUTH != null">
+                #{DATA_AUTH,jdbcType=VARCHAR},
+            </if>
+            <if test="PROJECT_ERPTYPE != null">
+                #{PROJECT_ERPTYPE,jdbcType=VARCHAR},
+            </if>
+            <if test="PROJECT_OFONESELF != null">
+                #{PROJECT_OFONESELF,jdbcType=VARCHAR},
+            </if>
+            <if test="LOT_NUMBER != null">
+                #{LOT_NUMBER,jdbcType=VARCHAR},
+            </if>
+            <if test="PRODUCT_SN_START != null">
+                #{PRODUCT_SN_START,jdbcType=VARCHAR},
+            </if>
+            <if test="PRODUCT_SN_END != null">
+                #{PRODUCT_SN_END,jdbcType=VARCHAR},
+            </if>
+            <if test="PRODUCT_SN_PREFIX != null">
+                #{PRODUCT_SN_PREFIX,jdbcType=VARCHAR},
+            </if>
+            <if test="PRODUCT_PACK_SEQ != null">
+                #{PRODUCT_PACK_SEQ,jdbcType=VARCHAR},
+            </if>
+            <if test="PM_CHANGE_TIMES != null">
+                #{PM_CHANGE_TIMES,jdbcType=DECIMAL},
+            </if>
+            <if test="PRODUCT_MATERIAL_VER != null">
+                #{PRODUCT_MATERIAL_VER,jdbcType=VARCHAR},
+            </if>
+            <if test="PRODUCT_CONFIGURE != null">
+                #{PRODUCT_CONFIGURE,jdbcType=VARCHAR},
+            </if>
+            <if test="PROJECT_FLAG != null">
+                #{PROJECT_FLAG,jdbcType=VARCHAR},
+            </if>
+            <if test="IS_REL != null">
+                #{IS_REL,jdbcType=VARCHAR},
+            </if>
+            <if test="REL_NUM != null">
+                #{REL_NUM,jdbcType=DECIMAL},
+            </if>
+            <if test="PROJECT_SORT != null">
+                #{PROJECT_SORT,jdbcType=DECIMAL},
+            </if>
+            <if test="PM_CHECK_STUST != null">
+                #{PM_CHECK_STUST,jdbcType=DECIMAL},
+            </if>
+            <if test="CHECK_MON != null">
+                #{CHECK_MON,jdbcType=DATE},
+            </if>
+            <if test="CHECK_USER != null">
+                #{CHECK_USER,jdbcType=VARCHAR},
+            </if>
+            <if test="WORK_SPACE != null">
+                #{WORK_SPACE,jdbcType=VARCHAR},
+            </if>
+            <if test="BASE_UNIT != null">
+                #{BASE_UNIT,jdbcType=VARCHAR},
+            </if>
+            <if test="WARE_HOUSE != null">
+                #{WARE_HOUSE,jdbcType=VARCHAR},
+            </if>
+            <if test="PM_MEMO != null">
+                #{PM_MEMO,jdbcType=CLOB},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.phantom.model.TPmProjectBaseExample" resultType="java.lang.Long">
+        select count(*) from N2ADMIN.T_PM_PROJECT_BASE
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
 
-  <select id="selectByProjectId" resultType="com.phantom.model.TPmProjectBase">
-    SELECT * FROM T_PM_PROJECT_BASE WHERE 1=1 AND PROJECT_ID = #{PROJECT_ID,jdbcType=VARCHAR}
-  </select>
-
-  <update id="updateByExampleSelective" parameterType="map">
-    update N2ADMIN.T_PM_PROJECT_BASE
-    <set>
-      <if test="record.ID != null">
-        ID = #{record.ID,jdbcType=VARCHAR},
-      </if>
-      <if test="record.PROJECT_ID != null">
+    <update id="updateByExampleSelective" parameterType="map">
+        update N2ADMIN.T_PM_PROJECT_BASE
+        <set>
+            <if test="record.ID != null">
+                ID = #{record.ID,jdbcType=VARCHAR},
+            </if>
+            <if test="record.PROJECT_ID != null">
+                PROJECT_ID = #{record.PROJECT_ID,jdbcType=VARCHAR},
+            </if>
+            <if test="record.PRODUCT_MATERIAL != null">
+                PRODUCT_MATERIAL = #{record.PRODUCT_MATERIAL,jdbcType=VARCHAR},
+            </if>
+            <if test="record.PRODUCT_NAME != null">
+                PRODUCT_NAME = #{record.PRODUCT_NAME,jdbcType=VARCHAR},
+            </if>
+            <if test="record.PRODUCT_STANDARD != null">
+                PRODUCT_STANDARD = #{record.PRODUCT_STANDARD,jdbcType=VARCHAR},
+            </if>
+            <if test="record.SCRAPPED_QTY != null">
+                SCRAPPED_QTY = #{record.SCRAPPED_QTY,jdbcType=DECIMAL},
+            </if>
+            <if test="record.DESTROY_NO != null">
+                DESTROY_NO = #{record.DESTROY_NO,jdbcType=VARCHAR},
+            </if>
+            <if test="record.CUST_CODE != null">
+                CUST_CODE = #{record.CUST_CODE,jdbcType=VARCHAR},
+            </if>
+            <if test="record.PRODUCT_COUNT != null">
+                PRODUCT_COUNT = #{record.PRODUCT_COUNT,jdbcType=DECIMAL},
+            </if>
+            <if test="record.FQC_COUNT != null">
+                FQC_COUNT = #{record.FQC_COUNT,jdbcType=DECIMAL},
+            </if>
+            <if test="record.FINISH_COUNT != null">
+                FINISH_COUNT = #{record.FINISH_COUNT,jdbcType=DECIMAL},
+            </if>
+            <if test="record.WORKING_SC != null">
+                WORKING_SC = #{record.WORKING_SC,jdbcType=DECIMAL},
+            </if>
+            <if test="record.PROJECT_STATUS != null">
+                PROJECT_STATUS = #{record.PROJECT_STATUS,jdbcType=VARCHAR},
+            </if>
+            <if test="record.PROJECT_TYPE != null">
+                PROJECT_TYPE = #{record.PROJECT_TYPE,jdbcType=VARCHAR},
+            </if>
+            <if test="record.PROLEPSIS_START_DATE != null">
+                PROLEPSIS_START_DATE = #{record.PROLEPSIS_START_DATE,jdbcType=DATE},
+            </if>
+            <if test="record.PROLEPSIS_END_DATE != null">
+                PROLEPSIS_END_DATE = #{record.PROLEPSIS_END_DATE,jdbcType=DATE},
+            </if>
+            <if test="record.TPPB_PLAN_DELIVERY_DATE != null">
+                TPPB_PLAN_DELIVERY_DATE = #{record.TPPB_PLAN_DELIVERY_DATE,jdbcType=DATE},
+            </if>
+            <if test="record.DEPT_ID != null">
+                DEPT_ID = #{record.DEPT_ID,jdbcType=VARCHAR},
+            </if>
+            <if test="record.CREATE_USER != null">
+                CREATE_USER = #{record.CREATE_USER,jdbcType=VARCHAR},
+            </if>
+            <if test="record.CREATE_TIME != null">
+                CREATE_TIME = #{record.CREATE_TIME,jdbcType=DATE},
+            </if>
+            <if test="record.EDIT_USER != null">
+                EDIT_USER = #{record.EDIT_USER,jdbcType=VARCHAR},
+            </if>
+            <if test="record.EDIT_TIME != null">
+                EDIT_TIME = #{record.EDIT_TIME,jdbcType=DATE},
+            </if>
+            <if test="record.PRODUCT_LINE != null">
+                PRODUCT_LINE = #{record.PRODUCT_LINE,jdbcType=VARCHAR},
+            </if>
+            <if test="record.ACTUAL_START_DATE != null">
+                ACTUAL_START_DATE = #{record.ACTUAL_START_DATE,jdbcType=DATE},
+            </if>
+            <if test="record.ACTUAL_END_DATE != null">
+                ACTUAL_END_DATE = #{record.ACTUAL_END_DATE,jdbcType=DATE},
+            </if>
+            <if test="record.PM_CLOSE_REASON != null">
+                PM_CLOSE_REASON = #{record.PM_CLOSE_REASON,jdbcType=VARCHAR},
+            </if>
+            <if test="record.PROJECT_STEP != null">
+                PROJECT_STEP = #{record.PROJECT_STEP,jdbcType=VARCHAR},
+            </if>
+            <if test="record.FAI_NUM != null">
+                FAI_NUM = #{record.FAI_NUM,jdbcType=DECIMAL},
+            </if>
+            <if test="record.DATA_AUTH != null">
+                DATA_AUTH = #{record.DATA_AUTH,jdbcType=VARCHAR},
+            </if>
+            <if test="record.PROJECT_ERPTYPE != null">
+                PROJECT_ERPTYPE = #{record.PROJECT_ERPTYPE,jdbcType=VARCHAR},
+            </if>
+            <if test="record.PROJECT_OFONESELF != null">
+                PROJECT_OFONESELF = #{record.PROJECT_OFONESELF,jdbcType=VARCHAR},
+            </if>
+            <if test="record.LOT_NUMBER != null">
+                LOT_NUMBER = #{record.LOT_NUMBER,jdbcType=VARCHAR},
+            </if>
+            <if test="record.PRODUCT_SN_START != null">
+                PRODUCT_SN_START = #{record.PRODUCT_SN_START,jdbcType=VARCHAR},
+            </if>
+            <if test="record.PRODUCT_SN_END != null">
+                PRODUCT_SN_END = #{record.PRODUCT_SN_END,jdbcType=VARCHAR},
+            </if>
+            <if test="record.PRODUCT_SN_PREFIX != null">
+                PRODUCT_SN_PREFIX = #{record.PRODUCT_SN_PREFIX,jdbcType=VARCHAR},
+            </if>
+            <if test="record.PRODUCT_PACK_SEQ != null">
+                PRODUCT_PACK_SEQ = #{record.PRODUCT_PACK_SEQ,jdbcType=VARCHAR},
+            </if>
+            <if test="record.PM_CHANGE_TIMES != null">
+                PM_CHANGE_TIMES = #{record.PM_CHANGE_TIMES,jdbcType=DECIMAL},
+            </if>
+            <if test="record.PRODUCT_MATERIAL_VER != null">
+                PRODUCT_MATERIAL_VER = #{record.PRODUCT_MATERIAL_VER,jdbcType=VARCHAR},
+            </if>
+            <if test="record.PRODUCT_CONFIGURE != null">
+                PRODUCT_CONFIGURE = #{record.PRODUCT_CONFIGURE,jdbcType=VARCHAR},
+            </if>
+            <if test="record.PROJECT_FLAG != null">
+                PROJECT_FLAG = #{record.PROJECT_FLAG,jdbcType=VARCHAR},
+            </if>
+            <if test="record.IS_REL != null">
+                IS_REL = #{record.IS_REL,jdbcType=VARCHAR},
+            </if>
+            <if test="record.REL_NUM != null">
+                REL_NUM = #{record.REL_NUM,jdbcType=DECIMAL},
+            </if>
+            <if test="record.PROJECT_SORT != null">
+                PROJECT_SORT = #{record.PROJECT_SORT,jdbcType=DECIMAL},
+            </if>
+            <if test="record.PM_CHECK_STUST != null">
+                PM_CHECK_STUST = #{record.PM_CHECK_STUST,jdbcType=DECIMAL},
+            </if>
+            <if test="record.CHECK_MON != null">
+                CHECK_MON = #{record.CHECK_MON,jdbcType=DATE},
+            </if>
+            <if test="record.CHECK_USER != null">
+                CHECK_USER = #{record.CHECK_USER,jdbcType=VARCHAR},
+            </if>
+            <if test="record.WORK_SPACE != null">
+                WORK_SPACE = #{record.WORK_SPACE,jdbcType=VARCHAR},
+            </if>
+            <if test="record.BASE_UNIT != null">
+                BASE_UNIT = #{record.BASE_UNIT,jdbcType=VARCHAR},
+            </if>
+            <if test="record.WARE_HOUSE != null">
+                WARE_HOUSE = #{record.WARE_HOUSE,jdbcType=VARCHAR},
+            </if>
+            <if test="record.PM_MEMO != null">
+                PM_MEMO = #{record.PM_MEMO,jdbcType=CLOB},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExampleWithBLOBs" parameterType="map">
+        update N2ADMIN.T_PM_PROJECT_BASE
+        set ID = #{record.ID,jdbcType=VARCHAR},
         PROJECT_ID = #{record.PROJECT_ID,jdbcType=VARCHAR},
-      </if>
-      <if test="record.PRODUCT_MATERIAL != null">
         PRODUCT_MATERIAL = #{record.PRODUCT_MATERIAL,jdbcType=VARCHAR},
-      </if>
-      <if test="record.PRODUCT_NAME != null">
         PRODUCT_NAME = #{record.PRODUCT_NAME,jdbcType=VARCHAR},
-      </if>
-      <if test="record.PRODUCT_STANDARD != null">
         PRODUCT_STANDARD = #{record.PRODUCT_STANDARD,jdbcType=VARCHAR},
-      </if>
-      <if test="record.SCRAPPED_QTY != null">
         SCRAPPED_QTY = #{record.SCRAPPED_QTY,jdbcType=DECIMAL},
-      </if>
-      <if test="record.DESTROY_NO != null">
         DESTROY_NO = #{record.DESTROY_NO,jdbcType=VARCHAR},
-      </if>
-      <if test="record.CUST_CODE != null">
         CUST_CODE = #{record.CUST_CODE,jdbcType=VARCHAR},
-      </if>
-      <if test="record.PRODUCT_COUNT != null">
         PRODUCT_COUNT = #{record.PRODUCT_COUNT,jdbcType=DECIMAL},
-      </if>
-      <if test="record.FQC_COUNT != null">
         FQC_COUNT = #{record.FQC_COUNT,jdbcType=DECIMAL},
-      </if>
-      <if test="record.FINISH_COUNT != null">
         FINISH_COUNT = #{record.FINISH_COUNT,jdbcType=DECIMAL},
-      </if>
-      <if test="record.WORKING_SC != null">
         WORKING_SC = #{record.WORKING_SC,jdbcType=DECIMAL},
-      </if>
-      <if test="record.PROJECT_STATUS != null">
         PROJECT_STATUS = #{record.PROJECT_STATUS,jdbcType=VARCHAR},
-      </if>
-      <if test="record.PROJECT_TYPE != null">
         PROJECT_TYPE = #{record.PROJECT_TYPE,jdbcType=VARCHAR},
-      </if>
-      <if test="record.PROLEPSIS_START_DATE != null">
         PROLEPSIS_START_DATE = #{record.PROLEPSIS_START_DATE,jdbcType=DATE},
-      </if>
-      <if test="record.PROLEPSIS_END_DATE != null">
         PROLEPSIS_END_DATE = #{record.PROLEPSIS_END_DATE,jdbcType=DATE},
-      </if>
-      <if test="record.TPPB_PLAN_DELIVERY_DATE != null">
         TPPB_PLAN_DELIVERY_DATE = #{record.TPPB_PLAN_DELIVERY_DATE,jdbcType=DATE},
-      </if>
-      <if test="record.DEPT_ID != null">
         DEPT_ID = #{record.DEPT_ID,jdbcType=VARCHAR},
-      </if>
-      <if test="record.CREATE_USER != null">
         CREATE_USER = #{record.CREATE_USER,jdbcType=VARCHAR},
-      </if>
-      <if test="record.CREATE_TIME != null">
         CREATE_TIME = #{record.CREATE_TIME,jdbcType=DATE},
-      </if>
-      <if test="record.EDIT_USER != null">
         EDIT_USER = #{record.EDIT_USER,jdbcType=VARCHAR},
-      </if>
-      <if test="record.EDIT_TIME != null">
         EDIT_TIME = #{record.EDIT_TIME,jdbcType=DATE},
-      </if>
-      <if test="record.PRODUCT_LINE != null">
         PRODUCT_LINE = #{record.PRODUCT_LINE,jdbcType=VARCHAR},
-      </if>
-      <if test="record.ACTUAL_START_DATE != null">
         ACTUAL_START_DATE = #{record.ACTUAL_START_DATE,jdbcType=DATE},
-      </if>
-      <if test="record.ACTUAL_END_DATE != null">
         ACTUAL_END_DATE = #{record.ACTUAL_END_DATE,jdbcType=DATE},
-      </if>
-      <if test="record.PM_CLOSE_REASON != null">
         PM_CLOSE_REASON = #{record.PM_CLOSE_REASON,jdbcType=VARCHAR},
-      </if>
-      <if test="record.PROJECT_STEP != null">
         PROJECT_STEP = #{record.PROJECT_STEP,jdbcType=VARCHAR},
-      </if>
-      <if test="record.FAI_NUM != null">
         FAI_NUM = #{record.FAI_NUM,jdbcType=DECIMAL},
-      </if>
-      <if test="record.DATA_AUTH != null">
         DATA_AUTH = #{record.DATA_AUTH,jdbcType=VARCHAR},
-      </if>
-      <if test="record.PROJECT_ERPTYPE != null">
         PROJECT_ERPTYPE = #{record.PROJECT_ERPTYPE,jdbcType=VARCHAR},
-      </if>
-      <if test="record.PROJECT_OFONESELF != null">
         PROJECT_OFONESELF = #{record.PROJECT_OFONESELF,jdbcType=VARCHAR},
-      </if>
-      <if test="record.LOT_NUMBER != null">
         LOT_NUMBER = #{record.LOT_NUMBER,jdbcType=VARCHAR},
-      </if>
-      <if test="record.PRODUCT_SN_START != null">
         PRODUCT_SN_START = #{record.PRODUCT_SN_START,jdbcType=VARCHAR},
-      </if>
-      <if test="record.PRODUCT_SN_END != null">
         PRODUCT_SN_END = #{record.PRODUCT_SN_END,jdbcType=VARCHAR},
-      </if>
-      <if test="record.PRODUCT_SN_PREFIX != null">
         PRODUCT_SN_PREFIX = #{record.PRODUCT_SN_PREFIX,jdbcType=VARCHAR},
-      </if>
-      <if test="record.PRODUCT_PACK_SEQ != null">
         PRODUCT_PACK_SEQ = #{record.PRODUCT_PACK_SEQ,jdbcType=VARCHAR},
-      </if>
-      <if test="record.PM_CHANGE_TIMES != null">
         PM_CHANGE_TIMES = #{record.PM_CHANGE_TIMES,jdbcType=DECIMAL},
-      </if>
-      <if test="record.PRODUCT_MATERIAL_VER != null">
         PRODUCT_MATERIAL_VER = #{record.PRODUCT_MATERIAL_VER,jdbcType=VARCHAR},
-      </if>
-      <if test="record.PRODUCT_CONFIGURE != null">
         PRODUCT_CONFIGURE = #{record.PRODUCT_CONFIGURE,jdbcType=VARCHAR},
-      </if>
-      <if test="record.PROJECT_FLAG != null">
         PROJECT_FLAG = #{record.PROJECT_FLAG,jdbcType=VARCHAR},
-      </if>
-      <if test="record.IS_REL != null">
         IS_REL = #{record.IS_REL,jdbcType=VARCHAR},
-      </if>
-      <if test="record.REL_NUM != null">
         REL_NUM = #{record.REL_NUM,jdbcType=DECIMAL},
-      </if>
-      <if test="record.PROJECT_SORT != null">
         PROJECT_SORT = #{record.PROJECT_SORT,jdbcType=DECIMAL},
-      </if>
-      <if test="record.PM_CHECK_STUST != null">
         PM_CHECK_STUST = #{record.PM_CHECK_STUST,jdbcType=DECIMAL},
-      </if>
-      <if test="record.CHECK_MON != null">
         CHECK_MON = #{record.CHECK_MON,jdbcType=DATE},
-      </if>
-      <if test="record.CHECK_USER != null">
         CHECK_USER = #{record.CHECK_USER,jdbcType=VARCHAR},
-      </if>
-      <if test="record.WORK_SPACE != null">
         WORK_SPACE = #{record.WORK_SPACE,jdbcType=VARCHAR},
-      </if>
-      <if test="record.BASE_UNIT != null">
         BASE_UNIT = #{record.BASE_UNIT,jdbcType=VARCHAR},
-      </if>
-      <if test="record.WARE_HOUSE != null">
         WARE_HOUSE = #{record.WARE_HOUSE,jdbcType=VARCHAR},
-      </if>
-      <if test="record.PM_MEMO != null">
-        PM_MEMO = #{record.PM_MEMO,jdbcType=CLOB},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map">
-    update N2ADMIN.T_PM_PROJECT_BASE
-    set ID = #{record.ID,jdbcType=VARCHAR},
-      PROJECT_ID = #{record.PROJECT_ID,jdbcType=VARCHAR},
-      PRODUCT_MATERIAL = #{record.PRODUCT_MATERIAL,jdbcType=VARCHAR},
-      PRODUCT_NAME = #{record.PRODUCT_NAME,jdbcType=VARCHAR},
-      PRODUCT_STANDARD = #{record.PRODUCT_STANDARD,jdbcType=VARCHAR},
-      SCRAPPED_QTY = #{record.SCRAPPED_QTY,jdbcType=DECIMAL},
-      DESTROY_NO = #{record.DESTROY_NO,jdbcType=VARCHAR},
-      CUST_CODE = #{record.CUST_CODE,jdbcType=VARCHAR},
-      PRODUCT_COUNT = #{record.PRODUCT_COUNT,jdbcType=DECIMAL},
-      FQC_COUNT = #{record.FQC_COUNT,jdbcType=DECIMAL},
-      FINISH_COUNT = #{record.FINISH_COUNT,jdbcType=DECIMAL},
-      WORKING_SC = #{record.WORKING_SC,jdbcType=DECIMAL},
-      PROJECT_STATUS = #{record.PROJECT_STATUS,jdbcType=VARCHAR},
-      PROJECT_TYPE = #{record.PROJECT_TYPE,jdbcType=VARCHAR},
-      PROLEPSIS_START_DATE = #{record.PROLEPSIS_START_DATE,jdbcType=DATE},
-      PROLEPSIS_END_DATE = #{record.PROLEPSIS_END_DATE,jdbcType=DATE},
-      TPPB_PLAN_DELIVERY_DATE = #{record.TPPB_PLAN_DELIVERY_DATE,jdbcType=DATE},
-      DEPT_ID = #{record.DEPT_ID,jdbcType=VARCHAR},
-      CREATE_USER = #{record.CREATE_USER,jdbcType=VARCHAR},
-      CREATE_TIME = #{record.CREATE_TIME,jdbcType=DATE},
-      EDIT_USER = #{record.EDIT_USER,jdbcType=VARCHAR},
-      EDIT_TIME = #{record.EDIT_TIME,jdbcType=DATE},
-      PRODUCT_LINE = #{record.PRODUCT_LINE,jdbcType=VARCHAR},
-      ACTUAL_START_DATE = #{record.ACTUAL_START_DATE,jdbcType=DATE},
-      ACTUAL_END_DATE = #{record.ACTUAL_END_DATE,jdbcType=DATE},
-      PM_CLOSE_REASON = #{record.PM_CLOSE_REASON,jdbcType=VARCHAR},
-      PROJECT_STEP = #{record.PROJECT_STEP,jdbcType=VARCHAR},
-      FAI_NUM = #{record.FAI_NUM,jdbcType=DECIMAL},
-      DATA_AUTH = #{record.DATA_AUTH,jdbcType=VARCHAR},
-      PROJECT_ERPTYPE = #{record.PROJECT_ERPTYPE,jdbcType=VARCHAR},
-      PROJECT_OFONESELF = #{record.PROJECT_OFONESELF,jdbcType=VARCHAR},
-      LOT_NUMBER = #{record.LOT_NUMBER,jdbcType=VARCHAR},
-      PRODUCT_SN_START = #{record.PRODUCT_SN_START,jdbcType=VARCHAR},
-      PRODUCT_SN_END = #{record.PRODUCT_SN_END,jdbcType=VARCHAR},
-      PRODUCT_SN_PREFIX = #{record.PRODUCT_SN_PREFIX,jdbcType=VARCHAR},
-      PRODUCT_PACK_SEQ = #{record.PRODUCT_PACK_SEQ,jdbcType=VARCHAR},
-      PM_CHANGE_TIMES = #{record.PM_CHANGE_TIMES,jdbcType=DECIMAL},
-      PRODUCT_MATERIAL_VER = #{record.PRODUCT_MATERIAL_VER,jdbcType=VARCHAR},
-      PRODUCT_CONFIGURE = #{record.PRODUCT_CONFIGURE,jdbcType=VARCHAR},
-      PROJECT_FLAG = #{record.PROJECT_FLAG,jdbcType=VARCHAR},
-      IS_REL = #{record.IS_REL,jdbcType=VARCHAR},
-      REL_NUM = #{record.REL_NUM,jdbcType=DECIMAL},
-      PROJECT_SORT = #{record.PROJECT_SORT,jdbcType=DECIMAL},
-      PM_CHECK_STUST = #{record.PM_CHECK_STUST,jdbcType=DECIMAL},
-      CHECK_MON = #{record.CHECK_MON,jdbcType=DATE},
-      CHECK_USER = #{record.CHECK_USER,jdbcType=VARCHAR},
-      WORK_SPACE = #{record.WORK_SPACE,jdbcType=VARCHAR},
-      BASE_UNIT = #{record.BASE_UNIT,jdbcType=VARCHAR},
-      WARE_HOUSE = #{record.WARE_HOUSE,jdbcType=VARCHAR},
-      PM_MEMO = #{record.PM_MEMO,jdbcType=CLOB}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update N2ADMIN.T_PM_PROJECT_BASE
-    set ID = #{record.ID,jdbcType=VARCHAR},
-      PROJECT_ID = #{record.PROJECT_ID,jdbcType=VARCHAR},
-      PRODUCT_MATERIAL = #{record.PRODUCT_MATERIAL,jdbcType=VARCHAR},
-      PRODUCT_NAME = #{record.PRODUCT_NAME,jdbcType=VARCHAR},
-      PRODUCT_STANDARD = #{record.PRODUCT_STANDARD,jdbcType=VARCHAR},
-      SCRAPPED_QTY = #{record.SCRAPPED_QTY,jdbcType=DECIMAL},
-      DESTROY_NO = #{record.DESTROY_NO,jdbcType=VARCHAR},
-      CUST_CODE = #{record.CUST_CODE,jdbcType=VARCHAR},
-      PRODUCT_COUNT = #{record.PRODUCT_COUNT,jdbcType=DECIMAL},
-      FQC_COUNT = #{record.FQC_COUNT,jdbcType=DECIMAL},
-      FINISH_COUNT = #{record.FINISH_COUNT,jdbcType=DECIMAL},
-      WORKING_SC = #{record.WORKING_SC,jdbcType=DECIMAL},
-      PROJECT_STATUS = #{record.PROJECT_STATUS,jdbcType=VARCHAR},
-      PROJECT_TYPE = #{record.PROJECT_TYPE,jdbcType=VARCHAR},
-      PROLEPSIS_START_DATE = #{record.PROLEPSIS_START_DATE,jdbcType=DATE},
-      PROLEPSIS_END_DATE = #{record.PROLEPSIS_END_DATE,jdbcType=DATE},
-      TPPB_PLAN_DELIVERY_DATE = #{record.TPPB_PLAN_DELIVERY_DATE,jdbcType=DATE},
-      DEPT_ID = #{record.DEPT_ID,jdbcType=VARCHAR},
-      CREATE_USER = #{record.CREATE_USER,jdbcType=VARCHAR},
-      CREATE_TIME = #{record.CREATE_TIME,jdbcType=DATE},
-      EDIT_USER = #{record.EDIT_USER,jdbcType=VARCHAR},
-      EDIT_TIME = #{record.EDIT_TIME,jdbcType=DATE},
-      PRODUCT_LINE = #{record.PRODUCT_LINE,jdbcType=VARCHAR},
-      ACTUAL_START_DATE = #{record.ACTUAL_START_DATE,jdbcType=DATE},
-      ACTUAL_END_DATE = #{record.ACTUAL_END_DATE,jdbcType=DATE},
-      PM_CLOSE_REASON = #{record.PM_CLOSE_REASON,jdbcType=VARCHAR},
-      PROJECT_STEP = #{record.PROJECT_STEP,jdbcType=VARCHAR},
-      FAI_NUM = #{record.FAI_NUM,jdbcType=DECIMAL},
-      DATA_AUTH = #{record.DATA_AUTH,jdbcType=VARCHAR},
-      PROJECT_ERPTYPE = #{record.PROJECT_ERPTYPE,jdbcType=VARCHAR},
-      PROJECT_OFONESELF = #{record.PROJECT_OFONESELF,jdbcType=VARCHAR},
-      LOT_NUMBER = #{record.LOT_NUMBER,jdbcType=VARCHAR},
-      PRODUCT_SN_START = #{record.PRODUCT_SN_START,jdbcType=VARCHAR},
-      PRODUCT_SN_END = #{record.PRODUCT_SN_END,jdbcType=VARCHAR},
-      PRODUCT_SN_PREFIX = #{record.PRODUCT_SN_PREFIX,jdbcType=VARCHAR},
-      PRODUCT_PACK_SEQ = #{record.PRODUCT_PACK_SEQ,jdbcType=VARCHAR},
-      PM_CHANGE_TIMES = #{record.PM_CHANGE_TIMES,jdbcType=DECIMAL},
-      PRODUCT_MATERIAL_VER = #{record.PRODUCT_MATERIAL_VER,jdbcType=VARCHAR},
-      PRODUCT_CONFIGURE = #{record.PRODUCT_CONFIGURE,jdbcType=VARCHAR},
-      PROJECT_FLAG = #{record.PROJECT_FLAG,jdbcType=VARCHAR},
-      IS_REL = #{record.IS_REL,jdbcType=VARCHAR},
-      REL_NUM = #{record.REL_NUM,jdbcType=DECIMAL},
-      PROJECT_SORT = #{record.PROJECT_SORT,jdbcType=DECIMAL},
-      PM_CHECK_STUST = #{record.PM_CHECK_STUST,jdbcType=DECIMAL},
-      CHECK_MON = #{record.CHECK_MON,jdbcType=DATE},
-      CHECK_USER = #{record.CHECK_USER,jdbcType=VARCHAR},
-      WORK_SPACE = #{record.WORK_SPACE,jdbcType=VARCHAR},
-      BASE_UNIT = #{record.BASE_UNIT,jdbcType=VARCHAR},
-      WARE_HOUSE = #{record.WARE_HOUSE,jdbcType=VARCHAR}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
+        PM_MEMO = #{record.PM_MEMO,jdbcType=CLOB}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update N2ADMIN.T_PM_PROJECT_BASE
+        set ID = #{record.ID,jdbcType=VARCHAR},
+        PROJECT_ID = #{record.PROJECT_ID,jdbcType=VARCHAR},
+        PRODUCT_MATERIAL = #{record.PRODUCT_MATERIAL,jdbcType=VARCHAR},
+        PRODUCT_NAME = #{record.PRODUCT_NAME,jdbcType=VARCHAR},
+        PRODUCT_STANDARD = #{record.PRODUCT_STANDARD,jdbcType=VARCHAR},
+        SCRAPPED_QTY = #{record.SCRAPPED_QTY,jdbcType=DECIMAL},
+        DESTROY_NO = #{record.DESTROY_NO,jdbcType=VARCHAR},
+        CUST_CODE = #{record.CUST_CODE,jdbcType=VARCHAR},
+        PRODUCT_COUNT = #{record.PRODUCT_COUNT,jdbcType=DECIMAL},
+        FQC_COUNT = #{record.FQC_COUNT,jdbcType=DECIMAL},
+        FINISH_COUNT = #{record.FINISH_COUNT,jdbcType=DECIMAL},
+        WORKING_SC = #{record.WORKING_SC,jdbcType=DECIMAL},
+        PROJECT_STATUS = #{record.PROJECT_STATUS,jdbcType=VARCHAR},
+        PROJECT_TYPE = #{record.PROJECT_TYPE,jdbcType=VARCHAR},
+        PROLEPSIS_START_DATE = #{record.PROLEPSIS_START_DATE,jdbcType=DATE},
+        PROLEPSIS_END_DATE = #{record.PROLEPSIS_END_DATE,jdbcType=DATE},
+        TPPB_PLAN_DELIVERY_DATE = #{record.TPPB_PLAN_DELIVERY_DATE,jdbcType=DATE},
+        DEPT_ID = #{record.DEPT_ID,jdbcType=VARCHAR},
+        CREATE_USER = #{record.CREATE_USER,jdbcType=VARCHAR},
+        CREATE_TIME = #{record.CREATE_TIME,jdbcType=DATE},
+        EDIT_USER = #{record.EDIT_USER,jdbcType=VARCHAR},
+        EDIT_TIME = #{record.EDIT_TIME,jdbcType=DATE},
+        PRODUCT_LINE = #{record.PRODUCT_LINE,jdbcType=VARCHAR},
+        ACTUAL_START_DATE = #{record.ACTUAL_START_DATE,jdbcType=DATE},
+        ACTUAL_END_DATE = #{record.ACTUAL_END_DATE,jdbcType=DATE},
+        PM_CLOSE_REASON = #{record.PM_CLOSE_REASON,jdbcType=VARCHAR},
+        PROJECT_STEP = #{record.PROJECT_STEP,jdbcType=VARCHAR},
+        FAI_NUM = #{record.FAI_NUM,jdbcType=DECIMAL},
+        DATA_AUTH = #{record.DATA_AUTH,jdbcType=VARCHAR},
+        PROJECT_ERPTYPE = #{record.PROJECT_ERPTYPE,jdbcType=VARCHAR},
+        PROJECT_OFONESELF = #{record.PROJECT_OFONESELF,jdbcType=VARCHAR},
+        LOT_NUMBER = #{record.LOT_NUMBER,jdbcType=VARCHAR},
+        PRODUCT_SN_START = #{record.PRODUCT_SN_START,jdbcType=VARCHAR},
+        PRODUCT_SN_END = #{record.PRODUCT_SN_END,jdbcType=VARCHAR},
+        PRODUCT_SN_PREFIX = #{record.PRODUCT_SN_PREFIX,jdbcType=VARCHAR},
+        PRODUCT_PACK_SEQ = #{record.PRODUCT_PACK_SEQ,jdbcType=VARCHAR},
+        PM_CHANGE_TIMES = #{record.PM_CHANGE_TIMES,jdbcType=DECIMAL},
+        PRODUCT_MATERIAL_VER = #{record.PRODUCT_MATERIAL_VER,jdbcType=VARCHAR},
+        PRODUCT_CONFIGURE = #{record.PRODUCT_CONFIGURE,jdbcType=VARCHAR},
+        PROJECT_FLAG = #{record.PROJECT_FLAG,jdbcType=VARCHAR},
+        IS_REL = #{record.IS_REL,jdbcType=VARCHAR},
+        REL_NUM = #{record.REL_NUM,jdbcType=DECIMAL},
+        PROJECT_SORT = #{record.PROJECT_SORT,jdbcType=DECIMAL},
+        PM_CHECK_STUST = #{record.PM_CHECK_STUST,jdbcType=DECIMAL},
+        CHECK_MON = #{record.CHECK_MON,jdbcType=DATE},
+        CHECK_USER = #{record.CHECK_USER,jdbcType=VARCHAR},
+        WORK_SPACE = #{record.WORK_SPACE,jdbcType=VARCHAR},
+        BASE_UNIT = #{record.BASE_UNIT,jdbcType=VARCHAR},
+        WARE_HOUSE = #{record.WARE_HOUSE,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+
+    <select id="selectByProjectId" resultType="com.phantom.model.TPmProjectBase">
+        SELECT *
+        FROM T_PM_PROJECT_BASE
+        WHERE 1 = 1 AND PROJECT_ID = #{PROJECT_ID,jdbcType=VARCHAR}
+    </select>
+
+    <update id="updateProjectQuickRel">
+        UPDATE T_PM_PROJECT_BASE
+        SET EDIT_TIME = CREATE_TIME + (SYSDATE - A.CREATE_TIME) / 2,
+            EDIT_USER = #{USER_ID,jdbcType=VARCHAR},
+            DATA_AUTH = #{DATA_AUTH,jdbcType=VARCHAR},
+            DEPT_ID   = #{DATA_AUTH,jdbcType=VARCHAR}
+        WHERE 1 = 1
+              AND A.PROJECT_ID = #{PROJECT_ID,jdbcType=VARCHAR}
+    </update>
+
 </mapper>
