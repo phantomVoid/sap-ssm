@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 
 public class propertiesDemo {
     public static void main(String[] args) {
-        ResourceBundle resourceBundle = ResourceBundle.getBundle("sap-pro");
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("sap");
         //遍历取值
         Enumeration enumeration = resourceBundle.getKeys();
         while (enumeration.hasMoreElements()) {

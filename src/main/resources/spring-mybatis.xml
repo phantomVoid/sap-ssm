@@ -32,9 +32,9 @@
             <list>
                 <value>classpath:jdbc.properties</value>
                 <value>classpath:sap.properties</value>
-                <value>classpath:sap-dev.properties</value>
-                <value>classpath:sap-oa-gui.properties</value>
-                <value>classpath:sap-pro.properties</value>
+                <!--<value>classpath:sap-dev.properties</value>-->
+                <!--<value>classpath:sap-oa-gui.properties</value>-->
+                <!--<value>classpath:sap-pro.properties</value>-->
                 <value>classpath:crontab.properties</value>
 
                 <value>classpath:crontab.properties</value>
